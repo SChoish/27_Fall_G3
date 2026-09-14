@@ -229,6 +229,7 @@ def measure(a,c):
             acquisition_error_mv=(float(np.interp(before,t,sig['vsample']))-target)*1000,
             turnoff_change_mv=(cap-float(np.interp(before,t,sig['vsample'])))*1000,
             worst_hold_error_mv=float(np.max(abs(held-target))*1000),
+            hold_drift_mv=float(np.max(abs(held-cap))*1000),
             switch_off=bool(off_n<.1*c.vdd_v and off_p>.9*c.vdd_v),
             amplifier_energy_pj=energy_amp,clock_energy_pj=energy_clock,
             driver_energy_pj=energy_amp+energy_clock,stimulus_energy_pj=energy_stim))
@@ -242,6 +243,8 @@ def measure(a,c):
         feasible=bool(valid and worst<=c.error_limit_mv),worst_hold_error_mv=worst,
         max_aperture_error_mv=max(abs(r['aperture_error_mv']) for r in cycles),
         max_acquisition_error_mv=max(abs(r['acquisition_error_mv']) for r in cycles),
+        max_turnoff_change_mv=max(abs(r['turnoff_change_mv']) for r in cycles),
+        max_hold_drift_mv=max(r['hold_drift_mv'] for r in cycles),
         mean_driver_energy_pj=energy,mean_driver_power_uw=energy*c.fs_hz*1e-6,
         mean_amplifier_energy_pj=float(np.mean([r['amplifier_energy_pj'] for r in cycles])),
         mean_clock_energy_pj=float(np.mean([r['clock_energy_pj'] for r in cycles])),

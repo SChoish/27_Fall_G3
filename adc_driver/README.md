@@ -191,9 +191,10 @@ python compare_attention.py --budget 32 --seeds 0 1 2 --workers 2 --include-base
 가중치와 설정이며, 독립 surrogate나 탐색 재개용 checkpoint는 아닙니다.
 
 실측 상위 3개 시작점, 모든 유효 실측의 residual 보정, 후보 bank는 유지했습니다.
-원본 ALARM의 **critic buffer는 아직 없습니다**. 원문과의 수식 대응 및 변경점은
-`ALARM_ATTENTION.md`에 정리했습니다. 고정된 context 목록을 쓰므로 평가 조건이
-학습 조건과 다르면 surrogate checkpoint 사용을 거부합니다.
+기본값은 고정 critic이며, `--critic-mode latest|buffer`로 전체 critic 온라인 갱신을 비교할 수 있습니다. 상세는 [2차 실험](ROUND2.md)을 참조하세요. 원문과의 수식 대응 및 변경점은
+`ALARM_ATTENTION.md`에 정리했습니다. 입력·회로·시간 간격 등 물리 평가 조건이
+학습 조건과 다르면 surrogate checkpoint 사용을 거부합니다. 오차 한도만 바뀌면
+저장된 오차·에너지 예측을 새 한도에 재사용할 수 있습니다.
 
 실행 확인용 `data/source_smoke.json`은 24개뿐입니다. 함께 제공한 모델과 1개 seed 결과는
 동작 확인용이고, RNC의 우위·미지 topology 전이를 검증한 결과가 아닙니다.
@@ -244,3 +245,8 @@ R/C·입력 자극·reference current source는 이상적인 요소입니다.
 모델 원본은 [SkyWater SKY130 primitive library](https://github.com/google/skywater-pdk-libs-sky130_fd_pr)의
 commit `f62031a1be9aefe902d6d54cddd6f59b57627436`입니다. 모델 계수는 변경하지 않았고,
 기존 번들에서 사용한 include 통합본과 라이선스를 그대로 가져왔습니다.
+
+## 8. 입력 다양성·여유 및 critic 2차 비교
+
+[ROUND2.md](ROUND2.md)에 A/B/C, 작은 달성 가능성 진단, mixed-only 비교,
+전체 critic 3모드, 새 입력 테스트와 실제 SPICE 비용 기록을 정리했습니다.

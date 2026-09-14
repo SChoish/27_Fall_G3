@@ -5,6 +5,7 @@ import hashlib
 import io
 import json
 import os
+from pathlib import Path
 import subprocess
 import sys
 import time
@@ -35,18 +36,30 @@ class Critic(nn.Module):
 
 def label(method,seed,alpha=0):return f'{method}_s{seed}'+(f'_a{alpha:g}' if method=='td3bc' else '')
 
-def train(method,seed,alpha):
-    cfg=config();folder=OUT/'models'/label(method,seed,alpha);folder.mkdir(parents=True,exist_ok=True)
+def train(method,seed,alpha,reward_spec=None):
+    cfg=config()
+    if reward_spec is not None:
+        if method!='td3bc':raise ValueError('Reward ablations apply to TD3+BC; BC does not consume reward')
+        if reward_spec.gamma!=cfg['discount'] or reward_spec.margin!=cfg['margin'] or reward_spec.energy_ratio!=cfg['primary_ratio']:
+            raise ValueError('Reward spec must match configured discount and success thresholds')
+        if reward_spec.budget>cfg['horizon']:raise ValueError('Reward budget exceeds source horizon')
+    name=label(method,seed,alpha)+(reward_spec.suffix() if reward_spec is not None else '')
+    folder=OUT/'models'/name;folder.mkdir(parents=True,exist_ok=True)
     torch.manual_seed(seed);np.random.seed(seed)
     verify_artifact(OUT/'dataset.npz',cfg,dependencies=[OUT/'train_table.npz'])
-    with np.load(OUT/'dataset.npz') as d:
-        obs=d['observations'];mean=obs.mean(0);std=obs.std(0)+.001
-        arrays=[(obs-mean)/std,d['actions'],(d['next_observations']-mean)/std,d['rewards'][:,None],
-                (~(d['terminals']|d['timeouts'])).astype(np.float32)[:,None]]
+    with np.load(OUT/'dataset.npz') as source:d={k:source[k] for k in source.files}
+    reward_audit=None
+    if reward_spec is not None:
+        from reward_design import relabel
+        d,reward_audit=relabel(d,reward_spec)
+        (folder/'reward_audit.json').write_text(json.dumps(reward_audit,indent=2)+'\n')
+    obs=d['observations'];mean=obs.mean(0);std=obs.std(0)+.001
+    arrays=[(obs-mean)/std,d['actions'],(d['next_observations']-mean)/std,d['rewards'][:,None],
+            (~(d['terminals']|d['timeouts'])).astype(np.float32)[:,None]]
     data=[torch.tensor(a,dtype=torch.float32) for a in arrays]
     actor=Actor();critic=Critic();at=copy.deepcopy(actor);ct=copy.deepcopy(critic)
     oa=torch.optim.Adam(actor.parameters(),lr=cfg['lr']);oc=torch.optim.Adam(critic.parameters(),lr=cfg['lr'])
-    logs=[];start=time.perf_counter();al=torch.tensor(0.)
+    logs=[];start=time.perf_counter();al=torch.tensor(0.);q_abs=0.;q_weight=0.;bc_loss=0.
     for step in range(1,max(cfg['checkpoint_steps'])+1):
         ix=torch.randint(len(data[0]),(cfg['batch_size'],));s,a,ns,r,mask=[t[ix] for t in data]
         if method=='bc':
@@ -61,31 +74,35 @@ def train(method,seed,alpha):
             if step%cfg['policy_frequency']==0:
                 for p in critic.parameters():p.requires_grad_(False)
                 pi=actor(s);q=critic.q1(torch.cat([s,pi],-1));weight=alpha/q.abs().mean().detach().clamp_min(1e-6)
-                al=-weight*q.mean()+F.mse_loss(pi,a);oa.zero_grad();al.backward();oa.step()
+                bc=F.mse_loss(pi,a);al=-weight*q.mean()+bc;oa.zero_grad();al.backward();oa.step()
+                q_abs=float(q.detach().abs().mean());q_weight=float(weight.detach());bc_loss=float(bc.detach())
                 for p in critic.parameters():p.requires_grad_(True)
                 with torch.no_grad():
                     for p,t in zip(actor.parameters(),at.parameters()):t.lerp_(p,cfg['tau'])
                     for p,t in zip(critic.parameters(),ct.parameters()):t.lerp_(p,cfg['tau'])
         if step%1000==0:
             if not torch.isfinite(al) or not torch.isfinite(cl):raise ValueError('Nonfinite training loss')
-            logs.append({'step':step,'actor_loss':float(al.detach()),'critic_loss':float(cl.detach()),'seconds':time.perf_counter()-start})
-            print(label(method,seed,alpha),logs[-1],flush=True)
+            logs.append({'step':step,'actor_loss':float(al.detach()),'critic_loss':float(cl.detach()),'q_abs_mean':q_abs,'q_weight':q_weight,'bc_loss':bc_loss,'seconds':time.perf_counter()-start})
+            print(name,logs[-1],flush=True)
         if step in cfg['checkpoint_steps']:
             checkpoint={'actor':actor.state_dict(),'critic':critic.state_dict(),'mean':torch.from_numpy(mean),'std':torch.from_numpy(std),
                         'method':method,'seed':seed,'alpha':alpha,'step':step}
+            if reward_spec is not None:checkpoint['reward_spec']=reward_audit['spec']
             buffer=io.BytesIO();torch.save(checkpoint,buffer)
             tmp=folder/f'step{step}.tmp.pt';tmp.write_bytes(buffer.getvalue());tmp.replace(folder/f'step{step}.pt')
-            write_metadata(folder/f'step{step}.pt',cfg,dependencies=[OUT/'dataset.npz'])
+            dependencies=[OUT/'dataset.npz']
+            if reward_spec is not None:dependencies += [Path(__file__),Path(__file__).with_name('reward_design.py')]
+            write_metadata(folder/f'step{step}.pt',cfg,dependencies=dependencies)
     (folder/'training.json').write_text(json.dumps({'logs':logs,'seconds':time.perf_counter()-start,
         'dataset_sha256':hashlib.sha256((OUT/'dataset.npz').read_bytes()).hexdigest(),
         'config_sha256':hashlib.sha256((OUT/'config.json').read_bytes()).hexdigest(),
-        'spice_calls_during_learning':0,'torch_version':torch.__version__},indent=2)+'\n')
+        'spice_calls_during_learning':0,'torch_version':torch.__version__,'reward_audit':reward_audit},indent=2)+'\n')
 
 class Policy:
     def __init__(self,path):
         verify_artifact(path,config(),dependencies=[OUT/'dataset.npz'])
         p=torch.load(path,map_location='cpu',weights_only=True);self.actor=Actor();self.actor.load_state_dict(p['actor']);self.actor.eval()
-        self.mean=p['mean'];self.std=p['std']
+        self.mean=p['mean'];self.std=p['std'];self.reward_spec=p.get('reward_spec')
     def __call__(self,obs):
         with torch.no_grad():return self.actor((torch.as_tensor(obs,dtype=torch.float32)-self.mean)/self.std).numpy()
 
@@ -100,6 +117,16 @@ def all_runs():
 
 if __name__=='__main__':
     p=argparse.ArgumentParser();p.add_argument('--all',action='store_true');p.add_argument('--method',choices=['bc','td3bc'],default='td3bc')
-    p.add_argument('--seed',type=int,default=0);p.add_argument('--alpha',type=float,default=2.5);a=p.parse_args()
-    if a.all:all_runs()
-    else:train(a.method,a.seed,a.alpha)
+    p.add_argument('--seed',type=int,default=0);p.add_argument('--alpha',type=float,default=2.5)
+    p.add_argument('--reward-mode',choices=['legacy','terminal_success','potential_success'])
+    p.add_argument('--reward-budget',type=int,default=16);p.add_argument('--reward-eta',type=float,default=1.)
+    a=p.parse_args()
+    if a.all:
+        if a.reward_mode:p.error('--all is the original experiment; use individual runs for reward ablations')
+        all_runs()
+    else:
+        spec=None
+        if a.reward_mode:
+            from reward_design import RewardSpec
+            cfg=config();spec=RewardSpec(a.reward_mode,a.reward_budget,cfg['discount'],a.reward_eta,cfg['margin'],cfg['primary_ratio'])
+        train(a.method,a.seed,a.alpha,spec)

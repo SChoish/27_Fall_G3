@@ -100,7 +100,7 @@ surrogate Armijo 검사를 합니다. 투영 후 실제 변위로 $g^\top(u^+-u)
 | 고정 critic으로 후보 비용을 낮추는 attention 학습 | 적용; 학습은 한 단계의 미분 가능한 이동 |
 | 여러 surrogate 이동 후 SPICE 평가 | 적용; 고정 단계 기본, Armijo 선택 가능 |
 | critic 학습 | offline regression/RNC + online residual ridge, 원문의 전체 재학습과 다름 |
-| critic buffer | 미구현 |
+| critic buffer | 선택적 전체 critic 버퍼 구현; 기본 frozen 유지, [2차 비교](ROUND2.md) 참고 |
 | elite | 실측 상위 3개 시작점; 학습은 모든 유효 실측에서 선택 |
 | 회로 topology | 14-MOS ADC 입력 드라이버 하나로 고정 |
 | 미지 topology 일반화 | 구현·검증하지 않음 |
@@ -166,3 +166,9 @@ surrogate는 기존 RNC checkpoint를 공유했고 attention은 각 run에서 �
 현재 결과는 라인서치를 기본적으로 끄는 간단한 구성과 양립합니다. 효과 비교에는 더 큰
 사전 데이터와 여러 seed·예산이 필요합니다. 실행 시간은 3개 프로세스의 동시 실행에서
 측정했으므로 이 표를 wall-clock 속도 비교로 사용하면 안 됩니다.
+
+## 7. 전체 critic 갱신 비교 옵션
+
+기본 frozen + residual에 더해 latest/buffer 전체 critic 갱신을 추가했습니다.
+[ROUND2.md](ROUND2.md)의 prequential 점수와 음의 score softmax, 전체 encoder/head/projector
+재사용은 현재 ADC 구조를 위한 변형입니다. 기존 결과 표는 새 critic 실험 결과가 아닙니다.

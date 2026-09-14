@@ -37,6 +37,12 @@ def main():
     opt=sub.add_parser('optimize',help='Run search with every initial and failed SPICE query charged')
     opt.add_argument('--method',choices=['random','ga','regression','rnc'],required=True)
     opt.add_argument('--budget',type=int,default=32);opt.add_argument('--seed',type=int,default=0)
+    opt.add_argument('--critic-mode',choices=['frozen','latest','buffer'],default='frozen')
+    opt.add_argument('--source-data',help='Exact offline dataset used by the critic checkpoint')
+    opt.add_argument('--critic-capacity',type=int,default=4)
+    opt.add_argument('--critic-epochs',type=int,default=20)
+    opt.add_argument('--critic-temperature',type=float,default=.25)
+    opt.add_argument('--warm-start',help='Additional diagnosed design replacing one random initial point')
     opt.add_argument('--contexts');opt.add_argument('--checkpoint');opt.add_argument('--output',required=True)
     opt.add_argument('--attention',choices=['off','learned'],default='learned',help='Surrogate search only; learned coordinate metric by default')
     opt.add_argument('--line-search',choices=['none','armijo'],default='none',help='Surrogate search only; fixed projected steps by default')
@@ -67,13 +73,18 @@ def main():
     from search import collect,optimize
     if args.command=='collect':collect(args.n,args.seed,contexts,args.output,args.workers);return
     if args.command=='optimize':
-        options=None
+        options=None;critic_options=None
         if args.method in ['regression','rnc']:
             from attention import SearchOptions
+            from critics import CriticOptions
+            critic_options=CriticOptions(mode=args.critic_mode,source_data=args.source_data,capacity=args.critic_capacity,epochs=args.critic_epochs,temperature=args.critic_temperature)
             options=SearchOptions(attention=args.attention,line_search=args.line_search,
                                   attention_steps=args.attention_steps,step_size=args.step_size,
                                   search_steps=args.search_steps)
-        optimize(args.method,args.budget,args.seed,contexts,args.output,args.checkpoint,options);return
+        elif args.critic_mode!='frozen' or args.source_data:
+            raise ValueError('Critic options require regression or RNC')
+        optimize(args.method,args.budget,args.seed,contexts,args.output,args.checkpoint,options,critic_options,
+                 None if args.warm_start is None else design(args.warm_start));return
     verify_runtime();out=Path(args.output);out.mkdir(parents=True,exist_ok=True)
     from plots import waveform,searches
     for name,x in [('nominal',NOMINAL),('prior_opamp',PRIOR_OPAMP)]:

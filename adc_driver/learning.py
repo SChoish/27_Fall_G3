@@ -103,13 +103,14 @@ class LocalSearch:
 
     Attention learns through a differentiable one-step proposal with the critic
     fixed, following ALARM Eq. (27). Execution uses fixed projected steps by
-    default; surrogate Armijo is optional. There is no critic buffer.
+    default; surrogate Armijo is optional. Critic updates are independently configurable.
     """
-    def __init__(self,path,contexts,options=None):
-        from search import fingerprint
+    def __init__(self,path,contexts,options=None,critic_options=None):
+        from search import physical_fingerprint
+        from circuit import Context
         torch.set_num_threads(1)
         p=torch.load(path,map_location='cpu',weights_only=False)
-        if p['context_hash']!=fingerprint(contexts): raise ValueError('Checkpoint context differs from the requested task')
+        if physical_fingerprint([Context.from_dict(c) for c in p['contexts']])!=physical_fingerprint(contexts): raise ValueError('Checkpoint context differs from the requested task')
         if len({c.error_limit_mv for c in contexts})!=1:
             raise ValueError('Surrogate search requires one common error limit across contexts')
         self.payload=p;self.model=Model().eval();self.model.load_state_dict(p['state_dict'])
@@ -118,6 +119,8 @@ class LocalSearch:
         self.options=options or SearchOptions()
         self.attention=CoordinateAttention(len(NAMES)) if self.options.attention=='learned' else None
         self.last_report={};self.objective_evaluations=0
+        from critics import CriticBuffer
+        self.critics=CriticBuffer(p,critic_options)
 
     def fit(self,rows):
         good=[r for r in rows if r['oracle']['valid']]
@@ -198,6 +201,10 @@ class LocalSearch:
     def propose(self,rows,rng):
         if not rows:raise ValueError('Local search requires paid observations')
         self.objective_evaluations=0
+        critic_report=self.critics.update(rows)
+        self.model.load_state_dict(self.critics.current["state_dict"])
+        self.mean=self.critics.current["mean"];self.std=self.critics.current["std"]
+        self.model.eval().requires_grad_(False)
         self.fit(rows)
         # Independent RNG stream: toggling attention does not consume the
         # candidate-bank RNG and confound the matched attention ablation.
@@ -244,7 +251,7 @@ class LocalSearch:
         g=torch.autograd.grad(self.loss(incumbent)[0],incumbent)[0]
         with torch.no_grad():
             p=self.probabilities(incumbent);eigenvalues=torch.linalg.eigvalsh(metric_matrix(g,p,self.options))
-        self.last_report=dict(surrogate_objective=SURROGATE_OBJECTIVE,attention=attention_report,incumbent_query=elites[0]['query'],
+        self.last_report=dict(critic=critic_report,surrogate_objective=SURROGATE_OBJECTIVE,attention=attention_report,incumbent_query=elites[0]['query'],
                               elite_queries=[r['query'] for r in elites],
                               coordinate_probabilities=p.tolist(),parameter_names=NAMES,
                               metric_min_eigenvalue=float(eigenvalues.min()),

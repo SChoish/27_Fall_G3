@@ -13,6 +13,12 @@ from circuit import (NAMES,LOW,HIGH,NOMINAL,PRIOR_OPAMP,ADC_REFERENCE,encode,dec
                      evaluate_suite,cost,write_json,verify_runtime)
 
 
+def physical_fingerprint(contexts):
+    """Measurement identity: the scoring threshold and display name are not physics."""
+    payload=[{k:v for k,v in asdict(c).items() if k not in ("error_limit_mv","name")} for c in contexts]
+    return hashlib.sha256(json.dumps(payload,sort_keys=True).encode()).hexdigest()
+
+
 def fingerprint(contexts):
     payload=json.dumps([asdict(c) for c in contexts],sort_keys=True)
     return hashlib.sha256(payload.encode()).hexdigest()
@@ -47,23 +53,28 @@ def initial(seed):
     return np.vstack([encode(NOMINAL),encode(PRIOR_OPAMP),encode(ADC_REFERENCE),rng.uniform(0,1,(5,len(NAMES)))])
 
 
-def optimize(method,budget,seed,contexts,output,checkpoint=None,search_options=None):
+def optimize(method,budget,seed,contexts,output,checkpoint=None,search_options=None,critic_options=None,warm_start=None):
     if budget<16 or budget%8: raise ValueError('Budget must be a multiple of 8, at least 16')
     if method not in ['random','ga','regression','rnc']: raise ValueError(method)
     surrogate=None
     if method in ['regression','rnc']:
         if checkpoint is None: raise ValueError('A matching trained checkpoint is required')
         from learning import LocalSearch, SURROGATE_OBJECTIVE
-        surrogate=LocalSearch(checkpoint,contexts,search_options)
+        surrogate=LocalSearch(checkpoint,contexts,search_options,critic_options)
         if surrogate.payload['method']!=method: raise ValueError('Checkpoint method does not match search method')
-    elif search_options is not None:
+    elif search_options is not None or critic_options is not None:
         raise ValueError('Attention/metric options apply only to regression or RNC search')
+    initial_points=initial(seed)
+    if warm_start is not None:
+        from circuit import validate_design
+        initial_points[3]=encode(validate_design(warm_start))
     verify_runtime()
     folder=Path(output);folder.mkdir(parents=True,exist_ok=True)
-    if (folder/'trace.json').exists(): raise FileExistsError(f'Refusing to overwrite {folder}/trace.json')
+    if any((folder/name).exists() for name in ('trace.json','partial.json','pending_prediction.json','protocol.json')):
+        raise FileExistsError(f'Refusing to overwrite completed or interrupted search {folder}')
     plan=dict(method=method,seed=seed,budget=budget,contexts=[asdict(c) for c in contexts],
               context_hash=fingerprint(contexts),parameter_names=NAMES,low=LOW.tolist(),high=HIGH.tolist(),
-              initial_queries=8,initial_rule='Nominal + prior OPAMP + developed ADC reference + five random designs, all charged',
+              initial_queries=8,warm_start=None if warm_start is None else np.asarray(warm_start).tolist(),critic_options=asdict(surrogate.critics.options) if surrogate else None,initial_rule='Nominal + prior OPAMP + ADC reference + five random designs; optional diagnosed warm start replaces the first random design; all charged',
               prior_opamp_rule='Earlier OPAMP sizing is a documented warm start; its ADC evaluation is new',
               objective='Minimize mean driver energy per sample subject to worst hold error in each context',
               checkpoint=str(checkpoint) if checkpoint else None,
@@ -78,12 +89,19 @@ def optimize(method,budget,seed,contexts,output,checkpoint=None,search_options=N
                       survival='constraint violation then energy'),
               full_budget_after_success=True)
     write_json(folder/'protocol.json',plan)
+    if surrogate: surrogate.critics.save(folder/'critics.pt')
     rows=[];best=None;first=None;begin=time.perf_counter()
     def query(u,proposal_report=None):
         nonlocal best,first
         assert len(rows)<budget
+        predictions=surrogate.critics.predict(u) if surrogate else None
+        if surrogate:
+            write_json(folder/'pending_prediction.json',dict(query=len(rows)+1,u=np.asarray(u).tolist(),predictions=predictions))
         r=evaluate_suite(decode(u),contexts);value=cost(r)
         row=dict(query=len(rows)+1,u=np.asarray(u).tolist(),x=decode(u).tolist(),cost=value,oracle=r)
+        if surrogate:
+            row['critic_predictions']=predictions
+            surrogate.critics.observe(row, predictions, None if best is None else best['cost'])
         if proposal_report is not None:row['proposal']=proposal_report
         if best is None or value<best['cost']: best=row
         if r['feasible'] and first is None: first=row['query']
@@ -91,6 +109,9 @@ def optimize(method,budget,seed,contexts,output,checkpoint=None,search_options=N
         rows.append(row)
         # A completed query is durably checkpointed before proposing the next one.
         write_json(folder/'partial.json',dict(**plan,trace=rows))
+        if surrogate:
+            surrogate.critics.save(folder/'critics.pt')
+            (folder/'pending_prediction.json').unlink(missing_ok=True)
         return r
     if method=='ga':
         from pymoo.algorithms.soo.nonconvex.ga import GA
@@ -105,7 +126,7 @@ def optimize(method,budget,seed,contexts,output,checkpoint=None,search_options=N
                 out['F']=r['mean_driver_energy_pj'] if r['valid'] else 1e12
                 out['G']=max(v['worst_hold_error_mv']/v['context']['error_limit_mv']-1
                              for v in r['contexts']) if r['valid'] else 1e6
-        algorithm=GA(pop_size=8,n_offsprings=8,sampling=initial(seed),
+        algorithm=GA(pop_size=8,n_offsprings=8,sampling=initial_points,
                      crossover=SBX(prob=.9,eta=15),mutation=PM(prob=1.,prob_var=1/len(NAMES),eta=20),
                      eliminate_duplicates=True)
         result=minimize(Problem(),algorithm,('n_eval',budget),seed=seed,verbose=False)
@@ -113,8 +134,10 @@ def optimize(method,budget,seed,contexts,output,checkpoint=None,search_options=N
     else:
         rng=np.random.default_rng(seed+90101)
         for k in range(budget):
-            if k<8: u=initial(seed)[k]
-            elif surrogate: u=surrogate.propose(rows,rng)
+            if k<8: u=initial_points[k]
+            elif surrogate:
+                u=surrogate.propose(rows,rng)
+                surrogate.critics.save(folder/'critics.pt')
             else: u=rng.uniform(0,1,len(NAMES))
             query(u,surrogate.last_report if surrogate and k>=8 else None)
     output_record=dict(**plan,trace=rows,best=best,first_success=first,
