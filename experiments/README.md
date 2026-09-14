@@ -127,7 +127,30 @@ potential이 [0, 1, 0]/12였지만 이를 주 결과로 바꿔 선택하지 않�
 학습 endpoint 성공은 2/96 episode이며, 제한된 성공 예제와 학습 경과의 변동을
 함께 점검할 근거다. 이 관찰만으로 실패 원인을 확정하지 않는다.
 
-우선 보상 비교 옵션을 유지하고, 다음 실험에서는 성공과 근접 실패를 연결하는
-위상 이동 전이의 데이터 포함 여부를 분석한다. 그 결과를 바탕으로 동일 수집 예산
-안에서 데이터 구성을 조정하고 validation 선택 규칙을 미리 고정한다. 최종 일반화
-확인은 별도로 고정한 새 평가 입력에서 수행해야 한다.
+후속 진단은 [DIAGNOSTIC.md](../campaigns/20260915_reward_s0-2/DIAGNOSTIC.md)에
+있다. validation 12조건 중 10% 절감 가능은 3개(모두 4+4)이고, 좌표 탐색도
+ρ=0.9에서 0/12다. 학습 성공 2/96은 16회 안에 새로 찾은 예이며 초기부터 성공은
+0, 17–32회 성공 3개는 잘려 빠졌다. 50k 정책은 중복 질의 없이 탐색하지만 4+4를
+가능 조건에서 거의 밟지 않아 반환 에너지 비가 ~1이 된다. 추가 50k나 성공
+샘플 확대보다 이 세 숫자를 먼저 고정한다. 최종 일반화 확인은 별도로 고정한
+새 평가 입력에서 수행해야 한다.
+
+## D2D 온라인 SAC — 2026-09-15
+
+고정 mixed 데이터 없이, 같은 관측·행동 양자화·16회 종료·종료 성공 보상으로
+SAC를 train 조건 lookup 표에서만 학습한다. seed 3개 × 환경 step 50,000,
+step당 업데이트 1회. 평가는 가중치 고정 후 validation에서 기준 1회 + 정책 16회다.
+캐시 lookup도 학습 측정으로 세고 기준 측정은 따로 집계한다. 마진 보조나
+새 보상은 넣지 않는다. 50k 환경 step을 IQL/TD3+BC 50k 업데이트와 같은
+비용으로 비교하지 않는다.
+
+```bash
+python experiments/train_sac_online.py \
+  --source campaigns/20260914_quality_s0-2/d2d_qualities/mixed/results/coupled_v1 \
+  --iql-execution campaigns/20260915_iql_terminal_s0-2/execution/summary.json \
+  --iql-tau09-execution campaigns/20260915_iql_tau09_beta10_s0-2/execution/summary.json \
+  --td3bc-execution campaigns/20260915_reward_s0-2/execution/summary.json \
+  --output campaigns/20260915_sac_online_s0-2
+python campaigns/20260915_sac_online_s0-2/train_sac_online.py \
+  --output campaigns/20260915_sac_online_s0-2 --execute
+```
