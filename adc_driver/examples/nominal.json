@@ -1,0 +1,11 @@
+{
+  "wi_um": 10.0,
+  "wp_um": 5.0,
+  "wt_um": 10.0,
+  "wop_um": 20.0,
+  "won_um": 20.0,
+  "cc_pf": 1.0,
+  "ibias_ua": 10.0,
+  "riso_ohm": 200.0,
+  "cfilter_pf": 10.0
+}

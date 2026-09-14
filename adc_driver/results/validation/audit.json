@@ -1,0 +1,76 @@
+{
+  "design_queries_source": 24,
+  "design_queries_search": 64,
+  "initial_pairs_matched": 24,
+  "source_training_feasible_designs": 1,
+  "source_lookup_index": 2,
+  "source_lookup_energy_pj": 169.29819714863518,
+  "dense_error_mv": 0.982893070445412,
+  "dense_minus_base_abs_error_mv": 0.001600965061632209,
+  "dense_energy_pj": 169.29828142728095,
+  "standalone_replay_matches": true,
+  "methods": [
+    {
+      "method": "random",
+      "budget": 16,
+      "first_success": 3,
+      "final_error_mv": 0.9812921053837798,
+      "final_energy_pj": 169.29819714863518,
+      "improves_reference": false
+    },
+    {
+      "method": "ga",
+      "budget": 16,
+      "first_success": 3,
+      "final_error_mv": 0.9812921053837798,
+      "final_energy_pj": 169.29819714863518,
+      "improves_reference": false
+    },
+    {
+      "method": "regression",
+      "budget": 16,
+      "first_success": 3,
+      "final_error_mv": 0.9812921053837798,
+      "final_energy_pj": 169.29819714863518,
+      "improves_reference": false
+    },
+    {
+      "method": "rnc",
+      "budget": 16,
+      "first_success": 3,
+      "final_error_mv": 0.9812921053837798,
+      "final_energy_pj": 169.29819714863518,
+      "improves_reference": false
+    }
+  ],
+  "stress": [
+    {
+      "name": "nominal",
+      "feasible": true,
+      "error_mv": 0.9812921053837798,
+      "energy_pj": 169.29819714863518
+    },
+    {
+      "name": "large_cap",
+      "feasible": false,
+      "error_mv": 18.64491345933694,
+      "energy_pj": 169.27197671833503
+    },
+    {
+      "name": "fast_acquisition",
+      "feasible": false,
+      "error_mv": 19.091445981130217,
+      "energy_pj": 169.28886987474687
+    },
+    {
+      "name": "hot",
+      "feasible": false,
+      "error_mv": 2.2269222363605623,
+      "energy_pj": 168.7704602520305
+    }
+  ],
+  "learning": {
+    "rnc_value_and_gradient_match_reference": true,
+    "checkpoint_data_splits_match": true
+  }
+}

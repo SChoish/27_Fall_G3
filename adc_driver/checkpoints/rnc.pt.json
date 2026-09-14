@@ -1,0 +1,44 @@
+{
+  "method": "rnc",
+  "seed": 0,
+  "epochs": 150,
+  "best_epoch": 76,
+  "validation_mse": 0.268098920583725,
+  "test_mse": 0.22384534776210785,
+  "valid_counts": {
+    "train": 16,
+    "validation": 4,
+    "test": 4
+  },
+  "context_hash": "ba035f57b9e5a208cec50a68ec357cdc62c896c2e0e384895cc37f9feb5517ae",
+  "contexts": [
+    {
+      "name": "nominal",
+      "vdd_v": 1.8,
+      "temperature_c": 27.0,
+      "csample_pf": 15.0,
+      "fs_hz": 1000000.0,
+      "acquisition_ns": 200.0,
+      "edge_ns": 2.0,
+      "input_lead_ns": 100.0,
+      "read_delay_ns": 20.0,
+      "maxstep_ns": 2.0,
+      "warmup_us": 2.0,
+      "dummy_cycles": 2,
+      "initial_v": 0.9,
+      "levels_v": [
+        0.8,
+        1.1,
+        0.85,
+        1.05,
+        0.8,
+        0.9
+      ],
+      "error_limit_mv": 1.0,
+      "switch_wn_um": 4.0,
+      "switch_wp_um": 8.0
+    }
+  ],
+  "source_sha256": "64eb933c93a726d5eaa6c2d9949a102ce4b3bbd5b3b01ade8e8b3979c713445c",
+  "source_design_queries": 24
+}

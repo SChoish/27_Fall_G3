@@ -1,0 +1,86 @@
+Note: can't find the initialization file spinit.
+Note: Starting dynamic gmin stepping
+Trying gmin =   1.0000E-03 Note: One successful gmin step
+Trying gmin =   1.0000E-04 Note: One successful gmin step
+Trying gmin =   1.0000E-05 Warning: Further gmin increment
+Trying gmin =   5.6234E-05 Warning: Further gmin increment
+Trying gmin =   8.6596E-05 Note: One successful gmin step
+Trying gmin =   6.9783E-05 Note: One successful gmin step
+Trying gmin =   5.0481E-05 Note: One successful gmin step
+Trying gmin =   3.1059E-05 Note: One successful gmin step
+Trying gmin =   1.4989E-05 Note: One successful gmin step
+Trying gmin =   5.0254E-06 Note: One successful gmin step
+Trying gmin =   9.7557E-07 Note: One successful gmin step
+Trying gmin =   9.7557E-08 Note: One successful gmin step
+Trying gmin =   9.7557E-09 Note: One successful gmin step
+Trying gmin =   9.7557E-10 Note: One successful gmin step
+Trying gmin =   9.7557E-11 Note: One successful gmin step
+Trying gmin =   9.7557E-12 Note: One successful gmin step
+Trying gmin =   1.0000E-12 Note: One successful gmin step
+Note: Dynamic gmin stepping completed
+
+Note: No compatibility mode selected!
+
+
+Circuit: sky130 adc input driver: 8-mos amplifier, cmos tg and clock buffer
+
+Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
+
+
+Initial Transient Solution
+--------------------------
+
+Node                                   Voltage
+----                                   -------
+avdd                                       1.8
+clkdd                                      1.8
+vin                                        0.9
+clkcmd                                       0
+xamp.bias                             0.722834
+xamp.tail                             0.223077
+xamp.n1                               0.729726
+out                                   0.900078
+xamp.n2                               0.735262
+adc_in                                0.900078
+clkp                                       1.8
+clkn                               1.44448e-07
+sample                                0.600976
+vclk#branch                                  0
+vin#branch                                   0
+vclkdd#branch                     -4.58033e-10
+vavdd#branch                      -9.38511e-05
+
+ Reference value :  0.00000e+00
+ Reference value :  4.38140e-07
+ Reference value :  9.63640e-07
+ Reference value :  1.51614e-06
+ Reference value :  2.10798e-06
+ Reference value :  2.62077e-06
+ Reference value :  3.00117e-06
+ Reference value :  3.24528e-06
+ Reference value :  3.56878e-06
+ Reference value :  3.81278e-06
+ Reference value :  3.97888e-06
+ Reference value :  4.06317e-06
+ Reference value :  4.17417e-06
+ Reference value :  4.42281e-06
+ Reference value :  4.81881e-06
+ Reference value :  5.03114e-06
+ Reference value :  5.32831e-06
+ Reference value :  5.58281e-06
+ Reference value :  6.00074e-06
+ Reference value :  6.27677e-06
+ Reference value :  6.56427e-06
+ Reference value :  6.90080e-06
+ Reference value :  7.16877e-06
+ Reference value :  7.43518e-06
+ Reference value :  7.83718e-06
+ Reference value :  7.97269e-06
+ Reference value :  8.15870e-06
+ Reference value :  8.38214e-06
+ Reference value :  8.79864e-06
+ Reference value :  9.10058e-06
+ Reference value :  9.35471e-06
+ Reference value :  9.73821e-06
+No. of Data Rows : 21015
+ngspice-39 done

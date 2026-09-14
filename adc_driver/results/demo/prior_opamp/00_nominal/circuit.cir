@@ -1,0 +1,42 @@
+SKY130 ADC input driver: 8-MOS amplifier, CMOS TG and clock buffer
+.include "../../../../models/sky130_1v8_tt.spice"
+.options numdgt=15 reltol=1e-5 abstol=1e-12 vntol=1e-8
+.temp 27
+.subckt opamp inp inn out vdd
+IREF vdd bias 17.5403158926u
+XREF bias bias 0 0 sky130_fd_pr__nfet_01v8 w=5 l=0.5 ad=1.45 as=1.45 pd=10.58 ps=10.58
+XTAIL tail bias 0 0 sky130_fd_pr__nfet_01v8 w=2.81293262936 l=0.5 ad=0.815750462514 as=0.815750462514 pd=6.20586525872 ps=6.20586525872
+XIN1 n1 inn tail 0 sky130_fd_pr__nfet_01v8 w=5.6257857391 l=0.5 ad=1.63147786434 as=1.63147786434 pd=11.8315714782 ps=11.8315714782
+XIN2 n2 inp tail 0 sky130_fd_pr__nfet_01v8 w=5.6257857391 l=0.5 ad=1.63147786434 as=1.63147786434 pd=11.8315714782 ps=11.8315714782
+XP1 n1 n1 vdd vdd sky130_fd_pr__pfet_01v8 w=3.21141206796 l=0.5 ad=0.931309499707 as=0.931309499707 pd=7.00282413591 ps=7.00282413591
+XP2 n2 n1 vdd vdd sky130_fd_pr__pfet_01v8 w=3.21141206796 l=0.5 ad=0.931309499707 as=0.931309499707 pd=7.00282413591 ps=7.00282413591
+XP3 out n2 vdd vdd sky130_fd_pr__pfet_01v8 w=80 l=0.5 ad=23.2 as=23.2 pd=160.58 ps=160.58
+XN3 out bias 0 0 sky130_fd_pr__nfet_01v8 w=14.6563073094 l=0.5 ad=4.25032911973 as=4.25032911973 pd=29.8926146188 ps=29.8926146188
+CC n2 out 0.784601030653p
+.ends opamp
+VAVDD avdd 0 1.8
+VCLKDD clkdd 0 1.8
+VIN vin 0 PWL(0 0.9 1.9e-06 0.9 1.902e-06 0.9 2.9e-06 0.9 2.902e-06 0.9 3.9e-06 0.9 3.902e-06 0.8 4.9e-06 0.8 4.902e-06 1.1 5.9e-06 1.1 5.902e-06 0.85 6.9e-06 0.85 6.902e-06 1.05 7.9e-06 1.05 7.902e-06 0.8 8.9e-06 0.8 8.902e-06 0.9 1e-05 0.9)
+VCLK clkcmd 0 PWL(0 0 2e-06 0 2.002e-06 1.8 2.198e-06 1.8 2.2e-06 0 3e-06 0 3.002e-06 1.8 3.198e-06 1.8 3.2e-06 0 4e-06 0 4.002e-06 1.8 4.198e-06 1.8 4.2e-06 0 5e-06 0 5.002e-06 1.8 5.198e-06 1.8 5.2e-06 0 6e-06 0 6.002e-06 1.8 6.198e-06 1.8 6.2e-06 0 7e-06 0 7.002e-06 1.8 7.198e-06 1.8 7.2e-06 0 8e-06 0 8.002e-06 1.8 8.198e-06 1.8 8.2e-06 0 9e-06 0 9.002e-06 1.8 9.198e-06 1.8 9.2e-06 0 1e-05 0)
+XAMP vin out out avdd opamp
+COUT out 0 2p
+RISO out adc_in 200
+CFILTER adc_in 0 10p
+XCK0N clkp clkcmd 0 0 sky130_fd_pr__nfet_01v8 w=2 l=0.15 ad=0.58 as=0.58 pd=4.58 ps=4.58
+XCK0P clkp clkcmd clkdd clkdd sky130_fd_pr__pfet_01v8 w=4 l=0.15 ad=1.16 as=1.16 pd=8.58 ps=8.58
+XCK1N clkn clkp 0 0 sky130_fd_pr__nfet_01v8 w=2 l=0.15 ad=0.58 as=0.58 pd=4.58 ps=4.58
+XCK1P clkn clkp clkdd clkdd sky130_fd_pr__pfet_01v8 w=4 l=0.15 ad=1.16 as=1.16 pd=8.58 ps=8.58
+XSWN adc_in clkn sample 0 sky130_fd_pr__nfet_01v8 w=4 l=0.15 ad=1.16 as=1.16 pd=8.58 ps=8.58
+XSWP adc_in clkp sample avdd sky130_fd_pr__pfet_01v8 w=8 l=0.15 ad=2.32 as=2.32 pd=16.58 ps=16.58
+CSAMPLE sample 0 15p
+RLEAK sample 0 1e12
+.control
+set noaskquit
+set wr_vecnames
+set wr_singlescale
+set numdgt=15
+tran 2e-09 1e-05 0 2e-09
+wrdata waveform.dat v(vin) v(out) v(adc_in) v(sample) v(clkn) v(clkp) v(clkcmd) i(vavdd) i(vclkdd) i(vin) i(vclk)
+quit
+.endc
+.end

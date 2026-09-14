@@ -34,5 +34,6 @@ d2d_coupled_calibration/runtime/
 
 # Local reruns
 d2d_coupled_calibration/results/**/jobs/
+adc_driver/results/my_*/
 *.nohup
 nohup.out

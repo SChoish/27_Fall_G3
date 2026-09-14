@@ -1,0 +1,55 @@
+Note: can't find the initialization file spinit.
+Note: Starting dynamic gmin stepping
+Trying gmin =   1.0000E-03 Note: One successful gmin step
+Trying gmin =   1.0000E-04 Note: One successful gmin step
+Trying gmin =   1.0000E-05 Note: One successful gmin step
+Trying gmin =   1.0000E-06 Note: One successful gmin step
+Trying gmin =   1.0000E-07 Note: One successful gmin step
+Trying gmin =   1.0000E-08 Note: One successful gmin step
+Trying gmin =   1.0000E-09 Note: One successful gmin step
+Trying gmin =   1.0000E-10 Note: One successful gmin step
+Trying gmin =   1.0000E-11 Note: One successful gmin step
+Trying gmin =   1.0000E-12 Note: One successful gmin step
+Trying gmin =   1.0000E-12 Note: One successful gmin step
+Note: Dynamic gmin stepping completed
+
+Note: No compatibility mode selected!
+
+
+Circuit: sky130 adc input driver: 8-mos amplifier, cmos tg and clock buffer
+
+Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
+
+
+Initial Transient Solution
+--------------------------
+
+Node                                   Voltage
+----                                   -------
+avdd                                       1.8
+clkdd                                      1.8
+vin                                        0.9
+clkcmd                                       0
+xamp.bias                             0.686718
+xamp.tail                              0.21118
+xamp.n1                                0.67331
+out                                   0.899343
+xamp.n2                               0.631682
+adc_in                                0.899343
+clkp                                       1.8
+clkn                               1.44448e-07
+sample                                0.600976
+vclk#branch                                  0
+vin#branch                                   0
+vclkdd#branch                     -4.58033e-10
+vavdd#branch                      -8.78186e-05
+
+ Reference value :  0.00000e+00
+ Reference value :  2.00106e-06
+ Reference value :  3.66113e-06
+ Reference value :  5.12187e-06
+ Reference value :  6.95741e-06
+ Reference value :  8.19924e-06
+ Reference value :  9.97102e-06
+No. of Data Rows : 6163
+ngspice-39 done
