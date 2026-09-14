@@ -1,0 +1,25 @@
+{
+  "lane0": {
+    "vdd": 1.0,
+    "temperature_c": 27.0,
+    "rate_gbps": 2.0,
+    "resistance_ohm": 30.0,
+    "inductance_nh": 0.3,
+    "capacitance_pf": 0.3,
+    "rx_capacitance_pf": 0.06,
+    "clock_offset_ui": 0.0,
+    "coarse_latency_ui": 1.0
+  },
+  "lane1": {
+    "vdd": 1.0,
+    "temperature_c": 27.0,
+    "rate_gbps": 2.0,
+    "resistance_ohm": 30.0,
+    "inductance_nh": 0.3,
+    "capacitance_pf": 0.3,
+    "rx_capacitance_pf": 0.06,
+    "clock_offset_ui": 0.0,
+    "coarse_latency_ui": 1.0
+  },
+  "coupling_pf": 0.12
+}

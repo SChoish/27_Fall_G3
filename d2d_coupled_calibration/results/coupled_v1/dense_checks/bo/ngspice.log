@@ -1,0 +1,199 @@
+
+Note: No compatibility mode selected!
+
+
+Circuit: two capacitively coupled lanes, 72 fixed mos devices
+
+Doing analysis at TEMP = 70.727128 and TNOM = 27.000000
+
+Warning: toxe, toxp and dtox all given and toxe != toxp + dtox; dtox ignored.
+Warning: toxe, toxp and dtox all given and toxe != toxp + dtox; dtox ignored.
+
+Initial Transient Solution
+--------------------------
+
+Node                                   Voltage
+----                                   -------
+vdd_0                                   1.0864
+din_0                                   1.0864
+pre_0                               0.00298479
+drive_0                                1.07512
+en0_0                                   1.0864
+enb0_0                                       0
+hp0_0                                  1.08635
+tx_0                                0.00616362
+fn0_0                               0.00309241
+en1_0                                   1.0864
+enb1_0                                       0
+hp1_0                                  1.08635
+fn1_0                               0.00309241
+en2_0                                   1.0864
+enb2_0                                       0
+hp2_0                                  1.08635
+fn2_0                               0.00309241
+en3_0                                   1.0864
+enb3_0                                       0
+hp3_0                                  1.08635
+fn3_0                               0.00309241
+en4_0                                        0
+enb4_0                                  1.0864
+hp4_0                                  1.06509
+fn4_0                               0.00715044
+en5_0                                        0
+enb5_0                                  1.0864
+hp5_0                                  1.06509
+fn5_0                               0.00715044
+en6_0                                        0
+enb6_0                                  1.0864
+hp6_0                                  1.06509
+fn6_0                               0.00715044
+en7_0                                        0
+enb7_0                                  1.0864
+hp7_0                                  1.06509
+fn7_0                               0.00715044
+rl0_0                               0.00616362
+ch0_0                               0.00616362
+rl1_0                               0.00616362
+ch1_0                               0.00616362
+rl2_0                               0.00616362
+rx_0                                0.00616362
+vdd_1                                   1.0864
+din_1                                   1.0864
+pre_1                               0.00298372
+drive_1                                1.07499
+en0_1                                   1.0864
+enb0_1                                       0
+hp0_1                                  1.08635
+tx_1                                0.00315121
+fn0_1                               0.00209466
+en1_1                                   1.0864
+enb1_1                                       0
+hp1_1                                  1.08635
+fn1_1                               0.00209466
+en2_1                                   1.0864
+enb2_1                                       0
+hp2_1                                  1.08635
+fn2_1                               0.00209466
+en3_1                                   1.0864
+enb3_1                                       0
+hp3_1                                  1.08635
+fn3_1                               0.00209466
+en4_1                                   1.0864
+enb4_1                                       0
+hp4_1                                  1.08635
+fn4_1                               0.00209466
+en5_1                                   1.0864
+enb5_1                                       0
+hp5_1                                  1.08635
+fn5_1                               0.00209466
+en6_1                                   1.0864
+enb6_1                                       0
+hp6_1                                  1.08635
+fn6_1                               0.00209466
+en7_1                                   1.0864
+enb7_1                                       0
+hp7_1                                  1.08635
+fn7_1                               0.00209466
+rl0_1                               0.00315121
+ch0_1                               0.00315121
+rl1_1                               0.00315121
+ch1_1                               0.00315121
+rl2_1                               0.00315121
+rx_1                                0.00315121
+lch2_1#branch                                0
+lch1_1#branch                                0
+lch0_1#branch                                0
+lch2_0#branch                                0
+lch1_0#branch                                0
+lch0_0#branch                                0
+venb7_1#branch                     2.20882e-07
+ven7_1#branch                     -7.15629e-06
+venb6_1#branch                     2.20882e-07
+ven6_1#branch                     -7.15629e-06
+venb5_1#branch                     2.20882e-07
+ven5_1#branch                     -7.15629e-06
+venb4_1#branch                     2.20882e-07
+ven4_1#branch                     -7.15629e-06
+venb3_1#branch                     2.20882e-07
+ven3_1#branch                     -7.15629e-06
+venb2_1#branch                     2.20882e-07
+ven2_1#branch                     -7.15629e-06
+venb1_1#branch                     2.20882e-07
+ven1_1#branch                     -7.15629e-06
+venb0_1#branch                     2.20882e-07
+ven0_1#branch                     -7.15629e-06
+vin_1#branch                      -1.80567e-06
+vdd_1#branch                      -3.08226e-05
+venb7_0#branch                    -1.74147e-11
+ven7_0#branch                       1.8118e-11
+venb6_0#branch                    -1.74147e-11
+ven6_0#branch                       1.8118e-11
+venb5_0#branch                    -1.74147e-11
+ven5_0#branch                       1.8118e-11
+venb4_0#branch                    -1.74147e-11
+ven4_0#branch                       1.8118e-11
+venb3_0#branch                     2.20882e-07
+ven3_0#branch                     -7.15116e-06
+venb2_0#branch                     2.20882e-07
+ven2_0#branch                     -7.15116e-06
+venb1_0#branch                     2.20882e-07
+ven1_0#branch                     -7.15116e-06
+venb0_0#branch                     2.20882e-07
+ven0_0#branch                     -7.15116e-06
+vin_0#branch                      -1.80567e-06
+vdd_0#branch                      -2.95522e-05
+
+
+No. of Data Rows : 18009
+ngspice-39 done
+Note: can't find the initialization file spinit.
+
+Checking parameters for BSIM 4.5 model nmos
+Warning: ckappas = 0.01 is too small.
+Warning: ckappad = 0.01 is too small.
+ Reference value :  1.29930e-09
+ Reference value :  2.71782e-09
+ Reference value :  4.06373e-09
+ Reference value :  5.15610e-09
+ Reference value :  6.21613e-09
+ Reference value :  7.29175e-09
+ Reference value :  8.67849e-09
+ Reference value :  1.01294e-08
+ Reference value :  1.14048e-08
+ Reference value :  1.41824e-08
+ Reference value :  1.66391e-08
+ Reference value :  1.85607e-08
+ Reference value :  2.00896e-08
+ Reference value :  2.11482e-08
+ Reference value :  2.27269e-08
+ Reference value :  2.50213e-08
+ Reference value :  2.59221e-08
+ Reference value :  2.72569e-08
+ Reference value :  2.85830e-08
+ Reference value :  3.02934e-08
+ Reference value :  3.16867e-08
+ Reference value :  3.39453e-08
+ Reference value :  3.54080e-08
+ Reference value :  3.72861e-08
+ Reference value :  3.83136e-08
+ Reference value :  4.02692e-08
+ Reference value :  4.15004e-08
+ Reference value :  4.35013e-08
+ Reference value :  4.53843e-08
+ Reference value :  4.88266e-08
+ Reference value :  5.08625e-08
+ Reference value :  5.32477e-08
+ Reference value :  5.51526e-08
+ Reference value :  5.68292e-08
+ Reference value :  5.92830e-08
+ Reference value :  6.15003e-08
+ Reference value :  6.39289e-08
+ Reference value :  6.49021e-08
+ Reference value :  6.60668e-08
+ Reference value :  6.75119e-08
+ Reference value :  6.89693e-08
+ Reference value :  6.95844e-08
+ Reference value :  7.07391e-08
+ Reference value :  7.17286e-08
+ Reference value :  7.26379e-08
+ Reference value :  7.35000e-08

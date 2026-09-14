@@ -1,0 +1,185 @@
+
+Note: No compatibility mode selected!
+
+
+Circuit: two capacitively coupled lanes, 72 fixed mos devices
+
+Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
+
+Warning: toxe, toxp and dtox all given and toxe != toxp + dtox; dtox ignored.
+Warning: toxe, toxp and dtox all given and toxe != toxp + dtox; dtox ignored.
+
+Initial Transient Solution
+--------------------------
+
+Node                                   Voltage
+----                                   -------
+vdd_0                                        1
+din_0                                        1
+pre_0                                0.0018532
+drive_0                               0.993312
+en0_0                                        1
+enb0_0                                       0
+hp0_0                                 0.999972
+tx_0                                0.00183122
+fn0_0                               0.00121342
+en1_0                                        1
+enb1_0                                       0
+hp1_0                                 0.999972
+fn1_0                               0.00121342
+en2_0                                        1
+enb2_0                                       0
+hp2_0                                 0.999972
+fn2_0                               0.00121342
+en3_0                                        1
+enb3_0                                       0
+hp3_0                                 0.999972
+fn3_0                               0.00121342
+en4_0                                        1
+enb4_0                                       0
+hp4_0                                 0.999972
+fn4_0                               0.00121342
+en5_0                                        1
+enb5_0                                       0
+hp5_0                                 0.999972
+fn5_0                               0.00121342
+en6_0                                        1
+enb6_0                                       0
+hp6_0                                 0.999972
+fn6_0                               0.00121342
+en7_0                                        1
+enb7_0                                       0
+hp7_0                                 0.999972
+fn7_0                               0.00121342
+rl0_0                               0.00183122
+ch0_0                               0.00183122
+rl1_0                               0.00183122
+ch1_0                               0.00183122
+rl2_0                               0.00183122
+rx_0                                0.00183122
+vdd_1                                        1
+din_1                                        1
+pre_1                                0.0018532
+drive_1                               0.993312
+en0_1                                        1
+enb0_1                                       0
+hp0_1                                 0.999972
+tx_1                                0.00183122
+fn0_1                               0.00121342
+en1_1                                        1
+enb1_1                                       0
+hp1_1                                 0.999972
+fn1_1                               0.00121342
+en2_1                                        1
+enb2_1                                       0
+hp2_1                                 0.999972
+fn2_1                               0.00121342
+en3_1                                        1
+enb3_1                                       0
+hp3_1                                 0.999972
+fn3_1                               0.00121342
+en4_1                                        1
+enb4_1                                       0
+hp4_1                                 0.999972
+fn4_1                               0.00121342
+en5_1                                        1
+enb5_1                                       0
+hp5_1                                 0.999972
+fn5_1                               0.00121342
+en6_1                                        1
+enb6_1                                       0
+hp6_1                                 0.999972
+fn6_1                               0.00121342
+en7_1                                        1
+enb7_1                                       0
+hp7_1                                 0.999972
+fn7_1                               0.00121342
+rl0_1                               0.00183122
+ch0_1                               0.00183122
+rl1_1                               0.00183122
+ch1_1                               0.00183122
+rl2_1                               0.00183122
+rx_1                                0.00183122
+lch2_1#branch                                0
+lch1_1#branch                                0
+lch0_1#branch                                0
+lch2_0#branch                                0
+lch1_0#branch                                0
+lch0_0#branch                                0
+venb7_1#branch                     1.43265e-07
+ven7_1#branch                     -4.25589e-06
+venb6_1#branch                     1.43265e-07
+ven6_1#branch                     -4.25589e-06
+venb5_1#branch                     1.43265e-07
+ven5_1#branch                     -4.25589e-06
+venb4_1#branch                     1.43265e-07
+ven4_1#branch                     -4.25589e-06
+venb3_1#branch                     1.43265e-07
+ven3_1#branch                     -4.25589e-06
+venb2_1#branch                     1.43265e-07
+ven2_1#branch                     -4.25589e-06
+venb1_1#branch                     1.43265e-07
+ven1_1#branch                     -4.25589e-06
+venb0_1#branch                     1.43265e-07
+ven0_1#branch                     -4.25589e-06
+vin_1#branch                      -1.07779e-06
+vdd_1#branch                      -1.89004e-05
+venb7_0#branch                     1.43265e-07
+ven7_0#branch                     -4.25589e-06
+venb6_0#branch                     1.43265e-07
+ven6_0#branch                     -4.25589e-06
+venb5_0#branch                     1.43265e-07
+ven5_0#branch                     -4.25589e-06
+venb4_0#branch                     1.43265e-07
+ven4_0#branch                     -4.25589e-06
+venb3_0#branch                     1.43265e-07
+ven3_0#branch                     -4.25589e-06
+venb2_0#branch                     1.43265e-07
+ven2_0#branch                     -4.25589e-06
+venb1_0#branch                     1.43265e-07
+ven1_0#branch                     -4.25589e-06
+venb0_0#branch                     1.43265e-07
+ven0_0#branch                     -4.25589e-06
+vin_0#branch                      -1.07779e-06
+vdd_0#branch                      -1.89004e-05
+
+
+No. of Data Rows : 9123
+ngspice-39 done
+Note: can't find the initialization file spinit.
+
+Checking parameters for BSIM 4.5 model nmos
+Warning: ckappas = 0.01 is too small.
+Warning: ckappad = 0.01 is too small.
+ Reference value :  1.33558e-09
+ Reference value :  2.55228e-09
+ Reference value :  3.82745e-09
+ Reference value :  5.10415e-09
+ Reference value :  6.04611e-09
+ Reference value :  7.05122e-09
+ Reference value :  8.22620e-09
+ Reference value :  9.36916e-09
+ Reference value :  1.07878e-08
+ Reference value :  1.21221e-08
+ Reference value :  1.35202e-08
+ Reference value :  1.49659e-08
+ Reference value :  1.60264e-08
+ Reference value :  1.70969e-08
+ Reference value :  1.85001e-08
+ Reference value :  1.97974e-08
+ Reference value :  2.08626e-08
+ Reference value :  2.22631e-08
+ Reference value :  2.35805e-08
+ Reference value :  2.50206e-08
+ Reference value :  2.61682e-08
+ Reference value :  2.73664e-08
+ Reference value :  2.85729e-08
+ Reference value :  3.00156e-08
+ Reference value :  3.15200e-08
+ Reference value :  3.30201e-08
+ Reference value :  3.44346e-08
+ Reference value :  3.58195e-08
+ Reference value :  3.70420e-08
+ Reference value :  3.81387e-08
+ Reference value :  3.95081e-08
+ Reference value :  4.06923e-08

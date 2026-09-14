@@ -1,0 +1,20 @@
+{
+  "fixed_mos_count": 72,
+  "coupling_capacitors": 3,
+  "quiet_victim": [
+    {
+      "coupling_pf": 0.0,
+      "victim_peak_to_peak_mv": 6.930393758874942e-11
+    },
+    {
+      "coupling_pf": 0.06,
+      "victim_peak_to_peak_mv": 46.60603763467976
+    },
+    {
+      "coupling_pf": 0.12,
+      "victim_peak_to_peak_mv": 85.19053071070344
+    }
+  ],
+  "decoupled_vs_single_lane_max_error_mv": 0.6277483808988515,
+  "passed": true
+}

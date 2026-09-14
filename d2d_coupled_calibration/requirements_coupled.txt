@@ -1,0 +1,2 @@
+-r requirements_rl.txt
+scipy>=1.11

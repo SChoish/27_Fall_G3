@@ -1,0 +1,3 @@
+{
+  "change": "Added explicit classical baseline hyperparameter candidate lists before dataset collection, any fitting, validation, or test result inspection. Circuit contexts, measurement protocol, reward and metrics unchanged."
+}

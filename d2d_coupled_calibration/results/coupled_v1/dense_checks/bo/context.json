@@ -1,0 +1,25 @@
+{
+  "lane0": {
+    "vdd": 1.0864039233551541,
+    "temperature_c": 70.72712842471083,
+    "rate_gbps": 2.0,
+    "resistance_ohm": 34.18834143158513,
+    "inductance_nh": 0.37931653226623874,
+    "capacitance_pf": 0.22934163365546115,
+    "rx_capacitance_pf": 0.05355698892126278,
+    "clock_offset_ui": -0.12261208213122031,
+    "coarse_latency_ui": 1.0
+  },
+  "lane1": {
+    "vdd": 1.0864039233551541,
+    "temperature_c": 70.72712842471083,
+    "rate_gbps": 2.0,
+    "resistance_ohm": 47.840346544267554,
+    "inductance_nh": 0.44416499095195616,
+    "capacitance_pf": 0.1814691198685663,
+    "rx_capacitance_pf": 0.06532210314600029,
+    "clock_offset_ui": -0.09331618007117518,
+    "coarse_latency_ui": 1.0
+  },
+  "coupling_pf": 0.06935309698508148
+}

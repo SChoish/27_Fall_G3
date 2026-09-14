@@ -1,0 +1,11 @@
+{
+  "context_id": 6,
+  "strengths": [
+    2,
+    2
+  ],
+  "points_per_ui": 32,
+  "max_raw_difference": 0.0,
+  "exact_raw_equality": true,
+  "scope": "One asymmetric training circuit, all times, both lane waveforms and supply currents; before/after changing only ngspice OpenMP thread count."
+}

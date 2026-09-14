@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+.coverage
+htmlcov/
+
+# OS / editors
+.DS_Store
+Thumbs.db
+*~
+*.swp
+*.swo
+.idea/
+.vscode/
+
+# Transfer leftovers
+*.zip
+
+# Bundled Linux ngspice (host-specific). Use system ngspice or NGSPICE_BIN.
+d2d_coupled_calibration/runtime/
+
+# Simulator scratch
+**/bsim4v5.out
+*.cm
+
+# Local reruns
+d2d_coupled_calibration/results/**/jobs/
+*.nohup
+nohup.out

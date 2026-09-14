@@ -1,0 +1,3 @@
+{
+  "reason": "Energy is invariant to receiver phase in this model. Strict utility-only tie handling prevented coordinate search from retaining margin improvements on a flat feasible-energy plateau. Added shared margin tie-break before validation or test. Recollecting and retraining all learned methods; preliminary training files preserved separately."
+}

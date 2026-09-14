@@ -1,0 +1,10 @@
+{
+  "unreadable": [
+    {
+      "path": "models/bc_s1/step4000.pt",
+      "error": "EOFError"
+    }
+  ],
+  "repair": "Re-ran the same BC seed 1 with unchanged data/hyperparameters; changed checkpoint persistence to in-memory serialization plus atomic write.",
+  "unchanged_8000_actor_exactly_reproduced": true
+}

@@ -1,0 +1,8 @@
+bc_s0 {'step': 1000, 'actor_loss': 0.2767520844936371, 'critic_loss': 0.0, 'seconds': 2.935201815000255}
+bc_s0 {'step': 2000, 'actor_loss': 0.26081717014312744, 'critic_loss': 0.0, 'seconds': 5.156689322000602}
+bc_s0 {'step': 3000, 'actor_loss': 0.24274732172489166, 'critic_loss': 0.0, 'seconds': 7.6871882310006185}
+bc_s0 {'step': 4000, 'actor_loss': 0.24074789881706238, 'critic_loss': 0.0, 'seconds': 9.91060963200107}
+bc_s0 {'step': 5000, 'actor_loss': 0.2143653929233551, 'critic_loss': 0.0, 'seconds': 12.352468893999685}
+bc_s0 {'step': 6000, 'actor_loss': 0.23221208155155182, 'critic_loss': 0.0, 'seconds': 14.901407294000819}
+bc_s0 {'step': 7000, 'actor_loss': 0.24151493608951569, 'critic_loss': 0.0, 'seconds': 17.685914944000615}
+bc_s0 {'step': 8000, 'actor_loss': 0.1854635328054428, 'critic_loss': 0.0, 'seconds': 20.115186042999994}

@@ -1,0 +1,1365 @@
+{
+  "version": "coupled_v1",
+  "contexts": [
+    {
+      "lane0": {
+        "vdd": 0.9734721182008155,
+        "temperature_c": 20.180693949295936,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 17.666421849914368,
+        "inductance_nh": 0.3003718015297169,
+        "capacitance_pf": 0.3838598231505973,
+        "rx_capacitance_pf": 0.06845194561562869,
+        "clock_offset_ui": -0.1282446262655065,
+        "coarse_latency_ui": 1.0
+      },
+      "lane1": {
+        "vdd": 0.9734721182008155,
+        "temperature_c": 20.180693949295936,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 50.466960303421956,
+        "inductance_nh": 0.38486679078205144,
+        "capacitance_pf": 0.365519905520331,
+        "rx_capacitance_pf": 0.07313439443238774,
+        "clock_offset_ui": 0.09779127026846285,
+        "coarse_latency_ui": 1.0
+      },
+      "coupling_pf": 0.13502611948464485
+    },
+    {
+      "lane0": {
+        "vdd": 0.97873715830484,
+        "temperature_c": 51.59934922647225,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 26.265222098139812,
+        "inductance_nh": 0.2961769645850703,
+        "capacitance_pf": 0.35072908825492366,
+        "rx_capacitance_pf": 0.057494996380531155,
+        "clock_offset_ui": 0.1086754692258513,
+        "coarse_latency_ui": 1.0
+      },
+      "lane1": {
+        "vdd": 0.97873715830484,
+        "temperature_c": 51.59934922647225,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 37.84856607855076,
+        "inductance_nh": 0.2021530772182174,
+        "capacitance_pf": 0.2885488804337962,
+        "rx_capacitance_pf": 0.04850739562757783,
+        "clock_offset_ui": -0.18978467706031568,
+        "coarse_latency_ui": 1.0
+      },
+      "coupling_pf": 0.0825044963932613
+    },
+    {
+      "lane0": {
+        "vdd": 1.0620196310410603,
+        "temperature_c": 58.15400903251228,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 45.726355859131104,
+        "inductance_nh": 0.4184529987028828,
+        "capacitance_pf": 0.1827509675054032,
+        "rx_capacitance_pf": 0.050169265807396966,
+        "clock_offset_ui": -0.0721310986829912,
+        "coarse_latency_ui": 1.0
+      },
+      "lane1": {
+        "vdd": 1.0620196310410603,
+        "temperature_c": 58.15400903251228,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 35.54200269233161,
+        "inductance_nh": 0.22527316410214407,
+        "capacitance_pf": 0.21965446742673916,
+        "rx_capacitance_pf": 0.06973873431817598,
+        "clock_offset_ui": 0.09323374435606901,
+        "coarse_latency_ui": 1.0
+      },
+      "coupling_pf": 0.11791088092827427
+    },
+    {
+      "lane0": {
+        "vdd": 1.0346999586387333,
+        "temperature_c": 33.96341301055773,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 21.67434511253277,
+        "inductance_nh": 0.43300616248626145,
+        "capacitance_pf": 0.28155932191436606,
+        "rx_capacitance_pf": 0.04566635232226998,
+        "clock_offset_ui": -0.13280506217183677,
+        "coarse_latency_ui": 1.0
+      },
+      "lane1": {
+        "vdd": 1.0346999586387333,
+        "temperature_c": 33.96341301055773,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 20.937841506473948,
+        "inductance_nh": 0.3089632749838411,
+        "capacitance_pf": 0.2716436261782412,
+        "rx_capacitance_pf": 0.05741237432171663,
+        "clock_offset_ui": 0.12921063256831977,
+        "coarse_latency_ui": 1.0
+      },
+      "coupling_pf": 0.12044776921724425
+    },
+    {
+      "lane0": {
+        "vdd": 0.9800166652980099,
+        "temperature_c": 62.41666510798249,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 42.74615263440363,
+        "inductance_nh": 0.4240315811757205,
+        "capacitance_pf": 0.22894869604649554,
+        "rx_capacitance_pf": 0.06584549204626357,
+        "clock_offset_ui": 0.19586053679628102,
+        "coarse_latency_ui": 1.0
+      },
+      "lane1": {
+        "vdd": 0.9800166652980099,
+        "temperature_c": 62.41666510798249,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 41.798704561484,
+        "inductance_nh": 0.2503571538179737,
+        "capacitance_pf": 0.28863537813998374,
+        "rx_capacitance_pf": 0.0625561000201724,
+        "clock_offset_ui": -0.12050010195767702,
+        "coarse_latency_ui": 1.0
+      },
+      "coupling_pf": 0.0200325128449549
+    },
+    {
+      "lane0": {
+        "vdd": 0.9826433075375336,
+        "temperature_c": 68.6651801337861,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 25.036333972585105,
+        "inductance_nh": 0.4489568395927679,
+        "capacitance_pf": 0.19047839757315732,
+        "rx_capacitance_pf": 0.042442578551370465,
+        "clock_offset_ui": -0.030994428507939237,
+        "coarse_latency_ui": 1.0
+      },
+      "lane1": {
+        "vdd": 0.9826433075375336,
+        "temperature_c": 68.6651801337861,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 32.952455399369114,
+        "inductance_nh": 0.44117803572283576,
+        "capacitance_pf": 0.36857507454271066,
+        "rx_capacitance_pf": 0.05951957086979889,
+        "clock_offset_ui": -0.0583935677249634,
+        "coarse_latency_ui": 1.0
+      },
+      "coupling_pf": 0.11249630885781109
+    },
+    {
+      "lane0": {
+        "vdd": 1.0079615419671817,
+        "temperature_c": 14.370672935725334,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 16.60933418957861,
+        "inductance_nh": 0.25560966184739636,
+        "capacitance_pf": 0.3148827385118035,
+        "rx_capacitance_pf": 0.046165198610932885,
+        "clock_offset_ui": 0.1172781642968252,
+        "coarse_latency_ui": 1.0
+      },
+      "lane1": {
+        "vdd": 1.0079615419671817,
+        "temperature_c": 14.370672935725334,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 17.399654086850866,
+        "inductance_nh": 0.36809710739698354,
+        "capacitance_pf": 0.3737760309542496,
+        "rx_capacitance_pf": 0.06565036224841449,
+        "clock_offset_ui": 0.18412119234161345,
+        "coarse_latency_ui": 1.0
+      },
+      "coupling_pf": 0.04733138673865277
+    },
+    {
+      "lane0": {
+        "vdd": 1.0257364267025442,
+        "temperature_c": 24.42478377169152,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 17.033152554161003,
+        "inductance_nh": 0.4217460430711282,
+        "capacitance_pf": 0.3008515413488244,
+        "rx_capacitance_pf": 0.0853593902633117,
+        "clock_offset_ui": 0.14238183803829974,
+        "coarse_latency_ui": 1.0
+      },
+      "lane1": {
+        "vdd": 1.0257364267025442,
+        "temperature_c": 24.42478377169152,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 35.985620733489526,
+        "inductance_nh": 0.22959031029418056,
+        "capacitance_pf": 0.31704744988605293,
+        "rx_capacitance_pf": 0.054468476300679136,
+        "clock_offset_ui": -0.004958701257429532,
+        "coarse_latency_ui": 1.0
+      },
+      "coupling_pf": 0.042237067273682274
+    },
+    {
+      "lane0": {
+        "vdd": 0.9709036350823501,
+        "temperature_c": 40.29679390947997,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 38.42242942458205,
+        "inductance_nh": 0.4848415501617248,
+        "capacitance_pf": 0.21915756963499206,
+        "rx_capacitance_pf": 0.07619773752206971,
+        "clock_offset_ui": -0.16869662866101873,
+        "coarse_latency_ui": 1.0
+      },
+      "lane1": {
+        "vdd": 0.9709036350823501,
+        "temperature_c": 40.29679390947997,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 16.954514412324585,
+        "inductance_nh": 0.45084670910110836,
+        "capacitance_pf": 0.28661773589287476,
+        "rx_capacitance_pf": 0.047179928409351195,
+        "clock_offset_ui": 0.06288998816241892,
+        "coarse_latency_ui": 1.0
+      },
+      "coupling_pf": 0.07077279916594562
+    },
+    {
+      "lane0": {
+        "vdd": 0.9923786749391936,
+        "temperature_c": 43.42726480435189,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 34.6252342007162,
+        "inductance_nh": 0.27252692105402837,
+        "capacitance_pf": 0.31676864682413336,
+        "rx_capacitance_pf": 0.06150282906096882,
+        "clock_offset_ui": 0.14012313130027976,
+        "coarse_latency_ui": 1.0
+      },
+      "lane1": {
+        "vdd": 0.9923786749391936,
+        "temperature_c": 43.42726480435189,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 31.050623701167595,
+        "inductance_nh": 0.1635244101804843,
+        "capacitance_pf": 0.3220540957236086,
+        "rx_capacitance_pf": 0.040875786983828655,
+        "clock_offset_ui": 0.029194692023418234,
+        "coarse_latency_ui": 1.0
+      },
+      "coupling_pf": 0.12804526925019627
+    },
+    {
+      "lane0": {
+        "vdd": 1.0922184134763844,
+        "temperature_c": 14.654794490858805,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 27.216105615233054,
+        "inductance_nh": 0.27413507887407124,
+        "capacitance_pf": 0.30241608381179996,
+        "rx_capacitance_pf": 0.08150149194101897,
+        "clock_offset_ui": 0.12623578881848863,
+        "coarse_latency_ui": 1.0
+      },
+      "lane1": {
+        "vdd": 1.0922184134763844,
+        "temperature_c": 14.654794490858805,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 16.712208536918965,
+        "inductance_nh": 0.46386444528144477,
+        "capacitance_pf": 0.21090513505652542,
+        "rx_capacitance_pf": 0.05110852195286203,
+        "clock_offset_ui": -0.05826565947252088,
+        "coarse_latency_ui": 1.0
+      },
+      "coupling_pf": 0.1138509359472096
+    },
+    {
+      "lane0": {
+        "vdd": 0.9964136947184157,
+        "temperature_c": 59.01165066682494,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 25.326090888825664,
+        "inductance_nh": 0.32652067637791543,
+        "capacitance_pf": 0.3381347455606737,
+        "rx_capacitance_pf": 0.05397728452381505,
+        "clock_offset_ui": 0.08172024567746017,
+        "coarse_latency_ui": 1.0
+      },
+      "lane1": {
+        "vdd": 0.9964136947184157,
+        "temperature_c": 59.01165066682494,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 46.66732456951306,
+        "inductance_nh": 0.3146103772895189,
+        "capacitance_pf": 0.24298520648571026,
+        "rx_capacitance_pf": 0.06887315065848544,
+        "clock_offset_ui": -0.062113174404041294,
+        "coarse_latency_ui": 1.0
+      },
+      "coupling_pf": 0.06802005183264666
+    },
+    {
+      "lane0": {
+        "vdd": 0.9582391361263923,
+        "temperature_c": 45.8646602853742,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 38.83130386025579,
+        "inductance_nh": 0.37408836381377186,
+        "capacitance_pf": 0.2137087903842644,
+        "rx_capacitance_pf": 0.08878670282833809,
+        "clock_offset_ui": -0.11028040432807124,
+        "coarse_latency_ui": 1.0
+      },
+      "lane1": {
+        "vdd": 0.9582391361263923,
+        "temperature_c": 45.8646602853742,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 40.64066489997853,
+        "inductance_nh": 0.40527058174495867,
+        "capacitance_pf": 0.26403629379454807,
+        "rx_capacitance_pf": 0.04128013532926709,
+        "clock_offset_ui": -0.0822804401589452,
+        "coarse_latency_ui": 1.0
+      },
+      "coupling_pf": 0.12832419902459286
+    },
+    {
+      "lane0": {
+        "vdd": 1.0563536587994198,
+        "temperature_c": 51.6501546542979,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 25.070912341866844,
+        "inductance_nh": 0.30243495051361485,
+        "capacitance_pf": 0.33158457829131294,
+        "rx_capacitance_pf": 0.05098101375276081,
+        "clock_offset_ui": -0.1862684849532663,
+        "coarse_latency_ui": 1.0
+      },
+      "lane1": {
+        "vdd": 1.0563536587994198,
+        "temperature_c": 51.6501546542979,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 43.436282636615545,
+        "inductance_nh": 0.3173519932717491,
+        "capacitance_pf": 0.2726109401738165,
+        "rx_capacitance_pf": 0.0652158052294751,
+        "clock_offset_ui": -0.17208531945060482,
+        "coarse_latency_ui": 1.0
+      },
+      "coupling_pf": 0.0715866559259374
+    },
+    {
+      "lane0": {
+        "vdd": 1.091128758743928,
+        "temperature_c": 55.20002758085414,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 15.262426052175307,
+        "inductance_nh": 0.26554328450572107,
+        "capacitance_pf": 0.21534845883074424,
+        "rx_capacitance_pf": 0.07274806988643241,
+        "clock_offset_ui": -0.10601950441736459,
+        "coarse_latency_ui": 1.0
+      },
+      "lane1": {
+        "vdd": 1.091128758743928,
+        "temperature_c": 55.20002758085414,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 24.83981934406044,
+        "inductance_nh": 0.30267628299176264,
+        "capacitance_pf": 0.26579574593651434,
+        "rx_capacitance_pf": 0.06331876027330911,
+        "clock_offset_ui": 0.08237730229423335,
+        "coarse_latency_ui": 1.0
+      },
+      "coupling_pf": 0.07439370400297866
+    },
+    {
+      "lane0": {
+        "vdd": 0.9820265312804443,
+        "temperature_c": 41.671324256525466,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 26.37940683747852,
+        "inductance_nh": 0.40855388595521747,
+        "capacitance_pf": 0.3722431940734324,
+        "rx_capacitance_pf": 0.05871804198411194,
+        "clock_offset_ui": 0.0003115662625489679,
+        "coarse_latency_ui": 1.0
+      },
+      "lane1": {
+        "vdd": 0.9820265312804443,
+        "temperature_c": 41.671324256525466,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 48.59585254417786,
+        "inductance_nh": 0.4672097752219827,
+        "capacitance_pf": 0.39342351571552814,
+        "rx_capacitance_pf": 0.060005871112840545,
+        "clock_offset_ui": 0.014144816883885192,
+        "coarse_latency_ui": 1.0
+      },
+      "coupling_pf": 0.05847110722035233
+    },
+    {
+      "lane0": {
+        "vdd": 1.0675405935263336,
+        "temperature_c": 73.55611996048661,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 31.3679926543246,
+        "inductance_nh": 0.34547697830282703,
+        "capacitance_pf": 0.27921840593857383,
+        "rx_capacitance_pf": 0.08723438824330577,
+        "clock_offset_ui": 0.10992102736487602,
+        "coarse_latency_ui": 1.0
+      },
+      "lane1": {
+        "vdd": 1.0675405935263336,
+        "temperature_c": 73.55611996048661,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 23.278509264749545,
+        "inductance_nh": 0.24163708237585219,
+        "capacitance_pf": 0.34743604214472934,
+        "rx_capacitance_pf": 0.0488151534620717,
+        "clock_offset_ui": 0.1022605637603331,
+        "coarse_latency_ui": 1.0
+      },
+      "coupling_pf": 0.03696794320457199
+    },
+    {
+      "lane0": {
+        "vdd": 1.075390203489094,
+        "temperature_c": 41.245616877509946,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 54.88382343210405,
+        "inductance_nh": 0.41227200860350666,
+        "capacitance_pf": 0.2400779697579991,
+        "rx_capacitance_pf": 0.07459379316440329,
+        "clock_offset_ui": -0.056533554291433114,
+        "coarse_latency_ui": 1.0
+      },
+      "lane1": {
+        "vdd": 1.075390203489094,
+        "temperature_c": 41.245616877509946,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 21.499515914712383,
+        "inductance_nh": 0.3034105086336454,
+        "capacitance_pf": 0.2820414460593508,
+        "rx_capacitance_pf": 0.07396635007183192,
+        "clock_offset_ui": -0.03860197978963059,
+        "coarse_latency_ui": 1.0
+      },
+      "coupling_pf": 0.1309518333621812
+    },
+    {
+      "lane0": {
+        "vdd": 1.0853648846009367,
+        "temperature_c": 27.269818497535603,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 47.07407072108394,
+        "inductance_nh": 0.2873907535570756,
+        "capacitance_pf": 0.29727443649718527,
+        "rx_capacitance_pf": 0.050738926578712526,
+        "clock_offset_ui": -0.028126377396674146,
+        "coarse_latency_ui": 1.0
+      },
+      "lane1": {
+        "vdd": 1.0853648846009367,
+        "temperature_c": 27.269818497535603,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 54.62697221955367,
+        "inductance_nh": 0.46400188126696607,
+        "capacitance_pf": 0.37578611575960086,
+        "rx_capacitance_pf": 0.0883756035660426,
+        "clock_offset_ui": 0.13318141493452046,
+        "coarse_latency_ui": 1.0
+      },
+      "coupling_pf": 0.04887935471842805
+    },
+    {
+      "lane0": {
+        "vdd": 1.0509019717158687,
+        "temperature_c": 35.791190509111544,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 54.70753841696436,
+        "inductance_nh": 0.21040418542345835,
+        "capacitance_pf": 0.18008855582529745,
+        "rx_capacitance_pf": 0.05872222179270893,
+        "clock_offset_ui": -0.12932745255325295,
+        "coarse_latency_ui": 1.0
+      },
+      "lane1": {
+        "vdd": 1.0509019717158687,
+        "temperature_c": 35.791190509111544,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 27.414229579322075,
+        "inductance_nh": 0.22649285140648748,
+        "capacitance_pf": 0.3913636413300412,
+        "rx_capacitance_pf": 0.0733403368096333,
+        "clock_offset_ui": -0.06401854348576161,
+        "coarse_latency_ui": 1.0
+      },
+      "coupling_pf": 0.06379602250342914
+    },
+    {
+      "lane0": {
+        "vdd": 1.0593899420509691,
+        "temperature_c": 54.75782494848568,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 39.4308816700146,
+        "inductance_nh": 0.43950372202899846,
+        "capacitance_pf": 0.20458687725697214,
+        "rx_capacitance_pf": 0.04463670734142169,
+        "clock_offset_ui": 0.17658226346758166,
+        "coarse_latency_ui": 1.0
+      },
+      "lane1": {
+        "vdd": 1.0593899420509691,
+        "temperature_c": 54.75782494848568,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 21.305681071694135,
+        "inductance_nh": 0.19883688893854973,
+        "capacitance_pf": 0.2499112653301725,
+        "rx_capacitance_pf": 0.0660568742809608,
+        "clock_offset_ui": 0.1986630273627587,
+        "coarse_latency_ui": 1.0
+      },
+      "coupling_pf": 0.030138010522621043
+    },
+    {
+      "lane0": {
+        "vdd": 1.0807778218092847,
+        "temperature_c": 52.546943105071506,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 34.129120471241514,
+        "inductance_nh": 0.3027162576768433,
+        "capacitance_pf": 0.23516958571159277,
+        "rx_capacitance_pf": 0.06122856453030646,
+        "clock_offset_ui": 0.085294632207505,
+        "coarse_latency_ui": 1.0
+      },
+      "lane1": {
+        "vdd": 1.0807778218092847,
+        "temperature_c": 52.546943105071506,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 32.639466293805604,
+        "inductance_nh": 0.4831473287992114,
+        "capacitance_pf": 0.22797604808712216,
+        "rx_capacitance_pf": 0.07679325488345096,
+        "clock_offset_ui": 0.15280158630134483,
+        "coarse_latency_ui": 1.0
+      },
+      "coupling_pf": 0.1112795030023299
+    },
+    {
+      "lane0": {
+        "vdd": 1.0795830254328962,
+        "temperature_c": 66.62613869824307,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 29.387993599989773,
+        "inductance_nh": 0.2625563675002233,
+        "capacitance_pf": 0.33076031987936577,
+        "rx_capacitance_pf": 0.06323817312447871,
+        "clock_offset_ui": 0.1080221052689942,
+        "coarse_latency_ui": 1.0
+      },
+      "lane1": {
+        "vdd": 1.0795830254328962,
+        "temperature_c": 66.62613869824307,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 33.49111638257094,
+        "inductance_nh": 0.23090462633517106,
+        "capacitance_pf": 0.26967059181756126,
+        "rx_capacitance_pf": 0.07622873516082576,
+        "clock_offset_ui": -0.17961876478465238,
+        "coarse_latency_ui": 1.0
+      },
+      "coupling_pf": 0.07683199512857589
+    },
+    {
+      "lane0": {
+        "vdd": 1.0416337019120059,
+        "temperature_c": 32.22913481324689,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 40.792434894857706,
+        "inductance_nh": 0.1599165952138371,
+        "capacitance_pf": 0.33876165338299624,
+        "rx_capacitance_pf": 0.046526017509486484,
+        "clock_offset_ui": -0.04545239286126451,
+        "coarse_latency_ui": 1.0
+      },
+      "lane1": {
+        "vdd": 1.0416337019120059,
+        "temperature_c": 32.22913481324689,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 17.62775483249508,
+        "inductance_nh": 0.41894606267091183,
+        "capacitance_pf": 0.31934788039663553,
+        "rx_capacitance_pf": 0.04437350119275317,
+        "clock_offset_ui": 0.10076187317977764,
+        "coarse_latency_ui": 1.0
+      },
+      "coupling_pf": 0.11290235726162937
+    },
+    {
+      "lane0": {
+        "vdd": 1.063428933056086,
+        "temperature_c": 24.854970696202688,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 38.303341509288565,
+        "inductance_nh": 0.15156696415346188,
+        "capacitance_pf": 0.29249576691644985,
+        "rx_capacitance_pf": 0.06312998368880654,
+        "clock_offset_ui": 0.16556050128527106,
+        "coarse_latency_ui": 1.0
+      },
+      "lane1": {
+        "vdd": 1.063428933056086,
+        "temperature_c": 24.854970696202688,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 39.813706672433185,
+        "inductance_nh": 0.32408562751677655,
+        "capacitance_pf": 0.2732427672614508,
+        "rx_capacitance_pf": 0.05968677273982747,
+        "clock_offset_ui": -0.03448595764991472,
+        "coarse_latency_ui": 1.0
+      },
+      "coupling_pf": 0.035303195503950335
+    },
+    {
+      "lane0": {
+        "vdd": 1.0489420991581946,
+        "temperature_c": 10.291974902589956,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 43.87678847212456,
+        "inductance_nh": 0.2392917953706193,
+        "capacitance_pf": 0.20724712445628954,
+        "rx_capacitance_pf": 0.0419568383979107,
+        "clock_offset_ui": 0.17217920886014815,
+        "coarse_latency_ui": 1.0
+      },
+      "lane1": {
+        "vdd": 1.0489420991581946,
+        "temperature_c": 10.291974902589956,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 16.54276186609159,
+        "inductance_nh": 0.4816120720185607,
+        "capacitance_pf": 0.24092171554536787,
+        "rx_capacitance_pf": 0.08472224664584477,
+        "clock_offset_ui": 0.11345845803128213,
+        "coarse_latency_ui": 1.0
+      },
+      "coupling_pf": 0.05555648396917415
+    },
+    {
+      "lane0": {
+        "vdd": 1.0754271946042797,
+        "temperature_c": 38.27365531593656,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 37.352690305578655,
+        "inductance_nh": 0.38619369675947895,
+        "capacitance_pf": 0.24067102987060696,
+        "rx_capacitance_pf": 0.05817694783431604,
+        "clock_offset_ui": 0.05245311112436435,
+        "coarse_latency_ui": 1.0
+      },
+      "lane1": {
+        "vdd": 1.0754271946042797,
+        "temperature_c": 38.27365531593656,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 45.76015775195499,
+        "inductance_nh": 0.4113324077431716,
+        "capacitance_pf": 0.22218499726467456,
+        "rx_capacitance_pf": 0.048441159342565064,
+        "clock_offset_ui": -0.17521460468550384,
+        "coarse_latency_ui": 1.0
+      },
+      "coupling_pf": 0.07072545634238864
+    },
+    {
+      "lane0": {
+        "vdd": 0.9620957263114006,
+        "temperature_c": 11.661245305573564,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 36.83754877502026,
+        "inductance_nh": 0.18585862830551766,
+        "capacitance_pf": 0.278491268503413,
+        "rx_capacitance_pf": 0.05204620648754034,
+        "clock_offset_ui": 0.05905146961851371,
+        "coarse_latency_ui": 1.0
+      },
+      "lane1": {
+        "vdd": 0.9620957263114006,
+        "temperature_c": 11.661245305573564,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 15.86895300050276,
+        "inductance_nh": 0.28288966221666434,
+        "capacitance_pf": 0.32355291358809135,
+        "rx_capacitance_pf": 0.06251390983577343,
+        "clock_offset_ui": -0.14544350049733368,
+        "coarse_latency_ui": 1.0
+      },
+      "coupling_pf": 0.06118076050532201
+    },
+    {
+      "lane0": {
+        "vdd": 0.9578933197949168,
+        "temperature_c": 70.427885858523,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 22.387766391733503,
+        "inductance_nh": 0.3862173620184766,
+        "capacitance_pf": 0.2751311095844168,
+        "rx_capacitance_pf": 0.045741360419303836,
+        "clock_offset_ui": -0.08944404023247238,
+        "coarse_latency_ui": 1.0
+      },
+      "lane1": {
+        "vdd": 0.9578933197949168,
+        "temperature_c": 70.427885858523,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 34.102584986952394,
+        "inductance_nh": 0.4758379198234568,
+        "capacitance_pf": 0.240161370981078,
+        "rx_capacitance_pf": 0.058183215223748114,
+        "clock_offset_ui": -0.1903577916608648,
+        "coarse_latency_ui": 1.0
+      },
+      "coupling_pf": 0.12608123191132045
+    },
+    {
+      "lane0": {
+        "vdd": 1.0424356036813616,
+        "temperature_c": 52.08661892091162,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 23.359307995630317,
+        "inductance_nh": 0.40931110085783406,
+        "capacitance_pf": 0.24939359805949574,
+        "rx_capacitance_pf": 0.08283259506965307,
+        "clock_offset_ui": 0.12211291297199356,
+        "coarse_latency_ui": 1.0
+      },
+      "lane1": {
+        "vdd": 1.0424356036813616,
+        "temperature_c": 52.08661892091162,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 42.46185573246123,
+        "inductance_nh": 0.22601133950875169,
+        "capacitance_pf": 0.22898739025166764,
+        "rx_capacitance_pf": 0.051909163673457936,
+        "clock_offset_ui": -0.09421994468419044,
+        "coarse_latency_ui": 1.0
+      },
+      "coupling_pf": 0.05148305513862832
+    },
+    {
+      "lane0": {
+        "vdd": 0.9751978317649086,
+        "temperature_c": 68.9515099649872,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 35.95859437040574,
+        "inductance_nh": 0.4743717764799138,
+        "capacitance_pf": 0.22882264195416782,
+        "rx_capacitance_pf": 0.08456503436502116,
+        "clock_offset_ui": -0.15846254670507093,
+        "coarse_latency_ui": 1.0
+      },
+      "lane1": {
+        "vdd": 0.9751978317649086,
+        "temperature_c": 68.9515099649872,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 47.40733303312107,
+        "inductance_nh": 0.38357242776463496,
+        "capacitance_pf": 0.3937763846088197,
+        "rx_capacitance_pf": 0.07983257088630485,
+        "clock_offset_ui": 0.009325404697076684,
+        "coarse_latency_ui": 1.0
+      },
+      "coupling_pf": 0.10579452452523044
+    },
+    {
+      "lane0": {
+        "vdd": 0.9559528166636494,
+        "temperature_c": 51.25803434368882,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 16.431292207734177,
+        "inductance_nh": 0.2036896231101468,
+        "capacitance_pf": 0.35561085247178753,
+        "rx_capacitance_pf": 0.074543486793783,
+        "clock_offset_ui": -0.08808035432193795,
+        "coarse_latency_ui": 1.0
+      },
+      "lane1": {
+        "vdd": 0.9559528166636494,
+        "temperature_c": 51.25803434368882,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 41.384250884681514,
+        "inductance_nh": 0.43216427350806763,
+        "capacitance_pf": 0.2857215366209068,
+        "rx_capacitance_pf": 0.08377185338950689,
+        "clock_offset_ui": -0.1145240230328434,
+        "coarse_latency_ui": 1.0
+      },
+      "coupling_pf": 0.055738425595768054
+    },
+    {
+      "lane0": {
+        "vdd": 1.0776211743530255,
+        "temperature_c": 45.36231033008332,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 32.53865052133238,
+        "inductance_nh": 0.4843678708849045,
+        "capacitance_pf": 0.2608322998683552,
+        "rx_capacitance_pf": 0.054264072539204344,
+        "clock_offset_ui": -0.14428943890372145,
+        "coarse_latency_ui": 1.0
+      },
+      "lane1": {
+        "vdd": 1.0776211743530255,
+        "temperature_c": 45.36231033008332,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 20.042634640456175,
+        "inductance_nh": 0.40864995649878877,
+        "capacitance_pf": 0.23829739371573339,
+        "rx_capacitance_pf": 0.06991770486661367,
+        "clock_offset_ui": 0.07490096403321245,
+        "coarse_latency_ui": 1.0
+      },
+      "coupling_pf": 0.059565750828234176
+    },
+    {
+      "lane0": {
+        "vdd": 1.0763542259658694,
+        "temperature_c": 33.195827487154205,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 32.422814950001566,
+        "inductance_nh": 0.15595208085924922,
+        "capacitance_pf": 0.23580226085143563,
+        "rx_capacitance_pf": 0.04759070299286244,
+        "clock_offset_ui": 0.08596161463566421,
+        "coarse_latency_ui": 1.0
+      },
+      "lane1": {
+        "vdd": 1.0763542259658694,
+        "temperature_c": 33.195827487154205,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 42.57527641822442,
+        "inductance_nh": 0.1756888065597858,
+        "capacitance_pf": 0.3618093496087142,
+        "rx_capacitance_pf": 0.08003792764028611,
+        "clock_offset_ui": 0.10504590314919998,
+        "coarse_latency_ui": 1.0
+      },
+      "coupling_pf": 0.07016291806255304
+    },
+    {
+      "lane0": {
+        "vdd": 0.9652617595242539,
+        "temperature_c": 49.448853064748384,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 30.71153644539933,
+        "inductance_nh": 0.24657485316080058,
+        "capacitance_pf": 0.39991447167057004,
+        "rx_capacitance_pf": 0.06342428226401746,
+        "clock_offset_ui": 0.16749951927341955,
+        "coarse_latency_ui": 1.0
+      },
+      "lane1": {
+        "vdd": 0.9652617595242539,
+        "temperature_c": 49.448853064748384,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 38.887817743919726,
+        "inductance_nh": 0.31608701600810163,
+        "capacitance_pf": 0.1817578877280239,
+        "rx_capacitance_pf": 0.0823538824833076,
+        "clock_offset_ui": 0.1864086422741893,
+        "coarse_latency_ui": 1.0
+      },
+      "coupling_pf": 0.10261611686640001
+    },
+    {
+      "lane0": {
+        "vdd": 1.0585532137375169,
+        "temperature_c": 13.788694789670663,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 15.460735169847602,
+        "inductance_nh": 0.2441744639548688,
+        "capacitance_pf": 0.397978971971521,
+        "rx_capacitance_pf": 0.0877780661730463,
+        "clock_offset_ui": -0.001572408840691042,
+        "coarse_latency_ui": 1.0
+      },
+      "lane1": {
+        "vdd": 1.0585532137375169,
+        "temperature_c": 13.788694789670663,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 37.28644849358605,
+        "inductance_nh": 0.44207467571191317,
+        "capacitance_pf": 0.3106418576363321,
+        "rx_capacitance_pf": 0.049977099880158304,
+        "clock_offset_ui": 0.01143318446187025,
+        "coarse_latency_ui": 1.0
+      },
+      "coupling_pf": 0.11343711974270419
+    },
+    {
+      "lane0": {
+        "vdd": 1.0795069930443018,
+        "temperature_c": 29.146213001222225,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 41.774666297882,
+        "inductance_nh": 0.4481817124219599,
+        "capacitance_pf": 0.37124086038513576,
+        "rx_capacitance_pf": 0.06533781249328877,
+        "clock_offset_ui": 0.11276871271883981,
+        "coarse_latency_ui": 1.0
+      },
+      "lane1": {
+        "vdd": 1.0795069930443018,
+        "temperature_c": 29.146213001222225,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 35.74264975958688,
+        "inductance_nh": 0.1527365492521053,
+        "capacitance_pf": 0.20437112092928958,
+        "rx_capacitance_pf": 0.08239315847080102,
+        "clock_offset_ui": 0.058294221242873145,
+        "coarse_latency_ui": 1.0
+      },
+      "coupling_pf": 0.07994136198680807
+    },
+    {
+      "lane0": {
+        "vdd": 0.9768487219028987,
+        "temperature_c": 39.11054202845716,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 31.562059490859316,
+        "inductance_nh": 0.44643086887651284,
+        "capacitance_pf": 0.2288547042702567,
+        "rx_capacitance_pf": 0.04654681885676172,
+        "clock_offset_ui": 0.09507829075726598,
+        "coarse_latency_ui": 1.0
+      },
+      "lane1": {
+        "vdd": 0.9768487219028987,
+        "temperature_c": 39.11054202845716,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 26.34289390253446,
+        "inductance_nh": 0.18708179836105368,
+        "capacitance_pf": 0.3288002861234991,
+        "rx_capacitance_pf": 0.06763883623256293,
+        "clock_offset_ui": 0.08529782534323249,
+        "coarse_latency_ui": 1.0
+      },
+      "coupling_pf": 0.05382790602190174
+    },
+    {
+      "lane0": {
+        "vdd": 1.0237169047909591,
+        "temperature_c": 63.3365596960674,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 51.20267631679948,
+        "inductance_nh": 0.3291996523439893,
+        "capacitance_pf": 0.39571191647581655,
+        "rx_capacitance_pf": 0.055332074439064016,
+        "clock_offset_ui": -0.0676887834662264,
+        "coarse_latency_ui": 1.0
+      },
+      "lane1": {
+        "vdd": 1.0237169047909591,
+        "temperature_c": 63.3365596960674,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 41.12034789426491,
+        "inductance_nh": 0.46609450609792147,
+        "capacitance_pf": 0.19576857687982405,
+        "rx_capacitance_pf": 0.057609280831525306,
+        "clock_offset_ui": -0.09125891161797256,
+        "coarse_latency_ui": 1.0
+      },
+      "coupling_pf": 0.09354418243607099
+    },
+    {
+      "lane0": {
+        "vdd": 0.9702815322277506,
+        "temperature_c": 11.095826667136443,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 46.112674460376,
+        "inductance_nh": 0.3883035729475115,
+        "capacitance_pf": 0.23137608828502648,
+        "rx_capacitance_pf": 0.051442188024517915,
+        "clock_offset_ui": -0.1855070291628405,
+        "coarse_latency_ui": 1.0
+      },
+      "lane1": {
+        "vdd": 0.9702815322277506,
+        "temperature_c": 11.095826667136443,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 51.72290991569475,
+        "inductance_nh": 0.47343221681092396,
+        "capacitance_pf": 0.19970799932178807,
+        "rx_capacitance_pf": 0.044613640630034423,
+        "clock_offset_ui": -0.11548034907562627,
+        "coarse_latency_ui": 1.0
+      },
+      "coupling_pf": 0.0494240543866972
+    },
+    {
+      "lane0": {
+        "vdd": 1.0597930606046746,
+        "temperature_c": 17.730239096375445,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 46.7236654439521,
+        "inductance_nh": 0.2782507539598008,
+        "capacitance_pf": 0.26698757111404803,
+        "rx_capacitance_pf": 0.0410279965955807,
+        "clock_offset_ui": -0.08645999906405649,
+        "coarse_latency_ui": 1.0
+      },
+      "lane1": {
+        "vdd": 1.0597930606046746,
+        "temperature_c": 17.730239096375445,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 17.49033326354588,
+        "inductance_nh": 0.1807217858959887,
+        "capacitance_pf": 0.36678838910053563,
+        "rx_capacitance_pf": 0.056676926829794555,
+        "clock_offset_ui": 0.1909717480824868,
+        "coarse_latency_ui": 1.0
+      },
+      "coupling_pf": 0.11792907129406076
+    },
+    {
+      "lane0": {
+        "vdd": 0.9827174730292167,
+        "temperature_c": 26.17611561843819,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 48.33811500721105,
+        "inductance_nh": 0.2219174854900369,
+        "capacitance_pf": 0.28846446482744115,
+        "rx_capacitance_pf": 0.04869048360809225,
+        "clock_offset_ui": 0.1521965217890242,
+        "coarse_latency_ui": 1.0
+      },
+      "lane1": {
+        "vdd": 0.9827174730292167,
+        "temperature_c": 26.17611561843819,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 30.841986273269676,
+        "inductance_nh": 0.4873724865217093,
+        "capacitance_pf": 0.29831296649436784,
+        "rx_capacitance_pf": 0.07445895907625241,
+        "clock_offset_ui": 0.03522241999077544,
+        "coarse_latency_ui": 1.0
+      },
+      "coupling_pf": 0.11016334249667846
+    },
+    {
+      "lane0": {
+        "vdd": 1.0864039233551541,
+        "temperature_c": 70.72712842471083,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 34.18834143158513,
+        "inductance_nh": 0.37931653226623874,
+        "capacitance_pf": 0.22934163365546115,
+        "rx_capacitance_pf": 0.05355698892126278,
+        "clock_offset_ui": -0.12261208213122031,
+        "coarse_latency_ui": 1.0
+      },
+      "lane1": {
+        "vdd": 1.0864039233551541,
+        "temperature_c": 70.72712842471083,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 47.840346544267554,
+        "inductance_nh": 0.44416499095195616,
+        "capacitance_pf": 0.1814691198685663,
+        "rx_capacitance_pf": 0.06532210314600029,
+        "clock_offset_ui": -0.09331618007117518,
+        "coarse_latency_ui": 1.0
+      },
+      "coupling_pf": 0.06935309698508148
+    },
+    {
+      "lane0": {
+        "vdd": 0.968315010686153,
+        "temperature_c": 36.69170762624735,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 42.010351639338054,
+        "inductance_nh": 0.15856664335651566,
+        "capacitance_pf": 0.3437757548152496,
+        "rx_capacitance_pf": 0.08363760197332017,
+        "clock_offset_ui": -0.00646828357405399,
+        "coarse_latency_ui": 1.0
+      },
+      "lane1": {
+        "vdd": 0.968315010686153,
+        "temperature_c": 36.69170762624735,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 25.525711998386797,
+        "inductance_nh": 0.20664329172840223,
+        "capacitance_pf": 0.2660227729935233,
+        "rx_capacitance_pf": 0.07164706022371614,
+        "clock_offset_ui": 0.0800861914742762,
+        "coarse_latency_ui": 1.0
+      },
+      "coupling_pf": 0.08325690671347351
+    },
+    {
+      "lane0": {
+        "vdd": 1.0873564423508562,
+        "temperature_c": 36.099821819390584,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 24.738458497080536,
+        "inductance_nh": 0.37678019252200834,
+        "capacitance_pf": 0.34756939212473054,
+        "rx_capacitance_pf": 0.04367089668180194,
+        "clock_offset_ui": -0.07994355323639973,
+        "coarse_latency_ui": 1.0
+      },
+      "lane1": {
+        "vdd": 1.0873564423508562,
+        "temperature_c": 36.099821819390584,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 37.609013326175656,
+        "inductance_nh": 0.24528725579437238,
+        "capacitance_pf": 0.21869747722789123,
+        "rx_capacitance_pf": 0.08482755844694838,
+        "clock_offset_ui": 0.07793100733728198,
+        "coarse_latency_ui": 1.0
+      },
+      "coupling_pf": 0.09237622529867155
+    },
+    {
+      "lane0": {
+        "vdd": 0.9991290315381602,
+        "temperature_c": 67.1361828836282,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 52.61719148828949,
+        "inductance_nh": 0.16956359044563873,
+        "capacitance_pf": 0.2940210868784393,
+        "rx_capacitance_pf": 0.06048163595257363,
+        "clock_offset_ui": -0.08345450905198537,
+        "coarse_latency_ui": 1.0
+      },
+      "lane1": {
+        "vdd": 0.9991290315381602,
+        "temperature_c": 67.1361828836282,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 42.64422051642199,
+        "inductance_nh": 0.28408389037233656,
+        "capacitance_pf": 0.36841551578226406,
+        "rx_capacitance_pf": 0.07289569807045954,
+        "clock_offset_ui": 0.07188361790863734,
+        "coarse_latency_ui": 1.0
+      },
+      "coupling_pf": 0.07275007355962683
+    },
+    {
+      "lane0": {
+        "vdd": 1.0991987269424772,
+        "temperature_c": 50.24201140890714,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 48.843248304081584,
+        "inductance_nh": 0.222728963217951,
+        "capacitance_pf": 0.39975172064766684,
+        "rx_capacitance_pf": 0.08765131095671409,
+        "clock_offset_ui": -0.16536465177032791,
+        "coarse_latency_ui": 1.0
+      },
+      "lane1": {
+        "vdd": 1.0991987269424772,
+        "temperature_c": 50.24201140890714,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 21.18956974349345,
+        "inductance_nh": 0.24106655772749072,
+        "capacitance_pf": 0.329738015268059,
+        "rx_capacitance_pf": 0.08766267026544614,
+        "clock_offset_ui": 0.10902977421565857,
+        "coarse_latency_ui": 1.0
+      },
+      "coupling_pf": 0.04118888663617602
+    },
+    {
+      "lane0": {
+        "vdd": 0.9614592549308998,
+        "temperature_c": 12.42015740584879,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 19.18161673194024,
+        "inductance_nh": 0.45953662495570435,
+        "capacitance_pf": 0.34493245477774126,
+        "rx_capacitance_pf": 0.07943850458812901,
+        "clock_offset_ui": 0.15322898142673091,
+        "coarse_latency_ui": 1.0
+      },
+      "lane1": {
+        "vdd": 0.9614592549308998,
+        "temperature_c": 12.42015740584879,
+        "rate_gbps": 2.0,
+        "resistance_ohm": 15.318611750018437,
+        "inductance_nh": 0.4267254151968064,
+        "capacitance_pf": 0.30273127399325583,
+        "rx_capacitance_pf": 0.04605066669543157,
+        "clock_offset_ui": 0.17109275793840428,
+        "coarse_latency_ui": 1.0
+      },
+      "coupling_pf": 0.07781533626996646
+    }
+  ],
+  "train_ids": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23
+  ],
+  "validation_ids": [
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31
+  ],
+  "test_ids": [
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47
+  ],
+  "strength_levels": [
+    1,
+    2,
+    4,
+    8
+  ],
+  "horizon": 32,
+  "budgets": [
+    4,
+    8,
+    16,
+    32
+  ],
+  "primary_budget": 16,
+  "ratios": [
+    0.95,
+    0.9,
+    0.85
+  ],
+  "primary_ratio": 0.9,
+  "margin": 0.08,
+  "guard_ui": 0.1,
+  "calibration_bits": 64,
+  "calibration_seed_base": 31609,
+  "confirmation_bits": 128,
+  "confirmation_seed_base": 59191,
+  "confirmation_patterns": [
+    "random_a",
+    "random_b",
+    "opposite_alternating"
+  ],
+  "points_per_ui": 32,
+  "train_seeds": [
+    0,
+    1,
+    2
+  ],
+  "alphas": [
+    0.1,
+    2.5
+  ],
+  "checkpoint_steps": [
+    4000,
+    8000
+  ],
+  "width": 128,
+  "batch_size": 256,
+  "lr": 0.0003,
+  "discount": 0.95,
+  "tau": 0.005,
+  "policy_noise": 0.2,
+  "noise_clip": 0.5,
+  "policy_frequency": 2,
+  "episodes_per_context": 32,
+  "bo_lengthscale": 0.6,
+  "bo_candidates": 1024,
+  "ga_population": 8,
+  "ga_mutation_prob": 0.35,
+  "observation": "Last four (setting,measurement) records, incumbent setting/measurement, VDD, rate, margin, guard, remaining budget; 50 dimensions.",
+  "reward": "Change in best observed utility minus 0.01. Fixed 32-step horizon, no success early termination.",
+  "utility": "2-energy_ratio if quality passes; otherwise -2-4*sum(margin deficits)-4*mean(error fractions)-0.1*energy_ratio.",
+  "energy": "Sum of both transmitter supply energies / total bits across both lanes. Paired reference on identical packet.",
+  "confirmation": "One frozen setting must meet margins and zero errors on ALL 3 held-out packets; energy ratio uses summed packet energies to the matching 8+8 reference.",
+  "selection": "Validation mean joint quality-energy success across all budgets/ratios/seeds, tie final utility. No test selection.",
+  "budget_note": "One query measures both lanes, nine phase probes per lane. Initial reference query is additional. Identical observation costs for all methods.",
+  "scope": "Lumped coupled-RLC toy; PTM predictive MOS model, behavioral RX; no PDK, extracted interposer, CDR, noise, compliance or real-time feedback claim.",
+  "baseline_sweeps": {
+    "traditional": [
+      {
+        "phase_step": 8
+      },
+      {
+        "phase_step": 16
+      }
+    ],
+    "bo": [
+      {
+        "lengthscale": 0.3
+      },
+      {
+        "lengthscale": 0.6
+      },
+      {
+        "lengthscale": 1.2
+      }
+    ],
+    "ga": [
+      {
+        "population": 4,
+        "mutation_prob": 0.2
+      },
+      {
+        "population": 4,
+        "mutation_prob": 0.5
+      },
+      {
+        "population": 8,
+        "mutation_prob": 0.2
+      },
+      {
+        "population": 8,
+        "mutation_prob": 0.5
+      }
+    ]
+  },
+  "incumbent_tiebreak": "Larger worst-lane voltage margin when utility ties, shared by all methods. Fixed before any validation or test results."
+}

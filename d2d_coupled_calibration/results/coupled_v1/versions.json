@@ -1,0 +1,7 @@
+{
+  "python": "3.12.14",
+  "numpy": "2.3.5",
+  "torch": "2.14.0+cpu",
+  "scipy": "1.17.0",
+  "ngspice": "39.3 bundled runtime"
+}

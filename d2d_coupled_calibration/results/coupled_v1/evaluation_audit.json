@@ -1,0 +1,32 @@
+{
+  "records_checked": 1088,
+  "frozen_selection_unchanged": true,
+  "td3bc_seed0_exact_replay": true,
+  "dense_verification": [
+    {
+      "method": "traditional",
+      "context_id": 42,
+      "pattern": "random_b",
+      "margin_abs_change": 6.66410863497946e-05,
+      "energy_relative_change": 6.268189297720106e-06,
+      "quality_classification_unchanged": true
+    },
+    {
+      "method": "bo",
+      "context_id": 42,
+      "pattern": "random_b",
+      "margin_abs_change": 0.000155220695074898,
+      "energy_relative_change": 1.097593853249812e-06,
+      "quality_classification_unchanged": true
+    },
+    {
+      "method": "td3bc",
+      "context_id": 36,
+      "pattern": "random_b",
+      "margin_abs_change": 0.00016963661952118514,
+      "energy_relative_change": 1.1777886574360075e-05,
+      "quality_classification_unchanged": true
+    }
+  ],
+  "passed": true
+}

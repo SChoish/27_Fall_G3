@@ -1,0 +1,51 @@
+{
+  "bc": {
+    "method": "bc",
+    "alpha": 0.0,
+    "step": 4000,
+    "score": [
+      0.10416666666666667,
+      0.19873867285941502
+    ]
+  },
+  "td3bc": {
+    "method": "td3bc",
+    "alpha": 0.1,
+    "step": 4000,
+    "score": [
+      0.1076388888888889,
+      0.7563099587771172
+    ]
+  },
+  "traditional": {
+    "method": "traditional",
+    "params": {
+      "phase_step": 8
+    },
+    "score": [
+      0.125,
+      1.0309487566953444
+    ]
+  },
+  "bo": {
+    "method": "bo",
+    "params": {
+      "lengthscale": 0.6
+    },
+    "score": [
+      0.041666666666666664,
+      1.0225864583725228
+    ]
+  },
+  "ga": {
+    "method": "ga",
+    "params": {
+      "population": 4,
+      "mutation_prob": 0.2
+    },
+    "score": [
+      0.11458333333333333,
+      1.0471745791114453
+    ]
+  }
+}

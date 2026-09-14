@@ -1,0 +1,7 @@
+{
+  "repository": "https://github.com/ksettaluri6/AutoCkt",
+  "commit": "a6c8a61d3dffb8b433f19251e135994a5b0f6ee4",
+  "model_path": "eval_engines/ngspice/ngspice_inputs/spice_models/45nm_bulk.txt",
+  "model_sha256": "42489e9aab3423fe868c6d249326535892ad87de7f8f5b18d790d0afe8401ef4",
+  "note": "BPTM/PTM predictive 45 nm model, NOT a foundry-qualified open PDK. Upstream repository has no top-level license file; no new license is asserted over upstream content."
+}

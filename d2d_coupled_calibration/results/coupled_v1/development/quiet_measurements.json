@@ -1,0 +1,14 @@
+[
+  {
+    "coupling_pf": 0.0,
+    "victim_peak_to_peak_mv": 6.930393758874942e-11
+  },
+  {
+    "coupling_pf": 0.06,
+    "victim_peak_to_peak_mv": 46.60603763467976
+  },
+  {
+    "coupling_pf": 0.12,
+    "victim_peak_to_peak_mv": 85.19053071070344
+  }
+]

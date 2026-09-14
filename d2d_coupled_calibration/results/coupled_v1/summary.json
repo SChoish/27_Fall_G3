@@ -1,0 +1,4095 @@
+{
+  "primary_budget": 16,
+  "primary_ratio": 0.9,
+  "results": {
+    "4": {
+      "0.95": {
+        "fixed8": {
+          "calibration": {
+            "mean": 0.0,
+            "std": null,
+            "quality_mean": 100.0,
+            "compute_seconds_mean": 0.0,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0
+              }
+            ]
+          },
+          "confirmation": {
+            "mean": 0.0,
+            "std": null,
+            "quality_mean": 93.75,
+            "compute_seconds_mean": 0.0,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.0
+              }
+            ]
+          }
+        },
+        "traditional": {
+          "calibration": {
+            "mean": 12.5,
+            "std": null,
+            "quality_mean": 100.0,
+            "compute_seconds_mean": 0.00020615468747564591,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 12.5,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.00020615468747564591
+              }
+            ]
+          },
+          "confirmation": {
+            "mean": 12.5,
+            "std": null,
+            "quality_mean": 93.75,
+            "compute_seconds_mean": 0.00020615468747564591,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 12.5,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.00020615468747564591
+              }
+            ]
+          }
+        },
+        "bo": {
+          "calibration": {
+            "mean": 0.0,
+            "std": 0.0,
+            "quality_mean": 100.0,
+            "compute_seconds_mean": 0.0001286018957671331,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.00010947581245090987
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.00010092568754771492
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.00017540418730277452
+              }
+            ]
+          },
+          "confirmation": {
+            "mean": 0.0,
+            "std": 0.0,
+            "quality_mean": 93.75,
+            "compute_seconds_mean": 0.0001286018957671331,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.00010947581245090987
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.00010092568754771492
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.00017540418730277452
+              }
+            ]
+          }
+        },
+        "ga": {
+          "calibration": {
+            "mean": 0.0,
+            "std": 0.0,
+            "quality_mean": 100.0,
+            "compute_seconds_mean": 0.00029824137508664233,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.00032137781374785845
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.00027638781170935545
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.00029695849980271305
+              }
+            ]
+          },
+          "confirmation": {
+            "mean": 0.0,
+            "std": 0.0,
+            "quality_mean": 95.83333333333333,
+            "compute_seconds_mean": 0.00029824137508664233,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.00032137781374785845
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.00027638781170935545
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.00029695849980271305
+              }
+            ]
+          }
+        },
+        "random": {
+          "calibration": {
+            "mean": 0.0,
+            "std": 0.0,
+            "quality_mean": 100.0,
+            "compute_seconds_mean": 9.402866684619464e-05,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 9.716474983179069e-05
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 9.500850023869134e-05
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 8.991275046810188e-05
+              }
+            ]
+          },
+          "confirmation": {
+            "mean": 0.0,
+            "std": 0.0,
+            "quality_mean": 93.75,
+            "compute_seconds_mean": 9.402866684619464e-05,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 9.716474983179069e-05
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 9.500850023869134e-05
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 8.991275046810188e-05
+              }
+            ]
+          }
+        },
+        "bc": {
+          "calibration": {
+            "mean": 6.25,
+            "std": 0.0,
+            "quality_mean": 100.0,
+            "compute_seconds_mean": 0.0006801488956398316,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 6.25,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0006375136255201141
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 6.25,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0007465104365564912
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 6.25,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0006564226248428895
+              }
+            ]
+          },
+          "confirmation": {
+            "mean": 6.25,
+            "std": 0.0,
+            "quality_mean": 87.5,
+            "compute_seconds_mean": 0.0006801488956398316,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 6.25,
+                "quality_success_percent": 87.5,
+                "controller_compute_seconds_mean": 0.0006375136255201141
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 6.25,
+                "quality_success_percent": 87.5,
+                "controller_compute_seconds_mean": 0.0007465104365564912
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 6.25,
+                "quality_success_percent": 87.5,
+                "controller_compute_seconds_mean": 0.0006564226248428895
+              }
+            ]
+          }
+        },
+        "td3bc": {
+          "calibration": {
+            "mean": 2.0833333333333335,
+            "std": 3.608439182435161,
+            "quality_mean": 100.0,
+            "compute_seconds_mean": 0.0008136324167556571,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0010079195003527275
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0007597092501328007
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 6.25,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0006732684997814431
+              }
+            ]
+          },
+          "confirmation": {
+            "mean": 2.0833333333333335,
+            "std": 3.608439182435161,
+            "quality_mean": 91.66666666666667,
+            "compute_seconds_mean": 0.0008136324167556571,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 87.5,
+                "controller_compute_seconds_mean": 0.0010079195003527275
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.0007597092501328007
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 6.25,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.0006732684997814431
+              }
+            ]
+          }
+        }
+      },
+      "0.9": {
+        "fixed8": {
+          "calibration": {
+            "mean": 0.0,
+            "std": null,
+            "quality_mean": 100.0,
+            "compute_seconds_mean": 0.0,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0
+              }
+            ]
+          },
+          "confirmation": {
+            "mean": 0.0,
+            "std": null,
+            "quality_mean": 93.75,
+            "compute_seconds_mean": 0.0,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.0
+              }
+            ]
+          }
+        },
+        "traditional": {
+          "calibration": {
+            "mean": 0.0,
+            "std": null,
+            "quality_mean": 100.0,
+            "compute_seconds_mean": 0.00020615468747564591,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.00020615468747564591
+              }
+            ]
+          },
+          "confirmation": {
+            "mean": 0.0,
+            "std": null,
+            "quality_mean": 93.75,
+            "compute_seconds_mean": 0.00020615468747564591,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.00020615468747564591
+              }
+            ]
+          }
+        },
+        "bo": {
+          "calibration": {
+            "mean": 0.0,
+            "std": 0.0,
+            "quality_mean": 100.0,
+            "compute_seconds_mean": 0.0001286018957671331,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.00010947581245090987
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.00010092568754771492
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.00017540418730277452
+              }
+            ]
+          },
+          "confirmation": {
+            "mean": 0.0,
+            "std": 0.0,
+            "quality_mean": 93.75,
+            "compute_seconds_mean": 0.0001286018957671331,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.00010947581245090987
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.00010092568754771492
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.00017540418730277452
+              }
+            ]
+          }
+        },
+        "ga": {
+          "calibration": {
+            "mean": 0.0,
+            "std": 0.0,
+            "quality_mean": 100.0,
+            "compute_seconds_mean": 0.00029824137508664233,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.00032137781374785845
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.00027638781170935545
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.00029695849980271305
+              }
+            ]
+          },
+          "confirmation": {
+            "mean": 0.0,
+            "std": 0.0,
+            "quality_mean": 95.83333333333333,
+            "compute_seconds_mean": 0.00029824137508664233,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.00032137781374785845
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.00027638781170935545
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.00029695849980271305
+              }
+            ]
+          }
+        },
+        "random": {
+          "calibration": {
+            "mean": 0.0,
+            "std": 0.0,
+            "quality_mean": 100.0,
+            "compute_seconds_mean": 9.402866684619464e-05,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 9.716474983179069e-05
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 9.500850023869134e-05
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 8.991275046810188e-05
+              }
+            ]
+          },
+          "confirmation": {
+            "mean": 0.0,
+            "std": 0.0,
+            "quality_mean": 93.75,
+            "compute_seconds_mean": 9.402866684619464e-05,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 9.716474983179069e-05
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 9.500850023869134e-05
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 8.991275046810188e-05
+              }
+            ]
+          }
+        },
+        "bc": {
+          "calibration": {
+            "mean": 0.0,
+            "std": 0.0,
+            "quality_mean": 100.0,
+            "compute_seconds_mean": 0.0006801488956398316,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0006375136255201141
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0007465104365564912
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0006564226248428895
+              }
+            ]
+          },
+          "confirmation": {
+            "mean": 0.0,
+            "std": 0.0,
+            "quality_mean": 87.5,
+            "compute_seconds_mean": 0.0006801488956398316,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 87.5,
+                "controller_compute_seconds_mean": 0.0006375136255201141
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 87.5,
+                "controller_compute_seconds_mean": 0.0007465104365564912
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 87.5,
+                "controller_compute_seconds_mean": 0.0006564226248428895
+              }
+            ]
+          }
+        },
+        "td3bc": {
+          "calibration": {
+            "mean": 0.0,
+            "std": 0.0,
+            "quality_mean": 100.0,
+            "compute_seconds_mean": 0.0008136324167556571,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0010079195003527275
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0007597092501328007
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0006732684997814431
+              }
+            ]
+          },
+          "confirmation": {
+            "mean": 0.0,
+            "std": 0.0,
+            "quality_mean": 91.66666666666667,
+            "compute_seconds_mean": 0.0008136324167556571,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 87.5,
+                "controller_compute_seconds_mean": 0.0010079195003527275
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.0007597092501328007
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.0006732684997814431
+              }
+            ]
+          }
+        }
+      },
+      "0.85": {
+        "fixed8": {
+          "calibration": {
+            "mean": 0.0,
+            "std": null,
+            "quality_mean": 100.0,
+            "compute_seconds_mean": 0.0,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0
+              }
+            ]
+          },
+          "confirmation": {
+            "mean": 0.0,
+            "std": null,
+            "quality_mean": 93.75,
+            "compute_seconds_mean": 0.0,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.0
+              }
+            ]
+          }
+        },
+        "traditional": {
+          "calibration": {
+            "mean": 0.0,
+            "std": null,
+            "quality_mean": 100.0,
+            "compute_seconds_mean": 0.00020615468747564591,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.00020615468747564591
+              }
+            ]
+          },
+          "confirmation": {
+            "mean": 0.0,
+            "std": null,
+            "quality_mean": 93.75,
+            "compute_seconds_mean": 0.00020615468747564591,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.00020615468747564591
+              }
+            ]
+          }
+        },
+        "bo": {
+          "calibration": {
+            "mean": 0.0,
+            "std": 0.0,
+            "quality_mean": 100.0,
+            "compute_seconds_mean": 0.0001286018957671331,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.00010947581245090987
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.00010092568754771492
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.00017540418730277452
+              }
+            ]
+          },
+          "confirmation": {
+            "mean": 0.0,
+            "std": 0.0,
+            "quality_mean": 93.75,
+            "compute_seconds_mean": 0.0001286018957671331,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.00010947581245090987
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.00010092568754771492
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.00017540418730277452
+              }
+            ]
+          }
+        },
+        "ga": {
+          "calibration": {
+            "mean": 0.0,
+            "std": 0.0,
+            "quality_mean": 100.0,
+            "compute_seconds_mean": 0.00029824137508664233,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.00032137781374785845
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.00027638781170935545
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.00029695849980271305
+              }
+            ]
+          },
+          "confirmation": {
+            "mean": 0.0,
+            "std": 0.0,
+            "quality_mean": 95.83333333333333,
+            "compute_seconds_mean": 0.00029824137508664233,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.00032137781374785845
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.00027638781170935545
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.00029695849980271305
+              }
+            ]
+          }
+        },
+        "random": {
+          "calibration": {
+            "mean": 0.0,
+            "std": 0.0,
+            "quality_mean": 100.0,
+            "compute_seconds_mean": 9.402866684619464e-05,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 9.716474983179069e-05
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 9.500850023869134e-05
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 8.991275046810188e-05
+              }
+            ]
+          },
+          "confirmation": {
+            "mean": 0.0,
+            "std": 0.0,
+            "quality_mean": 93.75,
+            "compute_seconds_mean": 9.402866684619464e-05,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 9.716474983179069e-05
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 9.500850023869134e-05
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 8.991275046810188e-05
+              }
+            ]
+          }
+        },
+        "bc": {
+          "calibration": {
+            "mean": 0.0,
+            "std": 0.0,
+            "quality_mean": 100.0,
+            "compute_seconds_mean": 0.0006801488956398316,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0006375136255201141
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0007465104365564912
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0006564226248428895
+              }
+            ]
+          },
+          "confirmation": {
+            "mean": 0.0,
+            "std": 0.0,
+            "quality_mean": 87.5,
+            "compute_seconds_mean": 0.0006801488956398316,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 87.5,
+                "controller_compute_seconds_mean": 0.0006375136255201141
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 87.5,
+                "controller_compute_seconds_mean": 0.0007465104365564912
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 87.5,
+                "controller_compute_seconds_mean": 0.0006564226248428895
+              }
+            ]
+          }
+        },
+        "td3bc": {
+          "calibration": {
+            "mean": 0.0,
+            "std": 0.0,
+            "quality_mean": 100.0,
+            "compute_seconds_mean": 0.0008136324167556571,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0010079195003527275
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0007597092501328007
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0006732684997814431
+              }
+            ]
+          },
+          "confirmation": {
+            "mean": 0.0,
+            "std": 0.0,
+            "quality_mean": 91.66666666666667,
+            "compute_seconds_mean": 0.0008136324167556571,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 87.5,
+                "controller_compute_seconds_mean": 0.0010079195003527275
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.0007597092501328007
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.0006732684997814431
+              }
+            ]
+          }
+        }
+      }
+    },
+    "8": {
+      "0.95": {
+        "fixed8": {
+          "calibration": {
+            "mean": 0.0,
+            "std": null,
+            "quality_mean": 100.0,
+            "compute_seconds_mean": 0.0,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0
+              }
+            ]
+          },
+          "confirmation": {
+            "mean": 0.0,
+            "std": null,
+            "quality_mean": 93.75,
+            "compute_seconds_mean": 0.0,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.0
+              }
+            ]
+          }
+        },
+        "traditional": {
+          "calibration": {
+            "mean": 18.75,
+            "std": null,
+            "quality_mean": 100.0,
+            "compute_seconds_mean": 0.0004128573758634957,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 18.75,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0004128573758634957
+              }
+            ]
+          },
+          "confirmation": {
+            "mean": 18.75,
+            "std": null,
+            "quality_mean": 87.5,
+            "compute_seconds_mean": 0.0004128573758634957,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 18.75,
+                "quality_success_percent": 87.5,
+                "controller_compute_seconds_mean": 0.0004128573758634957
+              }
+            ]
+          }
+        },
+        "bo": {
+          "calibration": {
+            "mean": 2.0833333333333335,
+            "std": 3.608439182435161,
+            "quality_mean": 100.0,
+            "compute_seconds_mean": 0.06268864204150759,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.06113233543783281
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 6.25,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.06324022568753662
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.06369336499915335
+              }
+            ]
+          },
+          "confirmation": {
+            "mean": 2.0833333333333335,
+            "std": 3.608439182435161,
+            "quality_mean": 97.91666666666667,
+            "compute_seconds_mean": 0.06268864204150759,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.06113233543783281
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 6.25,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.06324022568753662
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.06369336499915335
+              }
+            ]
+          }
+        },
+        "ga": {
+          "calibration": {
+            "mean": 4.166666666666667,
+            "std": 7.216878364870322,
+            "quality_mean": 100.0,
+            "compute_seconds_mean": 0.0010428454374581027,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0011237440005515964
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0010237311246328318
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 12.5,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.00098106118718988
+              }
+            ]
+          },
+          "confirmation": {
+            "mean": 4.166666666666667,
+            "std": 3.6084391824351614,
+            "quality_mean": 95.83333333333333,
+            "compute_seconds_mean": 0.0010428454374581027,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0011237440005515964
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 6.25,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.0010237311246328318
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 6.25,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.00098106118718988
+              }
+            ]
+          }
+        },
+        "random": {
+          "calibration": {
+            "mean": 2.0833333333333335,
+            "std": 3.608439182435161,
+            "quality_mean": 100.0,
+            "compute_seconds_mean": 0.0001605116668391323,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0001515074999360877
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.00015112818755369517
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 6.25,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.00017889931302761397
+              }
+            ]
+          },
+          "confirmation": {
+            "mean": 0.0,
+            "std": 0.0,
+            "quality_mean": 91.66666666666667,
+            "compute_seconds_mean": 0.0001605116668391323,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.0001515074999360877
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.00015112818755369517
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 87.5,
+                "controller_compute_seconds_mean": 0.00017889931302761397
+              }
+            ]
+          }
+        },
+        "bc": {
+          "calibration": {
+            "mean": 6.25,
+            "std": 0.0,
+            "quality_mean": 100.0,
+            "compute_seconds_mean": 0.0013309157707984316,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 6.25,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0013264446261018747
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 6.25,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0013727810613772817
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 6.25,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0012935216249161385
+              }
+            ]
+          },
+          "confirmation": {
+            "mean": 6.25,
+            "std": 0.0,
+            "quality_mean": 89.58333333333333,
+            "compute_seconds_mean": 0.0013309157707984316,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 6.25,
+                "quality_success_percent": 87.5,
+                "controller_compute_seconds_mean": 0.0013264446261018747
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 6.25,
+                "quality_success_percent": 87.5,
+                "controller_compute_seconds_mean": 0.0013727810613772817
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 6.25,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.0012935216249161385
+              }
+            ]
+          }
+        },
+        "td3bc": {
+          "calibration": {
+            "mean": 4.166666666666667,
+            "std": 3.6084391824351614,
+            "quality_mean": 100.0,
+            "compute_seconds_mean": 0.001445329666997471,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 6.25,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0016275876880627038
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0014558330630052296
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 6.25,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0012525682499244795
+              }
+            ]
+          },
+          "confirmation": {
+            "mean": 2.0833333333333335,
+            "std": 3.608439182435161,
+            "quality_mean": 91.66666666666667,
+            "compute_seconds_mean": 0.001445329666997471,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 87.5,
+                "controller_compute_seconds_mean": 0.0016275876880627038
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.0014558330630052296
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 6.25,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.0012525682499244795
+              }
+            ]
+          }
+        }
+      },
+      "0.9": {
+        "fixed8": {
+          "calibration": {
+            "mean": 0.0,
+            "std": null,
+            "quality_mean": 100.0,
+            "compute_seconds_mean": 0.0,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0
+              }
+            ]
+          },
+          "confirmation": {
+            "mean": 0.0,
+            "std": null,
+            "quality_mean": 93.75,
+            "compute_seconds_mean": 0.0,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.0
+              }
+            ]
+          }
+        },
+        "traditional": {
+          "calibration": {
+            "mean": 6.25,
+            "std": null,
+            "quality_mean": 100.0,
+            "compute_seconds_mean": 0.0004128573758634957,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 6.25,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0004128573758634957
+              }
+            ]
+          },
+          "confirmation": {
+            "mean": 6.25,
+            "std": null,
+            "quality_mean": 87.5,
+            "compute_seconds_mean": 0.0004128573758634957,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 6.25,
+                "quality_success_percent": 87.5,
+                "controller_compute_seconds_mean": 0.0004128573758634957
+              }
+            ]
+          }
+        },
+        "bo": {
+          "calibration": {
+            "mean": 0.0,
+            "std": 0.0,
+            "quality_mean": 100.0,
+            "compute_seconds_mean": 0.06268864204150759,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.06113233543783281
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.06324022568753662
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.06369336499915335
+              }
+            ]
+          },
+          "confirmation": {
+            "mean": 0.0,
+            "std": 0.0,
+            "quality_mean": 97.91666666666667,
+            "compute_seconds_mean": 0.06268864204150759,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.06113233543783281
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.06324022568753662
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.06369336499915335
+              }
+            ]
+          }
+        },
+        "ga": {
+          "calibration": {
+            "mean": 0.0,
+            "std": 0.0,
+            "quality_mean": 100.0,
+            "compute_seconds_mean": 0.0010428454374581027,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0011237440005515964
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0010237311246328318
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.00098106118718988
+              }
+            ]
+          },
+          "confirmation": {
+            "mean": 0.0,
+            "std": 0.0,
+            "quality_mean": 95.83333333333333,
+            "compute_seconds_mean": 0.0010428454374581027,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0011237440005515964
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.0010237311246328318
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.00098106118718988
+              }
+            ]
+          }
+        },
+        "random": {
+          "calibration": {
+            "mean": 0.0,
+            "std": 0.0,
+            "quality_mean": 100.0,
+            "compute_seconds_mean": 0.0001605116668391323,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0001515074999360877
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.00015112818755369517
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.00017889931302761397
+              }
+            ]
+          },
+          "confirmation": {
+            "mean": 0.0,
+            "std": 0.0,
+            "quality_mean": 91.66666666666667,
+            "compute_seconds_mean": 0.0001605116668391323,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.0001515074999360877
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.00015112818755369517
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 87.5,
+                "controller_compute_seconds_mean": 0.00017889931302761397
+              }
+            ]
+          }
+        },
+        "bc": {
+          "calibration": {
+            "mean": 0.0,
+            "std": 0.0,
+            "quality_mean": 100.0,
+            "compute_seconds_mean": 0.0013309157707984316,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0013264446261018747
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0013727810613772817
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0012935216249161385
+              }
+            ]
+          },
+          "confirmation": {
+            "mean": 0.0,
+            "std": 0.0,
+            "quality_mean": 89.58333333333333,
+            "compute_seconds_mean": 0.0013309157707984316,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 87.5,
+                "controller_compute_seconds_mean": 0.0013264446261018747
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 87.5,
+                "controller_compute_seconds_mean": 0.0013727810613772817
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.0012935216249161385
+              }
+            ]
+          }
+        },
+        "td3bc": {
+          "calibration": {
+            "mean": 0.0,
+            "std": 0.0,
+            "quality_mean": 100.0,
+            "compute_seconds_mean": 0.001445329666997471,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0016275876880627038
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0014558330630052296
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0012525682499244795
+              }
+            ]
+          },
+          "confirmation": {
+            "mean": 0.0,
+            "std": 0.0,
+            "quality_mean": 91.66666666666667,
+            "compute_seconds_mean": 0.001445329666997471,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 87.5,
+                "controller_compute_seconds_mean": 0.0016275876880627038
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.0014558330630052296
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.0012525682499244795
+              }
+            ]
+          }
+        }
+      },
+      "0.85": {
+        "fixed8": {
+          "calibration": {
+            "mean": 0.0,
+            "std": null,
+            "quality_mean": 100.0,
+            "compute_seconds_mean": 0.0,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0
+              }
+            ]
+          },
+          "confirmation": {
+            "mean": 0.0,
+            "std": null,
+            "quality_mean": 93.75,
+            "compute_seconds_mean": 0.0,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.0
+              }
+            ]
+          }
+        },
+        "traditional": {
+          "calibration": {
+            "mean": 0.0,
+            "std": null,
+            "quality_mean": 100.0,
+            "compute_seconds_mean": 0.0004128573758634957,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0004128573758634957
+              }
+            ]
+          },
+          "confirmation": {
+            "mean": 6.25,
+            "std": null,
+            "quality_mean": 87.5,
+            "compute_seconds_mean": 0.0004128573758634957,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 6.25,
+                "quality_success_percent": 87.5,
+                "controller_compute_seconds_mean": 0.0004128573758634957
+              }
+            ]
+          }
+        },
+        "bo": {
+          "calibration": {
+            "mean": 0.0,
+            "std": 0.0,
+            "quality_mean": 100.0,
+            "compute_seconds_mean": 0.06268864204150759,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.06113233543783281
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.06324022568753662
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.06369336499915335
+              }
+            ]
+          },
+          "confirmation": {
+            "mean": 0.0,
+            "std": 0.0,
+            "quality_mean": 97.91666666666667,
+            "compute_seconds_mean": 0.06268864204150759,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.06113233543783281
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.06324022568753662
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.06369336499915335
+              }
+            ]
+          }
+        },
+        "ga": {
+          "calibration": {
+            "mean": 0.0,
+            "std": 0.0,
+            "quality_mean": 100.0,
+            "compute_seconds_mean": 0.0010428454374581027,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0011237440005515964
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0010237311246328318
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.00098106118718988
+              }
+            ]
+          },
+          "confirmation": {
+            "mean": 0.0,
+            "std": 0.0,
+            "quality_mean": 95.83333333333333,
+            "compute_seconds_mean": 0.0010428454374581027,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0011237440005515964
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.0010237311246328318
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.00098106118718988
+              }
+            ]
+          }
+        },
+        "random": {
+          "calibration": {
+            "mean": 0.0,
+            "std": 0.0,
+            "quality_mean": 100.0,
+            "compute_seconds_mean": 0.0001605116668391323,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0001515074999360877
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.00015112818755369517
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.00017889931302761397
+              }
+            ]
+          },
+          "confirmation": {
+            "mean": 0.0,
+            "std": 0.0,
+            "quality_mean": 91.66666666666667,
+            "compute_seconds_mean": 0.0001605116668391323,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.0001515074999360877
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.00015112818755369517
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 87.5,
+                "controller_compute_seconds_mean": 0.00017889931302761397
+              }
+            ]
+          }
+        },
+        "bc": {
+          "calibration": {
+            "mean": 0.0,
+            "std": 0.0,
+            "quality_mean": 100.0,
+            "compute_seconds_mean": 0.0013309157707984316,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0013264446261018747
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0013727810613772817
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0012935216249161385
+              }
+            ]
+          },
+          "confirmation": {
+            "mean": 0.0,
+            "std": 0.0,
+            "quality_mean": 89.58333333333333,
+            "compute_seconds_mean": 0.0013309157707984316,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 87.5,
+                "controller_compute_seconds_mean": 0.0013264446261018747
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 87.5,
+                "controller_compute_seconds_mean": 0.0013727810613772817
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.0012935216249161385
+              }
+            ]
+          }
+        },
+        "td3bc": {
+          "calibration": {
+            "mean": 0.0,
+            "std": 0.0,
+            "quality_mean": 100.0,
+            "compute_seconds_mean": 0.001445329666997471,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0016275876880627038
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0014558330630052296
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0012525682499244795
+              }
+            ]
+          },
+          "confirmation": {
+            "mean": 0.0,
+            "std": 0.0,
+            "quality_mean": 91.66666666666667,
+            "compute_seconds_mean": 0.001445329666997471,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 87.5,
+                "controller_compute_seconds_mean": 0.0016275876880627038
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.0014558330630052296
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.0012525682499244795
+              }
+            ]
+          }
+        }
+      }
+    },
+    "16": {
+      "0.95": {
+        "fixed8": {
+          "calibration": {
+            "mean": 0.0,
+            "std": null,
+            "quality_mean": 100.0,
+            "compute_seconds_mean": 0.0,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0
+              }
+            ]
+          },
+          "confirmation": {
+            "mean": 0.0,
+            "std": null,
+            "quality_mean": 93.75,
+            "compute_seconds_mean": 0.0,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.0
+              }
+            ]
+          }
+        },
+        "traditional": {
+          "calibration": {
+            "mean": 25.0,
+            "std": null,
+            "quality_mean": 100.0,
+            "compute_seconds_mean": 0.0010547410008712177,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 25.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0010547410008712177
+              }
+            ]
+          },
+          "confirmation": {
+            "mean": 25.0,
+            "std": null,
+            "quality_mean": 87.5,
+            "compute_seconds_mean": 0.0010547410008712177,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 25.0,
+                "quality_success_percent": 87.5,
+                "controller_compute_seconds_mean": 0.0010547410008712177
+              }
+            ]
+          }
+        },
+        "bo": {
+          "calibration": {
+            "mean": 8.333333333333334,
+            "std": 3.608439182435161,
+            "quality_mean": 100.0,
+            "compute_seconds_mean": 0.19264486449928123,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 6.25,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.18979747943774328
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 6.25,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.19013933737426214
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 12.5,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.1979977766858383
+              }
+            ]
+          },
+          "confirmation": {
+            "mean": 10.416666666666666,
+            "std": 3.608439182435161,
+            "quality_mean": 95.83333333333333,
+            "compute_seconds_mean": 0.19264486449928123,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 6.25,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.18979747943774328
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 12.5,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.19013933737426214
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 12.5,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.1979977766858383
+              }
+            ]
+          }
+        },
+        "ga": {
+          "calibration": {
+            "mean": 12.5,
+            "std": 6.25,
+            "quality_mean": 100.0,
+            "compute_seconds_mean": 0.002904712000258769,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 6.25,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0029665001261491852
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 12.5,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.002948374562720346
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 18.75,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0027992613119067755
+              }
+            ]
+          },
+          "confirmation": {
+            "mean": 14.583333333333334,
+            "std": 7.216878364870323,
+            "quality_mean": 91.66666666666667,
+            "compute_seconds_mean": 0.002904712000258769,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 6.25,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.0029665001261491852
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 18.75,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.002948374562720346
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 18.75,
+                "quality_success_percent": 87.5,
+                "controller_compute_seconds_mean": 0.0027992613119067755
+              }
+            ]
+          }
+        },
+        "random": {
+          "calibration": {
+            "mean": 4.166666666666667,
+            "std": 7.216878364870322,
+            "quality_mean": 100.0,
+            "compute_seconds_mean": 0.0003245448132247475,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0002734698754238707
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0003832162510661874
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 12.5,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.00031694831318418437
+              }
+            ]
+          },
+          "confirmation": {
+            "mean": 2.0833333333333335,
+            "std": 3.608439182435161,
+            "quality_mean": 91.66666666666667,
+            "compute_seconds_mean": 0.0003245448132247475,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 6.25,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0002734698754238707
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.0003832162510661874
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 81.25,
+                "controller_compute_seconds_mean": 0.00031694831318418437
+              }
+            ]
+          }
+        },
+        "bc": {
+          "calibration": {
+            "mean": 6.25,
+            "std": 0.0,
+            "quality_mean": 100.0,
+            "compute_seconds_mean": 0.0025431935625495803,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 6.25,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.002348495125943373
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 6.25,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0026546559365669964
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 6.25,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.002626429625138371
+              }
+            ]
+          },
+          "confirmation": {
+            "mean": 6.25,
+            "std": 0.0,
+            "quality_mean": 91.66666666666667,
+            "compute_seconds_mean": 0.0025431935625495803,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 6.25,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.002348495125943373
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 6.25,
+                "quality_success_percent": 87.5,
+                "controller_compute_seconds_mean": 0.0026546559365669964
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 6.25,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.002626429625138371
+              }
+            ]
+          }
+        },
+        "td3bc": {
+          "calibration": {
+            "mean": 4.166666666666667,
+            "std": 3.6084391824351614,
+            "quality_mean": 100.0,
+            "compute_seconds_mean": 0.0027497681880959135,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 6.25,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.002722273250356011
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0030025696260054247
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 6.25,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.002524461687926305
+              }
+            ]
+          },
+          "confirmation": {
+            "mean": 2.0833333333333335,
+            "std": 3.608439182435161,
+            "quality_mean": 93.75,
+            "compute_seconds_mean": 0.0027497681880959135,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 87.5,
+                "controller_compute_seconds_mean": 0.002722273250356011
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0030025696260054247
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 6.25,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.002524461687926305
+              }
+            ]
+          }
+        }
+      },
+      "0.9": {
+        "fixed8": {
+          "calibration": {
+            "mean": 0.0,
+            "std": null,
+            "quality_mean": 100.0,
+            "compute_seconds_mean": 0.0,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0
+              }
+            ]
+          },
+          "confirmation": {
+            "mean": 0.0,
+            "std": null,
+            "quality_mean": 93.75,
+            "compute_seconds_mean": 0.0,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.0
+              }
+            ]
+          }
+        },
+        "traditional": {
+          "calibration": {
+            "mean": 6.25,
+            "std": null,
+            "quality_mean": 100.0,
+            "compute_seconds_mean": 0.0010547410008712177,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 6.25,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0010547410008712177
+              }
+            ]
+          },
+          "confirmation": {
+            "mean": 6.25,
+            "std": null,
+            "quality_mean": 87.5,
+            "compute_seconds_mean": 0.0010547410008712177,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 6.25,
+                "quality_success_percent": 87.5,
+                "controller_compute_seconds_mean": 0.0010547410008712177
+              }
+            ]
+          }
+        },
+        "bo": {
+          "calibration": {
+            "mean": 0.0,
+            "std": 0.0,
+            "quality_mean": 100.0,
+            "compute_seconds_mean": 0.19264486449928123,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.18979747943774328
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.19013933737426214
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.1979977766858383
+              }
+            ]
+          },
+          "confirmation": {
+            "mean": 0.0,
+            "std": 0.0,
+            "quality_mean": 95.83333333333333,
+            "compute_seconds_mean": 0.19264486449928123,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.18979747943774328
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.19013933737426214
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.1979977766858383
+              }
+            ]
+          }
+        },
+        "ga": {
+          "calibration": {
+            "mean": 0.0,
+            "std": 0.0,
+            "quality_mean": 100.0,
+            "compute_seconds_mean": 0.002904712000258769,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0029665001261491852
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.002948374562720346
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0027992613119067755
+              }
+            ]
+          },
+          "confirmation": {
+            "mean": 0.0,
+            "std": 0.0,
+            "quality_mean": 91.66666666666667,
+            "compute_seconds_mean": 0.002904712000258769,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.0029665001261491852
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.002948374562720346
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 87.5,
+                "controller_compute_seconds_mean": 0.0027992613119067755
+              }
+            ]
+          }
+        },
+        "random": {
+          "calibration": {
+            "mean": 0.0,
+            "std": 0.0,
+            "quality_mean": 100.0,
+            "compute_seconds_mean": 0.0003245448132247475,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0002734698754238707
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0003832162510661874
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.00031694831318418437
+              }
+            ]
+          },
+          "confirmation": {
+            "mean": 0.0,
+            "std": 0.0,
+            "quality_mean": 91.66666666666667,
+            "compute_seconds_mean": 0.0003245448132247475,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0002734698754238707
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.0003832162510661874
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 81.25,
+                "controller_compute_seconds_mean": 0.00031694831318418437
+              }
+            ]
+          }
+        },
+        "bc": {
+          "calibration": {
+            "mean": 0.0,
+            "std": 0.0,
+            "quality_mean": 100.0,
+            "compute_seconds_mean": 0.0025431935625495803,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.002348495125943373
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0026546559365669964
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.002626429625138371
+              }
+            ]
+          },
+          "confirmation": {
+            "mean": 0.0,
+            "std": 0.0,
+            "quality_mean": 91.66666666666667,
+            "compute_seconds_mean": 0.0025431935625495803,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.002348495125943373
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 87.5,
+                "controller_compute_seconds_mean": 0.0026546559365669964
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.002626429625138371
+              }
+            ]
+          }
+        },
+        "td3bc": {
+          "calibration": {
+            "mean": 0.0,
+            "std": 0.0,
+            "quality_mean": 100.0,
+            "compute_seconds_mean": 0.0027497681880959135,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.002722273250356011
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0030025696260054247
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.002524461687926305
+              }
+            ]
+          },
+          "confirmation": {
+            "mean": 0.0,
+            "std": 0.0,
+            "quality_mean": 93.75,
+            "compute_seconds_mean": 0.0027497681880959135,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 87.5,
+                "controller_compute_seconds_mean": 0.002722273250356011
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0030025696260054247
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.002524461687926305
+              }
+            ]
+          }
+        }
+      },
+      "0.85": {
+        "fixed8": {
+          "calibration": {
+            "mean": 0.0,
+            "std": null,
+            "quality_mean": 100.0,
+            "compute_seconds_mean": 0.0,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0
+              }
+            ]
+          },
+          "confirmation": {
+            "mean": 0.0,
+            "std": null,
+            "quality_mean": 93.75,
+            "compute_seconds_mean": 0.0,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.0
+              }
+            ]
+          }
+        },
+        "traditional": {
+          "calibration": {
+            "mean": 0.0,
+            "std": null,
+            "quality_mean": 100.0,
+            "compute_seconds_mean": 0.0010547410008712177,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0010547410008712177
+              }
+            ]
+          },
+          "confirmation": {
+            "mean": 6.25,
+            "std": null,
+            "quality_mean": 87.5,
+            "compute_seconds_mean": 0.0010547410008712177,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 6.25,
+                "quality_success_percent": 87.5,
+                "controller_compute_seconds_mean": 0.0010547410008712177
+              }
+            ]
+          }
+        },
+        "bo": {
+          "calibration": {
+            "mean": 0.0,
+            "std": 0.0,
+            "quality_mean": 100.0,
+            "compute_seconds_mean": 0.19264486449928123,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.18979747943774328
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.19013933737426214
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.1979977766858383
+              }
+            ]
+          },
+          "confirmation": {
+            "mean": 0.0,
+            "std": 0.0,
+            "quality_mean": 95.83333333333333,
+            "compute_seconds_mean": 0.19264486449928123,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.18979747943774328
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.19013933737426214
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.1979977766858383
+              }
+            ]
+          }
+        },
+        "ga": {
+          "calibration": {
+            "mean": 0.0,
+            "std": 0.0,
+            "quality_mean": 100.0,
+            "compute_seconds_mean": 0.002904712000258769,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0029665001261491852
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.002948374562720346
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0027992613119067755
+              }
+            ]
+          },
+          "confirmation": {
+            "mean": 0.0,
+            "std": 0.0,
+            "quality_mean": 91.66666666666667,
+            "compute_seconds_mean": 0.002904712000258769,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.0029665001261491852
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.002948374562720346
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 87.5,
+                "controller_compute_seconds_mean": 0.0027992613119067755
+              }
+            ]
+          }
+        },
+        "random": {
+          "calibration": {
+            "mean": 0.0,
+            "std": 0.0,
+            "quality_mean": 100.0,
+            "compute_seconds_mean": 0.0003245448132247475,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0002734698754238707
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0003832162510661874
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.00031694831318418437
+              }
+            ]
+          },
+          "confirmation": {
+            "mean": 0.0,
+            "std": 0.0,
+            "quality_mean": 91.66666666666667,
+            "compute_seconds_mean": 0.0003245448132247475,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0002734698754238707
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.0003832162510661874
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 81.25,
+                "controller_compute_seconds_mean": 0.00031694831318418437
+              }
+            ]
+          }
+        },
+        "bc": {
+          "calibration": {
+            "mean": 0.0,
+            "std": 0.0,
+            "quality_mean": 100.0,
+            "compute_seconds_mean": 0.0025431935625495803,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.002348495125943373
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0026546559365669964
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.002626429625138371
+              }
+            ]
+          },
+          "confirmation": {
+            "mean": 0.0,
+            "std": 0.0,
+            "quality_mean": 91.66666666666667,
+            "compute_seconds_mean": 0.0025431935625495803,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.002348495125943373
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 87.5,
+                "controller_compute_seconds_mean": 0.0026546559365669964
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.002626429625138371
+              }
+            ]
+          }
+        },
+        "td3bc": {
+          "calibration": {
+            "mean": 0.0,
+            "std": 0.0,
+            "quality_mean": 100.0,
+            "compute_seconds_mean": 0.0027497681880959135,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.002722273250356011
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0030025696260054247
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.002524461687926305
+              }
+            ]
+          },
+          "confirmation": {
+            "mean": 0.0,
+            "std": 0.0,
+            "quality_mean": 93.75,
+            "compute_seconds_mean": 0.0027497681880959135,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 87.5,
+                "controller_compute_seconds_mean": 0.002722273250356011
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0030025696260054247
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.002524461687926305
+              }
+            ]
+          }
+        }
+      }
+    },
+    "32": {
+      "0.95": {
+        "fixed8": {
+          "calibration": {
+            "mean": 0.0,
+            "std": null,
+            "quality_mean": 100.0,
+            "compute_seconds_mean": 0.0,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0
+              }
+            ]
+          },
+          "confirmation": {
+            "mean": 0.0,
+            "std": null,
+            "quality_mean": 93.75,
+            "compute_seconds_mean": 0.0,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.0
+              }
+            ]
+          }
+        },
+        "traditional": {
+          "calibration": {
+            "mean": 25.0,
+            "std": null,
+            "quality_mean": 100.0,
+            "compute_seconds_mean": 0.002972158250599932,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 25.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.002972158250599932
+              }
+            ]
+          },
+          "confirmation": {
+            "mean": 25.0,
+            "std": null,
+            "quality_mean": 87.5,
+            "compute_seconds_mean": 0.002972158250599932,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 25.0,
+                "quality_success_percent": 87.5,
+                "controller_compute_seconds_mean": 0.002972158250599932
+              }
+            ]
+          }
+        },
+        "bo": {
+          "calibration": {
+            "mean": 14.583333333333334,
+            "std": 3.608439182435161,
+            "quality_mean": 100.0,
+            "compute_seconds_mean": 0.4721960080411615,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 12.5,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.4718975142510544
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 12.5,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.47342591606081896
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 18.75,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.4712645938116111
+              }
+            ]
+          },
+          "confirmation": {
+            "mean": 16.666666666666668,
+            "std": 3.608439182435161,
+            "quality_mean": 93.75,
+            "compute_seconds_mean": 0.4721960080411615,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 12.5,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.4718975142510544
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 18.75,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.47342591606081896
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 18.75,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.4712645938116111
+              }
+            ]
+          }
+        },
+        "ga": {
+          "calibration": {
+            "mean": 22.916666666666668,
+            "std": 3.608439182435161,
+            "quality_mean": 100.0,
+            "compute_seconds_mean": 0.0083636594587612,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 25.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.00847687987595691
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 25.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.008682486001475809
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 18.75,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.007931612498850882
+              }
+            ]
+          },
+          "confirmation": {
+            "mean": 20.833333333333332,
+            "std": 3.608439182435161,
+            "quality_mean": 85.41666666666667,
+            "compute_seconds_mean": 0.0083636594587612,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 18.75,
+                "quality_success_percent": 81.25,
+                "controller_compute_seconds_mean": 0.00847687987595691
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 18.75,
+                "quality_success_percent": 81.25,
+                "controller_compute_seconds_mean": 0.008682486001475809
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 25.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.007931612498850882
+              }
+            ]
+          }
+        },
+        "random": {
+          "calibration": {
+            "mean": 6.25,
+            "std": 6.25,
+            "quality_mean": 100.0,
+            "compute_seconds_mean": 0.0005556347093715885,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.00050737100070819
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 6.25,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0006105150009716453
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 12.5,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0005490181264349303
+              }
+            ]
+          },
+          "confirmation": {
+            "mean": 2.0833333333333335,
+            "std": 3.608439182435161,
+            "quality_mean": 91.66666666666667,
+            "compute_seconds_mean": 0.0005556347093715885,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 6.25,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.00050737100070819
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 87.5,
+                "controller_compute_seconds_mean": 0.0006105150009716453
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 87.5,
+                "controller_compute_seconds_mean": 0.0005490181264349303
+              }
+            ]
+          }
+        },
+        "bc": {
+          "calibration": {
+            "mean": 6.25,
+            "std": 0.0,
+            "quality_mean": 100.0,
+            "compute_seconds_mean": 0.0046302382084301525,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 6.25,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.004305997126493821
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 6.25,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.004701738749076867
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 6.25,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0048829787497197685
+              }
+            ]
+          },
+          "confirmation": {
+            "mean": 6.25,
+            "std": 0.0,
+            "quality_mean": 91.66666666666667,
+            "compute_seconds_mean": 0.0046302382084301525,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 6.25,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.004305997126493821
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 6.25,
+                "quality_success_percent": 87.5,
+                "controller_compute_seconds_mean": 0.004701738749076867
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 6.25,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.0048829787497197685
+              }
+            ]
+          }
+        },
+        "td3bc": {
+          "calibration": {
+            "mean": 4.166666666666667,
+            "std": 3.6084391824351614,
+            "quality_mean": 100.0,
+            "compute_seconds_mean": 0.005201020438600305,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 6.25,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.004952051063696672
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.005827556501571962
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 6.25,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0048234537505322805
+              }
+            ]
+          },
+          "confirmation": {
+            "mean": 4.166666666666667,
+            "std": 3.6084391824351614,
+            "quality_mean": 95.83333333333333,
+            "compute_seconds_mean": 0.005201020438600305,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 6.25,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.004952051063696672
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.005827556501571962
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 6.25,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.0048234537505322805
+              }
+            ]
+          }
+        }
+      },
+      "0.9": {
+        "fixed8": {
+          "calibration": {
+            "mean": 0.0,
+            "std": null,
+            "quality_mean": 100.0,
+            "compute_seconds_mean": 0.0,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0
+              }
+            ]
+          },
+          "confirmation": {
+            "mean": 0.0,
+            "std": null,
+            "quality_mean": 93.75,
+            "compute_seconds_mean": 0.0,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.0
+              }
+            ]
+          }
+        },
+        "traditional": {
+          "calibration": {
+            "mean": 6.25,
+            "std": null,
+            "quality_mean": 100.0,
+            "compute_seconds_mean": 0.002972158250599932,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 6.25,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.002972158250599932
+              }
+            ]
+          },
+          "confirmation": {
+            "mean": 6.25,
+            "std": null,
+            "quality_mean": 87.5,
+            "compute_seconds_mean": 0.002972158250599932,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 6.25,
+                "quality_success_percent": 87.5,
+                "controller_compute_seconds_mean": 0.002972158250599932
+              }
+            ]
+          }
+        },
+        "bo": {
+          "calibration": {
+            "mean": 4.166666666666667,
+            "std": 3.608439182435161,
+            "quality_mean": 100.0,
+            "compute_seconds_mean": 0.4721960080411615,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 6.25,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.4718975142510544
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 6.25,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.47342591606081896
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.4712645938116111
+              }
+            ]
+          },
+          "confirmation": {
+            "mean": 4.166666666666667,
+            "std": 3.608439182435161,
+            "quality_mean": 93.75,
+            "compute_seconds_mean": 0.4721960080411615,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 6.25,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.4718975142510544
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 6.25,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.47342591606081896
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.4712645938116111
+              }
+            ]
+          }
+        },
+        "ga": {
+          "calibration": {
+            "mean": 2.0833333333333335,
+            "std": 3.608439182435161,
+            "quality_mean": 100.0,
+            "compute_seconds_mean": 0.0083636594587612,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.00847687987595691
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 6.25,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.008682486001475809
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.007931612498850882
+              }
+            ]
+          },
+          "confirmation": {
+            "mean": 0.0,
+            "std": 0.0,
+            "quality_mean": 85.41666666666667,
+            "compute_seconds_mean": 0.0083636594587612,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 81.25,
+                "controller_compute_seconds_mean": 0.00847687987595691
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 81.25,
+                "controller_compute_seconds_mean": 0.008682486001475809
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.007931612498850882
+              }
+            ]
+          }
+        },
+        "random": {
+          "calibration": {
+            "mean": 2.0833333333333335,
+            "std": 3.608439182435161,
+            "quality_mean": 100.0,
+            "compute_seconds_mean": 0.0005556347093715885,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.00050737100070819
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 6.25,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0006105150009716453
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0005490181264349303
+              }
+            ]
+          },
+          "confirmation": {
+            "mean": 0.0,
+            "std": 0.0,
+            "quality_mean": 91.66666666666667,
+            "compute_seconds_mean": 0.0005556347093715885,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.00050737100070819
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 87.5,
+                "controller_compute_seconds_mean": 0.0006105150009716453
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 87.5,
+                "controller_compute_seconds_mean": 0.0005490181264349303
+              }
+            ]
+          }
+        },
+        "bc": {
+          "calibration": {
+            "mean": 0.0,
+            "std": 0.0,
+            "quality_mean": 100.0,
+            "compute_seconds_mean": 0.0046302382084301525,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.004305997126493821
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.004701738749076867
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0048829787497197685
+              }
+            ]
+          },
+          "confirmation": {
+            "mean": 0.0,
+            "std": 0.0,
+            "quality_mean": 91.66666666666667,
+            "compute_seconds_mean": 0.0046302382084301525,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.004305997126493821
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 87.5,
+                "controller_compute_seconds_mean": 0.004701738749076867
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.0048829787497197685
+              }
+            ]
+          }
+        },
+        "td3bc": {
+          "calibration": {
+            "mean": 0.0,
+            "std": 0.0,
+            "quality_mean": 100.0,
+            "compute_seconds_mean": 0.005201020438600305,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.004952051063696672
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.005827556501571962
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0048234537505322805
+              }
+            ]
+          },
+          "confirmation": {
+            "mean": 0.0,
+            "std": 0.0,
+            "quality_mean": 95.83333333333333,
+            "compute_seconds_mean": 0.005201020438600305,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.004952051063696672
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.005827556501571962
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.0048234537505322805
+              }
+            ]
+          }
+        }
+      },
+      "0.85": {
+        "fixed8": {
+          "calibration": {
+            "mean": 0.0,
+            "std": null,
+            "quality_mean": 100.0,
+            "compute_seconds_mean": 0.0,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0
+              }
+            ]
+          },
+          "confirmation": {
+            "mean": 0.0,
+            "std": null,
+            "quality_mean": 93.75,
+            "compute_seconds_mean": 0.0,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.0
+              }
+            ]
+          }
+        },
+        "traditional": {
+          "calibration": {
+            "mean": 0.0,
+            "std": null,
+            "quality_mean": 100.0,
+            "compute_seconds_mean": 0.002972158250599932,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.002972158250599932
+              }
+            ]
+          },
+          "confirmation": {
+            "mean": 6.25,
+            "std": null,
+            "quality_mean": 87.5,
+            "compute_seconds_mean": 0.002972158250599932,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 6.25,
+                "quality_success_percent": 87.5,
+                "controller_compute_seconds_mean": 0.002972158250599932
+              }
+            ]
+          }
+        },
+        "bo": {
+          "calibration": {
+            "mean": 0.0,
+            "std": 0.0,
+            "quality_mean": 100.0,
+            "compute_seconds_mean": 0.4721960080411615,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.4718975142510544
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.47342591606081896
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.4712645938116111
+              }
+            ]
+          },
+          "confirmation": {
+            "mean": 4.166666666666667,
+            "std": 3.608439182435161,
+            "quality_mean": 93.75,
+            "compute_seconds_mean": 0.4721960080411615,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 6.25,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.4718975142510544
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 6.25,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.47342591606081896
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.4712645938116111
+              }
+            ]
+          }
+        },
+        "ga": {
+          "calibration": {
+            "mean": 0.0,
+            "std": 0.0,
+            "quality_mean": 100.0,
+            "compute_seconds_mean": 0.0083636594587612,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.00847687987595691
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.008682486001475809
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.007931612498850882
+              }
+            ]
+          },
+          "confirmation": {
+            "mean": 0.0,
+            "std": 0.0,
+            "quality_mean": 85.41666666666667,
+            "compute_seconds_mean": 0.0083636594587612,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 81.25,
+                "controller_compute_seconds_mean": 0.00847687987595691
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 81.25,
+                "controller_compute_seconds_mean": 0.008682486001475809
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.007931612498850882
+              }
+            ]
+          }
+        },
+        "random": {
+          "calibration": {
+            "mean": 0.0,
+            "std": 0.0,
+            "quality_mean": 100.0,
+            "compute_seconds_mean": 0.0005556347093715885,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.00050737100070819
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0006105150009716453
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0005490181264349303
+              }
+            ]
+          },
+          "confirmation": {
+            "mean": 0.0,
+            "std": 0.0,
+            "quality_mean": 91.66666666666667,
+            "compute_seconds_mean": 0.0005556347093715885,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.00050737100070819
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 87.5,
+                "controller_compute_seconds_mean": 0.0006105150009716453
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 87.5,
+                "controller_compute_seconds_mean": 0.0005490181264349303
+              }
+            ]
+          }
+        },
+        "bc": {
+          "calibration": {
+            "mean": 0.0,
+            "std": 0.0,
+            "quality_mean": 100.0,
+            "compute_seconds_mean": 0.0046302382084301525,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.004305997126493821
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.004701738749076867
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0048829787497197685
+              }
+            ]
+          },
+          "confirmation": {
+            "mean": 0.0,
+            "std": 0.0,
+            "quality_mean": 91.66666666666667,
+            "compute_seconds_mean": 0.0046302382084301525,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.004305997126493821
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 87.5,
+                "controller_compute_seconds_mean": 0.004701738749076867
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.0048829787497197685
+              }
+            ]
+          }
+        },
+        "td3bc": {
+          "calibration": {
+            "mean": 0.0,
+            "std": 0.0,
+            "quality_mean": 100.0,
+            "compute_seconds_mean": 0.005201020438600305,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.004952051063696672
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.005827556501571962
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.0048234537505322805
+              }
+            ]
+          },
+          "confirmation": {
+            "mean": 0.0,
+            "std": 0.0,
+            "quality_mean": 95.83333333333333,
+            "compute_seconds_mean": 0.005201020438600305,
+            "seeds": [
+              {
+                "seed": 0,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.004952051063696672
+              },
+              {
+                "seed": 1,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 100.0,
+                "controller_compute_seconds_mean": 0.005827556501571962
+              },
+              {
+                "seed": 2,
+                "joint_success_percent": 0.0,
+                "quality_success_percent": 93.75,
+                "controller_compute_seconds_mean": 0.0048234537505322805
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "calibration_grid_feasible_count": {
+    "0.95": 5,
+    "0.9": 2,
+    "0.85": 0
+  },
+  "test_contexts": 16,
+  "calibration_and_confirmation_feasible_count": {
+    "0.95": 5,
+    "0.9": 2,
+    "0.85": 2
+  },
+  "robust_oracle_status": "Post-evaluation diagnostic of all output-eligible settings: SAME phases pass calibration AND all 3 confirmation packets. All initial references pass calibration, so the common incumbent rule always returns a calibration-feasible setting. NOT an unrestricted 3-packet oracle. Never supplied to methods; primary test.json unchanged.",
+  "selection": {
+    "bc": {
+      "method": "bc",
+      "alpha": 0.0,
+      "step": 4000,
+      "score": [
+        0.10416666666666667,
+        0.19873867285941502
+      ]
+    },
+    "td3bc": {
+      "method": "td3bc",
+      "alpha": 0.1,
+      "step": 4000,
+      "score": [
+        0.1076388888888889,
+        0.7563099587771172
+      ]
+    },
+    "traditional": {
+      "method": "traditional",
+      "params": {
+        "phase_step": 8
+      },
+      "score": [
+        0.125,
+        1.0309487566953444
+      ]
+    },
+    "bo": {
+      "method": "bo",
+      "params": {
+        "lengthscale": 0.6
+      },
+      "score": [
+        0.041666666666666664,
+        1.0225864583725228
+      ]
+    },
+    "ga": {
+      "method": "ga",
+      "params": {
+        "population": 4,
+        "mutation_prob": 0.2
+      },
+      "score": [
+        0.11458333333333333,
+        1.0471745791114453
+      ]
+    }
+  },
+  "dataset": {
+    "transitions": 24576,
+    "episodes": 768,
+    "logical_measurement_bundles": 25728,
+    "behavior": "random / coordinate search / randomly perturbed coordinate search, train contexts only",
+    "dataset_sha256": "fee897175a808b68467e56d099b7713b475343aa8a11113675fe266fb3a39845"
+  },
+  "physics": {
+    "fixed_mos_count": 72,
+    "coupling_capacitors": 3,
+    "quiet_victim": [
+      {
+        "coupling_pf": 0.0,
+        "victim_peak_to_peak_mv": 6.930393758874942e-11
+      },
+      {
+        "coupling_pf": 0.06,
+        "victim_peak_to_peak_mv": 46.60603763467976
+      },
+      {
+        "coupling_pf": 0.12,
+        "victim_peak_to_peak_mv": 85.19053071070344
+      }
+    ],
+    "decoupled_vs_single_lane_max_error_mv": 0.6277483808988515,
+    "passed": true
+  },
+  "confirmation_unique_transients": 72,
+  "notes": [
+    "Three seeds reuse the same 16 conditions; seed std is not a confidence interval.",
+    "Fixed 8+8 makes only the initial measurement; active methods have an additional query allowance.",
+    "Calibration-grid oracle feasibility is not independent-packet feasibility.",
+    "Every frozen endpoint, including calibration failures, is evaluated on all confirmation packets."
+  ]
+}

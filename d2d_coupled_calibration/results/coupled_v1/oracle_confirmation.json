@@ -1,0 +1,1964 @@
+{
+  "status": "Post-evaluation diagnostic of all output-eligible settings: SAME phases pass calibration AND all 3 confirmation packets. All initial references pass calibration, so the common incumbent rule always returns a calibration-feasible setting. NOT an unrestricted 3-packet oracle. Never supplied to methods; primary test.json unchanged.",
+  "source_test_sha256": "64991ac22f647af349766fd3ddd7767d324d4c6dbdacb486584f772e05b7f26d",
+  "unique_transients_in_grid": 81,
+  "records": [
+    {
+      "context_id": 32,
+      "quality_feasible": true,
+      "minimum_energy_ratio": 0.8114945118932066,
+      "options": [
+        {
+          "strength0": 0,
+          "strength1": 0,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 0,
+          "strength1": 1,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 0,
+          "strength1": 2,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 0,
+          "strength1": 3,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 1,
+          "strength1": 0,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 1,
+          "strength1": 1,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 1,
+          "strength1": 2,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 1,
+          "strength1": 3,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 2,
+          "strength1": 0,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 2,
+          "strength1": 1,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 2,
+          "strength1": 2,
+          "feasible": true,
+          "energy_ratio": 0.8114945118932066
+        },
+        {
+          "strength0": 2,
+          "strength1": 3,
+          "feasible": true,
+          "energy_ratio": 0.8990246078376396
+        },
+        {
+          "strength0": 3,
+          "strength1": 0,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 3,
+          "strength1": 1,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 3,
+          "strength1": 2,
+          "feasible": false,
+          "energy_ratio": 0.9052694545264107
+        },
+        {
+          "strength0": 3,
+          "strength1": 3,
+          "feasible": true,
+          "energy_ratio": 1.0
+        }
+      ],
+      "feasible_by_ratio": {
+        "0.95": true,
+        "0.9": true,
+        "0.85": true
+      }
+    },
+    {
+      "context_id": 33,
+      "quality_feasible": true,
+      "minimum_energy_ratio": 0.9130157370953269,
+      "options": [
+        {
+          "strength0": 0,
+          "strength1": 0,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 0,
+          "strength1": 1,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 0,
+          "strength1": 2,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 0,
+          "strength1": 3,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 1,
+          "strength1": 0,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 1,
+          "strength1": 1,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 1,
+          "strength1": 2,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 1,
+          "strength1": 3,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 2,
+          "strength1": 0,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 2,
+          "strength1": 1,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 2,
+          "strength1": 2,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 2,
+          "strength1": 3,
+          "feasible": true,
+          "energy_ratio": 0.9130157370953269
+        },
+        {
+          "strength0": 3,
+          "strength1": 0,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 3,
+          "strength1": 1,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 3,
+          "strength1": 2,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 3,
+          "strength1": 3,
+          "feasible": true,
+          "energy_ratio": 1.0
+        }
+      ],
+      "feasible_by_ratio": {
+        "0.95": true,
+        "0.9": false,
+        "0.85": false
+      }
+    },
+    {
+      "context_id": 34,
+      "quality_feasible": true,
+      "minimum_energy_ratio": 1.0,
+      "options": [
+        {
+          "strength0": 0,
+          "strength1": 0,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 0,
+          "strength1": 1,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 0,
+          "strength1": 2,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 0,
+          "strength1": 3,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 1,
+          "strength1": 0,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 1,
+          "strength1": 1,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 1,
+          "strength1": 2,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 1,
+          "strength1": 3,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 2,
+          "strength1": 0,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 2,
+          "strength1": 1,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 2,
+          "strength1": 2,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 2,
+          "strength1": 3,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 3,
+          "strength1": 0,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 3,
+          "strength1": 1,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 3,
+          "strength1": 2,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 3,
+          "strength1": 3,
+          "feasible": true,
+          "energy_ratio": 1.0
+        }
+      ],
+      "feasible_by_ratio": {
+        "0.95": false,
+        "0.9": false,
+        "0.85": false
+      }
+    },
+    {
+      "context_id": 35,
+      "quality_feasible": true,
+      "minimum_energy_ratio": 1.0,
+      "options": [
+        {
+          "strength0": 0,
+          "strength1": 0,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 0,
+          "strength1": 1,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 0,
+          "strength1": 2,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 0,
+          "strength1": 3,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 1,
+          "strength1": 0,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 1,
+          "strength1": 1,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 1,
+          "strength1": 2,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 1,
+          "strength1": 3,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 2,
+          "strength1": 0,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 2,
+          "strength1": 1,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 2,
+          "strength1": 2,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 2,
+          "strength1": 3,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 3,
+          "strength1": 0,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 3,
+          "strength1": 1,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 3,
+          "strength1": 2,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 3,
+          "strength1": 3,
+          "feasible": true,
+          "energy_ratio": 1.0
+        }
+      ],
+      "feasible_by_ratio": {
+        "0.95": false,
+        "0.9": false,
+        "0.85": false
+      }
+    },
+    {
+      "context_id": 36,
+      "quality_feasible": true,
+      "minimum_energy_ratio": 0.9136300904046631,
+      "options": [
+        {
+          "strength0": 0,
+          "strength1": 0,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 0,
+          "strength1": 1,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 0,
+          "strength1": 2,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 0,
+          "strength1": 3,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 1,
+          "strength1": 0,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 1,
+          "strength1": 1,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 1,
+          "strength1": 2,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 1,
+          "strength1": 3,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 2,
+          "strength1": 0,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 2,
+          "strength1": 1,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 2,
+          "strength1": 2,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 2,
+          "strength1": 3,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 3,
+          "strength1": 0,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 3,
+          "strength1": 1,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 3,
+          "strength1": 2,
+          "feasible": true,
+          "energy_ratio": 0.9136300904046631
+        },
+        {
+          "strength0": 3,
+          "strength1": 3,
+          "feasible": true,
+          "energy_ratio": 1.0
+        }
+      ],
+      "feasible_by_ratio": {
+        "0.95": true,
+        "0.9": false,
+        "0.85": false
+      }
+    },
+    {
+      "context_id": 37,
+      "quality_feasible": true,
+      "minimum_energy_ratio": 1.0,
+      "options": [
+        {
+          "strength0": 0,
+          "strength1": 0,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 0,
+          "strength1": 1,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 0,
+          "strength1": 2,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 0,
+          "strength1": 3,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 1,
+          "strength1": 0,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 1,
+          "strength1": 1,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 1,
+          "strength1": 2,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 1,
+          "strength1": 3,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 2,
+          "strength1": 0,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 2,
+          "strength1": 1,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 2,
+          "strength1": 2,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 2,
+          "strength1": 3,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 3,
+          "strength1": 0,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 3,
+          "strength1": 1,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 3,
+          "strength1": 2,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 3,
+          "strength1": 3,
+          "feasible": true,
+          "energy_ratio": 1.0
+        }
+      ],
+      "feasible_by_ratio": {
+        "0.95": false,
+        "0.9": false,
+        "0.85": false
+      }
+    },
+    {
+      "context_id": 38,
+      "quality_feasible": true,
+      "minimum_energy_ratio": 1.0,
+      "options": [
+        {
+          "strength0": 0,
+          "strength1": 0,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 0,
+          "strength1": 1,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 0,
+          "strength1": 2,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 0,
+          "strength1": 3,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 1,
+          "strength1": 0,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 1,
+          "strength1": 1,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 1,
+          "strength1": 2,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 1,
+          "strength1": 3,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 2,
+          "strength1": 0,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 2,
+          "strength1": 1,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 2,
+          "strength1": 2,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 2,
+          "strength1": 3,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 3,
+          "strength1": 0,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 3,
+          "strength1": 1,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 3,
+          "strength1": 2,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 3,
+          "strength1": 3,
+          "feasible": true,
+          "energy_ratio": 1.0
+        }
+      ],
+      "feasible_by_ratio": {
+        "0.95": false,
+        "0.9": false,
+        "0.85": false
+      }
+    },
+    {
+      "context_id": 39,
+      "quality_feasible": true,
+      "minimum_energy_ratio": 0.9158170856711056,
+      "options": [
+        {
+          "strength0": 0,
+          "strength1": 0,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 0,
+          "strength1": 1,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 0,
+          "strength1": 2,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 0,
+          "strength1": 3,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 1,
+          "strength1": 0,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 1,
+          "strength1": 1,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 1,
+          "strength1": 2,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 1,
+          "strength1": 3,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 2,
+          "strength1": 0,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 2,
+          "strength1": 1,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 2,
+          "strength1": 2,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 2,
+          "strength1": 3,
+          "feasible": false,
+          "energy_ratio": 0.9023659482536059
+        },
+        {
+          "strength0": 3,
+          "strength1": 0,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 3,
+          "strength1": 1,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 3,
+          "strength1": 2,
+          "feasible": true,
+          "energy_ratio": 0.9158170856711056
+        },
+        {
+          "strength0": 3,
+          "strength1": 3,
+          "feasible": true,
+          "energy_ratio": 1.0
+        }
+      ],
+      "feasible_by_ratio": {
+        "0.95": true,
+        "0.9": false,
+        "0.85": false
+      }
+    },
+    {
+      "context_id": 40,
+      "quality_feasible": true,
+      "minimum_energy_ratio": 1.0,
+      "options": [
+        {
+          "strength0": 0,
+          "strength1": 0,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 0,
+          "strength1": 1,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 0,
+          "strength1": 2,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 0,
+          "strength1": 3,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 1,
+          "strength1": 0,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 1,
+          "strength1": 1,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 1,
+          "strength1": 2,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 1,
+          "strength1": 3,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 2,
+          "strength1": 0,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 2,
+          "strength1": 1,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 2,
+          "strength1": 2,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 2,
+          "strength1": 3,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 3,
+          "strength1": 0,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 3,
+          "strength1": 1,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 3,
+          "strength1": 2,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 3,
+          "strength1": 3,
+          "feasible": true,
+          "energy_ratio": 1.0
+        }
+      ],
+      "feasible_by_ratio": {
+        "0.95": false,
+        "0.9": false,
+        "0.85": false
+      }
+    },
+    {
+      "context_id": 41,
+      "quality_feasible": true,
+      "minimum_energy_ratio": 1.0,
+      "options": [
+        {
+          "strength0": 0,
+          "strength1": 0,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 0,
+          "strength1": 1,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 0,
+          "strength1": 2,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 0,
+          "strength1": 3,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 1,
+          "strength1": 0,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 1,
+          "strength1": 1,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 1,
+          "strength1": 2,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 1,
+          "strength1": 3,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 2,
+          "strength1": 0,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 2,
+          "strength1": 1,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 2,
+          "strength1": 2,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 2,
+          "strength1": 3,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 3,
+          "strength1": 0,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 3,
+          "strength1": 1,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 3,
+          "strength1": 2,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 3,
+          "strength1": 3,
+          "feasible": true,
+          "energy_ratio": 1.0
+        }
+      ],
+      "feasible_by_ratio": {
+        "0.95": false,
+        "0.9": false,
+        "0.85": false
+      }
+    },
+    {
+      "context_id": 42,
+      "quality_feasible": true,
+      "minimum_energy_ratio": 0.8202536536693363,
+      "options": [
+        {
+          "strength0": 0,
+          "strength1": 0,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 0,
+          "strength1": 1,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 0,
+          "strength1": 2,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 0,
+          "strength1": 3,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 1,
+          "strength1": 0,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 1,
+          "strength1": 1,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 1,
+          "strength1": 2,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 1,
+          "strength1": 3,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 2,
+          "strength1": 0,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 2,
+          "strength1": 1,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 2,
+          "strength1": 2,
+          "feasible": true,
+          "energy_ratio": 0.8202536536693363
+        },
+        {
+          "strength0": 2,
+          "strength1": 3,
+          "feasible": true,
+          "energy_ratio": 0.9051609600210356
+        },
+        {
+          "strength0": 3,
+          "strength1": 0,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 3,
+          "strength1": 1,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 3,
+          "strength1": 2,
+          "feasible": true,
+          "energy_ratio": 0.9079332536780989
+        },
+        {
+          "strength0": 3,
+          "strength1": 3,
+          "feasible": true,
+          "energy_ratio": 1.0
+        }
+      ],
+      "feasible_by_ratio": {
+        "0.95": true,
+        "0.9": true,
+        "0.85": true
+      }
+    },
+    {
+      "context_id": 43,
+      "quality_feasible": true,
+      "minimum_energy_ratio": 1.0,
+      "options": [
+        {
+          "strength0": 0,
+          "strength1": 0,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 0,
+          "strength1": 1,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 0,
+          "strength1": 2,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 0,
+          "strength1": 3,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 1,
+          "strength1": 0,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 1,
+          "strength1": 1,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 1,
+          "strength1": 2,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 1,
+          "strength1": 3,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 2,
+          "strength1": 0,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 2,
+          "strength1": 1,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 2,
+          "strength1": 2,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 2,
+          "strength1": 3,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 3,
+          "strength1": 0,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 3,
+          "strength1": 1,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 3,
+          "strength1": 2,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 3,
+          "strength1": 3,
+          "feasible": true,
+          "energy_ratio": 1.0
+        }
+      ],
+      "feasible_by_ratio": {
+        "0.95": false,
+        "0.9": false,
+        "0.85": false
+      }
+    },
+    {
+      "context_id": 44,
+      "quality_feasible": true,
+      "minimum_energy_ratio": 1.0,
+      "options": [
+        {
+          "strength0": 0,
+          "strength1": 0,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 0,
+          "strength1": 1,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 0,
+          "strength1": 2,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 0,
+          "strength1": 3,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 1,
+          "strength1": 0,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 1,
+          "strength1": 1,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 1,
+          "strength1": 2,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 1,
+          "strength1": 3,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 2,
+          "strength1": 0,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 2,
+          "strength1": 1,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 2,
+          "strength1": 2,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 2,
+          "strength1": 3,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 3,
+          "strength1": 0,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 3,
+          "strength1": 1,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 3,
+          "strength1": 2,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 3,
+          "strength1": 3,
+          "feasible": true,
+          "energy_ratio": 1.0
+        }
+      ],
+      "feasible_by_ratio": {
+        "0.95": false,
+        "0.9": false,
+        "0.85": false
+      }
+    },
+    {
+      "context_id": 45,
+      "quality_feasible": true,
+      "minimum_energy_ratio": 1.0,
+      "options": [
+        {
+          "strength0": 0,
+          "strength1": 0,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 0,
+          "strength1": 1,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 0,
+          "strength1": 2,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 0,
+          "strength1": 3,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 1,
+          "strength1": 0,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 1,
+          "strength1": 1,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 1,
+          "strength1": 2,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 1,
+          "strength1": 3,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 2,
+          "strength1": 0,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 2,
+          "strength1": 1,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 2,
+          "strength1": 2,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 2,
+          "strength1": 3,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 3,
+          "strength1": 0,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 3,
+          "strength1": 1,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 3,
+          "strength1": 2,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 3,
+          "strength1": 3,
+          "feasible": true,
+          "energy_ratio": 1.0
+        }
+      ],
+      "feasible_by_ratio": {
+        "0.95": false,
+        "0.9": false,
+        "0.85": false
+      }
+    },
+    {
+      "context_id": 46,
+      "quality_feasible": true,
+      "minimum_energy_ratio": 1.0,
+      "options": [
+        {
+          "strength0": 0,
+          "strength1": 0,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 0,
+          "strength1": 1,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 0,
+          "strength1": 2,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 0,
+          "strength1": 3,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 1,
+          "strength1": 0,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 1,
+          "strength1": 1,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 1,
+          "strength1": 2,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 1,
+          "strength1": 3,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 2,
+          "strength1": 0,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 2,
+          "strength1": 1,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 2,
+          "strength1": 2,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 2,
+          "strength1": 3,
+          "feasible": false,
+          "energy_ratio": 0.8798988887624394
+        },
+        {
+          "strength0": 3,
+          "strength1": 0,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 3,
+          "strength1": 1,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 3,
+          "strength1": 2,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 3,
+          "strength1": 3,
+          "feasible": true,
+          "energy_ratio": 1.0
+        }
+      ],
+      "feasible_by_ratio": {
+        "0.95": false,
+        "0.9": false,
+        "0.85": false
+      }
+    },
+    {
+      "context_id": 47,
+      "quality_feasible": true,
+      "minimum_energy_ratio": 1.0,
+      "options": [
+        {
+          "strength0": 0,
+          "strength1": 0,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 0,
+          "strength1": 1,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 0,
+          "strength1": 2,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 0,
+          "strength1": 3,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 1,
+          "strength1": 0,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 1,
+          "strength1": 1,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 1,
+          "strength1": 2,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 1,
+          "strength1": 3,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 2,
+          "strength1": 0,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 2,
+          "strength1": 1,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 2,
+          "strength1": 2,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 2,
+          "strength1": 3,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 3,
+          "strength1": 0,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 3,
+          "strength1": 1,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 3,
+          "strength1": 2,
+          "feasible": false,
+          "energy_ratio": null,
+          "reason": "No phase pair passes the calibration packet; not eligible under the shared incumbent rule."
+        },
+        {
+          "strength0": 3,
+          "strength1": 3,
+          "feasible": true,
+          "energy_ratio": 1.0
+        }
+      ],
+      "feasible_by_ratio": {
+        "0.95": false,
+        "0.9": false,
+        "0.85": false
+      }
+    }
+  ]
+}

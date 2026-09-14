@@ -1,0 +1,7 @@
+{
+  "transitions": 24576,
+  "episodes": 768,
+  "logical_measurement_bundles": 25728,
+  "behavior": "random / coordinate search / randomly perturbed coordinate search, train contexts only",
+  "dataset_sha256": "39182f74b1d0f6843dc385486e5dfb12bff3665bc1ecf33b40fa7302fa503072"
+}

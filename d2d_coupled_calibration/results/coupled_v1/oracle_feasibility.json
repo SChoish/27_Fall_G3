@@ -1,0 +1,165 @@
+{
+  "scope": "Calibration packet, full 4x4x65x65 action grid; no independent-pattern oracle claim. Never supplied to policies.",
+  "records": [
+    {
+      "context_id": 32,
+      "calibration_feasible": true,
+      "minimum_energy_ratio": 0.8692231623149675,
+      "feasible_by_ratio": {
+        "0.95": true,
+        "0.9": true,
+        "0.85": false
+      }
+    },
+    {
+      "context_id": 33,
+      "calibration_feasible": true,
+      "minimum_energy_ratio": 0.9248241212499719,
+      "feasible_by_ratio": {
+        "0.95": true,
+        "0.9": false,
+        "0.85": false
+      }
+    },
+    {
+      "context_id": 34,
+      "calibration_feasible": true,
+      "minimum_energy_ratio": 1.0,
+      "feasible_by_ratio": {
+        "0.95": false,
+        "0.9": false,
+        "0.85": false
+      }
+    },
+    {
+      "context_id": 35,
+      "calibration_feasible": true,
+      "minimum_energy_ratio": 1.0,
+      "feasible_by_ratio": {
+        "0.95": false,
+        "0.9": false,
+        "0.85": false
+      }
+    },
+    {
+      "context_id": 36,
+      "calibration_feasible": true,
+      "minimum_energy_ratio": 0.9536210342191056,
+      "feasible_by_ratio": {
+        "0.95": false,
+        "0.9": false,
+        "0.85": false
+      }
+    },
+    {
+      "context_id": 37,
+      "calibration_feasible": true,
+      "minimum_energy_ratio": 1.0,
+      "feasible_by_ratio": {
+        "0.95": false,
+        "0.9": false,
+        "0.85": false
+      }
+    },
+    {
+      "context_id": 38,
+      "calibration_feasible": true,
+      "minimum_energy_ratio": 1.0,
+      "feasible_by_ratio": {
+        "0.95": false,
+        "0.9": false,
+        "0.85": false
+      }
+    },
+    {
+      "context_id": 39,
+      "calibration_feasible": true,
+      "minimum_energy_ratio": 0.9369950768127917,
+      "feasible_by_ratio": {
+        "0.95": true,
+        "0.9": false,
+        "0.85": false
+      }
+    },
+    {
+      "context_id": 40,
+      "calibration_feasible": true,
+      "minimum_energy_ratio": 1.0,
+      "feasible_by_ratio": {
+        "0.95": false,
+        "0.9": false,
+        "0.85": false
+      }
+    },
+    {
+      "context_id": 41,
+      "calibration_feasible": true,
+      "minimum_energy_ratio": 1.0,
+      "feasible_by_ratio": {
+        "0.95": false,
+        "0.9": false,
+        "0.85": false
+      }
+    },
+    {
+      "context_id": 42,
+      "calibration_feasible": true,
+      "minimum_energy_ratio": 0.867759131281105,
+      "feasible_by_ratio": {
+        "0.95": true,
+        "0.9": true,
+        "0.85": false
+      }
+    },
+    {
+      "context_id": 43,
+      "calibration_feasible": true,
+      "minimum_energy_ratio": 1.0,
+      "feasible_by_ratio": {
+        "0.95": false,
+        "0.9": false,
+        "0.85": false
+      }
+    },
+    {
+      "context_id": 44,
+      "calibration_feasible": true,
+      "minimum_energy_ratio": 1.0,
+      "feasible_by_ratio": {
+        "0.95": false,
+        "0.9": false,
+        "0.85": false
+      }
+    },
+    {
+      "context_id": 45,
+      "calibration_feasible": true,
+      "minimum_energy_ratio": 1.0,
+      "feasible_by_ratio": {
+        "0.95": false,
+        "0.9": false,
+        "0.85": false
+      }
+    },
+    {
+      "context_id": 46,
+      "calibration_feasible": true,
+      "minimum_energy_ratio": 0.9298690290495191,
+      "feasible_by_ratio": {
+        "0.95": true,
+        "0.9": false,
+        "0.85": false
+      }
+    },
+    {
+      "context_id": 47,
+      "calibration_feasible": true,
+      "minimum_energy_ratio": 1.0,
+      "feasible_by_ratio": {
+        "0.95": false,
+        "0.9": false,
+        "0.85": false
+      }
+    }
+  ]
+}

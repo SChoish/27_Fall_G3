@@ -1,0 +1,57 @@
+{
+  "logs": [
+    {
+      "step": 1000,
+      "actor_loss": 0.24352990090847015,
+      "critic_loss": 0.0,
+      "seconds": 1.5118602170005033
+    },
+    {
+      "step": 2000,
+      "actor_loss": 0.25031816959381104,
+      "critic_loss": 0.0,
+      "seconds": 3.0669872690014017
+    },
+    {
+      "step": 3000,
+      "actor_loss": 0.23404806852340698,
+      "critic_loss": 0.0,
+      "seconds": 4.567625923000378
+    },
+    {
+      "step": 4000,
+      "actor_loss": 0.22450044751167297,
+      "critic_loss": 0.0,
+      "seconds": 6.084591889000876
+    },
+    {
+      "step": 5000,
+      "actor_loss": 0.2108033448457718,
+      "critic_loss": 0.0,
+      "seconds": 7.6816556100002344
+    },
+    {
+      "step": 6000,
+      "actor_loss": 0.22391453385353088,
+      "critic_loss": 0.0,
+      "seconds": 9.296173251001164
+    },
+    {
+      "step": 7000,
+      "actor_loss": 0.2169918566942215,
+      "critic_loss": 0.0,
+      "seconds": 10.969883437001045
+    },
+    {
+      "step": 8000,
+      "actor_loss": 0.18276920914649963,
+      "critic_loss": 0.0,
+      "seconds": 12.593463147000875
+    }
+  ],
+  "seconds": 12.596530540000458,
+  "dataset_sha256": "fee897175a808b68467e56d099b7713b475343aa8a11113675fe266fb3a39845",
+  "config_sha256": "c52f85ca15b9c88381f3ab55cf3ba40e2b7426455de4898adcce9a59e7e77264",
+  "spice_calls_during_learning": 0,
+  "torch_version": "2.14.0+cpu"
+}
