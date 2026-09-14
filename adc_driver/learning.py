@@ -6,6 +6,7 @@ hold-error and dynamic energy. This module learns fresh models from source data.
 import copy
 import hashlib
 import json
+from dataclasses import asdict
 from pathlib import Path
 
 import numpy as np
@@ -15,6 +16,8 @@ from torch.nn import functional as F
 
 from circuit import NAMES,cost,write_json
 from rnc import rank_n_contrast
+from attention import (CoordinateAttention, SearchOptions, metric_direction,
+                       metric_matrix, project)
 
 
 def target(r):
@@ -76,12 +79,13 @@ def train(data_path,method,seed,output,epochs=150):
 
 
 class LocalSearch:
-    """Frozen encoder, paid-data residual fit, metric descent and Armijo.
+    """Frozen surrogate, paid-data residual fit and learned coordinate metric.
 
-This is the earlier ALARM-inspired subset, not full ALARM. No attention metric
-or critic buffer. Top-three starts and a candidate bank are explicit additions.
-"""
-    def __init__(self,path,contexts):
+    Attention learns through a differentiable one-step proposal with the critic
+    fixed, following ALARM Eq. (27). Execution uses fixed projected steps by
+    default; surrogate Armijo is optional. There is no critic buffer.
+    """
+    def __init__(self,path,contexts,options=None):
         from search import fingerprint
         torch.set_num_threads(1)
         p=torch.load(path,map_location='cpu',weights_only=False)
@@ -89,7 +93,11 @@ or critic buffer. Top-three starts and a candidate bank are explicit additions.
         if len({c.error_limit_mv for c in contexts})!=1:
             raise ValueError('Surrogate search requires one common error limit across contexts')
         self.payload=p;self.model=Model().eval();self.model.load_state_dict(p['state_dict'])
+        self.model.requires_grad_(False)
         self.mean=p['mean'];self.std=p['std'];self.limit=np.log10(contexts[0].error_limit_mv);self.coef=None
+        self.options=options or SearchOptions()
+        self.attention=CoordinateAttention(len(NAMES)) if self.options.attention=='learned' else None
+        self.last_report={};self.objective_evaluations=0
 
     def fit(self,rows):
         good=[r for r in rows if r['oracle']['valid']]
@@ -105,36 +113,123 @@ or critic buffer. Top-three starts and a candidate bank are explicit additions.
 
     def loss(self,u):
         out=self.model(u.reshape(-1,len(NAMES)));pred=out['pred']
+        self.objective_evaluations+=len(pred)
         if self.coef is not None:
             phi=torch.cat([(out['h']-self.hm)/self.hs,torch.ones(len(pred),1)],1)
             pred=pred+phi@self.coef
         y=pred*self.std+self.mean
         return (F.softplus(5*(y[:,0]-self.limit))/5).square()+.02*y[:,1]+.2*F.softplus(-out['logit'])
 
+    def probabilities(self,u):
+        if self.attention is None: return torch.ones_like(u)/len(NAMES)
+        return self.attention(u)
+
+    def update_attention(self,rows,rng):
+        """All paid valid observations are eligible, not just elite starts.
+
+        No new SPICE calls, held-out labels, or pos/neg annotations. Gradients
+        flow through the solve, projection and endpoint surrogate to eta. The
+        initial gradient is fixed because these starting designs are fixed.
+        """
+        good=[r for r in rows if r['oracle']['valid']]
+        report=dict(enabled=self.attention is not None,eligible_observations=len(good),
+                    training_observations=0,updates=0,additional_spice_queries=0,
+                    objective='Mean frozen-surrogate cost after one fixed projected metric step')
+        if self.attention is None or not good: return report
+        indices=rng.choice(len(good),size=min(32,len(good)),replace=False)
+        points=torch.tensor(np.array([good[i]['u'] for i in indices]),dtype=torch.float32,requires_grad=True)
+        base_loss=self.loss(points)
+        gradient=torch.autograd.grad(base_loss.sum(),points)[0].detach()
+        points=points.detach()
+        active=torch.isfinite(gradient).all(-1)&torch.isfinite(base_loss)&(gradient.norm(dim=-1)>1e-8)
+        points=points[active];gradient=gradient[active]
+        if len(points)==0:return report
+        before={k:v.detach().clone() for k,v in self.attention.state_dict().items()}
+        optimizer=torch.optim.Adam(self.attention.parameters(),lr=self.options.attention_lr)
+        def objective():
+            direction=metric_direction(gradient,self.probabilities(points),self.options)
+            return self.loss(project(points+direction,points,self.options)).mean()
+        with torch.no_grad(): first=float(objective())
+        if not np.isfinite(first): raise FloatingPointError('Non-finite attention training objective')
+        best=first;state=copy.deepcopy(self.attention.state_dict());grad_norm=0.;updates=0
+        for _ in range(self.options.attention_steps):
+            value=objective()
+            if not torch.isfinite(value):raise FloatingPointError('Non-finite attention training objective')
+            optimizer.zero_grad(set_to_none=True);value.backward()
+            norm=nn.utils.clip_grad_norm_(self.attention.parameters(),5,error_if_nonfinite=True)
+            grad_norm=max(grad_norm,float(norm));optimizer.step();updates+=1
+            with torch.no_grad(): score=float(objective())
+            if np.isfinite(score) and score<best:
+                best=score;state=copy.deepcopy(self.attention.state_dict())
+        self.attention.load_state_dict(state)
+        delta=sum(float((v-before[k]).square().sum()) for k,v in state.items())**.5
+        report.update(training_observations=len(points),updates=updates,
+                      loss_before=first,loss_after=best,max_gradient_norm=grad_norm,parameter_delta_l2=delta)
+        return report
+
+    def save_attention(self,path):
+        if self.attention is None:return
+        torch.save(dict(state_dict=self.attention.state_dict(),options=asdict(self.options),
+                        parameter_names=NAMES,context_hash=self.payload['context_hash'],
+                        surrogate_source_sha256=self.payload['source_sha256'],
+                        note='Final attention snapshot; not a resumable search or a standalone surrogate'),path)
+
     def propose(self,rows,rng):
-        self.fit(rows);elites=sorted(rows,key=lambda r:cost(r['oracle']))[:3]
+        if not rows:raise ValueError('Local search requires paid observations')
+        self.objective_evaluations=0
+        self.fit(rows)
+        # Independent RNG stream: toggling attention does not consume the
+        # candidate-bank RNG and confound the matched attention ablation.
+        attention_rng=np.random.default_rng(np.random.SeedSequence([self.payload['seed'],len(rows),41871]))
+        attention_report=self.update_attention(rows,attention_rng)
+        elites=sorted(rows,key=lambda r:cost(r['oracle']))[:3]
         centers=[np.array(r['u']) for r in elites]
         starts=centers+[np.clip(centers[0]+rng.normal(0,.15,len(NAMES)),0,1) for _ in range(2)]
-        candidates=[]
+        candidates=[];origins=[];line_trials=0;accepted_steps=0
         for start in starts:
             u=torch.tensor(start,dtype=torch.float32);center=u.clone()
-            for _ in range(6):
+            for _ in range(self.options.search_steps):
                 u=u.detach().requires_grad_(True);f=self.loss(u)[0];g=torch.autograd.grad(f,u)[0]
-                if not torch.isfinite(g).all() or g.norm()<1e-8:break
-                metric=torch.outer(g,g)+torch.diag(g.square()+.01*g.square().mean()+1e-4)
-                direction=-torch.linalg.solve(metric,g);direction=direction/direction.norm().clamp_min(1e-8)*.15
+                if not torch.isfinite(f) or not torch.isfinite(g).all() or g.norm()<1e-8:break
                 accepted=False
                 with torch.no_grad():
-                    for k in range(8):
-                        proposal=(u+(0.5**k)*direction).clamp(0,1)
-                        proposal=torch.maximum(torch.minimum(proposal,center+.25),center-.25).clamp(0,1)
-                        if self.loss(proposal)[0]<=f+1e-4*torch.dot(g,proposal-u):
-                            u=proposal;accepted=True;break
+                    direction=metric_direction(g,self.probabilities(u),self.options)
+                    if self.options.line_search=='none':
+                        proposal=project(u+direction,center,self.options)
+                        accepted=bool((proposal-u).norm()>1e-8)
+                    else:
+                        for k in range(self.options.backtracks):
+                            proposal=project(u+(0.5**k)*direction,center,self.options)
+                            line_trials+=1
+                            if (proposal-u).norm()<=1e-8:break
+                            if self.loss(proposal)[0]<=f+self.options.armijo_c1*torch.dot(g,proposal-u):
+                                accepted=True;break
+                    if accepted:u=proposal;accepted_steps+=1
                 if not accepted:break
-            candidates.append(u.detach().numpy())
-        candidates.extend(np.clip(centers[0]+rng.normal(0,.15,(64,len(NAMES))),0,1))
-        candidates.extend(rng.uniform(0,1,(64,len(NAMES))))
-        a=np.array(candidates);old=np.array([r['u'] for r in rows])
-        a=a[np.min(np.linalg.norm(a[:,None,:]-old[None,:,:],axis=2),axis=1)>1e-6]
+                # Retain every iterate so fixed steps need no decrease test.
+                candidates.append(u.detach().numpy());origins.append('metric_step')
+        local=np.clip(centers[0]+rng.normal(0,.15,(64,len(NAMES))),0,1)
+        candidates.extend(local);origins.extend(['local_random']*len(local))
+        global_bank=rng.uniform(0,1,(64,len(NAMES)))
+        candidates.extend(global_bank);origins.extend(['global_random']*len(global_bank))
+        a=np.array(candidates);old=np.array([r['u'] for r in rows]);origins=np.array(origins)
+        keep=np.isfinite(a).all(1)&(np.min(np.linalg.norm(a[:,None,:]-old[None,:,:],axis=2),axis=1)>1e-6)
+        a=a[keep];origins=origins[keep]
+        if len(a)==0:raise RuntimeError('No unevaluated finite candidate')
         with torch.no_grad(): scores=self.loss(torch.tensor(a,dtype=torch.float32)).numpy()
-        return a[np.argmin(scores)]
+        scores=np.where(np.isfinite(scores),scores,np.inf)
+        if not np.isfinite(scores).any():raise FloatingPointError('No finite surrogate candidate score')
+        selected=int(np.argmin(scores));incumbent=torch.tensor(centers[0],dtype=torch.float32,requires_grad=True)
+        g=torch.autograd.grad(self.loss(incumbent)[0],incumbent)[0]
+        with torch.no_grad():
+            p=self.probabilities(incumbent);eigenvalues=torch.linalg.eigvalsh(metric_matrix(g,p,self.options))
+        self.last_report=dict(attention=attention_report,incumbent_query=elites[0]['query'],
+                              elite_queries=[r['query'] for r in elites],
+                              coordinate_probabilities=p.tolist(),parameter_names=NAMES,
+                              metric_min_eigenvalue=float(eigenvalues.min()),
+                              selected_origin=str(origins[selected]),predicted_loss=float(scores[selected]),
+                              candidates=len(a),accepted_metric_steps=accepted_steps,
+                              line_search=self.options.line_search,line_search_trials=line_trials,
+                              surrogate_objective_evaluations=self.objective_evaluations,
+                              additional_spice_queries=0)
+        return a[selected]

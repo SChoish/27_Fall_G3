@@ -84,3 +84,10 @@ RNC를 포함한 방법의 필요성과 개선 정도를 판단하려면 더 충
 
 공정 변화·mismatch·잡음·전체 ADC의 선형성·ENOB·레이아웃 추출은 검증하지 않았습니다.
 현재 범위는 실제 MOS 샘플링 부하를 구동하는 회로도 단계의 고정 topology sizing입니다.
+# Attention 추가 이후 결과
+
+이 문서의 기존 번들 실험과 별도로, 학습하는 coordinate attention을 구현했습니다.
+새 2×2 ablation 및 무작위·GA 비교(총 96 SPICE queries)는
+[`ALARM_ATTENTION.md`](ALARM_ATTENTION.md#6-이번-실제-실행-결과)에 있습니다.
+현재 기본값은 attention 사용, 라인서치 끔입니다. 아래 과거 결과를 새 알고리즘의
+결과로 해석하지 마세요.

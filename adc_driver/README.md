@@ -5,7 +5,8 @@
 사양을 만족하면서 에너지를 줄이도록 소자 크기·바이어스·RC를 최적화합니다.
 
 **바로 실행할 회로, Python 평가기, 데이터 수집, GA·무작위 탐색, 회귀·RNC 학습과
-지역 탐색, 실행 기록·파형이 포함되어 있습니다.** 확인한 결과는 `RESULTS.md`에 있습니다.
+지역 탐색, 학습하는 coordinate attention, 실행 기록·파형이 포함되어 있습니다.**
+기존 결과는 `RESULTS.md`, attention 구현과 새 비교는 `ALARM_ATTENTION.md`에 있습니다.
 
 ## 1. 설치와 첫 실행
 
@@ -154,12 +155,38 @@ checkpoint 선택은 유효 검증 데이터만 사용합니다. 사전 데이�
 포함되지 않고 별도로 기록됩니다. 같은 데이터에서 최선의 feasible 설계를 선택하는
 기준선도 연구 평가에 포함해야 합니다. 번들의 `validate_bundle.py`가 이를 보고합니다.
 
-지역 탐색은 이전 **ALARM-inspired subset**을 연결했습니다: gradient outer product와
-대각 damping으로 만든 metric, metric-preconditioned descent, surrogate Armijo,
-실측 상위 3개에서 시작하는 탐색, 모든 유효 실측을 이용한 residual ridge 보정입니다.
-원본 ALARM의 attention metric과 critic buffer는 구현하지 않았습니다. RNC는 별도
-표현학습 항입니다. 이 모델은 고정된 context 목록을 입력에 내장한 모델이므로, 평가
-조건이 학습 조건과 다르면 체크포인트 사용을 거부합니다.
+지역 탐색은 **ALARM의 self-attention → FC → softmax 좌표 가중치**를 사용합니다.
+유효한 실측 데이터로 residual ridge를 보정한 뒤 예측 모델을 고정하고, metric을 이용한
+한 번의 이동 후 예측 비용을 낮추도록 attention을 학습합니다. 별도의 SPICE 호출이나
+수동 positive/negative 라벨은 필요하지 않습니다. RNC는 별도의 표현학습 항입니다.
+
+기본값은 `--attention learned --line-search none`입니다. 고정 길이의 metric 방향을
+설계 범위·지역 반경 안으로 투영하고, 모든 중간 후보와 무작위 후보 중 예측 비용이 가장
+낮은 하나만 SPICE로 평가합니다. 라인서치를 켜면 surrogate Armijo를 적용합니다.
+어느 쪽도 실제 회로 성능의 단조 개선을 보장하지 않습니다.
+
+```bash
+# 포함된 RNC surrogate로 바로 실행: attention을 탐색 중 새로 학습
+python run.py optimize --method rnc --checkpoint checkpoints/rnc.pt --budget 32 --output results/my_attention
+# 같은 surrogate, attention을 끈 비교
+python run.py optimize --method rnc --checkpoint checkpoints/rnc.pt --attention off --line-search none --budget 32 --output results/my_no_attention
+# Attention 2종 × line search 2종, 필요하면 GA·무작위도 함께 비교
+python compare_attention.py --budget 32 --seeds 0 1 2 --workers 2 --include-baselines --output results/my_ablation
+```
+
+`--attention-steps 40`, `--step-size 0.15`, `--search-steps 6`으로 학습·이동량을
+조절할 수 있습니다. 이 옵션들은 `regression`/`rnc` 탐색에 적용되며 GA·무작위에는
+적용되지 않습니다. 기존 surrogate checkpoint를 그대로 사용할 수 있습니다.
+
+`protocol.json`에는 모든 탐색 설정과 데이터·checkpoint 식별값을 기록합니다.
+`trace.json`의 `proposal`에는 attention 학습 전후 비용, 가중치, elite query,
+선택 후보 출처와 라인서치 횟수가 있습니다. `attention.pt`는 마지막 attention의
+가중치와 설정이며, 독립 surrogate나 탐색 재개용 checkpoint는 아닙니다.
+
+실측 상위 3개 시작점, 모든 유효 실측의 residual 보정, 후보 bank는 유지했습니다.
+원본 ALARM의 **critic buffer는 아직 없습니다**. 원문과의 수식 대응 및 변경점은
+`ALARM_ATTENTION.md`에 정리했습니다. 고정된 context 목록을 쓰므로 평가 조건이
+학습 조건과 다르면 surrogate checkpoint 사용을 거부합니다.
 
 실행 확인용 `data/source_smoke.json`은 24개뿐입니다. 함께 제공한 모델과 1개 seed 결과는
 동작 확인용이고, RNC의 우위·미지 topology 전이를 검증한 결과가 아닙니다.
@@ -192,7 +219,9 @@ checkpoint 데이터 분할, dense 및 독립 SPICE 실행 결과를 다시 점�
 | circuit.py | MOS 회로 생성, ngspice 실행, 정확도·에너지 측정 |
 | run.py | 사용자 명령 진입점 |
 | search.py | 데이터 수집, GA·무작위·학습 기반 탐색 |
-| learning.py / rnc.py | 회귀·RNC 학습, ALARM-inspired 지역 탐색 |
+| learning.py / rnc.py | 회귀·RNC 학습, residual 보정, attention 학습과 지역 탐색 |
+| attention.py | ALARM 좌표 attention, 양의 정부호 metric, 투영된 이동 |
+| compare_attention.py | attention/라인서치 2×2 및 선택적 GA·무작위 비교 |
 | configs/ | nominal·stress 조건 |
 | examples/ | 기준 설계 세 개, 독립 SPICE netlist |
 | models/ | 실제 SKY130 TT 모델, Apache-2.0 라이선스·출처 |

@@ -47,18 +47,30 @@ def initial(seed):
     return np.vstack([encode(NOMINAL),encode(PRIOR_OPAMP),encode(ADC_REFERENCE),rng.uniform(0,1,(5,len(NAMES)))])
 
 
-def optimize(method,budget,seed,contexts,output,checkpoint=None):
+def optimize(method,budget,seed,contexts,output,checkpoint=None,search_options=None):
     if budget<16 or budget%8: raise ValueError('Budget must be a multiple of 8, at least 16')
+    if method not in ['random','ga','regression','rnc']: raise ValueError(method)
+    surrogate=None
+    if method in ['regression','rnc']:
+        if checkpoint is None: raise ValueError('A matching trained checkpoint is required')
+        from learning import LocalSearch
+        surrogate=LocalSearch(checkpoint,contexts,search_options)
+        if surrogate.payload['method']!=method: raise ValueError('Checkpoint method does not match search method')
+    elif search_options is not None:
+        raise ValueError('Attention/metric options apply only to regression or RNC search')
     verify_runtime()
     folder=Path(output);folder.mkdir(parents=True,exist_ok=True)
     if (folder/'trace.json').exists(): raise FileExistsError(f'Refusing to overwrite {folder}/trace.json')
-    if method not in ['random','ga','regression','rnc']: raise ValueError(method)
     plan=dict(method=method,seed=seed,budget=budget,contexts=[asdict(c) for c in contexts],
               context_hash=fingerprint(contexts),parameter_names=NAMES,low=LOW.tolist(),high=HIGH.tolist(),
               initial_queries=8,initial_rule='Nominal + prior OPAMP + developed ADC reference + five random designs, all charged',
               prior_opamp_rule='Earlier OPAMP sizing is a documented warm start; its ADC evaluation is new',
               objective='Minimize mean driver energy per sample subject to worst hold error in each context',
               checkpoint=str(checkpoint) if checkpoint else None,
+              checkpoint_sha256=hashlib.sha256(Path(checkpoint).read_bytes()).hexdigest() if surrogate else None,
+              search_options=asdict(surrogate.options) if surrogate else None,
+              source_design_queries=surrogate.payload['source_design_queries'] if surrogate else 0,
+              source_sha256=surrogate.payload['source_sha256'] if surrogate else None,
               source_data_cost_in_search_budget=False,
               ga=dict(population=8,offspring=8,crossover='SBX(prob=.9,eta=15)',
                       mutation='Polynomial(prob=1,prob_var=1/9,eta=20)',selection='binary tournament',
@@ -66,11 +78,12 @@ def optimize(method,budget,seed,contexts,output,checkpoint=None):
               full_budget_after_success=True)
     write_json(folder/'protocol.json',plan)
     rows=[];best=None;first=None;begin=time.perf_counter()
-    def query(u):
+    def query(u,proposal_report=None):
         nonlocal best,first
         assert len(rows)<budget
         r=evaluate_suite(decode(u),contexts);value=cost(r)
         row=dict(query=len(rows)+1,u=np.asarray(u).tolist(),x=decode(u).tolist(),cost=value,oracle=r)
+        if proposal_report is not None:row['proposal']=proposal_report
         if best is None or value<best['cost']: best=row
         if r['feasible'] and first is None: first=row['query']
         row['best_cost']=best['cost'];row['first_success']=first
@@ -98,22 +111,17 @@ def optimize(method,budget,seed,contexts,output,checkpoint=None):
         assert result.algorithm.evaluator.n_eval==len(rows)==budget
     else:
         rng=np.random.default_rng(seed+90101)
-        surrogate=None
-        if method in ['regression','rnc']:
-            if checkpoint is None: raise ValueError('A matching trained checkpoint is required')
-            from learning import LocalSearch
-            surrogate=LocalSearch(checkpoint,contexts)
-            if surrogate.payload['method']!=method: raise ValueError('Checkpoint method does not match search method')
         for k in range(budget):
             if k<8: u=initial(seed)[k]
             elif surrogate: u=surrogate.propose(rows,rng)
             else: u=rng.uniform(0,1,len(NAMES))
-            query(u)
+            query(u,surrogate.last_report if surrogate and k>=8 else None)
     output_record=dict(**plan,trace=rows,best=best,first_success=first,
                        design_queries=len(rows),transient_queries=len(rows)*len(contexts),
                        elapsed_seconds=time.perf_counter()-begin)
     write_json(folder/'trace.json',output_record)
     write_json(folder/'best_design.json',dict(zip(NAMES,best['x'])))
+    if surrogate:surrogate.save_attention(folder/'attention.pt')
     (folder/'partial.json').unlink(missing_ok=True)
     print(json.dumps(dict(stage='search',method=method,seed=seed,first_success=first,
                           error_mv=best['oracle']['worst_hold_error_mv'],

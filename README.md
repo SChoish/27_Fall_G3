@@ -17,4 +17,7 @@ SKY130 TT MOS로 만든 ADC 입력 드라이버(2단 OPAMP + transmission gate +
 
 - 실행: [`adc_driver/README.md`](adc_driver/README.md)
 - 결과: [`adc_driver/RESULTS.md`](adc_driver/RESULTS.md)
+- ALARM attention 구현·비교: [`adc_driver/ALARM_ATTENTION.md`](adc_driver/ALARM_ATTENTION.md)
 
+ADC 드라이버의 regression/RNC 탐색은 학습되는 좌표 attention을 사용합니다.
+라인서치는 기본적으로 끄며 `--line-search armijo`로 비교할 수 있습니다.

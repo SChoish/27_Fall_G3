@@ -38,6 +38,11 @@ def main():
     opt.add_argument('--method',choices=['random','ga','regression','rnc'],required=True)
     opt.add_argument('--budget',type=int,default=32);opt.add_argument('--seed',type=int,default=0)
     opt.add_argument('--contexts');opt.add_argument('--checkpoint');opt.add_argument('--output',required=True)
+    opt.add_argument('--attention',choices=['off','learned'],default='learned',help='Surrogate search only; learned coordinate metric by default')
+    opt.add_argument('--line-search',choices=['none','armijo'],default='none',help='Surrogate search only; fixed projected steps by default')
+    opt.add_argument('--attention-steps',type=int,default=40,help='Attention updates per paid-data residual refit')
+    opt.add_argument('--step-size',type=float,default=.15,help='Metric direction length in normalized design coordinates')
+    opt.add_argument('--search-steps',type=int,default=6,help='Metric steps per start before selecting one SPICE candidate')
     demo=sub.add_parser('demo',help='Evaluate two reference designs and run random/GA examples')
     demo.add_argument('--budget',type=int,default=16);demo.add_argument('--seed',type=int,default=0)
     demo.add_argument('--workers',type=int,default=2);demo.add_argument('--contexts');demo.add_argument('--output',default='results/demo')
@@ -61,7 +66,14 @@ def main():
         print(json.dumps({k:v for k,v in r.items() if k!='contexts'},indent=2));return
     from search import collect,optimize
     if args.command=='collect':collect(args.n,args.seed,contexts,args.output,args.workers);return
-    if args.command=='optimize':optimize(args.method,args.budget,args.seed,contexts,args.output,args.checkpoint);return
+    if args.command=='optimize':
+        options=None
+        if args.method in ['regression','rnc']:
+            from attention import SearchOptions
+            options=SearchOptions(attention=args.attention,line_search=args.line_search,
+                                  attention_steps=args.attention_steps,step_size=args.step_size,
+                                  search_steps=args.search_steps)
+        optimize(args.method,args.budget,args.seed,contexts,args.output,args.checkpoint,options);return
     verify_runtime();out=Path(args.output);out.mkdir(parents=True,exist_ok=True)
     from plots import waveform,searches
     for name,x in [('nominal',NOMINAL),('prior_opamp',PRIOR_OPAMP)]:
