@@ -1,0 +1,8 @@
+# Combined deps for d2d_coupled_calibration + adc_driver
+numpy>=2.0,<3
+scipy>=1.13,<2
+matplotlib>=3.8,<4
+pymoo==0.6.2
+# RTX 5080 (sm_120) + driver CUDA 12.9: use cu128, not default cu130
+# pip install torch==2.11.0+cu128 --index-url https://download.pytorch.org/whl/cu128
+torch==2.11.0+cu128

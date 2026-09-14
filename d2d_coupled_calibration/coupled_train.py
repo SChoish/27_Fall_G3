@@ -15,6 +15,8 @@ from torch import nn
 from torch.nn import functional as F
 from coupled_experiment import OUT,config,Environment
 
+from provenance import verify_artifact, write_metadata
+
 torch.set_num_threads(1)
 
 class Actor(nn.Module):
@@ -36,6 +38,7 @@ def label(method,seed,alpha=0):return f'{method}_s{seed}'+(f'_a{alpha:g}' if met
 def train(method,seed,alpha):
     cfg=config();folder=OUT/'models'/label(method,seed,alpha);folder.mkdir(parents=True,exist_ok=True)
     torch.manual_seed(seed);np.random.seed(seed)
+    verify_artifact(OUT/'dataset.npz',cfg,dependencies=[OUT/'train_table.npz'])
     with np.load(OUT/'dataset.npz') as d:
         obs=d['observations'];mean=obs.mean(0);std=obs.std(0)+.001
         arrays=[(obs-mean)/std,d['actions'],(d['next_observations']-mean)/std,d['rewards'][:,None],
@@ -72,6 +75,7 @@ def train(method,seed,alpha):
                         'method':method,'seed':seed,'alpha':alpha,'step':step}
             buffer=io.BytesIO();torch.save(checkpoint,buffer)
             tmp=folder/f'step{step}.tmp.pt';tmp.write_bytes(buffer.getvalue());tmp.replace(folder/f'step{step}.pt')
+            write_metadata(folder/f'step{step}.pt',cfg,dependencies=[OUT/'dataset.npz'])
     (folder/'training.json').write_text(json.dumps({'logs':logs,'seconds':time.perf_counter()-start,
         'dataset_sha256':hashlib.sha256((OUT/'dataset.npz').read_bytes()).hexdigest(),
         'config_sha256':hashlib.sha256((OUT/'config.json').read_bytes()).hexdigest(),
@@ -79,6 +83,7 @@ def train(method,seed,alpha):
 
 class Policy:
     def __init__(self,path):
+        verify_artifact(path,config(),dependencies=[OUT/'dataset.npz'])
         p=torch.load(path,map_location='cpu',weights_only=True);self.actor=Actor();self.actor.load_state_dict(p['actor']);self.actor.eval()
         self.mean=p['mean'];self.std=p['std']
     def __call__(self,obs):

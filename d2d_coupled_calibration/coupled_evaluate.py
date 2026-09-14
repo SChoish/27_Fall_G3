@@ -40,7 +40,7 @@ def rollout(table,i,method,seed=0,policy=None,params=None):
 def score(records):
     cfg=config()
     rates=[r['calibration_quality'] and r['calibration']['energy_ratio']<=rho for r in records for rho in cfg['ratios']]
-    return [float(np.mean(rates)),float(np.mean([utility(r['calibration']) for r in records if r['budget']==cfg['horizon']]))]
+    return [float(np.mean(rates)),float(np.mean([utility(r['calibration'],cfg['margin']) for r in records if r['budget']==cfg['horizon']]))]
 
 def validate():
     cfg=config();table=Table('validation');trials=[]
@@ -145,7 +145,7 @@ def oracle_confirmation(workers=6):
     # Diagnose the full eligible output set, adding the calibration packet to
     # the three confirmation packets. Do not call this an unrestricted 3-packet oracle.
     payload=json.loads(frozen)
-    assert all(quality(t['initial_measurement']) for t in payload['trajectories'])
+    assert all(quality(t['initial_measurement'],cfg['margin']) for t in payload['trajectories'])
     assert all(r['calibration_quality'] for r in payload['records'])
     eligible={}
     for j,i in enumerate(table.ids):

@@ -9,6 +9,7 @@ from pathlib import Path
 import hashlib
 import json
 import os
+import re
 import shutil
 import subprocess
 import tempfile
@@ -179,6 +180,8 @@ def simulate(context, cells, payload, keep=None, points_per_ui=64, sections=3):
             # Kept cases remain executable after moving the whole project.
             relative_model = os.path.relpath(ROOT/'assets/45nm_bulk.txt',path.resolve())
             text = text.replace(str(ROOT/'assets/45nm_bulk.txt'),relative_model)
+        (path/'wave.txt').unlink(missing_ok=True)
+        (path/'wave.npz').unlink(missing_ok=True)
         (path/'circuit.cir').write_text(text)
         proc = subprocess.run([binary,'-b','circuit.cir'],cwd=path,env=env,
                               capture_output=True,text=True,timeout=120)
@@ -187,7 +190,7 @@ def simulate(context, cells, payload, keep=None, points_per_ui=64, sections=3):
             (path/'ngspice.log').write_text(log)
             (path/'context.json').write_text(json.dumps(asdict(context),indent=2))
             np.save(path/'payload.npy',payload)
-        if proc.returncode or not (path/'wave.txt').exists():
+        if proc.returncode or re.search(r'(?im)^\s*(?:fatal error|error on line|error:|fatal:)', log) or not (path/'wave.txt').exists():
             raise RuntimeError(f'ngspice failed: {log[-1800:]}')
         raw = np.loadtxt(path/'wave.txt',skiprows=1,ndmin=2)
     # Discard duplicate timestamps if the simulator emits any at breakpoints.

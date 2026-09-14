@@ -20,6 +20,26 @@ from attention import (CoordinateAttention, SearchOptions, metric_direction,
                        metric_matrix, project)
 
 
+SURROGATE_OBJECTIVE = 'validity_feasibility_energy_v2'
+
+
+def surrogate_cost(log_targets, logits, log_error_limit):
+    """Predicted valid+feasible < valid+infeasible < invalid.
+
+    Feasible cost is E/(E+1000), matching circuit.cost, independent of excess
+    accuracy or validity confidence. Infeasible cost increases monotonically
+    with log error. The bounded tiers preserve priority even at extreme values.
+    This piecewise objective is differentiable within each tier; crossing a
+    validity/feasibility boundary may jump and is checked at the endpoint.
+    """
+    violation = (log_targets[:, 0] - log_error_limit).clamp_min(0)
+    energy = torch.sigmoid(np.log(10.) * (log_targets[:, 1] - 3.))
+    infeasible = 1. + violation / (1. + violation)
+    invalid = 2. + torch.sigmoid(-logits)
+    return torch.where(logits < 0, invalid,
+                       torch.where(violation > 0, infeasible, energy))
+
+
 def target(r):
     return np.log10([max(r['worst_hold_error_mv'],1e-6),max(r['mean_driver_energy_pj'],1e-6)])
 
@@ -118,7 +138,7 @@ class LocalSearch:
             phi=torch.cat([(out['h']-self.hm)/self.hs,torch.ones(len(pred),1)],1)
             pred=pred+phi@self.coef
         y=pred*self.std+self.mean
-        return (F.softplus(5*(y[:,0]-self.limit))/5).square()+.02*y[:,1]+.2*F.softplus(-out['logit'])
+        return surrogate_cost(y,out['logit'],self.limit)
 
     def probabilities(self,u):
         if self.attention is None: return torch.ones_like(u)/len(NAMES)
@@ -170,6 +190,7 @@ class LocalSearch:
     def save_attention(self,path):
         if self.attention is None:return
         torch.save(dict(state_dict=self.attention.state_dict(),options=asdict(self.options),
+                        surrogate_objective=SURROGATE_OBJECTIVE,
                         parameter_names=NAMES,context_hash=self.payload['context_hash'],
                         surrogate_source_sha256=self.payload['source_sha256'],
                         note='Final attention snapshot; not a resumable search or a standalone surrogate'),path)
@@ -223,7 +244,7 @@ class LocalSearch:
         g=torch.autograd.grad(self.loss(incumbent)[0],incumbent)[0]
         with torch.no_grad():
             p=self.probabilities(incumbent);eigenvalues=torch.linalg.eigvalsh(metric_matrix(g,p,self.options))
-        self.last_report=dict(attention=attention_report,incumbent_query=elites[0]['query'],
+        self.last_report=dict(surrogate_objective=SURROGATE_OBJECTIVE,attention=attention_report,incumbent_query=elites[0]['query'],
                               elite_queries=[r['query'] for r in elites],
                               coordinate_probabilities=p.tolist(),parameter_names=NAMES,
                               metric_min_eigenvalue=float(eigenvalues.min()),

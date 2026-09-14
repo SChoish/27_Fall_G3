@@ -40,7 +40,9 @@ $$
 원문 Eq. (24)의 $\mu=9$로 두면 균등 확률 $p_i=1/9$일 때 기존의
 $\operatorname{Diag}(g^2)$ 항과 일치합니다. $\rho$는 균등분포 혼합이고,
 마지막 ridge는 gradient가 0인 좌표에서도 가역성을 확보하는 수치적 수정입니다.
-`--attention off`는 정확히 균등 가중치를 사용합니다.
+`--attention off`는 정확히 균등 가중치를 사용합니다. 길이 정규화 후에는 rank-one 항의 크기 효과가 사라지지만,
+학습된 대각 가중치는 이동 방향을 바꿉니다. 따라서 이 항의 존재 자체를 attention의
+효과로 해석하지 않고, 학습 가중치 on/off와 실측 탐색 성능으로 평가합니다.
 
 **큰 가중치는 그 좌표로의 이동에 더 큰 metric 비용을 부여합니다.** 이를 곧바로
 “더 중요한 소자”나 회로의 인과적 중요도로 해석하면 안 됩니다.
@@ -122,14 +124,20 @@ python compare_attention.py --budget 32 --seeds 0 1 2 --workers 2 --include-base
 
 수치 검증에는 metric의 양의 정부호성, 0 gradient, box 경계, 극단 가중치,
 균등 가중치의 기존 metric 일치, meta-gradient와 유한차분 일치, 배치 간 독립성,
-고정 critic 보존 및 attention의 실제 후보 변경을 포함합니다.
+고정 critic 보존 및 attention의 실제 이동 방향 변경을 포함합니다. 후보 bank에서 같은
+후보가 최선이면 attention on/off가 같은 최종 후보를 선택할 수도 있습니다.
 
 새 SPICE 결과는 `results/attention_demo/summary.csv`와 `summary.json`, 상세 기록은
 각 조합 폴더의 `trace.json`에서 확인할 수 있습니다. 포함된 source는 24개뿐이고 초기
 설계에 알려진 feasible reference가 있으므로, 이 작은 실행은 통합 검증이며 알고리즘
 우위나 미지 회로 일반화를 입증하는 실험이 아닙니다.
 
-## 6. 이번 실제 실행 결과
+## 6. 기존 실행 결과 (v1 후보 비용)
+
+아래 결과와 `results/attention_demo/`는 비용 수정 이전 실행 기록입니다.
+현재 코드는 `validity_feasibility_energy_v2` 비용으로 attention과 후보를 평가하므로
+아래 비용·제안 개수를 현재 코드의 재현 결과로 해석하지 않습니다. 기존 surrogate
+checkpoint는 오차·에너지를 예측하므로 그대로 사용하며, attention은 새 탐색에서 학습합니다.
 
 ngspice 39 / SKY130 TT, RNC source 24개, seed 0, 설정별 **16 design queries**로
 실행했습니다. 초기 8개를 포함하며 총 6설정에서 새 SPICE transient 96회를 수행했습니다.

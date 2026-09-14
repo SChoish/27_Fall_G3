@@ -52,6 +52,31 @@ method across seeds. Both learning and classical search receive validation
 tuning. Every test endpoint is saved before independent-packet verification.
 All endpoints, including calibration failures, are independently checked.
 
+## Artifact consistency and regression checks
+
+```bash
+python3 -m unittest discover -s tests -v
+```
+
+New measurement tables, datasets and checkpoints are written with
+`<artifact>.metadata.json` sidecars. Loaders check the artifact hash, the complete
+configuration, circuit/model and measurement/task code, and recorded dependency
+hashes. Keep the sidecars when copying artifacts. A changed configuration or
+measurement implementation requires regeneration; even a tuning-only config
+change is conservatively treated as a new contract.
+
+The original bundled assets remain readable only if they match the original
+`COUPLED_MANIFEST_SHA256.json` and the pinned `legacy_contract.json`. The original
+manifest is a historical release inventory, not a checksum list for the edited
+source tree. Do not refresh the legacy contract to bypass a mismatch. For a new
+experiment, copy the project, archive/remove its old `results/coupled_v1/waves/`
+cache when changing the circuit or packet definition, then run prepare, collect,
+train, validation and test evaluation in order. New artifacts get new metadata.
+
+Configured margin and guard values are passed through search and audit paths.
+SPICE runs discard prior waveform outputs and reject error logs even when the
+process returns zero; retained run folders preserve the failure log.
+
 ## Python interface
 
 ```python

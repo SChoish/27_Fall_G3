@@ -1,0 +1,15 @@
+name: 27fallg3
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11.15
+  - pip
+  - ngspice=41
+  - pip:
+    - numpy>=2.0,<3
+    - scipy>=1.13,<2
+    - matplotlib>=3.8,<4
+    - pymoo==0.6.2
+    # GPU torch is installed after create:
+    # pip install torch==2.11.0+cu128 --index-url https://download.pytorch.org/whl/cu128

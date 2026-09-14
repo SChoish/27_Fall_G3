@@ -6,6 +6,7 @@ import json
 import numpy as np
 from coupled_link import *
 from coupled_experiment import OUT,config,Table,quality,utility,rank
+from provenance import verify_artifact
 
 def physical():
     cfg=config();p=OUT/'development';p.mkdir(parents=True,exist_ok=True)
@@ -42,7 +43,9 @@ def physical():
     (OUT/'physics_audit.json').write_text(json.dumps(result,indent=2)+'\n');print(result,flush=True)
 
 def data_audit():
-    cfg=config();d=np.load(OUT/'dataset.npz');n=len(d['rewards'])
+    cfg=config()
+    verify_artifact(OUT/'dataset.npz',cfg,dependencies=[OUT/'train_table.npz'])
+    d=np.load(OUT/'dataset.npz');n=len(d['rewards'])
     assert set(d['context_ids'])==set(cfg['train_ids'])
     assert not set(cfg['train_ids'])&set(cfg['validation_ids']) and not set(cfg['test_ids'])&set(cfg['train_ids']+cfg['validation_ids'])
     assert d['observations'].shape==(n,50) and d['actions'].shape==(n,4)
@@ -66,7 +69,7 @@ def data_audit():
                 s=CoupledSetting(a,int(rng.integers(65)),b,int(rng.integers(65)));m=table.evaluate(i,s)
                 for j,lane in enumerate([c.lane0,c.lane1]):
                     sw={'t':w['t'],'rx':w['rx'][:,j],'energy_pj_bit':float(w['energy_lane_pj_bit'][j])}
-                    mm=link.measure(sw,lane,link.Setting(LEVELS[[a,b][j]],16,[s.phase0,s.phase1][j]),bits[j])
+                    mm=link.measure(sw,lane,link.Setting(LEVELS[[a,b][j]],16,[s.phase0,s.phase1][j]),bits[j],guard_ui=cfg['guard_ui'])
                     assert mm['bit_errors']==m['errors'][j]
                     max_error=max(max_error,abs(mm['guard_margin_vdd']-m['margins'][j]))
     assert max_error<1e-12
@@ -83,11 +86,11 @@ def evaluation():
     for r in rows:
         t=traces[r['context_id'],r['method'],r['seed']]
         candidates=[{'setting':t['initial_setting'],'measurement':t['initial_measurement']}]+t['trajectory'][:r['budget']]
-        best=max(candidates,key=lambda q:rank(q['measurement']))
+        best=max(candidates,key=lambda q:rank(q['measurement'],cfg['margin']))
         assert best['setting']==r['setting'] and best['measurement']==r['calibration']
         bundles=1 if r['method']=='fixed8' else r['budget']+1
         assert r['measurement_bundles']==bundles and r['phase_probes']==18*bundles
-        assert r['confirmation']['quality_all_patterns']==all(quality(m) for m in r['confirmation']['patterns'])
+        assert r['confirmation']['quality_all_patterns']==all(quality(m,cfg['margin']) for m in r['confirmation']['patterns'])
         ms=r['confirmation']['patterns'];ratio=sum(m['energy_pj_bit'] for m in ms)/sum(m['reference_energy_pj_bit'] for m in ms)
         assert abs(ratio-r['confirmation']['energy_ratio'])<1e-12
     selected=selection['td3bc'];policy=Policy(OUT/'models'/label('td3bc',0,selected['alpha'])/f'step{selected["step"]}.pt')
@@ -104,9 +107,9 @@ def evaluation():
         i=r['context_id'];s=CoupledSetting(**r['setting']);c=CoupledContext.from_dict(cfg['contexts'][i])
         bits=__import__('coupled_experiment').packet_for(i,worst['pattern'])
         w=simulate(c,s.strengths(),bits,keep=OUT/'dense_checks'/method,points_per_ui=64)
-        m=measure(w,c,s,bits);margin_change=float(np.max(np.abs(np.array(m['margins'])-worst['margins'])))
+        m=measure(w,c,s,bits,guard_ui=cfg['guard_ui']);margin_change=float(np.max(np.abs(np.array(m['margins'])-worst['margins'])))
         en_change=float(abs(m['energy_pj_bit']/worst['energy_pj_bit']-1))
-        same=quality(m)==quality(worst)
+        same=quality(m,cfg['margin'])==quality(worst,cfg['margin'])
         dense.append({'method':method,'context_id':i,'pattern':worst['pattern'],'margin_abs_change':margin_change,
                       'energy_relative_change':en_change,'quality_classification_unchanged':same})
         assert margin_change<.002 and en_change<.01 and same

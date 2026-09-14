@@ -1,0 +1,22 @@
+{
+  "note": "Compatibility contract for original release artifacts. Asset, config and model hashes verified against the original manifest on 2026-09-14. Simulation error handling changed without changing netlists, measurement formulas or recorded outcomes. This does not attest that historical assets were regenerated with the current code. Never refresh this contract to accept new code/configuration; regenerate artifacts and metadata instead.",
+  "manifest_sha256": "93e2823309a81cfcb7ebb2d2c3722e05a67330f54e56580913da6e43e0415884",
+  "contract": {
+    "schema": 1,
+    "config_sha256": "62a579616e2ba62ad6997367746373212db2eeb66e5a8c0e439232cc64f286bd",
+    "model_sha256": "42489e9aab3423fe868c6d249326535892ad87de7f8f5b18d790d0afe8401ef4",
+    "measurement_code": {
+      "link.py": "e88c13dcac52f5b17ad5b2f8f34fb8a32a24f7cc054b97008985847f5a19813a",
+      "coupled_link.py": "0e705c89876bab418b8bf9a580427e973a4d5e024dbf5a3674551588fc27a3ea"
+    },
+    "task_code": {
+      "packet_for": "3652fbd92417bb7568f6ab3e73c9203056bfc8474b4ef2dd1da1e40d43f42b26",
+      "features": "6ee3cb556cf5b6e8e1842dd7422131e04c47f8b93e57c28abd671ae52a4b9d72",
+      "quality": "44451f84e35e242b9610697ef307a0384eb6a25b7151db4d15bdf685828b60ba",
+      "utility": "e0c3cd1122de85a162b246c3a0258090a8cb88e331ea10fad24b827e396a1050",
+      "rank": "9cada416cecf783f7db722ba279fe5a3cb90338096c0a3b82c89a8f2d355d232",
+      "Environment": "96db096a6a9d31c7073127247dc1ad40ee2a5042932f6f852c1f02c47cce7277",
+      "Table.evaluate": "2493f6daee356fc99157f4b7a7fc78954feb69a155c73dd9df703868caca225a"
+    }
+  }
+}

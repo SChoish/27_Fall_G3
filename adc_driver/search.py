@@ -53,7 +53,7 @@ def optimize(method,budget,seed,contexts,output,checkpoint=None,search_options=N
     surrogate=None
     if method in ['regression','rnc']:
         if checkpoint is None: raise ValueError('A matching trained checkpoint is required')
-        from learning import LocalSearch
+        from learning import LocalSearch, SURROGATE_OBJECTIVE
         surrogate=LocalSearch(checkpoint,contexts,search_options)
         if surrogate.payload['method']!=method: raise ValueError('Checkpoint method does not match search method')
     elif search_options is not None:
@@ -69,6 +69,7 @@ def optimize(method,budget,seed,contexts,output,checkpoint=None,search_options=N
               checkpoint=str(checkpoint) if checkpoint else None,
               checkpoint_sha256=hashlib.sha256(Path(checkpoint).read_bytes()).hexdigest() if surrogate else None,
               search_options=asdict(surrogate.options) if surrogate else None,
+              surrogate_objective=SURROGATE_OBJECTIVE if surrogate else None,
               source_design_queries=surrogate.payload['source_design_queries'] if surrogate else 0,
               source_sha256=surrogate.payload['source_sha256'] if surrogate else None,
               source_data_cost_in_search_budget=False,

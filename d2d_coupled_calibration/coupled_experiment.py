@@ -11,6 +11,8 @@ from scipy.linalg import cho_factor,cho_solve
 from scipy.special import ndtr
 from coupled_link import ROOT,LEVELS,CoupledContext,CoupledSetting,payloads,simulate,phase_table,fingerprint,link
 
+from provenance import verify_artifact, write_metadata
+
 OUT=ROOT/'results/coupled_v1'
 
 def config():
@@ -63,7 +65,8 @@ def cached_wave(i,a,b,which='calibration'):
     p=folder/f'c{i:02d}_s{a}{b}.npz';strengths=(LEVELS[a],LEVELS[b])
     if p.exists():
         with np.load(p) as z:w={k:z[k].item() if z[k].ndim==0 else z[k] for k in z.files}
-        assert w['fingerprint']==fingerprint(c,strengths,bits,cfg['points_per_ui'])
+        if w['fingerprint']!=fingerprint(c,strengths,bits,cfg['points_per_ui']):
+            raise ValueError(f'Stale waveform cache: {p}')
     else:
         w=simulate(c,strengths,bits,points_per_ui=cfg['points_per_ui'])
         temporary=p.with_suffix('.tmp.npz');np.savez_compressed(temporary,**w);temporary.replace(p)
@@ -83,6 +86,7 @@ def prepare(split,workers=6):
             margin[j,a,b]=m;errors[j,a,b]=e;energy[j,a,b]=en;seconds.append(sec)
             if (k+1)%16==0:print(split,k+1,'/',len(futures),'SPICE transients',round(time.perf_counter()-t,1),'seconds',flush=True)
     np.savez_compressed(OUT/f'{split}_table.npz',ids=ids,margin=margin,errors=errors,energy=energy)
+    write_metadata(OUT/f'{split}_table.npz',cfg)
     (OUT/f'{split}_simulation.json').write_text(json.dumps({'transients':len(seconds),'elapsed_seconds':time.perf_counter()-t,
          'sum_transient_seconds':sum(seconds),'config_sha256':hashlib.sha256((OUT/'config.json').read_bytes()).hexdigest()},indent=2)+'\n')
 
@@ -97,6 +101,7 @@ def rank(m,margin=.08):return (utility(m,margin),float(min(m['margins'])))
 class Table:
     def __init__(self,split):
         self.cfg=config();self.split=split;self.measurements=0
+        verify_artifact(OUT/f'{split}_table.npz',self.cfg)
         with np.load(OUT/f'{split}_table.npz') as z:
             self.ids=z['ids'].tolist();self.margin=z['margin'];self.errors=z['errors'];self.energy=z['energy']
     def evaluate(self,i,s):
@@ -154,7 +159,7 @@ class Search:
                     if p in self.seen:continue
                     yield p
                     best=self.best()
-                    if rank(self.seen[best])>rank(self.seen[s]):s=best;improved=True
+                    if rank(self.seen[best],self.cfg['margin'])>rank(self.seen[s],self.cfg['margin']):s=best;improved=True
             if not improved:
                 if deltas[1]==1:return
                 deltas[1]=max(1,deltas[1]//2);deltas[3]=deltas[1]
@@ -171,7 +176,7 @@ class Search:
         raise ValueError(self.method)
     def ga(self):
         popsize=self.params.get('population',self.cfg['ga_population'])
-        pop=sorted(self.seen,key=lambda s:rank(self.seen[s]),reverse=True)[:popsize]
+        pop=sorted(self.seen,key=lambda s:rank(self.seen[s],self.cfg['margin']),reverse=True)[:popsize]
         if len(pop)<popsize:return random_setting(self.rng)
         def tournament():
             q=self.rng.choice(len(pop),size=3,replace=False)
@@ -187,7 +192,7 @@ class Search:
     def bo(self):
         if len(self.seen)<5:return random_setting(self.rng)
         ss=list(self.seen);x=np.stack([s.action() for s in ss]).astype(float)
-        y=np.array([utility(self.seen[s]) for s in ss]);y=(y-y.mean())/(y.std()+1e-6)
+        y=np.array([utility(self.seen[s],self.cfg['margin']) for s in ss]);y=(y-y.mean())/(y.std()+1e-6)
         # Matérn-5/2 GP; fixed hyperparameters predeclared in config, nugget 1e-5.
         def kernel(a,b):
             r=np.sqrt(np.maximum(((a[:,None,:]-b[None,:,:])**2).sum(-1),0))/self.params.get('lengthscale',self.cfg['bo_lengthscale'])
@@ -223,6 +228,7 @@ def collect():
     arr={k:np.asarray(v) for k,v in data.items()}
     for k in ['observations','actions','rewards','next_observations']:arr[k]=arr[k].astype(np.float32)
     np.savez_compressed(OUT/'dataset.npz',**arr)
+    write_metadata(OUT/'dataset.npz',cfg,dependencies=[OUT/'train_table.npz'])
     meta={'transitions':len(arr['rewards']),'episodes':ep,'logical_measurement_bundles':table.measurements,
           'behavior':'random / coordinate search / randomly perturbed coordinate search, train contexts only',
           'dataset_sha256':hashlib.sha256((OUT/'dataset.npz').read_bytes()).hexdigest()}

@@ -8,6 +8,7 @@ from pathlib import Path
 import hashlib
 import json
 import os
+import re
 import subprocess
 import tempfile
 import time
@@ -94,9 +95,14 @@ def simulate(context,strengths,bits,keep=None,points_per_ui=32):
         text=netlist(context,strengths,bits,points_per_ui)
         if keep is not None:
             text=text.replace(str(ROOT/'assets/45nm_bulk.txt'),os.path.relpath(ROOT/'assets/45nm_bulk.txt',path.resolve()))
+        (path/'wave.txt').unlink(missing_ok=True)
+        (path/'wave.npz').unlink(missing_ok=True)
         (path/'circuit.cir').write_text(text)
         proc=subprocess.run([binary,'-b','circuit.cir'],cwd=path,env=env,capture_output=True,text=True,timeout=120)
-        if proc.returncode or not (path/'wave.txt').exists():raise RuntimeError((proc.stdout+proc.stderr)[-2000:])
+        log=proc.stdout+proc.stderr
+        if keep is not None:(path/'ngspice.log').write_text(log)
+        if proc.returncode or re.search(r'(?im)^\s*(?:fatal error|error on line|error:|fatal:)',log) or not (path/'wave.txt').exists():
+            raise RuntimeError(log[-2000:])
         raw=np.loadtxt(path/'wave.txt',skiprows=1,ndmin=2)
         if keep is not None:
             (path/'ngspice.log').write_text(proc.stdout+proc.stderr)

@@ -78,7 +78,7 @@ class AttentionTests(unittest.TestCase):
         self.assertTrue(bool(((v >= 0) & (v <= 1)).all()))
         self.assertLessEqual(float((v - u).abs().max()), config.trust_radius)
 
-    def test_attention_trains_and_changes_candidate_without_changing_critic(self):
+    def test_attention_trains_and_changes_direction_without_changing_critic(self):
         rows = json.loads((ROOT / 'results/demo/rnc/trace.json').read_text())['trace'][:8]
         off = LocalSearch(ROOT / 'checkpoints/rnc.pt', [Context()], SearchOptions(attention='off'))
         learned = LocalSearch(ROOT / 'checkpoints/rnc.pt', [Context()])
@@ -91,7 +91,14 @@ class AttentionTests(unittest.TestCase):
         self.assertGreater(report['parameter_delta_l2'], 0)
         self.assertGreater(report['max_gradient_norm'], 0)
         self.assertLess(report['loss_after'], report['loss_before'])
-        self.assertFalse(np.allclose(a, b))
+        # Both searches may correctly select the same winning random-bank
+        # candidate. Verify the learned movement, not an accidental argmin tie.
+        u = torch.tensor(rows[2]['u'], dtype=torch.float32, requires_grad=True)
+        gradient = torch.autograd.grad(learned.loss(u)[0], u)[0].detach()
+        with torch.no_grad():
+            uniform_step = metric_direction(gradient, off.probabilities(u), off.options)
+            learned_step = metric_direction(gradient, learned.probabilities(u), learned.options)
+        self.assertFalse(torch.allclose(uniform_step, learned_step))
         self.assertEqual(learned.last_report['line_search_trials'], 0)
         self.assertGreater(learned.last_report['accepted_metric_steps'], 0)
         for name, value in learned.model.state_dict().items():
