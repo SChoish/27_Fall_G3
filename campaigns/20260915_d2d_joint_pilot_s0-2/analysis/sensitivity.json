@@ -1,0 +1,293 @@
+{
+  "scope": "Fixed recorded actions and block-index drift, no policy tuning/reselection; timing sensitivity does not resimulate drift during pauses",
+  "rows": [
+    {
+      "controller": "none",
+      "monitor_energy_scale": 0.1,
+      "calibration_time_scale": 0.5,
+      "passing_episodes": 0,
+      "mean_energy_pj": 1750.2310294811086,
+      "worst_downtime": 0.0
+    },
+    {
+      "controller": "none",
+      "monitor_energy_scale": 0.1,
+      "calibration_time_scale": 1,
+      "passing_episodes": 0,
+      "mean_energy_pj": 1750.2310294811086,
+      "worst_downtime": 0.0
+    },
+    {
+      "controller": "none",
+      "monitor_energy_scale": 0.1,
+      "calibration_time_scale": 2,
+      "passing_episodes": 0,
+      "mean_energy_pj": 1750.2310294811086,
+      "worst_downtime": 0.0
+    },
+    {
+      "controller": "none",
+      "monitor_energy_scale": 1,
+      "calibration_time_scale": 0.5,
+      "passing_episodes": 0,
+      "mean_energy_pj": 1750.2310294811086,
+      "worst_downtime": 0.0
+    },
+    {
+      "controller": "none",
+      "monitor_energy_scale": 1,
+      "calibration_time_scale": 1,
+      "passing_episodes": 0,
+      "mean_energy_pj": 1750.2310294811086,
+      "worst_downtime": 0.0
+    },
+    {
+      "controller": "none",
+      "monitor_energy_scale": 1,
+      "calibration_time_scale": 2,
+      "passing_episodes": 0,
+      "mean_energy_pj": 1750.2310294811086,
+      "worst_downtime": 0.0
+    },
+    {
+      "controller": "none",
+      "monitor_energy_scale": 10,
+      "calibration_time_scale": 0.5,
+      "passing_episodes": 0,
+      "mean_energy_pj": 1750.2310294811086,
+      "worst_downtime": 0.0
+    },
+    {
+      "controller": "none",
+      "monitor_energy_scale": 10,
+      "calibration_time_scale": 1,
+      "passing_episodes": 0,
+      "mean_energy_pj": 1750.2310294811086,
+      "worst_downtime": 0.0
+    },
+    {
+      "controller": "none",
+      "monitor_energy_scale": 10,
+      "calibration_time_scale": 2,
+      "passing_episodes": 0,
+      "mean_energy_pj": 1750.2310294811086,
+      "worst_downtime": 0.0
+    },
+    {
+      "controller": "periodic",
+      "monitor_energy_scale": 0.1,
+      "calibration_time_scale": 0.5,
+      "passing_episodes": 5,
+      "mean_energy_pj": 2265.411909864546,
+      "worst_downtime": 0.11647972389991368
+    },
+    {
+      "controller": "periodic",
+      "monitor_energy_scale": 0.1,
+      "calibration_time_scale": 1,
+      "passing_episodes": 5,
+      "mean_energy_pj": 2265.411909864546,
+      "worst_downtime": 0.20435120435120427
+    },
+    {
+      "controller": "periodic",
+      "monitor_energy_scale": 0.1,
+      "calibration_time_scale": 2,
+      "passing_episodes": 0,
+      "mean_energy_pj": 2265.411909864546,
+      "worst_downtime": 0.3363577446532728
+    },
+    {
+      "controller": "periodic",
+      "monitor_energy_scale": 1,
+      "calibration_time_scale": 0.5,
+      "passing_episodes": 5,
+      "mean_energy_pj": 2364.944709864546,
+      "worst_downtime": 0.11647972389991368
+    },
+    {
+      "controller": "periodic",
+      "monitor_energy_scale": 1,
+      "calibration_time_scale": 1,
+      "passing_episodes": 5,
+      "mean_energy_pj": 2364.944709864546,
+      "worst_downtime": 0.20435120435120427
+    },
+    {
+      "controller": "periodic",
+      "monitor_energy_scale": 1,
+      "calibration_time_scale": 2,
+      "passing_episodes": 0,
+      "mean_energy_pj": 2364.944709864546,
+      "worst_downtime": 0.3363577446532728
+    },
+    {
+      "controller": "periodic",
+      "monitor_energy_scale": 10,
+      "calibration_time_scale": 0.5,
+      "passing_episodes": 5,
+      "mean_energy_pj": 3360.2727098645455,
+      "worst_downtime": 0.11647972389991368
+    },
+    {
+      "controller": "periodic",
+      "monitor_energy_scale": 10,
+      "calibration_time_scale": 1,
+      "passing_episodes": 5,
+      "mean_energy_pj": 3360.2727098645455,
+      "worst_downtime": 0.20435120435120427
+    },
+    {
+      "controller": "periodic",
+      "monitor_energy_scale": 10,
+      "calibration_time_scale": 2,
+      "passing_episodes": 0,
+      "mean_energy_pj": 3360.2727098645455,
+      "worst_downtime": 0.3363577446532728
+    },
+    {
+      "controller": "event",
+      "monitor_energy_scale": 0.1,
+      "calibration_time_scale": 0.5,
+      "passing_episodes": 3,
+      "mean_energy_pj": 2120.6514190468565,
+      "worst_downtime": 0.0962047661076787
+    },
+    {
+      "controller": "event",
+      "monitor_energy_scale": 0.1,
+      "calibration_time_scale": 1,
+      "passing_episodes": 3,
+      "mean_energy_pj": 2120.6514190468565,
+      "worst_downtime": 0.17219078415521422
+    },
+    {
+      "controller": "event",
+      "monitor_energy_scale": 0.1,
+      "calibration_time_scale": 2,
+      "passing_episodes": 2,
+      "mean_energy_pj": 2120.6514190468565,
+      "worst_downtime": 0.29134948096885804
+    },
+    {
+      "controller": "event",
+      "monitor_energy_scale": 1,
+      "calibration_time_scale": 0.5,
+      "passing_episodes": 3,
+      "mean_energy_pj": 2192.190619046856,
+      "worst_downtime": 0.0962047661076787
+    },
+    {
+      "controller": "event",
+      "monitor_energy_scale": 1,
+      "calibration_time_scale": 1,
+      "passing_episodes": 3,
+      "mean_energy_pj": 2192.190619046856,
+      "worst_downtime": 0.17219078415521422
+    },
+    {
+      "controller": "event",
+      "monitor_energy_scale": 1,
+      "calibration_time_scale": 2,
+      "passing_episodes": 2,
+      "mean_energy_pj": 2192.190619046856,
+      "worst_downtime": 0.29134948096885804
+    },
+    {
+      "controller": "event",
+      "monitor_energy_scale": 10,
+      "calibration_time_scale": 0.5,
+      "passing_episodes": 3,
+      "mean_energy_pj": 2907.582619046857,
+      "worst_downtime": 0.0962047661076787
+    },
+    {
+      "controller": "event",
+      "monitor_energy_scale": 10,
+      "calibration_time_scale": 1,
+      "passing_episodes": 3,
+      "mean_energy_pj": 2907.582619046857,
+      "worst_downtime": 0.17219078415521422
+    },
+    {
+      "controller": "event",
+      "monitor_energy_scale": 10,
+      "calibration_time_scale": 2,
+      "passing_episodes": 2,
+      "mean_energy_pj": 2907.582619046857,
+      "worst_downtime": 0.29134948096885804
+    },
+    {
+      "controller": "bang_bang",
+      "monitor_energy_scale": 0.1,
+      "calibration_time_scale": 0.5,
+      "passing_episodes": 0,
+      "mean_energy_pj": 3545.923858962218,
+      "worst_downtime": 0.33678756476683935
+    },
+    {
+      "controller": "bang_bang",
+      "monitor_energy_scale": 0.1,
+      "calibration_time_scale": 1,
+      "passing_episodes": 0,
+      "mean_energy_pj": 3545.923858962218,
+      "worst_downtime": 0.5019455252918287
+    },
+    {
+      "controller": "bang_bang",
+      "monitor_energy_scale": 0.1,
+      "calibration_time_scale": 2,
+      "passing_episodes": 0,
+      "mean_energy_pj": 3545.923858962218,
+      "worst_downtime": 0.6675324675324674
+    },
+    {
+      "controller": "bang_bang",
+      "monitor_energy_scale": 1,
+      "calibration_time_scale": 0.5,
+      "passing_episodes": 0,
+      "mean_energy_pj": 3944.0550589622194,
+      "worst_downtime": 0.33678756476683935
+    },
+    {
+      "controller": "bang_bang",
+      "monitor_energy_scale": 1,
+      "calibration_time_scale": 1,
+      "passing_episodes": 0,
+      "mean_energy_pj": 3944.0550589622194,
+      "worst_downtime": 0.5019455252918287
+    },
+    {
+      "controller": "bang_bang",
+      "monitor_energy_scale": 1,
+      "calibration_time_scale": 2,
+      "passing_episodes": 0,
+      "mean_energy_pj": 3944.0550589622194,
+      "worst_downtime": 0.6675324675324674
+    },
+    {
+      "controller": "bang_bang",
+      "monitor_energy_scale": 10,
+      "calibration_time_scale": 0.5,
+      "passing_episodes": 0,
+      "mean_energy_pj": 7925.367058962213,
+      "worst_downtime": 0.33678756476683935
+    },
+    {
+      "controller": "bang_bang",
+      "monitor_energy_scale": 10,
+      "calibration_time_scale": 1,
+      "passing_episodes": 0,
+      "mean_energy_pj": 7925.367058962213,
+      "worst_downtime": 0.5019455252918287
+    },
+    {
+      "controller": "bang_bang",
+      "monitor_energy_scale": 10,
+      "calibration_time_scale": 2,
+      "passing_episodes": 0,
+      "mean_energy_pj": 7925.367058962213,
+      "worst_downtime": 0.6675324675324674
+    }
+  ]
+}

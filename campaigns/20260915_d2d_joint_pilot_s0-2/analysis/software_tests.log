@@ -1,0 +1,16 @@
+test_block_endpoint_not_best_incumbent (test_joint.JointTests.test_block_endpoint_not_best_incumbent) ... ok
+test_gae_terminal_has_no_bootstrap_or_cross_episode_return (test_joint.JointTests.test_gae_terminal_has_no_bootstrap_or_cross_episode_return) ... ok
+test_hidden_drift_reward_and_info_do_not_enter_observation (test_joint.JointTests.test_hidden_drift_reward_and_info_do_not_enter_observation) ... ok
+test_no_future_measurement_and_same_classical_ppo_cost (test_joint.JointTests.test_no_future_measurement_and_same_classical_ppo_cost) ... ok
+test_operational_surrogate_and_buffer_receive_rollout_metrics (test_joint.JointTests.test_operational_surrogate_and_buffer_receive_rollout_metrics) ... ok
+test_phase_and_time_persist_without_wrap (test_joint.JointTests.test_phase_and_time_persist_without_wrap) ... ok
+test_sampling_support_and_drift_correlation (test_joint.JointTests.test_sampling_support_and_drift_correlation) ... ok
+test_selected_design_and_policy_integrity (test_joint.JointTests.test_selected_design_and_policy_integrity) ... ok
+test_small_ppo_updates_and_balances_designs (test_joint.JointTests.test_small_ppo_updates_and_balances_designs) ... ok
+test_unmeasured_observation_and_phase_change_staleness (test_joint.JointTests.test_unmeasured_observation_and_phase_change_staleness) ... ok
+test_four_comparisons_use_locked_designs_and_policy_versions (test_pipeline.PipelineTest.test_four_comparisons_use_locked_designs_and_policy_versions) ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 4.650s
+
+OK

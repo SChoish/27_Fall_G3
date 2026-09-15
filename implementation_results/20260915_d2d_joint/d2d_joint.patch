@@ -1,0 +1,1093 @@
+diff --git a/d2d_joint/README.md b/d2d_joint/README.md
+new file mode 100644
+index 0000000..5ed13e3
+--- /dev/null
++++ b/d2d_joint/README.md
+@@ -0,0 +1,42 @@
++# Dynamic D2D circuit–control pilot
++
++Separate module for a two-lane, 72-MOS sizing driver under correlated timing drift. Existing static calibration, ADC and sizing experiments remain separate. The controller applies phase settings to every data block; evaluation never returns a best incumbent.
++
++The actual initial pilot stopped at the predefined nominal feasibility gate. See [results](../campaigns/20260915_d2d_joint_pilot_s0-2/RESULTS.md): periodic calibration misses the quality constraint on some trajectories, while every-block calibration violates the interruption constraint. No physical PPO/co-design improvement is claimed.
++
++## Requirements and run
++
++Run from the repository root. Requires Python, NumPy, SciPy, PyTorch, matplotlib and ngspice. The existing `d2d_sizing/{__init__,circuit,surrogate}.py`, `adc_driver/{attention,rnc}.py`, and D2D link/model files are dependencies. `d2d_sizing` exists in the present worktree; commit `8a75f60` is not locally available as a Git object, while `d2d_implementation_8a75f60.patch` is available. Preserve the existing worktree rather than resetting to that commit.
++
++Commands for this machine (use a NEW output directory for another run):
++
++```bash
++cd /home/svcho/27_fall_g3
++export OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1
++PYTHON=/home/svcho/anaconda3/envs/27fallg3/bin/python
++RUN=/home/svcho/27_fall_g3/campaigns/d2d_joint_new_run
++"$PYTHON" -m unittest discover -s d2d_joint/tests -v
++"$PYTHON" -m d2d_joint.run initialize --output "$RUN" \
++  --binary /home/svcho/anaconda3/envs/27fallg3/bin/ngspice
++(cd "$RUN/code" && "$PYTHON" -u -m d2d_joint.run execute --output "$RUN" > "$RUN/execution.log" 2>&1)
++"$PYTHON" -m d2d_joint.report --output "$RUN"
++```
++
++`initialize` freezes protocol, dependency/source snapshots, simulator version and hashes before any transistor measurement. `execute` requires the frozen copy and refuses overwrite or silent resume. `report` reads the campaign and writes derived analysis; a failed feasibility gate triggers an explicitly privileged diagnostic, with no additional SPICE or learning. Reporting can regenerate derived analysis, never source logs or physics.
++
++Use `--representation rnc` at initialization for the separate RNC option. The default is regression. This option is implemented; the physical RNC ablation was not executed. No gate-bypass option exists. Any subsequent development study must change assumptions transparently in a new protocol and output directory, preserving the failed pilot.
++
++## Contents
++
++- `physics.py`: fresh transistor characterization, receipts, raw waves, bounded phase bank.
++- `environment.py`: persistent phase/drift, causal paid observations, block reward and physical metrics.
++- `controllers.py`: none, fixed-period, event-driven and every-block bang-bang.
++- `ppo.py`: categorical PPO, four-frame history, design-conditioned actor and value network.
++- `design.py`: reused sizing regression/RNC backbone and four-entry parent-reuse buffer for operational responses.
++- `run.py`: nominal gate, three seeds, frozen policy stages, three circuit-search arms and four comparisons.
++- `report.py`: audit, cost sensitivity, privileged diagnosis and tracking plots.
++- `tests/`: information boundary, state, cost, PPO updates, selected design integrity and synthetic end-to-end checks.
++
++[Model specification](SPEC.md) · [References and access limits](REFERENCES.md)
++
++All four comparisons are supported in code. Synthetic integration tests exercise them, but are **not circuit performance experiments**. The actual run evaluated one circuit, four development waveform contexts and four classical controllers; it did not evaluate the locked final test set.
+diff --git a/d2d_joint/REFERENCES.md b/d2d_joint/REFERENCES.md
+new file mode 100644
+index 0000000..7b95e5c
+--- /dev/null
++++ b/d2d_joint/REFERENCES.md
+@@ -0,0 +1,13 @@
++# Source reading and scope
++
++Access checked 2026-09-15. These sources motivate separating real-time control from circuit sizing; neither circuit nor algorithm is claimed to be reproduced in full.
++
++1. **A Variation-Robust 20-Gb/s Wireline Transceiver With Real-Time Calibration in 28-nm CMOS**, DOI [10.1109/TCSI.2024.3516127](https://doi.org/10.1109/TCSI.2024.3516127).
++
++   The [authors' institution record and abstract](https://scholarworks.bwise.kr/hanyang/handle/2021.sw.hanyang/210667?mode=full) identify sampling threshold and clock phase as real-time calibration targets, alongside a four-tap FFE transceiver. The accessible abstract supports phase calibration as a relevant control target. The full paper was not accessible in this session (publisher access unavailable; author ResearchGate page says no full text). Therefore no claim is made about its exact detector, measurement sequence, observability or calibration cost. The present E/C/L margin monitor is an explicitly assumed model, not a reconstruction of that paper's receiver. Our fixed-strength 2 Gb/s/lane predictive-model driver is not its 28 nm, 20 Gb/s silicon implementation.
++
++2. **Analog Circuit Design Automation via Sequential RL Agents and Gm/ID Methodology**, DOI [10.1109/ACCESS.2024.3435331](https://doi.org/10.1109/ACCESS.2024.3435331).
++
++   Read the [accessible author manuscript](https://www.researchgate.net/publication/382688640_Analog_Circuit_Design_Automation_via_Sequential_RL_Agents_and_gmID_Methodology), particularly the problem formulation, state/observation discussion and sequential feasible-region procedure. The manuscript separates sizing parameters from measured circuit outputs and conditions the state on specifications and characteristics. Its gm/ID treatment preserves DC conditions while adjusting AC-related sizing, and its sequential RL procedure addresses circuit design. Here x is likewise explicit, but the operational policy acts on persistent sampling phase and paid sensing. We do not implement its gm/ID lookup, sequential feasible-region algorithm, DC-bias guarantee or reported amplifiers. This pilot's finite alternating co-design is a different model.
++
++Literature-derived content is confined to these scoped summaries. No measured energy or success value from either paper supplies labels, monitor costs, or acceptance targets for the new experiment. ALARM is not implemented; the small design-surrogate buffer is the repository's existing parent-reuse idea with documented limitations.
+diff --git a/d2d_joint/SPEC.md b/d2d_joint/SPEC.md
+new file mode 100644
+index 0000000..62971d6
+--- /dev/null
++++ b/d2d_joint/SPEC.md
+@@ -0,0 +1,69 @@
++# Circuit–control model and protocol
++
++## Circuit and design variables
++
++Reuse the existing two-lane 72-MOS driver with six physical variables. Gate length is fixed at 90 nm using the repository's predictive PTM 45 nm bulk model. This is not a foundry PDK, 28 nm silicon reproduction, UCIe compliance model, complete SerDes or package extraction. Channels are lumped coupled RLC networks with a behavioral receiver. Source excitation and receiver static circuit power are excluded from transistor TX energy; the added monitor budget is explicit below. Drive strength remains fixed within each episode; there is no PLL/CDR, FFE, supply-network or threshold-control extension.
++
++| x variable | Lower | Upper | Nominal |
++|---|---:|---:|---:|
++| pre1_n_um | 0.4 | 2.5 | 1 |
++| pre2_n_um | 1.5 | 10 | 4 |
++| output_n_um | 0.25 | 4 | 2 |
++| pn_ratio | 1.4 | 3 | 2 |
++| enable_width_ratio | 1 | 4 | 2 |
++| series_resistance_ohm | 1 | 80 | 5 |
++
++Each x is fixed during an episode. Models receive its six log-normalized coordinates. New x values require new transistor simulations; operational rollouts use that design's own phase bank. Prior SAC/IQL rewards and old sizing outcomes do not label this environment.
++
++## Transitions and sampling support
++
++One step transmits 64 payload bits per lane at 2 Gb/s per lane, with a nominal 32 ns data interval. Each 64-block episode fixes its external voltage/temperature/channel setting and alternates two predetermined packets. Voltage and temperature are static during each SPICE waveform. Correlated timing displacement is a quasi-static resampling approximation; it does not implement actual temperature or voltage transients.
++
++The hidden two-lane timing state obeys `v[t+1] = 0.96*v[t] + Normal(0, 0.004 UI)` and `d[t+1] = clip(d[t]+v[t+1], -0.32, 0.32 UI)`. Boundary hits reverse and halve velocity. Initial drift is uniform ±0.08 UI; initial velocity uniform ±0.008 UI/block. The independent lane processes are temporally correlated. The same seeded paths are reused across controllers/designs, never selected for favorable outcomes. Drift advances per data block, not continuously through calibration interruptions; this approximation matters for timing sensitivity.
++
++Receiver effective phase is `phase_code/64 - d[t]`. Codes start at 32, persist, and clamp to [0,64]. The characterized phase range is [-0.5,1.5] UI with 513 points, an explicit coarse latency of 1 UI and nine aperture samples across ±0.1 UI. No wrap or outside-support interpolation is allowed. Even extreme control/drift/dither/aperture combinations remain inside this support. Raw-time support is checked before interpolation; nominal margins are checked against the original direct-waveform measurement.
++
++The phase bank contains fixed packet waveforms with preamble/tail. Alternating precharacterized packets approximates blocks independently and does not simulate arbitrary long-stream inter-block electrical memory. Discrete phase changes themselves are not circuit transients; their energy and settling pause are modeled costs.
++
++## Actions, measurement and causal observation
++
++There are 18 actions: lane 0 increment × lane 1 increment × measurement request, with increments {-4,0,+4} codes and request {0,1}. An action is selected using history through the previous step. Then:
++
++1. Apply/clamp phase increments and charge any phase-update energy/pause.
++2. Transmit the current block at those settings and evaluate its physical quality.
++3. If requested, execute a paid known-pilot measurement at the same block's quasi-static drift; save its result and the exact measured phase codes.
++4. Increment time and return the new public observation. The measurement can first influence the NEXT action.
++
++The idealized monitor reads signed voltage margins at early/center/late phase centers separated by 0.0625 UI. Each center uses nine aperture samples per bit. Signed margins use the known pilot bits, yielding a 2×3 matrix of minimum normalized margin. This is a noiseless analog margin monitor, stronger than a single binary early/late detector; its analog readout, aggregation and calibration are not transistor-characterized. One 64-bit/lane pilot is assumed with 27 parallel probes per lane. It reuses the current packet waveform as a known pilot proxy. It does not reveal the full phase curve, absolute timing error or optimal phase.
++
++A frame has 24 fields: x (6), current phase (2), last measured phase (2), last E/C/L result (6), normalized age (1), measurement-exists mask (1), per-lane same-phase masks (2), time fraction (1), last applied phase increments and measurement flag (3). Four frames form a 96-vector, with zero padding initially. PPO actor AND value network use this same vector. No observation normalization is fit on hidden/test data.
++
++Without a measurement, the last result and measured phase remain unchanged; age advances. Changing phase invalidates the corresponding same-phase mask, even though the historical observation remains available. Hidden drift, full curves, current unmeasured quality, reward and diagnostic `info` are never appended to policy history. Reward is used for gradient training, not as an inference input. Classical policies receive only this same public vector and never an environment handle.
++
++## Costs, reward and physical evaluation
++
++TX energy is the integrated driver supply energy per payload bit from that fixed SPICE waveform, times 128 transmitted bits. At fixed x/packet this term is independent of phase actions. A measurement adds one packet of TX energy, `2*64*3*9*0.002 = 6.912 pJ` of assumed monitor energy, and 64 UI interruption. Each changed lane adds 0.1 pJ; any phase change adds two UI interruption once. These are explicit modeling assumptions, not measured monitor or phase-shifter silicon power. Receiver baseline, leakage during interruptions, policy inference hardware, and monitor readout overhead beyond the assumed budget remain uncharacterized.
++
++Sensitivity reaccounts monitor energy ×{0.1,1,10} and pilot time ×{0.5,1,2}. It retains fixed trajectories/actions and TX energy, and never changes primary success criteria or selects policies from sensitivity results. It cannot establish accuracy of the assumed costs.
++
++Physical block success requires both lanes' minimum signed normalized margin ≥0.08, zero center sample errors over the finite packet, and static waveform overshoot fraction ≤0.2. The finite packet check is not a long-run BER guarantee. Report every applied block, not a returned incumbent. Episode constraints are block violation rate ≤5% AND interruption/(data+interruption) ≤25%; a method passes the gate only if every development episode passes both. These are pilot requirements, not claimed industry standards. There is no 10% energy-saving requirement.
++
++Training reward is `-total_block_energy_pj/(128*1 pJ) - quality_signal`, where quality_signal is the maximum of mean clipped normalized margin deficit, sampled error fraction and overshoot-violation indicator. The fixed quality coefficient is 1. This bounded shaping signal is distinct from binary physical quality and does not guarantee satisfying constraints. Operational design scores rank constraint exceedance first and mean energy among feasible responses. Failed responses have score `1 + exceedance`; feasible ones `E/(8192+E)`. Overshoot and sampled error failures enter through the physical violation rate.
++
++Metrics include violation rate, maximum consecutive failed blocks, TX/pilot/monitor/phase-update energy, paid measurements, interruption seconds/fraction, delivered bits and effective throughput. Delivered bits count the whole two-lane block only if full quality passes; no FEC or retransmission model is claimed. Compute/runtime training cost, phase-bank lookups and actual SPICE are separate from modeled operating energy.
++
++## Controllers and learning
++
++None never changes phase or measures. Periodic requests one measurement every four blocks. Event control requests initially, after age 7, or after age 3 if the last center margin is below 0.16. Every-block bang-bang measures on every block. Each paid observation is consumed once. If center margin <0.18 or an E/L margin <0.1, the controller moves by the sign of late-minus-early with a 0.01 deadband, only for a still-matching measured phase. Thus no controller uses true drift or future measurements.
++
++PPO uses 96→64 tanh→64 tanh, categorical 18-way policy and scalar value. Four-frame history addresses partial observability approximately; it is not a sufficient-state or recurrent optimality claim. Training samples actions; evaluation uses argmax. Protocol fixes gamma 0.99, GAE lambda 0.95, Adam 3e-4, clip 0.2, entropy coefficient 0.01, value coefficient 0.5, rollout 256, minibatch 128, four epochs and gradient clipping 0.5. Three seeds each receive 7,680 blocks per stage; no validation-driven extra learning is added.
++
++## Finite joint optimization
++
++The nominal gate precedes learning/search. If it passes, V1 learns only on nominal x, then freezes. Initial six design points and two new proposals for each static/classical/RL arm use equal per-candidate development rollouts. Each arm has a pool of eight (six shared, two own); total twelve distinct characterizations. Candidate labels use the identical fixed V1 policies across all proposals, not checkpoint stages of different quality.
++
++The design surrogate reuses the sizing Model encoder/regressor/RNC projector and Entry buffer mechanics. Regression is default; RNC is optional. Four operational targets are worst violation, worst downtime, log mean energy, and longest failure/64. The x-conditioned model and fixed normalization statistics are checkpointed together. Initial training is 200 gradient steps, each update 100; predictions are recorded before observing new labels. The parent-reuse buffer holds up to four full models, selected by softmax of negative premeasurement error score. New children are used without an independent adoption test; this is a heuristic buffer, not evidence of superior retention and not a SAC Bellman critic.
++
++V2 then fine-tunes each policy once on ALL twelve designs for 7,680 blocks, exactly ten episodes/design/seed, balanced across two environments. Every design is rescored under each fixed V2. RL arm selection uses only its original eight-design pool under that V2. Static+RL and joint+RL use the exact same V2 checkpoint for each seed. Classical settings remain development-selected and unchanged. This finite alternating procedure does not solve an exact bilevel optimum.
++
++Supported final comparisons are static design+classical, static design+RL, classical-operational design+classical, and RL-operational design+RL. Classical comparisons are deterministic rows, not duplicated into fake independent training seeds. The twelve-design pilot can demonstrate software feasibility, not establish statistically reliable optimizer superiority. Protocol separates development waveform seeds/drift from new test waveform seeds/drift; selections and checkpoint hashes lock before test characterization. Every returned x must exactly match its evaluation bank. No silent resume accepts changed traces.
+diff --git a/d2d_joint/__init__.py b/d2d_joint/__init__.py
+new file mode 100644
+index 0000000..e3098e3
+--- /dev/null
++++ b/d2d_joint/__init__.py
+@@ -0,0 +1 @@
++"""Quasi-static dynamic D2D circuit/control co-design pilot."""
+diff --git a/d2d_joint/controllers.py b/d2d_joint/controllers.py
+new file mode 100644
+index 0000000..1eae31b
+--- /dev/null
++++ b/d2d_joint/controllers.py
+@@ -0,0 +1,24 @@
++"""Classical controllers consume only the exact policy observation vector."""
++import numpy as np
++from .environment import FRAME_DIM,action_id
++
++
++class Classical:
++    def __init__(self,mode,horizon=64):
++        if mode not in ('none','periodic','event','bang_bang'):raise ValueError(mode)
++        self.mode=mode;self.horizon=horizon;self.last_used=-2
++    def __call__(self,observation):
++        f=np.asarray(observation)[-FRAME_DIM:];t=int(round(float(f[20])*self.horizon))
++        age=int(round(float(f[16])*self.horizon));exists=f[17]>.5
++        last=t-1-age;delta=np.zeros(2,int);m=f[10:16].reshape(2,3)
++        if self.mode=='none':return action_id(delta,False)
++        if exists and last!=self.last_used:
++            for lane in range(2):
++                if f[18+lane]>.5 and (m[lane,1]<.18 or min(m[lane,0],m[lane,2])<.1):
++                    difference=m[lane,2]-m[lane,0]
++                    delta[lane]=4 if difference>.01 else -4 if difference<-.01 else 0
++            self.last_used=last
++        if self.mode=='periodic':request=t%4==0
++        elif self.mode=='bang_bang':request=True
++        else:request=not exists or age>=7 or (age>=3 and m[:,1].min()<.16)
++        return action_id(delta,request)
+diff --git a/d2d_joint/design.py b/d2d_joint/design.py
+new file mode 100644
+index 0000000..03a10c0
+--- /dev/null
++++ b/d2d_joint/design.py
+@@ -0,0 +1,54 @@
++"""Operational-response regression and small parent-reuse critic buffer."""
++import copy
++import numpy as np
++import torch
++from d2d_sizing.surrogate import Model,Entry,Search
++from adc_driver.rnc import rank_n_contrast
++from d2d_sizing.surrogate import target as static_target
++from d2d_sizing.circuit import cost as static_cost
++
++def vector(r):
++    return np.array([r['worst_violation_rate'],r['worst_downtime_fraction'],np.log10(r['mean_total_energy_pj']),r['longest_failure_run']/64],np.float32)
++
++def score(r,quality_limit=.05,downtime_limit=.25):
++    violation=max(0,r['worst_violation_rate']/quality_limit-1)+max(0,r['worst_downtime_fraction']/downtime_limit-1)
++    e=r['mean_total_energy_pj'];return 1+violation if violation>0 else e/(8192+e)
++
++class DesignSearch:
++    def __init__(self,rows,method='regression',seed=491,mode='operational'):
++        if method not in ('regression','rnc'):raise ValueError(method)
++        self.method=method;self.seed=seed;self.rows=list(rows);self.events=[]
++        self.vector=static_target if mode=='static' else vector;self.score=static_cost if mode=='static' else score;self.mode=mode
++        y=np.array([self.vector(r['result']) for r in rows]);self.mean=torch.tensor(y.mean(0));self.std=torch.tensor(np.maximum(y.std(0),[.05,.05,.05,.05]),dtype=torch.float32)
++        torch.manual_seed(seed);model=Model();self.entries=[Entry(0,model,[])];self.current=self.entries[0];self.next_id=1
++        self._fit(model,self.rows,200)
++    def _fit(self,model,rows,steps):
++        model.train().requires_grad_(True);optimizer=torch.optim.AdamW(model.parameters(),lr=1e-3,weight_decay=1e-4)
++        u=torch.tensor(np.array([r['u'] for r in rows]),dtype=torch.float32)
++        y=(torch.tensor(np.array([self.vector(r['result']) for r in rows]))-self.mean)/self.std
++        for _ in range(steps):
++            pred,_,_,z=model(u);loss=(pred-y).square().mean()
++            if self.method=='rnc':loss=loss+.1*rank_n_contrast(z,y)
++            optimizer.zero_grad();loss.backward();torch.nn.utils.clip_grad_norm_(model.parameters(),5.,error_if_nonfinite=True);optimizer.step()
++        model.eval().requires_grad_(False)
++    def predict(self,model,u):return model(u)[0]*self.std+self.mean
++    def propose(self,excluded):
++        rng=np.random.default_rng(self.seed+len(self.rows)*1009);center=np.array(min(self.rows,key=lambda r:self.score(r['result']))['u'])
++        pool=np.r_[np.clip(center+rng.normal(0,.12,(128,6)),0,1),rng.uniform(0,1,(128,6))]
++        pool=pool[np.min(np.linalg.norm(pool[:,None]-np.array(excluded)[None],axis=-1),axis=1)>1e-5]
++        with torch.no_grad():y=self.predict(self.current.model,torch.tensor(pool,dtype=torch.float32)).numpy()
++        v=(np.maximum(0,(.08-y[:,:2])/.08).sum(1)+np.maximum(0,(y[:,3]-.2)/.2) if self.mode=='static' else np.maximum(0,y[:,0]/.05-1)+np.maximum(0,y[:,1]/.25-1));e=10**np.clip(y[:,2],-5,8)
++        u=pool[int(np.where(v>0,1+v,e/((1 if self.mode=='static' else 8192)+e)).argmin())]
++        with torch.no_grad():pred=[dict(id=x.id,prediction=self.predict(x.model,torch.tensor(u[None],dtype=torch.float32))[0].tolist()) for x in self.entries]
++        return u,pred
++    def observe(self,row,predictions):
++        target=self.vector(row['result']);old={e.id:e for e in self.entries}
++        for r in predictions:old[r['id']].errors.append(float(np.mean(((np.array(r['prediction'])-target)/self.std.numpy())**2)))
++        self.rows.append(row);scores=np.array([Search.score(e) for e in self.entries]);prob=np.exp(-(scores-scores.min())/.25);prob/=prob.sum()
++        rng=np.random.default_rng(self.seed+len(self.rows));parent=self.entries[int(rng.choice(len(self.entries),p=prob))]
++        child=Entry(self.next_id,copy.deepcopy(parent.model),[],Search.score(parent));self.next_id+=1;self._fit(child.model,self.rows,100)
++        if len(self.entries)==4:self.entries.pop(int(scores.argmax()))
++        self.entries.append(child);self.current=child
++        self.events.append(dict(parent=parent.id,child=child.id,premeasurement_predictions=predictions,
++            normalized_error_scores=scores.tolist(),parent_probabilities=prob.tolist(),gradient_steps=100,
++            note='Heuristic parent reuse; child has no independent adoption test'))
+diff --git a/d2d_joint/environment.py b/d2d_joint/environment.py
+new file mode 100644
+index 0000000..904fe9d
+--- /dev/null
++++ b/d2d_joint/environment.py
+@@ -0,0 +1,112 @@
++"""Partially observed persistent phase control; private physical diagnostics."""
++from dataclasses import dataclass,asdict
++from itertools import product
++import numpy as np
++from d2d_sizing.circuit import encode
++
++ACTIONS=np.array(list(product([-4,0,4],[-4,0,4],[0,1])),dtype=int)
++FRAME_DIM=24
++
++
++@dataclass(frozen=True)
++class Config:
++    horizon:int=64
++    history:int=4
++    drift_bound:float=.32
++    drift_velocity_rho:float=.96
++    drift_velocity_sigma:float=.004
++    margin_min:float=.08
++    overshoot_max:float=.2
++    violation_limit:float=.05
++    downtime_limit:float=.25
++    dither_ui:float=.0625
++    monitor_pj_per_comparison:float=.002
++    phase_update_pj_per_lane:float=.1
++    phase_update_ui:float=2.
++    reward_energy_reference_pj_bit:float=1.
++    quality_weight:float=1.
++
++
++def drift_path(seed,cfg):
++    rng=np.random.default_rng(seed);d=rng.uniform(-.08,.08,2);v=rng.uniform(-.008,.008,2)
++    rows=[]
++    for t in range(cfg.horizon):
++        rows.append(d.copy());v=cfg.drift_velocity_rho*v+rng.normal(0,cfg.drift_velocity_sigma,2)
++        nxt=d+v;hit=np.abs(nxt)>cfg.drift_bound
++        d=np.clip(nxt,-cfg.drift_bound,cfg.drift_bound);v[hit]*=-.5
++    return np.array(rows)
++
++
++def action_id(delta,measure):
++    matches=np.flatnonzero(np.all(ACTIONS==[*delta,int(measure)],axis=1))
++    if len(matches)!=1:raise ValueError('Invalid discrete control action')
++    return int(matches[0])
++
++
++class Environment:
++    def __init__(self,bank,trajectory,environment_id=0,cfg=Config()):
++        self.bank=bank;self.cfg=cfg;self._drift=np.asarray(trajectory,float).copy()
++        if self._drift.shape!=(cfg.horizon,2) or np.max(np.abs(self._drift))>cfg.drift_bound+1e-12:raise ValueError('Invalid drift trajectory')
++        self._environment_id=environment_id;self.x=bank.x.copy();self.x.setflags(write=False)
++        self.t=0;self.phase=np.array([32,32]);self.last_phase=np.array([0,0]);self.last_measurement=np.zeros((2,3))
++        self.last_measurement_t=None;self.previous_action=np.zeros(3);self.frames=[];self.records=[]
++        self._append_frame()
++    def _frame(self):
++        exists=self.last_measurement_t is not None
++        age=self.t-1-self.last_measurement_t if exists else self.cfg.horizon
++        matches=(self.phase==self.last_phase).astype(float) if exists else np.zeros(2)
++        return np.r_[encode(self.x),self.phase/64,self.last_phase/64,self.last_measurement.ravel(),
++            min(age,self.cfg.horizon)/self.cfg.horizon,float(exists),matches,self.t/self.cfg.horizon,self.previous_action].astype(np.float32)
++    def _append_frame(self):
++        f=self._frame();assert len(f)==FRAME_DIM
++        self.frames.append(f);self.frames=self.frames[-self.cfg.history:]
++    def observation(self):
++        # Neither reward nor info, actual drift, packet labels or full curves are included.
++        return np.concatenate([np.zeros(FRAME_DIM,np.float32)]*(self.cfg.history-len(self.frames))+self.frames).copy()
++    def step(self,action):
++        if self.t>=self.cfg.horizon:raise RuntimeError('Episode already ended')
++        if not isinstance(action,(int,np.integer)) or not 0<=action<len(ACTIONS):raise ValueError('Invalid action index')
++        request=ACTIONS[action];old=self.phase.copy();self.phase=np.clip(self.phase+request[:2],0,64)
++        changed=int(np.sum(self.phase!=old));measure=bool(request[2])
++        case_index=self._environment_id*2+self.t%2;case=self.bank.cases[case_index]
++        effective=self.phase/64-self._drift[self.t]
++        margins,errors=self.bank.sample(case_index,effective)
++        quality=bool(margins.min()>=self.cfg.margin_min and errors.sum()==0 and self.bank.overshoot[case_index]<=self.cfg.overshoot_max)
++        bits=case.bits;tx=float(self.bank.energy[case_index]*2*bits)
++        monitor_energy=pilot_tx=0.;measurement_time=0.
++        if measure:
++            measured=np.stack([self.bank.sample(case_index,effective+offset)[0] for offset in [-self.cfg.dither_ui,0,self.cfg.dither_ui]],axis=1)
++            self.last_measurement=measured;self.last_phase=self.phase.copy();self.last_measurement_t=self.t
++            # One known pilot packet; 3 phase centers x 9 aperture probes in parallel on both lanes.
++            pilot_tx=tx;monitor_energy=2*bits*3*9*self.cfg.monitor_pj_per_comparison
++            measurement_time=bits*case.context.lane0.ui
++        phase_energy=changed*self.cfg.phase_update_pj_per_lane
++        update_time=self.cfg.phase_update_ui*case.context.lane0.ui if changed else 0.
++        data_time=bits*case.context.lane0.ui
++        deficit=float(np.maximum(0,(self.cfg.margin_min-margins)/self.cfg.margin_min).clip(0,1).mean())
++        quality_signal=max(deficit,float(errors.sum()/(2*bits)),float(self.bank.overshoot[case_index]>self.cfg.overshoot_max))
++        total=tx+pilot_tx+monitor_energy+phase_energy
++        reward=-total/(2*bits*self.cfg.reward_energy_reference_pj_bit)-self.cfg.quality_weight*quality_signal
++        record=dict(block=self.t,phase_codes=self.phase.tolist(),effective_phase=effective.tolist(),drift_ui=self._drift[self.t].tolist(),
++            requested_action=int(action),measured=measure,phase_changes=changed,margins=margins.tolist(),errors=errors.tolist(),
++            quality=quality,tx_energy_pj=tx,pilot_tx_energy_pj=pilot_tx,monitor_energy_pj=monitor_energy,
++            phase_update_energy_pj=phase_energy,total_energy_pj=total,data_seconds=data_time,
++            interruption_seconds=measurement_time+update_time,delivered_bits=2*bits if quality else 0,
++            reward=float(reward),quality_shaping=quality_signal,case_index=case_index)
++        self.records.append(record);self.previous_action=np.r_[(self.phase-old)/4,float(measure)]
++        self.t+=1;self._append_frame()
++        return self.observation(),float(reward),self.t==self.cfg.horizon,record.copy()
++
++
++def metrics(records,cfg=Config()):
++    failures=[not r['quality'] for r in records];run=longest=0
++    for bad in failures:run=run+1 if bad else 0;longest=max(longest,run)
++    data=sum(r['data_seconds'] for r in records);stop=sum(r['interruption_seconds'] for r in records)
++    keys=['tx_energy_pj','pilot_tx_energy_pj','monitor_energy_pj','phase_update_energy_pj','total_energy_pj','delivered_bits']
++    out={k:sum(r[k] for r in records) for k in keys}
++    out.update(blocks=len(records),violation_rate=float(np.mean(failures)),longest_failure_run=longest,
++        calibration_measurements=sum(r['measured'] for r in records),phase_changes=sum(r['phase_changes'] for r in records),
++        interruption_seconds=stop,downtime_fraction=stop/(data+stop),elapsed_seconds=data+stop,
++        effective_throughput_bps=out['delivered_bits']/(data+stop))
++    out['feasible']=out['violation_rate']<=cfg.violation_limit and out['downtime_fraction']<=cfg.downtime_limit
++    return out
+diff --git a/d2d_joint/physics.py b/d2d_joint/physics.py
+new file mode 100644
+index 0000000..5018c6a
+--- /dev/null
++++ b/d2d_joint/physics.py
+@@ -0,0 +1,81 @@
++"""Fresh transistor simulations, then bounded receiver-time interpolation."""
++from dataclasses import asdict
++import json
++from pathlib import Path
++import numpy as np
++from d2d_sizing import circuit
++from d2d_sizing.circuit import Case, Evaluator, file_hash, write_json
++
++
++def suites():
++    development=[];test=[]
++    for split,settings,base,dest in [('development',[(1.,27.,30.,.30,.06),(.95,65.,40.,.34,.10)],641000,development),
++                                    ('test',[(.98,42.,35.,.32,.08),(1.02,55.,38.,.33,.09)],971000,test)]:
++        for env,(v,temp,r,c,coupling) in enumerate(settings):
++            lanes=[circuit.link.Context(vdd=v,temperature_c=temp,resistance_ohm=r+2*k,
++                 capacitance_pf=c,inductance_nh=.3,rx_capacitance_pf=.06,clock_offset_ui=0.) for k in range(2)]
++            for packet in range(2):
++                dest.append(Case(f'{split}_e{env}_p{packet}',context=circuit.CoupledContext(*lanes,coupling),
++                    seed=base+env*101+packet,bits=64,pattern='random',points_per_ui=64))
++    return development,test
++
++
++class PhaseBank:
++    def __init__(self,phase,voltage,bits,energy,overshoot,cases,x):
++        self.phase=np.asarray(phase);self.voltage=np.asarray(voltage);self.bits=np.asarray(bits)
++        self.energy=np.asarray(energy);self.overshoot=np.asarray(overshoot);self.cases=cases
++        self.x=np.asarray(x,float).copy();self.x.setflags(write=False);self.lookups=0
++    def sample(self,case_index,phase,guard=.1):
++        """Two lanes at requested centers; no outside-support interpolation."""
++        self.lookups+=1
++        positions=np.asarray(phase)[:,None]+np.linspace(-guard,guard,9)[None,:]
++        if not np.isfinite(positions).all() or positions.min()<self.phase[0] or positions.max()>self.phase[-1]:
++            raise ValueError('Requested sampling times outside characterized support')
++        loc=(positions-self.phase[0])/(self.phase[1]-self.phase[0]);lo=np.floor(loc).astype(int)
++        lo=np.minimum(lo,len(self.phase)-2);w=loc-lo;margins=[];errors=[]
++        for lane in range(2):
++            curve=self.voltage[case_index,lane]
++            v=curve[:,lo[lane]]*(1-w[lane])+curve[:,lo[lane]+1]*w[lane]
++            signed=(2*self.bits[case_index,lane].astype(float)[:,None]-1)*(v-.5)
++            margins.append(float(signed.min()));errors.append(int(np.sum((v[:,4]>=.5)!=self.bits[case_index,lane])))
++        return np.asarray(margins),np.asarray(errors)
++    def save(self,path):
++        np.savez_compressed(path,phase=self.phase,voltage=self.voltage,bits=self.bits,energy=self.energy,
++            overshoot=self.overshoot,x=self.x,cases_json=json.dumps([asdict(c) for c in self.cases]))
++    @classmethod
++    def load(cls,path,expected_hash):
++        if file_hash(path)!=expected_hash:raise ValueError('Phase bank checksum mismatch')
++        with np.load(path) as z:
++            return cls(z['phase'],z['voltage'],z['bits'],z['energy'],z['overshoot'],
++                       [Case.from_dict(c) for c in json.loads(str(z['cases_json']))],z['x'])
++
++
++def characterize(x,cases,output,workers=2):
++    output=Path(output)
++    if output.exists():raise FileExistsError('Never overwrite or silently resume characterization')
++    evaluator=Evaluator(cases,output,workers);result=evaluator.evaluate(x)
++    if not result['valid']:raise ValueError('Invalid transistor characterization; see receipts')
++    phase=np.linspace(-.5,1.5,513);voltage=[];bits=[];energies=[];overshoot=[];waves=[]
++    for j,case in enumerate(cases):
++        receipt=json.loads((output/'receipts'/f'q00001_c{j:02d}.json').read_text())
++        folder=output/'cache'/receipt['fingerprint'];measurement=folder/'measurement.json'
++        if file_hash(measurement)!=receipt['measurement_sha256']:raise ValueError('Characterization receipt mismatch')
++        with np.load(folder/'wave.npz') as z:wave={k:z[k] for k in z.files}
++        curves=[]
++        for lane,c in enumerate([case.context.lane0,case.context.lane1]):
++            times=(np.arange(16,16+case.bits)[:,None]+c.coarse_latency_ui+phase[None,:]+c.clock_offset_ui)*c.ui
++            if times.min()<wave['t'][0] or times.max()>wave['t'][-1]:raise ValueError('Incomplete characterized waveform')
++            curves.append(np.interp(times.ravel(),wave['t'],wave['rx'][:,lane]).reshape(times.shape)/c.vdd)
++        voltage.append(curves);bits.append(case.payload());energies.append(result['cases'][j]['energy_pj_bit'])
++        overshoot.append(result['cases'][j]['overshoot_fraction']);waves.append(file_hash(folder/'wave.npz'))
++    bank=PhaseBank(phase,np.asarray(voltage,np.float32),bits,energies,overshoot,cases,x)
++    deltas=[]
++    for j,c in enumerate(cases):
++        m,e=bank.sample(j,[c.phase_ui]*2,c.guard_ui)
++        deltas.append(float(np.max(np.abs(m-result['cases'][j]['margins']))))
++        if deltas[-1]>.002 or e.tolist()!=result['cases'][j]['errors']:raise ValueError('Phase-grid numerical check failed')
++    bank.lookups=0;bank.save(output/'bank.npz')
++    write_json(output/'receipt.json',dict(bank_sha256=file_hash(output/'bank.npz'),x=np.asarray(x).tolist(),
++        static_result=result,accounting=evaluator.accounting(),max_margin_grid_error=max(deltas),
++        waveform_hashes=waves,scope='Fixed waveforms; receiver sampling-time displacement only'))
++    return bank,result,evaluator.accounting()
+diff --git a/d2d_joint/ppo.py b/d2d_joint/ppo.py
+new file mode 100644
+index 0000000..7b447a2
+--- /dev/null
++++ b/d2d_joint/ppo.py
+@@ -0,0 +1,73 @@
++"""Categorical PPO; four-frame history, no privileged critic input."""
++from pathlib import Path
++import numpy as np
++import torch
++from torch import nn
++from torch.distributions import Categorical
++from .environment import Environment,drift_path,ACTIONS,FRAME_DIM,Config,metrics
++from d2d_sizing.circuit import write_json,file_hash
++
++class ActorCritic(nn.Module):
++    def __init__(self,dim=96):
++        super().__init__();self.encoder=nn.Sequential(nn.Linear(dim,64),nn.Tanh(),nn.Linear(64,64),nn.Tanh())
++        self.actor=nn.Linear(64,len(ACTIONS));self.value=nn.Linear(64,1)
++    def forward(self,obs):
++        h=self.encoder(obs);return Categorical(logits=self.actor(h)),self.value(h).squeeze(-1)
++
++class Policy:
++    def __init__(self,model):self.model=model.eval()
++    def __call__(self,obs):
++        with torch.inference_mode():dist,_=self.model(torch.as_tensor(obs,dtype=torch.float32));return int(dist.logits.argmax())
++
++def gae(rewards,values,next_values,dones,gamma=.99,lam=.95):
++    adv=np.zeros(len(rewards),np.float32);last=0.
++    for i in range(len(rewards)-1,-1,-1):
++        mask=1.-dones[i];delta=rewards[i]+gamma*mask*next_values[i]-values[i]
++        last=delta+gamma*lam*mask*last;adv[i]=last
++    return adv,adv+values
++
++def train(banks,seed,stage,output,cfg=Config(),steps=7680,initial=None):
++    output=Path(output);output.mkdir(parents=True,exist_ok=False)
++    if steps%256 or steps%(len(banks)*cfg.horizon):raise ValueError('Budget must balance complete design episodes')
++    torch.set_num_threads(1);torch.manual_seed(seed+stage*1000)
++    model=ActorCritic(FRAME_DIM*cfg.history)
++    if initial is not None:model.load_state_dict(initial.state_dict())
++    optimizer=torch.optim.Adam(model.parameters(),lr=3e-4);logs=[];episodes=[];ep=0;env=None
++    design_ids=list(banks);counts={k:0 for k in banks};lookup_before=sum(b.lookups for b in banks.values())
++    for update in range(steps//256):
++        obs_rows=[];actions=[];rewards=[];values=[];next_values=[];dones=[];logps=[]
++        for _ in range(256):
++            if env is None:
++                design=design_ids[ep%len(design_ids)];environment=(ep//len(design_ids))%2
++                trajectory_seed=1000000+stage*100000+seed*10000+ep
++                env=Environment(banks[design],drift_path(trajectory_seed,cfg),environment,cfg);counts[design]+=1;ep+=1
++            obs=env.observation()
++            with torch.no_grad():dist,v=model(torch.from_numpy(obs));action=dist.sample();lp=dist.log_prob(action)
++            nxt,reward,done,_=env.step(int(action))
++            with torch.no_grad():_,nv=model(torch.from_numpy(nxt))
++            obs_rows.append(obs);actions.append(int(action));rewards.append(reward);values.append(float(v));next_values.append(float(nv));dones.append(float(done));logps.append(float(lp))
++            if done:
++                episodes.append(dict(episode=ep-1,design=design,environment=environment,drift_seed=trajectory_seed,metrics=metrics(env.records,cfg)));env=None
++        adv,returns=gae(np.asarray(rewards),np.asarray(values,np.float32),np.asarray(next_values,np.float32),np.asarray(dones))
++        x=torch.tensor(np.array(obs_rows));a=torch.tensor(actions);old=torch.tensor(logps);ret=torch.tensor(returns)
++        advantage=torch.tensor((adv-adv.mean())/(adv.std()+1e-8))
++        for epoch in range(4):
++            for ix in torch.randperm(256).split(128):
++                dist,v=model(x[ix]);new=dist.log_prob(a[ix]);ratio=(new-old[ix]).exp()
++                pg=-torch.minimum(ratio*advantage[ix],ratio.clamp(.8,1.2)*advantage[ix]).mean()
++                vl=(v-ret[ix]).square().mean();entropy=dist.entropy().mean();loss=pg+.5*vl-.01*entropy
++                if not torch.isfinite(loss):raise FloatingPointError('Nonfinite PPO loss')
++                optimizer.zero_grad();loss.backward();nn.utils.clip_grad_norm_(model.parameters(),.5,error_if_nonfinite=True);optimizer.step()
++        logs.append(dict(environment_steps=(update+1)*256,reward_mean=float(np.mean(rewards)),policy_loss=float(pg.detach()),
++            value_loss=float(vl.detach()),entropy=float(entropy.detach()),approx_kl=float((old[ix]-new).mean().detach()),gradient_steps=(update+1)*8))
++    assert env is None
++    torch.save(dict(state_dict=model.state_dict(),seed=seed,stage=stage,environment_steps=steps,observation_dim=FRAME_DIM*cfg.history,
++        policy='Categorical PPO / four-frame MLP / argmax evaluation',designs=design_ids),output/'policy.pt')
++    write_json(output/'training.json',dict(logs=logs,episodes=episodes,per_design_episodes=counts,blocks=steps,
++        phase_bank_lookups=sum(b.lookups for b in banks.values())-lookup_before,
++        calibration_measurements=sum(r['metrics']['calibration_measurements'] for r in episodes),
++        tx_energy_pj=sum(r['metrics']['tx_energy_pj'] for r in episodes),
++        control_energy_pj=sum(r['metrics']['total_energy_pj']-r['metrics']['tx_energy_pj'] for r in episodes),
++        interrupted_seconds=sum(r['metrics']['interruption_seconds'] for r in episodes),gradient_steps=steps//256*8,
++        checkpoint_sha256=file_hash(output/'policy.pt'),new_spice_calls=0))
++    return model
+diff --git a/d2d_joint/report.py b/d2d_joint/report.py
+new file mode 100644
+index 0000000..66b0518
+--- /dev/null
++++ b/d2d_joint/report.py
+@@ -0,0 +1,178 @@
++"""Read-only run audit, explicitly privileged gate diagnosis, and plots."""
++import argparse
++from dataclasses import replace
++import json
++from pathlib import Path
++import time
++import numpy as np
++from d2d_sizing.circuit import file_hash,write_json
++from .physics import PhaseBank
++from .environment import Config,Environment,drift_path,metrics,action_id,ACTIONS
++from .run import verify,read
++
++
++def oracle_diagnosis(root,cfg,p):
++    """Minimum failed blocks on 17x17 reachable phase states; NOT a controller.
++
++    Uses future drift and full waveform labels. Deliberately isolated from all
++    policy/surrogate training and main comparisons. Zero monitor cost is a
++    privileged lower bound, not an implementable energy result.
++    """
++    receipt=read(root/'physics/x0/development/receipt.json')
++    bank=PhaseBank.load(root/'physics/x0/development/bank.npz',receipt['bank_sha256'])
++    rows=[];start=time.time()
++    for environment in range(2):
++        for seed in p['development_drift_seeds']:
++            d=drift_path(seed,cfg);good=[]
++            for t in range(cfg.horizon):
++                lane_good=np.zeros((2,17),bool);case=environment*2+t%2
++                for i in range(17):
++                    margin,error=bank.sample(case,np.full(2,i/16)-d[t])
++                    lane_good[:,i]=(margin>=cfg.margin_min)&(error==0)
++                good.append(lane_good[0,:,None]&lane_good[1,None,:]&(bank.overshoot[case]<=cfg.overshoot_max))
++            dp=np.full((17,17),1e6);dp[8,8]=0;parents=[]
++            for t in range(cfg.horizon):
++                new=np.full((17,17),1e6);parent=np.zeros((17,17,2),int)
++                for i in range(17):
++                    for j in range(17):
++                        options=[(dp[ii,jj]+.0001*((i!=ii)+(j!=jj)),ii,jj)
++                                 for ii in range(max(0,i-1),min(17,i+2))
++                                 for jj in range(max(0,j-1),min(17,j+2))]
++                        val,ii,jj=min(options);new[i,j]=val+int(not good[t][i,j]);parent[i,j]=[ii,jj]
++                dp=new;parents.append(parent)
++            pos=np.array(np.unravel_index(dp.argmin(),dp.shape));path=[]
++            for parent in parents[::-1]:path.append(pos.copy()*4);pos=parent[tuple(pos)]
++            env=Environment(bank,d,environment,cfg)
++            for phase in path[::-1]:env.step(action_id(phase-env.phase,False))
++            m=metrics(env.records,cfg)
++            assert sum(not r['quality'] for r in env.records)==int(np.floor(dp.min()+1e-6))
++            rows.append(dict(environment=environment,drift_seed=seed,minimum_failure_blocks=round(m['violation_rate']*cfg.horizon),
++                any_phase_impossible_blocks=sum(not g.any() for g in good),metrics=m,blocks=env.records))
++    write_json(root/'analysis/oracle_diagnosis.json',dict(label='POST-HOC PRIVILEGED DIAGNOSTIC ONLY; cannot deploy or compare as a policy',
++        algorithm='Dynamic programming, known future drift, 17x17 states, +/-4 code per block; tie break minimizes phase changes',
++        phase_bank_lookups=bank.lookups,spice_transients=0,elapsed_seconds=time.time()-start,episodes=rows))
++    return rows,bank.lookups
++
++
++def audit(root,p,cfg,costs):
++    verify(root,read(root/'input_hashes.json'));checks=[]
++    devseeds=set(p['development_drift_seeds']);testseeds=set(p['test_drift_seeds'])
++    assert not devseeds&testseeds;checks.append('development/test drift seeds disjoint')
++    for path in sorted((root/'physics').glob('*/*/receipt.json')):
++        r=read(path);PhaseBank.load(path.parent/'bank.npz',r['bank_sha256'])
++        receipts=sorted((path.parent/'receipts').glob('*.json'))
++        for item in receipts:
++            receipt=read(item);folder=path.parent/'cache'/receipt['fingerprint']
++            assert file_hash(folder/'measurement.json')==receipt['measurement_sha256']
++        waves=[file_hash(path.parent/'cache'/read(item)['fingerprint']/'wave.npz') for item in receipts]
++        assert waves==r['waveform_hashes']
++        for netlist in (path.parent/'cache').glob('*/circuit.cir'):
++            assert sum(line.lstrip().lower().startswith('m') for line in netlist.read_text().splitlines())==72
++    checks.append('banks, measured data, raw waveform hashes and 72 MOS netlists verified')
++    for entry in costs['evaluation']:
++        path=root/entry['path'];assert file_hash(path)==entry['sha256'];data=read(path)
++        assert entry['phase_bank_lookups']==entry['blocks']+3*entry['calibration_measurements']
++        for episode in data['episodes']:
++            recomputed=metrics(episode['blocks'],cfg)
++            for key,value in recomputed.items():assert np.isclose(value,episode['metrics'][key])
++            previous=np.array([32,32]);drift=drift_path(episode['drift_seed'],cfg)
++            for t,block in enumerate(episode['blocks']):
++                current=np.clip(previous+ACTIONS[block['requested_action'],:2],0,64)
++                np.testing.assert_array_equal(current,block['phase_codes'])
++                np.testing.assert_allclose(current/64-drift[t],block['effective_phase'])
++                assert block['block']==t;previous=current
++    checks.append('all evaluation metrics and persistent phase transitions recomputed; lookup accounting checked')
++    if (root/'locked_selection.json').exists():
++        receipt=read(root/'selection_receipt.json');assert file_hash(root/'locked_selection.json')==receipt['lock_sha256']
++        for row in read(root/'locked_selection.json').values():
++            r=read(root/'physics'/row['design']/'test/receipt.json');assert row['x']==r['x']
++            if row['policy_seed'] is not None:assert file_hash(root/'policies'/f"v2_s{row['policy_seed']}"/'policy.pt')==row['policy_sha256']
++        checks.append('selected design and evaluation bank/policy match locked return')
++    else:checks.append('no returned design or final evaluation: feasibility gate stopped execution')
++    write_json(root/'analysis/verification.json',dict(passed=True,checks=checks,postprocessing_source_sha256=file_hash(__file__)))
++
++
++def generate(root):
++    root=Path(root).resolve();p=read(root/'protocol.json');cfg=Config(**p['config']);costs=read(root/'costs.json');state=read(root/'status.json')
++    (root/'analysis').mkdir(exist_ok=True);audit(root,p,cfg,costs)
++    results=read(root/'final_results.json') if (root/'final_results.json').exists() else read(root/'classical_gate.json')
++    prefix='final_' if (root/'final_results.json').exists() else 'A_nominal_'
++    sensitivities=[]
++    for mode in results:
++        episodes=read(root/'rollouts'/f'{prefix}{mode}.json')['episodes']
++        for energy_scale in p['sensitivity']['monitor_energy_scales']:
++            for time_scale in p['sensitivity']['calibration_time_scales']:
++                items=[]
++                for ep in episodes:
++                    blocks=ep['blocks'];data=sum(r['data_seconds'] for r in blocks)
++                    pause=sum(r['data_seconds']*time_scale*r['measured']+(cfg.phase_update_ui/64*r['data_seconds'] if r['phase_changes'] else 0) for r in blocks)
++                    energy=sum(r['total_energy_pj']+(energy_scale-1)*r['monitor_energy_pj'] for r in blocks)
++                    items.append(dict(energy=energy,downtime=pause/(pause+data),feasible=ep['metrics']['violation_rate']<=cfg.violation_limit and pause/(pause+data)<=cfg.downtime_limit))
++                sensitivities.append(dict(controller=mode,monitor_energy_scale=energy_scale,calibration_time_scale=time_scale,
++                    passing_episodes=sum(i['feasible'] for i in items),mean_energy_pj=np.mean([i['energy'] for i in items]),worst_downtime=max(i['downtime'] for i in items)))
++    write_json(root/'analysis/sensitivity.json',dict(scope='Fixed recorded actions and block-index drift, no policy tuning/reselection; timing sensitivity does not resimulate drift during pauses',rows=sensitivities))
++    oracle=[];diagnostic_lookups=0
++    if state['state']=='gate_failed':oracle,diagnostic_lookups=oracle_diagnosis(root,cfg,p)
++    import matplotlib
++    matplotlib.use('Agg')
++    import matplotlib.pyplot as plt
++    modes=list(results) if prefix=='A_nominal_' else ['static_classical','joint_classical','static_rl_s0','joint_rl_s0']
++    fig,axes=plt.subplots(4,len(modes),figsize=(4*len(modes),10),squeeze=False,sharex=True)
++    for col,mode in enumerate(modes):
++        ep=read(root/'rollouts'/f'{prefix}{mode}.json')['episodes'][0];b=ep['blocks'];t=np.arange(len(b))
++        phase=np.array([r['phase_codes'] for r in b])/64;drift=np.array([r['drift_ui'] for r in b]);margin=np.array([r['margins'] for r in b])
++        for lane in range(2):
++            axes[0,col].step(t,phase[:,lane],where='post',label=f'phase L{lane}')
++            axes[0,col].plot(t,drift[:,lane],':',label=f'drift L{lane} (private)')
++            axes[1,col].plot(t,margin[:,lane],label=f'L{lane}')
++        axes[0,col].set_title(mode);axes[0,col].legend(fontsize=6)
++        axes[1,col].axhline(cfg.margin_min,color='red',linestyle='--');axes[1,col].set_ylim(-.55,.55)
++        axes[2,col].stem(t,[r['measured'] for r in b],basefmt=' ')
++        axes[3,col].plot(t,np.cumsum([r['tx_energy_pj'] for r in b]),label='TX')
++        axes[3,col].plot(t,np.cumsum([r['total_energy_pj'] for r in b]),label='total');axes[3,col].legend(fontsize=7);axes[3,col].set_xlabel('Data block')
++    for i,label in enumerate(['Phase / drift (UI)','Signed margin / VDD','Paid measurement','Cumulative energy (pJ)']):axes[i,0].set_ylabel(label)
++    fig.suptitle('First predefined environment / drift seed; drift shown for diagnosis only');fig.tight_layout()
++    fig.savefig(root/'analysis/tracking.png',dpi=150);fig.savefig(root/'analysis/tracking.pdf');plt.close(fig)
++    sums=dict(spice_transients=sum(r['spice_transient_attempts'] for r in costs['physical']),cache_hits=sum(r['cache_hits'] for r in costs['physical']),
++        design_characterizations=len(costs['physical']),evaluation_blocks=sum(r['blocks'] for r in costs['evaluation']),
++        evaluation_calibration_measurements=sum(r['calibration_measurements'] for r in costs['evaluation']),
++        evaluation_phase_bank_lookups=sum(r['phase_bank_lookups'] for r in costs['evaluation']),
++        training_blocks=sum(r['blocks'] for r in costs['training']),training_gradient_steps=sum(r['gradient_steps'] for r in costs['training']),
++        training_phase_bank_lookups=sum(r['phase_bank_lookups'] for r in costs['training']),
++        training_calibration_measurements=sum(r['calibration_measurements'] for r in costs['training']),
++        diagnostic_phase_bank_lookups=diagnostic_lookups,diagnostic_spice_transients=0,
++        numerical_grid_validation_lookups=4*len(costs['physical']))
++    write_json(root/'analysis/cost_summary.json',sums)
++    lines=['# D2D dynamic co-design pilot results','',f"Execution status: **{state['state']}**. Source and assumptions were frozen before characterization.",'',
++        'All figures below use the new dynamic environment; no earlier sizing/SAC/IQL result is counted.', '',
++        '| Controller | Passing episodes | Mean / worst violation | Longest failure | TX / control energy (pJ/episode) | Measurements/episode | Mean / worst downtime | Throughput (Gb/s) |',
++        '|---|---:|---:|---:|---:|---:|---:|---:|']
++    for name,r in results.items():
++        lines.append(f"| {name} | {r['passing_episodes']}/{r['episodes']} | {100*r['mean_violation_rate']:.2f}% / {100*r['worst_violation_rate']:.2f}% | {r['longest_failure_run']} | {r['mean_tx_energy_pj']:.2f} / {r['mean_calibration_energy_pj']:.2f} | {r['mean_calibration_measurements']:.2f} | {100*r['mean_downtime_fraction']:.2f}% / {100*r['worst_downtime_fraction']:.2f}% | {r['mean_effective_throughput_bps']/1e9:.3f} |")
++    if oracle:
++        lines+=['','## Interpretation and gate diagnosis','',
++            'No classical method passed all eight development episodes under both fixed constraints (quality violation ≤5%, downtime ≤25%). The gate therefore stopped PPO training, circuit search and final testing. No thresholds were relaxed and no extra learning was added.',
++            f"The post-hoc full-information dynamic program found minimum failure-block counts {[r['minimum_failure_blocks'] for r in oracle]} across the same eight trajectories while respecting ±4-code movement and phase bounds. This uses future drift/full phase labels and is **not a deployable controller or a fair energy baseline**.",
++            'Every-block paid sensing tracks quality, but its pilot overhead violates downtime. Periodic sensing respects downtime, but loses quality on some trajectories. This identifies a sensing/cadence tradeoff for the implemented baselines; it does not prove that all causal controllers are infeasible.',
++            'The first next step is a separately preregistered development study of causal prediction from paid measurement history and a physically supported monitor implementation. The present experiment does not establish an RL or co-design advantage.',
++            '', '## Executed versus unexecuted','',
++            '- Executed: fresh nominal transistor characterization, four classical controllers, paired development trajectories, integrity audit, bounded privileged diagnosis and fixed-trajectory cost sensitivity.',
++            '- Implemented but not physically executed: three-seed PPO pilot, twelve-design alternating search, all four joint comparisons, final held-out inputs/drift, RNC option. PPO and design integration are checked separately with synthetic data, which are software checks, not physical performance.',
++            '- The locked test packets and drift seeds were not evaluated; there is no selected return design.']
++    lines+=['','## Cost ledger','', '```json',json.dumps(sums,indent=2),'```','',
++        'SPICE runs characterize fixed waveforms. A phase-bank lookup is a two-lane numerical query, not SPICE. Each data block uses one lookup and each paid monitor request uses three additional lookups. Raw interpolation validation and privileged diagnostics are recorded separately. Calibration energy/time describes modeled hardware operation, not machine training power.',
++        '', '## Model and sensitivity limits','',
++        'PTM predictive 45 nm bulk devices at fixed 90 nm gate length, lumped coupled RLC channels, 2 Gb/s/lane and behavioral RX. Voltage/temperature are fixed within each waveform; correlated timing displacement is quasi-static, not an actual PVT transient. Phase interpolation is bounded and has no wrap. The finite 64-bit margin/error check is not a demonstrated BER specification.',
++        'The ideal noiseless early/center/late amplitude monitor uses one known pilot packet with 27 parallel probes per lane. Its readout/aggregation energy is an assumed monitor budget (2 fJ per sample), not characterized silicon power; exact analog margins are stronger information than a one-bit early/late detector. Pilot TX and phase updates are charged separately. A realistic monitor may cost more and reveal less.',
++        'Sensitivity covers monitor energy ×0.1/1/10 and pilot downtime ×0.5/1/2 on fixed trajectories. TX, pilot TX and phase-update energy are unchanged. None of these post-hoc accounting scenarios replaces the primary criteria. Drift advances by data block, so the model omits extra drift during interruption.',
++        '', '## Artifacts','',
++        '- [Frozen protocol](protocol.json), [source hashes](input_hashes.json), [raw logs](execution.log), [costs](costs.json).',
++        '- [Verification](analysis/verification.json), [sensitivity](analysis/sensitivity.json), [plot PNG](analysis/tracking.png), [plot PDF](analysis/tracking.pdf).',
++        '- [Privileged diagnosis](analysis/oracle_diagnosis.json) is development-only and never used for policy learning or design selection.' if oracle else '- Final selected designs are in locked_selection.json.',
++        '', 'See `d2d_joint/SPEC.md` and `REFERENCES.md` for observation order, cost assumptions, algorithm scope and accessible-source limitations.']
++    (root/'RESULTS.md').write_text('\n'.join(lines)+'\n')
++    write_json(root/'analysis/artifact_hashes.json',{str(f.relative_to(root)):file_hash(f) for f in sorted((root/'analysis').glob('*')) if f.is_file() and f.name!='artifact_hashes.json'})
++    print(json.dumps(sums,indent=2))
++
++if __name__=='__main__':
++    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--output',required=True,type=Path);generate(p.parse_args().output)
+diff --git a/d2d_joint/run.py b/d2d_joint/run.py
+new file mode 100644
+index 0000000..5e4779f
+--- /dev/null
++++ b/d2d_joint/run.py
+@@ -0,0 +1,209 @@
++"""Preregister, run feasibility gate, PPO, and bounded alternating co-design."""
++import argparse
++from dataclasses import asdict
++import json
++import os
++from pathlib import Path
++import shutil
++import subprocess
++import time
++import numpy as np
++import torch
++from scipy.stats import qmc
++from d2d_sizing import circuit
++from d2d_sizing.circuit import encode,decode,NOMINAL,Case,file_hash,write_json,cost
++from .physics import suites,characterize
++from .environment import Config,Environment,drift_path,metrics
++from .controllers import Classical
++from .ppo import train,Policy
++from .design import DesignSearch,score
++
++
++def read(p):return json.loads(Path(p).read_text())
++def verify(root,items):
++    for name,h in items.items():
++        if file_hash(root/name)!=h:raise ValueError('Frozen input changed: '+name)
++
++
++def validate_selected(row,bank,policy_path=None):
++    if row['x']!=bank.x.tolist():
++        raise ValueError('Evaluated design differs from selected design')
++    if row['policy_seed'] is not None:
++        if policy_path is None or file_hash(policy_path)!=row['policy_sha256']:
++            raise ValueError('Policy version differs')
++
++
++def initialize(output,binary,representation='regression'):
++    output=Path(output).resolve();output.mkdir(parents=True,exist_ok=False)
++    repo=Path(__file__).resolve().parents[1]
++    initial=np.clip(encode(NOMINAL)+(qmc.LatinHypercube(6,seed=6217).random(6)-.5)*.36,0,1);initial[0]=encode(NOMINAL)
++    development,test=suites();binary=Path(binary).resolve()
++    version=subprocess.run([str(binary),'--version'],capture_output=True,text=True,check=True).stdout.strip()
++    files=list((repo/'d2d_joint').glob('*.py'))+[repo/'d2d_sizing'/n for n in ['__init__.py','circuit.py','surrogate.py']]
++    files += [repo/'adc_driver'/n for n in ['attention.py','rnc.py']]
++    files += [repo/'d2d_coupled_calibration'/n for n in ['link.py','coupled_link.py','assets/45nm_bulk.txt']]
++    for f in files:
++        dest=output/'code'/f.relative_to(repo);dest.parent.mkdir(parents=True,exist_ok=True);shutil.copy2(f,dest)
++    write_json(output/'protocol.json',dict(schema=1,topic='Low-power D2D circuit/control co-design under quasi-static correlated timing drift',
++        git_head=subprocess.check_output(['git','rev-parse','HEAD'],cwd=repo,text=True).strip(),
++        worktree_before=subprocess.check_output(['git','status','--short'],cwd=repo,text=True),
++        config=asdict(Config()),binary=str(binary),binary_sha256=file_hash(binary),simulator_version=version,
++        initial_designs={f'x{i}':decode(u).tolist() for i,u in enumerate(initial)},designs_initial=6,
++        proposals_per_arm=2,designs_total=12,representation=representation,
++        design_arms=['static','classical','rl'],design_optimizer='Sizing regression backbone and parent-reuse critic buffer; 200 initial + 100 steps per update; RNC optional',
++        development=[asdict(c) for c in development],test=[asdict(c) for c in test],
++        development_drift_seeds=[601001,601002,601003,601004],test_drift_seeds=list(range(901001,901009)),
++        ppo_seeds=[0,1,2],ppo_steps_per_stage=7680,ppo_stages=2,ppo=dict(rollout=256,minibatch=128,epochs=4,lr=.0003,gamma=.99,gae_lambda=.95,clip=.2,entropy_coefficient=.01,value_coefficient=.5),
++        stage_A='Nominal design: none/periodic/event/bang-bang, eight development episodes each. Proceed only if at least one satisfies the unchanged episode constraints.',
++        stage_B='Three nominal-design PPO pilots, 7680 blocks each; four-frame history and argmax evaluation',
++        stage_C='Freeze V1 for all proposal scores; two proposals per arm after common six designs. Train V2 once on all 12 designs, 10 episodes per design per seed; re-score ALL designs under each fixed V2 before final selection.',
++        selection='Static arm uses fixed-phase SPICE metric; classical and RL arms use actual per-block operational metrics, constraints first then energy. Each arm may select only common six plus its own two proposals.',
++        cost_assumptions='Parallel 3-center x 9-aperture monitor on a known 64-bit/lane pilot; pilot TX energy from bank; comparator 0.002 pJ/sample, phase change 0.1 pJ/lane + two UI pause. No measured monitor silicon power claim.',
++        sensitivity=dict(monitor_energy_scales=[.1,1,10],calibration_time_scales=[.5,1,2],scope='Reaccount fixed selected trajectories/actions; no retraining or reselection'),
++        gate_failure='Save classical diagnostics and do not start joint optimization; no relaxed thresholds or extra training',
++        claims='Finite alternating pilot, not exact bilevel optimum or real PVT transient / full SerDes reproduction',created_at=time.time()))
++    write_json(output/'input_hashes.json',{str(f.relative_to(output)):file_hash(f) for f in output.rglob('*') if f.is_file()})
++
++
++def evaluate(bank,factory,seeds,cfg,output,tag):
++    episodes=[];lookup_before=bank.lookups
++    for env_id in range(2):
++        for seed in seeds:
++            controller=factory();env=Environment(bank,drift_path(seed,cfg),env_id,cfg)
++            while env.t<cfg.horizon:env.step(controller(env.observation()))
++            episodes.append(dict(environment=env_id,drift_seed=seed,metrics=metrics(env.records,cfg),blocks=env.records))
++    m=[e['metrics'] for e in episodes]
++    result=dict(worst_violation_rate=max(r['violation_rate'] for r in m),worst_downtime_fraction=max(r['downtime_fraction'] for r in m),
++        mean_violation_rate=float(np.mean([r['violation_rate'] for r in m])),mean_downtime_fraction=float(np.mean([r['downtime_fraction'] for r in m])),
++        mean_total_energy_pj=float(np.mean([r['total_energy_pj'] for r in m])),longest_failure_run=max(r['longest_failure_run'] for r in m),
++        feasible=all(r['feasible'] for r in m),passing_episodes=sum(r['feasible'] for r in m),episodes=len(m),
++        mean_calibration_measurements=float(np.mean([r['calibration_measurements'] for r in m])),
++        mean_effective_throughput_bps=float(np.mean([r['effective_throughput_bps'] for r in m])),
++        mean_tx_energy_pj=float(np.mean([r['tx_energy_pj'] for r in m])),
++        mean_calibration_energy_pj=float(np.mean([r['pilot_tx_energy_pj']+r['monitor_energy_pj']+r['phase_update_energy_pj'] for r in m])),
++        mean_interruption_seconds=float(np.mean([r['interruption_seconds'] for r in m])),phase_bank_lookups=bank.lookups-lookup_before)
++    write_json(output,dict(tag=tag,result=result,episodes=episodes));return result
++
++
++def average_results(results):
++    # Constraints apply to every paired development rollout and every V1 seed.
++    return dict(worst_violation_rate=max(r['worst_violation_rate'] for r in results),
++        worst_downtime_fraction=max(r['worst_downtime_fraction'] for r in results),
++        mean_total_energy_pj=float(np.mean([r['mean_total_energy_pj'] for r in results])),
++        longest_failure_run=max(r['longest_failure_run'] for r in results))
++
++
++def execute(output):
++    output=Path(output).resolve();p=read(output/'protocol.json');verify(output,read(output/'input_hashes.json'))
++    if Path(__file__).resolve()!=output/'code/d2d_joint/run.py':raise ValueError('Run the frozen code copy')
++    if (output/'status.json').exists():raise FileExistsError('No silent resume or overwrite')
++    if file_hash(p['binary'])!=p['binary_sha256']:raise ValueError('Simulator changed')
++    os.environ['NGSPICE_BIN']=p['binary'];cfg=Config(**p['config']);start=time.time()
++    state=dict(state='running',stage='A',pid=os.getpid(),started_at=start);write_json(output/'status.json',state)
++    banks={};static={};designs=dict(p['initial_designs']);costs=[];eval_ledger=[]
++    cases=[Case.from_dict(c) for c in p['development']]
++    def add_design(name,x):
++        bank,result,account=characterize(x,cases,output/'physics'/name/'development',workers=2)
++        if account['simulator_version']!=p['simulator_version']:raise ValueError('Wrong simulator')
++        banks[name]=bank;static[name]=result;designs[name]=np.asarray(x).tolist();costs.append(dict(design=name,split='development',**account))
++        print('CHARACTERIZED',name,'static pass',result['feasible'],flush=True)
++    def evaluate_one(name,factory,tag,phase='development',bank=None):
++        selected=banks[name] if bank is None else bank
++        seeds=p['development_drift_seeds'] if phase=='development' else p['test_drift_seeds']
++        path=output/'rollouts'/f'{tag}.json'
++        r=evaluate(selected,factory,seeds,cfg,path,tag)
++        eval_ledger.append(dict(tag=tag,design=name,split=phase,blocks=r['episodes']*cfg.horizon,calibration_measurements=r['mean_calibration_measurements']*r['episodes'],
++            phase_bank_lookups=r['phase_bank_lookups'],path=str(path.relative_to(output)),sha256=file_hash(path)))
++        return r
++    try:
++        add_design('x0',designs['x0']);classical={}
++        for mode in ['none','periodic','event','bang_bang']:
++            classical[mode]=evaluate_one('x0',lambda m=mode:Classical(m,cfg.horizon),'A_nominal_'+mode)
++        write_json(output/'classical_gate.json',classical)
++        feasible=[m for m in classical if classical[m]['feasible']]
++        if not feasible:
++            state.update(state='gate_failed',reason='No classical controller meets fixed nominal development constraints; joint optimization not run')
++            write_json(output/'costs.json',dict(physical=costs,evaluation=eval_ledger,training=[]));write_json(output/'status.json',state)
++            print('GATE FAILED',json.dumps(classical),flush=True);return
++        controller=min(feasible,key=lambda m:score(classical[m]));write_json(output/'selected_classical.json',dict(mode=controller,selected_on='nominal development only'))
++        print('GATE PASSED',controller,flush=True);state['stage']='B';write_json(output/'status.json',state)
++        v1={};v1_hash={};nominal_ppo={}
++        for seed in p['ppo_seeds']:
++            v1[seed]=train({'x0':banks['x0']},seed,1,output/'policies'/f'v1_s{seed}',cfg,p['ppo_steps_per_stage'])
++            v1_hash[str(seed)]=file_hash(output/'policies'/f'v1_s{seed}'/'policy.pt')
++            nominal_ppo[str(seed)]=evaluate_one('x0',lambda s=seed:Policy(v1[s]),f'B_nominal_ppo_s{seed}')
++            print('PPO V1 COMPLETE',seed,nominal_ppo[str(seed)]['passing_episodes'],'/8',flush=True)
++        write_json(output/'nominal_ppo.json',nominal_ppo);write_json(output/'v1_lock.json',v1_hash)
++        state['stage']='C';write_json(output/'status.json',state)
++        for name,x in p['initial_designs'].items():
++            if name!='x0':add_design(name,x)
++        classical_scores={};rl_scores={}
++        def operational(name):
++            classical_scores[name]=evaluate_one(name,lambda:Classical(controller,cfg.horizon),'C_classical_'+name)
++            rl_scores[name]=[evaluate_one(name,lambda s=seed:Policy(v1[s]),f'C_v1_s{seed}_{name}') for seed in p['ppo_seeds']]
++        for name in p['initial_designs']:operational(name)
++        pools={arm:list(p['initial_designs']) for arm in p['design_arms']};events={}
++        for arm in p['design_arms']:
++            def response(name):return static[name] if arm=='static' else classical_scores[name] if arm=='classical' else average_results(rl_scores[name])
++            rows=[dict(u=encode(designs[name]).tolist(),result=response(name)) for name in pools[arm]]
++            optimizer=DesignSearch(rows,method=p['representation'],seed=491,mode='static' if arm=='static' else 'operational')
++            for query in range(p['proposals_per_arm']):
++                u,pred=optimizer.propose([encode(x) for x in designs.values()]);name=f'{arm}_{query}'
++                write_json(output/f'pending_{arm}.json',dict(u=u.tolist(),predictions=pred,policy_version_hashes=v1_hash))
++                add_design(name,decode(u));operational(name)
++                optimizer.observe(dict(u=u.tolist(),result=response(name)),pred);pools[arm].append(name)
++                (output/f'pending_{arm}.json').unlink()
++            events[arm]=optimizer.events
++            torch.save(dict(state_dict=optimizer.current.model.state_dict(),mean=optimizer.mean,std=optimizer.std,
++                mode=optimizer.mode,representation=optimizer.method,buffer=[dict(id=e.id,state_dict=e.model.state_dict(),errors=e.errors) for e in optimizer.entries]),output/f'design_surrogate_{arm}.pt')
++        write_json(output/'design_search.json',dict(designs=designs,pools=pools,events=events,static=static,classical_scores=classical_scores,v1_rl_scores=rl_scores))
++        for seed in p['ppo_seeds']:
++            if file_hash(output/'policies'/f'v1_s{seed}'/'policy.pt')!=v1_hash[str(seed)]:raise ValueError('V1 policy changed')
++        v2={};v2_scores={};v2_hash={}
++        for seed in p['ppo_seeds']:
++            v2[seed]=train(banks,seed,2,output/'policies'/f'v2_s{seed}',cfg,p['ppo_steps_per_stage'],v1[seed])
++            v2_hash[str(seed)]=file_hash(output/'policies'/f'v2_s{seed}'/'policy.pt')
++            v2_scores[str(seed)]={name:evaluate_one(name,lambda s=seed:Policy(v2[s]),f'C_v2_s{seed}_{name}') for name in banks}
++            print('PPO V2 COMPLETE',seed,flush=True)
++        write_json(output/'v2_scores.json',v2_scores)
++        x_static=min(pools['static'],key=lambda n:cost(static[n]));x_classic=min(pools['classical'],key=lambda n:score(classical_scores[n]))
++        selection={'static_classical':dict(design=x_static,controller=controller,policy_seed=None),
++                   'joint_classical':dict(design=x_classic,controller=controller,policy_seed=None)}
++        for seed in p['ppo_seeds']:
++            x_rl=min(pools['rl'],key=lambda n:score(v2_scores[str(seed)][n]))
++            selection[f'static_rl_s{seed}']=dict(design=x_static,controller='ppo',policy_seed=seed,policy_sha256=v2_hash[str(seed)])
++            selection[f'joint_rl_s{seed}']=dict(design=x_rl,controller='ppo',policy_seed=seed,policy_sha256=v2_hash[str(seed)])
++        for row in selection.values():row['x']=designs[row['design']]
++        write_json(output/'locked_selection.json',selection);lock_hash=file_hash(output/'locked_selection.json')
++        write_json(output/'selection_receipt.json',dict(lock_sha256=lock_hash,policy_hashes=v2_hash,
++            v2_scores_sha256=file_hash(output/'v2_scores.json'),design_search_sha256=file_hash(output/'design_search.json'),locked_at=time.time()))
++        state['stage']='final';write_json(output/'status.json',state)
++        final_banks={};final_results={}
++        for name in sorted({r['design'] for r in selection.values()}):
++            bank,_,account=characterize(designs[name],[Case.from_dict(c) for c in p['test']],output/'physics'/name/'test',workers=2)
++            final_banks[name]=bank;costs.append(dict(design=name,split='test',**account))
++        for key,row in selection.items():
++            if file_hash(output/'locked_selection.json')!=lock_hash:raise ValueError('Locked return changed')
++            seed=row['policy_seed']
++            validate_selected(row,final_banks[row['design']],output/'policies'/f'v2_s{seed}'/'policy.pt' if seed is not None else None)
++            factory=(lambda:Classical(controller,cfg.horizon)) if seed is None else (lambda s=seed:Policy(v2[s]))
++            final_results[key]=evaluate_one(row['design'],factory,'final_'+key,'test',final_banks[row['design']])
++        write_json(output/'final_results.json',final_results)
++        training=[dict(path=str(f.relative_to(output)),sha256=file_hash(f),**read(f)) for f in sorted((output/'policies').glob('*/training.json'))]
++        write_json(output/'costs.json',dict(physical=costs,evaluation=eval_ledger,training=training))
++        verify(output,read(output/'input_hashes.json'))
++        write_json(output/'receipt.json',dict(protocol_sha256=file_hash(output/'protocol.json'),lock_sha256=lock_hash,
++            final_results_sha256=file_hash(output/'final_results.json'),costs_sha256=file_hash(output/'costs.json'),
++            elapsed_seconds=time.time()-start,policy_hashes=v2_hash))
++        state.update(state='completed',finished_at=time.time(),receipt_sha256=file_hash(output/'receipt.json'));write_json(output/'status.json',state)
++        print('COMPLETED',json.dumps(final_results),flush=True)
++    except Exception as exc:
++        state.update(state='failed',error=str(exc),finished_at=time.time());write_json(output/'status.json',state);raise
++
++if __name__=='__main__':
++    p=argparse.ArgumentParser(description=__doc__);p.add_argument('command',choices=['initialize','execute']);p.add_argument('--output',type=Path,required=True)
++    p.add_argument('--binary',type=Path);p.add_argument('--representation',choices=['regression','rnc'],default='regression');a=p.parse_args()
++    if a.command=='initialize':
++        if not a.binary:p.error('--binary required')
++        initialize(a.output,a.binary,a.representation)
++    else:execute(a.output)
+diff --git a/d2d_joint/tests/test_joint.py b/d2d_joint/tests/test_joint.py
+new file mode 100644
+index 0000000..951dbe6
+--- /dev/null
++++ b/d2d_joint/tests/test_joint.py
+@@ -0,0 +1,108 @@
++import json
++from pathlib import Path
++import tempfile
++import unittest
++import numpy as np
++import torch
++from d2d_joint.physics import PhaseBank,suites
++from d2d_joint.environment import Environment,Config,action_id,FRAME_DIM,drift_path,metrics
++from d2d_joint.controllers import Classical
++from d2d_joint.ppo import ActorCritic,Policy,gae,train
++from d2d_joint.design import DesignSearch
++from d2d_sizing.circuit import NOMINAL,file_hash
++
++
++def bank():
++    phase=np.linspace(-.5,1.5,513);bits=np.tile(np.arange(64)%2,(4,2,1));signed=np.clip(.35-2*np.abs(phase-.5),-.5,.5)
++    voltage=.5+(2*bits[:,:,:,None]-1)*signed
++    return PhaseBank(phase,voltage,bits,[.25]*4,[0.]*4,suites()[0],NOMINAL)
++
++
++class JointTests(unittest.TestCase):
++    def test_selected_design_and_policy_integrity(self):
++        from d2d_joint.run import validate_selected
++        from types import SimpleNamespace
++        from d2d_sizing.circuit import file_hash
++        with tempfile.TemporaryDirectory() as tmp:
++            path=Path(tmp)/'policy';path.write_bytes(b'fixed version')
++            bank=SimpleNamespace(x=np.array([1.,2.]))
++            row=dict(x=[1.,2.],policy_seed=0,policy_sha256=file_hash(path))
++            validate_selected(row,bank,path)
++            with self.assertRaises(ValueError):validate_selected(dict(row,x=[1.,3.]),bank,path)
++            path.write_bytes(b'different version')
++            with self.assertRaises(ValueError):validate_selected(row,bank,path)
++
++    def test_phase_and_time_persist_without_wrap(self):
++        e=Environment(bank(),np.zeros((64,2)))
++        e.step(action_id([4,-4],False));self.assertEqual(e.phase.tolist(),[36,28])
++        e.step(action_id([0,0],False));self.assertEqual(e.phase.tolist(),[36,28]);self.assertEqual(e.t,2)
++        e.phase[:]=64;e.step(action_id([4,4],False));self.assertEqual(e.phase.tolist(),[64,64])
++        np.testing.assert_array_equal(e.x,NOMINAL)
++
++    def test_hidden_drift_reward_and_info_do_not_enter_observation(self):
++        a=Environment(bank(),np.zeros((64,2)));b=Environment(bank(),np.full((64,2),.3))
++        np.testing.assert_array_equal(a.observation(),b.observation())
++        oa,ra,_,ia=a.step(action_id([0,0],False));ob,rb,_,ib=b.step(action_id([0,0],False))
++        self.assertNotEqual(ra,rb);self.assertNotEqual(ia['margins'],ib['margins'])
++        np.testing.assert_array_equal(oa,ob)
++        self.assertEqual(oa.shape,(96,))
++        a.step(action_id([0,0],True));b.step(action_id([0,0],True))
++        self.assertFalse(np.array_equal(a.observation(),b.observation()))
++
++    def test_unmeasured_observation_and_phase_change_staleness(self):
++        e=Environment(bank(),np.zeros((64,2)))
++        e.step(action_id([0,0],True));old=e.last_measurement.copy();oldphase=e.last_phase.copy()
++        e.step(action_id([4,0],False));f=e.observation()[-FRAME_DIM:]
++        np.testing.assert_array_equal(old,e.last_measurement);np.testing.assert_array_equal(oldphase,e.last_phase)
++        self.assertEqual(f[17],1);self.assertEqual(f[18],0);self.assertEqual(f[19],1)
++        self.assertAlmostEqual(f[16],1/64)
++        e.step(action_id([0,0],True));f=e.observation()[-FRAME_DIM:]
++        self.assertEqual(f[16],0);self.assertTrue((f[18:20]==1).all());self.assertEqual(e.last_phase.tolist(),[36,32])
++
++    def test_no_future_measurement_and_same_classical_ppo_cost(self):
++        ba=bank();bb=bank();ea=Environment(ba,np.zeros((64,2)));eb=Environment(bb,np.zeros((64,2)))
++        c=Classical('periodic');model=ActorCritic()
++        with torch.no_grad():model.actor.weight.zero_();model.actor.bias.fill_(-10);model.actor.bias[action_id([0,0],True)]=10
++        p=Policy(model);a=c(ea.observation());b=p(eb.observation())
++        self.assertEqual(ba.lookups,0);self.assertEqual(bb.lookups,0);self.assertEqual(a,b)
++        oa,ra,da,ia=ea.step(a);ob,rb,db,ib=eb.step(b)
++        self.assertEqual(ia,ib);self.assertEqual(ba.lookups,4);self.assertEqual(bb.lookups,4)
++        self.assertGreater(ia['pilot_tx_energy_pj'],0);self.assertGreater(ia['monitor_energy_pj'],0)
++        self.assertGreater(ia['interruption_seconds'],0)
++
++    def test_sampling_support_and_drift_correlation(self):
++        with self.assertRaises(ValueError):bank().sample(0,[1.5,.5])
++        with self.assertRaises(ValueError):Environment(bank(),np.ones((64,2)))
++        d=drift_path(601001,Config());self.assertLessEqual(np.abs(d).max(),.32)
++        self.assertGreater(np.corrcoef(d[:-1,0],d[1:,0])[0,1],.8)
++        np.testing.assert_array_equal(d,drift_path(601001,Config()))
++
++    def test_block_endpoint_not_best_incumbent(self):
++        d=np.zeros((64,2));d[1:]=.3;e=Environment(bank(),d)
++        while e.t<64:e.step(action_id([0,0],False))
++        r=metrics(e.records);self.assertAlmostEqual(r['violation_rate'],63/64)
++        self.assertEqual(r['longest_failure_run'],63);self.assertEqual(r['delivered_bits'],128)
++        self.assertEqual(r['calibration_measurements'],0);self.assertEqual(r['tx_energy_pj'],64*32.)
++
++    def test_gae_terminal_has_no_bootstrap_or_cross_episode_return(self):
++        a,r=gae(np.array([1.,2.]),np.array([.1,.2]),np.array([999.,999.]),np.ones(2))
++        np.testing.assert_allclose(a,[.9,1.8]);np.testing.assert_allclose(r,[1,2])
++
++    def test_small_ppo_updates_and_balances_designs(self):
++        with tempfile.TemporaryDirectory() as tmp:
++            torch.manual_seed(1000);initial=ActorCritic();before={k:v.clone() for k,v in initial.state_dict().items()}
++            model=train({'a':bank(),'b':bank()},0,1,Path(tmp)/'train',steps=256)
++            self.assertTrue(any(not torch.equal(v,model.state_dict()[k]) for k,v in before.items()))
++            log=json.loads((Path(tmp)/'train/training.json').read_text());self.assertEqual(log['per_design_episodes'],{'a':2,'b':2})
++            self.assertEqual(log['blocks'],256);self.assertEqual(log['gradient_steps'],8)
++            self.assertEqual(file_hash(Path(tmp)/'train/policy.pt'),log['checkpoint_sha256'])
++
++    def test_operational_surrogate_and_buffer_receive_rollout_metrics(self):
++        rows=[dict(u=[.1*i]*6,result=dict(worst_violation_rate=.01*i,worst_downtime_fraction=.1,
++            mean_total_energy_pj=2000+100*i,longest_failure_run=i)) for i in range(6)]
++        model=DesignSearch(rows);u,pred=model.propose([r['u'] for r in rows]);self.assertEqual(u.shape,(6,));self.assertEqual(pred[0]['id'],0)
++        model.observe(dict(u=u.tolist(),result=rows[0]['result']),pred)
++        self.assertEqual(len(model.entries),2);self.assertEqual(model.events[0]['gradient_steps'],100)
++        self.assertTrue(np.isfinite(model.events[0]['normalized_error_scores']).all())
++
++if __name__=='__main__':unittest.main()
+diff --git a/d2d_joint/tests/test_pipeline.py b/d2d_joint/tests/test_pipeline.py
+new file mode 100644
+index 0000000..13f72aa
+--- /dev/null
++++ b/d2d_joint/tests/test_pipeline.py
+@@ -0,0 +1,51 @@
++"""Software-only end-to-end plumbing test; no transistor performance evidence."""
++import contextlib
++import io
++import json
++from pathlib import Path
++import tempfile
++import unittest
++from unittest.mock import patch
++import numpy as np
++from d2d_joint import run
++from d2d_joint.physics import PhaseBank
++from d2d_sizing.circuit import file_hash,write_json
++
++
++class PipelineTest(unittest.TestCase):
++    def test_four_comparisons_use_locked_designs_and_policy_versions(self):
++        with tempfile.TemporaryDirectory() as tmp:
++            root=Path(tmp)/'synthetic_run'
++            run.initialize(root,'/usr/bin/true')
++            p=run.read(root/'protocol.json');p['ppo_steps_per_stage']=768
++            p['development_drift_seeds']=[601001];p['test_drift_seeds']=[901001]
++            write_json(root/'protocol.json',p)
++            hashes=run.read(root/'input_hashes.json');hashes['protocol.json']=file_hash(root/'protocol.json');write_json(root/'input_hashes.json',hashes)
++            physical=[]
++            def synthetic(x,cases,output,workers):
++                Path(output).mkdir(parents=True);physical.append((list(x),[c.name for c in cases]))
++                phase=np.linspace(-.5,1.5,513);bits=np.tile(np.arange(64)%2,(4,2,1))
++                voltage=np.broadcast_to(.5+(2*bits[:,:,:,None]-1)*.3,(4,2,64,513)).copy()
++                energy=float(np.sum(x)/100)
++                bank=PhaseBank(phase,voltage,bits,[energy]*4,[0.]*4,cases,x)
++                result=dict(valid=True,feasible=True,margins=[.3,.3],energy_pj_bit=energy,overshoot_fraction=0.)
++                return bank,result,dict(simulator_version=p['simulator_version'],spice_transient_attempts=0,cache_hits=0)
++            with patch.object(run,'characterize',synthetic),patch.object(run,'__file__',str(root/'code/d2d_joint/run.py')),contextlib.redirect_stdout(io.StringIO()):
++                run.execute(root)
++            self.assertEqual(run.read(root/'status.json')['state'],'completed')
++            search=run.read(root/'design_search.json');self.assertEqual(len(search['designs']),12)
++            self.assertTrue(all(len(pool)==8 for pool in search['pools'].values()))
++            locked=run.read(root/'locked_selection.json');self.assertEqual(len(locked),8)
++            self.assertEqual(set(locked),set(run.read(root/'final_results.json')))
++            for row in locked.values():
++                self.assertEqual(row['x'],search['designs'][row['design']])
++                seed=row['policy_seed']
++                if seed is not None:
++                    self.assertEqual(row['policy_sha256'],file_hash(root/'policies'/f'v2_s{seed}'/'policy.pt'))
++                    train=run.read(root/'policies'/f'v2_s{seed}'/'training.json')
++                    self.assertEqual(set(train['per_design_episodes'].values()),{1})
++            costs=run.read(root/'costs.json');self.assertEqual(len(costs['training']),6)
++            self.assertEqual(sum(x['blocks'] for x in costs['training']),4608)
++            self.assertTrue(all(x['spice_transient_attempts']==0 for x in costs['physical']))
++
++if __name__=='__main__':unittest.main()

@@ -1,0 +1,433 @@
+{
+  "schema": 1,
+  "topic": "Low-power D2D circuit/control co-design under quasi-static correlated timing drift",
+  "git_head": "19d1d3dec92d7376ab9df98e7575aef2fe4f944b",
+  "worktree_before": " M adc_driver/ALARM_ATTENTION.md\n M adc_driver/ROUND2.md\n M adc_driver/ROUND2_VALIDATION.md\n M adc_driver/critics.py\n M adc_driver/learning.py\n M adc_driver/round2.py\n M adc_driver/run.py\n M adc_driver/search.py\n M adc_driver/tests/test_critic_round2.py\n M d2d_coupled_calibration/coupled_train.py\n M d2d_coupled_calibration/tests/test_sac.py\n M experiments/README.md\n M experiments/tests/test_sac_online.py\n M experiments/train_reward_ablation.py\n M experiments/train_sac_online.py\n?? ALARM_V0.pdf\n?? adc_driver/CONFIRMATION.md\n?? adc_driver/REVIEW_FIXES.md\n?? adc_driver/confirmation.py\n?? adc_driver/critic_prediction.py\n?? adc_driver/run_integrity.py\n?? adc_driver/tests/test_confirmation.py\n?? adc_driver/tests/test_critic_adoption.py\n?? adc_driver/tests/test_round2_resume.py\n?? audits/\n?? d2d_coupled_calibration/INTERFACE_AUDIT.md\n?? d2d_coupled_calibration/MEASUREMENT_AUXILIARY.md\n?? d2d_coupled_calibration/measurement_auxiliary.py\n?? d2d_coupled_calibration/policy_observation.py\n?? d2d_coupled_calibration/tests/test_measurement_auxiliary.py\n?? d2d_coupled_calibration/tests/test_policy_observation.py\n?? d2d_coupled_calibration/tests/test_training_diagnostics.py\n?? d2d_implementation_8a75f60.patch\n?? d2d_joint/\n?? d2d_sizing/\n?? experiments/diagnose_sac_terminal.py\n?? experiments/evaluate_sac_execution.py\n?? experiments/report_sac_terminal.py\n?? experiments/run_review_sweep.py\n?? experiments/run_sac_interface.py\n?? experiments/run_sac_measurement_aux.py\n?? experiments/tests/test_review_sweep.py\n?? experiments/tests/test_sac_execution.py\n?? experiments/tests/test_sac_interface.py\n?? experiments/tests/test_sac_terminal.py\n?? implementation_results/\n",
+  "config": {
+    "horizon": 64,
+    "history": 4,
+    "drift_bound": 0.32,
+    "drift_velocity_rho": 0.96,
+    "drift_velocity_sigma": 0.004,
+    "margin_min": 0.08,
+    "overshoot_max": 0.2,
+    "violation_limit": 0.05,
+    "downtime_limit": 0.25,
+    "dither_ui": 0.0625,
+    "monitor_pj_per_comparison": 0.002,
+    "phase_update_pj_per_lane": 0.1,
+    "phase_update_ui": 2.0,
+    "reward_energy_reference_pj_bit": 1.0,
+    "quality_weight": 1.0
+  },
+  "binary": "/home/svcho/anaconda3/envs/27fallg3/bin/ngspice",
+  "binary_sha256": "6d36058622617c3c57ea0ac6fb442f56f86c585c9bd5b2743319017b0a98401b",
+  "simulator_version": "******\n** ngspice-41 : Circuit level simulation program\n** The U. C. Berkeley CAD Group\n** Copyright 1985-1994, Regents of the University of California.\n** Copyright 2001-2023, The ngspice team.\n** Please get your ngspice manual from https://ngspice.sourceforge.io/docs.html\n** Please file your bug-reports at http://ngspice.sourceforge.net/bugrep.html\n** Creation Date: Mon Mar 25 19:05:40 UTC 2024\n******",
+  "initial_designs": {
+    "x0": [
+      1.0,
+      4.0,
+      2.0,
+      2.0,
+      2.0,
+      5.000000000000001
+    ],
+    "x1": [
+      1.2209306092968728,
+      3.491635356170373,
+      1.2917340737659229,
+      1.9784341991998289,
+      1.6922733750523073,
+      10.1968370545029
+    ],
+    "x2": [
+      1.3710904097822538,
+      3.8989022026668634,
+      3.1627511924042095,
+      2.271631671247969,
+      2.2569256094148806,
+      7.2805627755648334
+    ],
+    "x3": [
+      1.0248212575739497,
+      4.094368562435022,
+      1.5706225697524698,
+      2.0014914678810842,
+      1.7322316577390653,
+      3.7382162403992516
+    ],
+    "x4": [
+      0.8829523434210769,
+      4.7761670039193636,
+      2.653602577016628,
+      1.8751255798113,
+      2.4622930384538546,
+      5.700644286421427
+    ],
+    "x5": [
+      0.9217792701256156,
+      5.282120167733991,
+      1.8988579001728085,
+      1.790553983215153,
+      1.8923080352217383,
+      2.361185591979234
+    ]
+  },
+  "designs_initial": 6,
+  "proposals_per_arm": 2,
+  "designs_total": 12,
+  "representation": "regression",
+  "design_arms": [
+    "static",
+    "classical",
+    "rl"
+  ],
+  "design_optimizer": "Sizing regression backbone and parent-reuse critic buffer; 200 initial + 100 steps per update; RNC optional",
+  "development": [
+    {
+      "name": "development_e0_p0",
+      "context": {
+        "lane0": {
+          "vdd": 1.0,
+          "temperature_c": 27.0,
+          "rate_gbps": 2.0,
+          "resistance_ohm": 30.0,
+          "inductance_nh": 0.3,
+          "capacitance_pf": 0.3,
+          "rx_capacitance_pf": 0.06,
+          "clock_offset_ui": 0.0,
+          "coarse_latency_ui": 1.0
+        },
+        "lane1": {
+          "vdd": 1.0,
+          "temperature_c": 27.0,
+          "rate_gbps": 2.0,
+          "resistance_ohm": 32.0,
+          "inductance_nh": 0.3,
+          "capacitance_pf": 0.3,
+          "rx_capacitance_pf": 0.06,
+          "clock_offset_ui": 0.0,
+          "coarse_latency_ui": 1.0
+        },
+        "coupling_pf": 0.06
+      },
+      "pattern": "random",
+      "seed": 641000,
+      "bits": 64,
+      "phase_ui": 0.5,
+      "guard_ui": 0.1,
+      "margin_min": 0.08,
+      "overshoot_max": 0.2,
+      "points_per_ui": 64
+    },
+    {
+      "name": "development_e0_p1",
+      "context": {
+        "lane0": {
+          "vdd": 1.0,
+          "temperature_c": 27.0,
+          "rate_gbps": 2.0,
+          "resistance_ohm": 30.0,
+          "inductance_nh": 0.3,
+          "capacitance_pf": 0.3,
+          "rx_capacitance_pf": 0.06,
+          "clock_offset_ui": 0.0,
+          "coarse_latency_ui": 1.0
+        },
+        "lane1": {
+          "vdd": 1.0,
+          "temperature_c": 27.0,
+          "rate_gbps": 2.0,
+          "resistance_ohm": 32.0,
+          "inductance_nh": 0.3,
+          "capacitance_pf": 0.3,
+          "rx_capacitance_pf": 0.06,
+          "clock_offset_ui": 0.0,
+          "coarse_latency_ui": 1.0
+        },
+        "coupling_pf": 0.06
+      },
+      "pattern": "random",
+      "seed": 641001,
+      "bits": 64,
+      "phase_ui": 0.5,
+      "guard_ui": 0.1,
+      "margin_min": 0.08,
+      "overshoot_max": 0.2,
+      "points_per_ui": 64
+    },
+    {
+      "name": "development_e1_p0",
+      "context": {
+        "lane0": {
+          "vdd": 0.95,
+          "temperature_c": 65.0,
+          "rate_gbps": 2.0,
+          "resistance_ohm": 40.0,
+          "inductance_nh": 0.3,
+          "capacitance_pf": 0.34,
+          "rx_capacitance_pf": 0.06,
+          "clock_offset_ui": 0.0,
+          "coarse_latency_ui": 1.0
+        },
+        "lane1": {
+          "vdd": 0.95,
+          "temperature_c": 65.0,
+          "rate_gbps": 2.0,
+          "resistance_ohm": 42.0,
+          "inductance_nh": 0.3,
+          "capacitance_pf": 0.34,
+          "rx_capacitance_pf": 0.06,
+          "clock_offset_ui": 0.0,
+          "coarse_latency_ui": 1.0
+        },
+        "coupling_pf": 0.1
+      },
+      "pattern": "random",
+      "seed": 641101,
+      "bits": 64,
+      "phase_ui": 0.5,
+      "guard_ui": 0.1,
+      "margin_min": 0.08,
+      "overshoot_max": 0.2,
+      "points_per_ui": 64
+    },
+    {
+      "name": "development_e1_p1",
+      "context": {
+        "lane0": {
+          "vdd": 0.95,
+          "temperature_c": 65.0,
+          "rate_gbps": 2.0,
+          "resistance_ohm": 40.0,
+          "inductance_nh": 0.3,
+          "capacitance_pf": 0.34,
+          "rx_capacitance_pf": 0.06,
+          "clock_offset_ui": 0.0,
+          "coarse_latency_ui": 1.0
+        },
+        "lane1": {
+          "vdd": 0.95,
+          "temperature_c": 65.0,
+          "rate_gbps": 2.0,
+          "resistance_ohm": 42.0,
+          "inductance_nh": 0.3,
+          "capacitance_pf": 0.34,
+          "rx_capacitance_pf": 0.06,
+          "clock_offset_ui": 0.0,
+          "coarse_latency_ui": 1.0
+        },
+        "coupling_pf": 0.1
+      },
+      "pattern": "random",
+      "seed": 641102,
+      "bits": 64,
+      "phase_ui": 0.5,
+      "guard_ui": 0.1,
+      "margin_min": 0.08,
+      "overshoot_max": 0.2,
+      "points_per_ui": 64
+    }
+  ],
+  "test": [
+    {
+      "name": "test_e0_p0",
+      "context": {
+        "lane0": {
+          "vdd": 0.98,
+          "temperature_c": 42.0,
+          "rate_gbps": 2.0,
+          "resistance_ohm": 35.0,
+          "inductance_nh": 0.3,
+          "capacitance_pf": 0.32,
+          "rx_capacitance_pf": 0.06,
+          "clock_offset_ui": 0.0,
+          "coarse_latency_ui": 1.0
+        },
+        "lane1": {
+          "vdd": 0.98,
+          "temperature_c": 42.0,
+          "rate_gbps": 2.0,
+          "resistance_ohm": 37.0,
+          "inductance_nh": 0.3,
+          "capacitance_pf": 0.32,
+          "rx_capacitance_pf": 0.06,
+          "clock_offset_ui": 0.0,
+          "coarse_latency_ui": 1.0
+        },
+        "coupling_pf": 0.08
+      },
+      "pattern": "random",
+      "seed": 971000,
+      "bits": 64,
+      "phase_ui": 0.5,
+      "guard_ui": 0.1,
+      "margin_min": 0.08,
+      "overshoot_max": 0.2,
+      "points_per_ui": 64
+    },
+    {
+      "name": "test_e0_p1",
+      "context": {
+        "lane0": {
+          "vdd": 0.98,
+          "temperature_c": 42.0,
+          "rate_gbps": 2.0,
+          "resistance_ohm": 35.0,
+          "inductance_nh": 0.3,
+          "capacitance_pf": 0.32,
+          "rx_capacitance_pf": 0.06,
+          "clock_offset_ui": 0.0,
+          "coarse_latency_ui": 1.0
+        },
+        "lane1": {
+          "vdd": 0.98,
+          "temperature_c": 42.0,
+          "rate_gbps": 2.0,
+          "resistance_ohm": 37.0,
+          "inductance_nh": 0.3,
+          "capacitance_pf": 0.32,
+          "rx_capacitance_pf": 0.06,
+          "clock_offset_ui": 0.0,
+          "coarse_latency_ui": 1.0
+        },
+        "coupling_pf": 0.08
+      },
+      "pattern": "random",
+      "seed": 971001,
+      "bits": 64,
+      "phase_ui": 0.5,
+      "guard_ui": 0.1,
+      "margin_min": 0.08,
+      "overshoot_max": 0.2,
+      "points_per_ui": 64
+    },
+    {
+      "name": "test_e1_p0",
+      "context": {
+        "lane0": {
+          "vdd": 1.02,
+          "temperature_c": 55.0,
+          "rate_gbps": 2.0,
+          "resistance_ohm": 38.0,
+          "inductance_nh": 0.3,
+          "capacitance_pf": 0.33,
+          "rx_capacitance_pf": 0.06,
+          "clock_offset_ui": 0.0,
+          "coarse_latency_ui": 1.0
+        },
+        "lane1": {
+          "vdd": 1.02,
+          "temperature_c": 55.0,
+          "rate_gbps": 2.0,
+          "resistance_ohm": 40.0,
+          "inductance_nh": 0.3,
+          "capacitance_pf": 0.33,
+          "rx_capacitance_pf": 0.06,
+          "clock_offset_ui": 0.0,
+          "coarse_latency_ui": 1.0
+        },
+        "coupling_pf": 0.09
+      },
+      "pattern": "random",
+      "seed": 971101,
+      "bits": 64,
+      "phase_ui": 0.5,
+      "guard_ui": 0.1,
+      "margin_min": 0.08,
+      "overshoot_max": 0.2,
+      "points_per_ui": 64
+    },
+    {
+      "name": "test_e1_p1",
+      "context": {
+        "lane0": {
+          "vdd": 1.02,
+          "temperature_c": 55.0,
+          "rate_gbps": 2.0,
+          "resistance_ohm": 38.0,
+          "inductance_nh": 0.3,
+          "capacitance_pf": 0.33,
+          "rx_capacitance_pf": 0.06,
+          "clock_offset_ui": 0.0,
+          "coarse_latency_ui": 1.0
+        },
+        "lane1": {
+          "vdd": 1.02,
+          "temperature_c": 55.0,
+          "rate_gbps": 2.0,
+          "resistance_ohm": 40.0,
+          "inductance_nh": 0.3,
+          "capacitance_pf": 0.33,
+          "rx_capacitance_pf": 0.06,
+          "clock_offset_ui": 0.0,
+          "coarse_latency_ui": 1.0
+        },
+        "coupling_pf": 0.09
+      },
+      "pattern": "random",
+      "seed": 971102,
+      "bits": 64,
+      "phase_ui": 0.5,
+      "guard_ui": 0.1,
+      "margin_min": 0.08,
+      "overshoot_max": 0.2,
+      "points_per_ui": 64
+    }
+  ],
+  "development_drift_seeds": [
+    601001,
+    601002,
+    601003,
+    601004
+  ],
+  "test_drift_seeds": [
+    901001,
+    901002,
+    901003,
+    901004,
+    901005,
+    901006,
+    901007,
+    901008
+  ],
+  "ppo_seeds": [
+    0,
+    1,
+    2
+  ],
+  "ppo_steps_per_stage": 7680,
+  "ppo_stages": 2,
+  "ppo": {
+    "rollout": 256,
+    "minibatch": 128,
+    "epochs": 4,
+    "lr": 0.0003,
+    "gamma": 0.99,
+    "gae_lambda": 0.95,
+    "clip": 0.2,
+    "entropy_coefficient": 0.01,
+    "value_coefficient": 0.5
+  },
+  "stage_A": "Nominal design: none/periodic/event/bang-bang, eight development episodes each. Proceed only if at least one satisfies the unchanged episode constraints.",
+  "stage_B": "Three nominal-design PPO pilots, 7680 blocks each; four-frame history and argmax evaluation",
+  "stage_C": "Freeze V1 for all proposal scores; two proposals per arm after common six designs. Train V2 once on all 12 designs, 10 episodes per design per seed; re-score ALL designs under each fixed V2 before final selection.",
+  "selection": "Static arm uses fixed-phase SPICE metric; classical and RL arms use actual per-block operational metrics, constraints first then energy. Each arm may select only common six plus its own two proposals.",
+  "cost_assumptions": "Parallel 3-center x 9-aperture monitor on a known 64-bit/lane pilot; pilot TX energy from bank; comparator 0.002 pJ/sample, phase change 0.1 pJ/lane + two UI pause. No measured monitor silicon power claim.",
+  "sensitivity": {
+    "monitor_energy_scales": [
+      0.1,
+      1,
+      10
+    ],
+    "calibration_time_scales": [
+      0.5,
+      1,
+      2
+    ],
+    "scope": "Reaccount fixed selected trajectories/actions; no retraining or reselection"
+  },
+  "gate_failure": "Save classical diagnostics and do not start joint optimization; no relaxed thresholds or extra training",
+  "claims": "Finite alternating pilot, not exact bilevel optimum or real PVT transient / full SerDes reproduction",
+  "created_at": 1789441881.4207106
+}

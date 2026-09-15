@@ -1,0 +1,616 @@
+diff --git a/d2d_sizing/__init__.py b/d2d_sizing/__init__.py
+new file mode 100644
+index 0000000..a69089e
+--- /dev/null
++++ b/d2d_sizing/__init__.py
+@@ -0,0 +1 @@
++"""Fixed-topology D2D transmitter sizing with measured SPICE supervision."""
+diff --git a/d2d_sizing/circuit.py b/d2d_sizing/circuit.py
+new file mode 100644
+index 0000000..ba285ae
+--- /dev/null
++++ b/d2d_sizing/circuit.py
+@@ -0,0 +1,311 @@
++"""Six sizing variables, 72 MOS, coupled RLC channels and a fixed RX aperture.
++
++Uses the repository's PTM predictive MOS model, not a foundry PDK or a UCIe
++compliance model. Every design is physically re-simulated; calibration lookup
++tables are never used. Source excitation and behavioral RX power are excluded.
++"""
++from concurrent.futures import ThreadPoolExecutor
++from dataclasses import asdict, dataclass, field
++import hashlib
++import json
++import os
++from pathlib import Path
++import re
++import subprocess
++import sys
++import time
++
++import numpy as np
++
++REPO = Path(__file__).resolve().parents[1]
++LINK_ROOT = REPO / 'd2d_coupled_calibration'
++if str(LINK_ROOT) not in sys.path:
++    sys.path.insert(0, str(LINK_ROOT))
++from coupled_link import CoupledContext, link, netlist as link_netlist
++
++NAMES = ('pre1_n_um', 'pre2_n_um', 'output_n_um', 'pn_ratio',
++         'enable_width_ratio', 'series_resistance_ohm')
++LOW = np.array([.4, 1.5, .25, 1.4, 1., 1.])
++HIGH = np.array([2.5, 10., 4., 3., 4., 80.])
++NOMINAL = np.array([1., 4., 2., 2., 2., 5.])
++
++
++def write_json(path, value):
++    path = Path(path)
++    path.parent.mkdir(parents=True, exist_ok=True)
++    temporary = path.with_suffix(path.suffix + '.tmp')
++    temporary.write_text(json.dumps(value, indent=2, allow_nan=False) + '\n')
++    temporary.replace(path)
++
++
++def file_hash(path):
++    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
++
++
++def validate_design(x):
++    x = np.asarray(x, float)
++    if x.shape != LOW.shape or not np.isfinite(x).all() or (x < LOW).any() or (x > HIGH).any():
++        raise ValueError('Expected six finite sizing variables within LOW/HIGH')
++    return x
++
++
++def encode(x):
++    return np.log(validate_design(x) / LOW) / np.log(HIGH / LOW)
++
++
++def decode(u):
++    u = np.asarray(u, float)
++    if u.shape != LOW.shape or not np.isfinite(u).all() or (u < 0).any() or (u > 1).any():
++        raise ValueError('Expected six normalized variables in [0,1]')
++    return np.clip(LOW * (HIGH / LOW) ** u, LOW, HIGH)
++
++
++@dataclass(frozen=True)
++class Case:
++    name: str
++    context: CoupledContext = field(default_factory=lambda: CoupledContext(link.Context(), link.Context(), .06))
++    pattern: str = 'random'
++    seed: int = 71001
++    bits: int = 64
++    # Fixed before optimization. No per-design phase maximization or alignment.
++    phase_ui: float = .5
++    guard_ui: float = .1
++    margin_min: float = .08
++    overshoot_max: float = .2
++    points_per_ui: int = 64
++
++    def __post_init__(self):
++        if self.pattern not in ('random', 'opposite', 'same', 'runs'):
++            raise ValueError('Unknown data pattern')
++        if type(self.bits) is not int or self.bits < 8 or self.bits % 8:
++            raise ValueError('bits must be a multiple of eight')
++        if not 0 <= self.phase_ui <= 1 or not 0 < self.guard_ui < .5:
++            raise ValueError('Invalid fixed sampling aperture')
++        if not 0 < self.margin_min < .5 or not 0 < self.overshoot_max < 1:
++            raise ValueError('Invalid quality limits')
++        if type(self.points_per_ui) is not int or self.points_per_ui < 32:
++            raise ValueError('Use at least 32 transient points per UI')
++
++    @classmethod
++    def from_dict(cls, value):
++        value = dict(value)
++        value['context'] = CoupledContext.from_dict(value['context'])
++        return cls(**value)
++
++    def payload(self):
++        if self.pattern == 'random':
++            return np.random.default_rng(self.seed).integers(0, 2, (2, self.bits), dtype=np.uint8)
++        if self.pattern == 'runs':
++            a = np.tile(np.r_[np.zeros(4), np.ones(4)], self.bits // 8).astype(np.uint8)
++        else:
++            a = np.tile([0, 1], self.bits // 2).astype(np.uint8)
++        return np.stack([a, a if self.pattern == 'same' else 1 - a])
++
++
++def default_suite(split='development'):
++    """Small predeclared input suites, not statistically exhaustive PVT corners."""
++    if split not in ('development', 'test'):
++        raise ValueError(split)
++    development = split == 'development'
++    settings = [(1., 27., 30., .30, .06), (.95, 65., 40., .34, .10)] if development else [
++        (.98, 40., 35., .32, .08), (1.02, 55., 38., .33, .09)]
++    result = []
++    for j, (vdd, temp, resistance, cap, coupling) in enumerate(settings):
++        lanes = [link.Context(vdd=vdd, temperature_c=temp, resistance_ohm=resistance + 2*k,
++                              capacitance_pf=cap, inductance_nh=.3, rx_capacitance_pf=.06,
++                              clock_offset_ui=0.) for k in range(2)]
++        context = CoupledContext(*lanes, coupling_pf=coupling)
++        patterns = ('random', 'opposite') if development else ('random', 'random', 'same', 'runs')
++        for k, pattern in enumerate(patterns):
++            result.append(Case(f'{split}_{j}_{k}_{pattern}', context=context, pattern=pattern,
++                               seed=(71001 if development else 171001) + 101*j + k,
++                               bits=64 if development else 128))
++    return result
++
++
++def suite_hash(cases):
++    return hashlib.sha256(json.dumps([asdict(c) for c in cases], sort_keys=True).encode()).hexdigest()
++
++
++def netlist(x, case):
++    p1, p2, out, pn, en, rs = validate_design(x)
++    lines = link_netlist(case.context, (8, 8), case.payload(), case.points_per_ui).splitlines()
++    lines[0] = 'D2D transmitter sizing: shared six-variable design, 72 fixed MOS'
++    mos_count = 0
++    for i, line in enumerate(lines):
++        tokens = line.split()
++        if not tokens:
++            continue
++        name = tokens[0]
++        if name.startswith('M'):
++            base = name.rsplit('_', 1)[0]
++            if base.startswith('MPRE1'):
++                width = p1 * (pn if base.endswith('P') else 1.)
++            elif base.startswith('MPRE2'):
++                width = p2 * (pn if base.endswith('P') else 1.)
++            elif base.startswith('MH'):
++                width = out * pn * en
++            elif base.startswith('MF'):
++                width = out * en
++            elif base.startswith('MP'):
++                width = out * pn
++            elif base.startswith('MN'):
++                width = out
++            else:
++                raise ValueError(f'Unrecognized MOS: {name}')
++            lines[i] = re.sub(r'\bw=\S+', f'w={width:.12g}u', line)
++            mos_count += 1
++        elif name.startswith('RCH0_'):
++            lane = name.rsplit('_', 1)[1]
++            tokens[1] = 'pad_' + lane
++            lines[i] = ' '.join(tokens)
++    if mos_count != 72:
++        raise ValueError('Unexpected transmitter topology')
++    control = lines.index('.control')
++    lines[control:control] = [f'RTERM_{k} tx_{k} pad_{k} {rs:.12g}' for k in range(2)]
++    return '\n'.join(lines) + '\n'
++
++
++def area_proxy(x):
++    p1, p2, out, pn, en, _ = validate_design(x)
++    return float(2 * .09 * (1 + pn) * (p1 + p2 + 8*out*(1 + en)))
++
++
++def measure(wave, case):
++    t, rx, currents = wave['t'], wave['rx'], wave['ivdd']
++    bits = case.payload()
++    c = case.context.lane0
++    if len(t) < 2 or not np.isfinite(t).all() or not np.isfinite(rx).all() or not np.isfinite(currents).all():
++        raise ValueError('Nonfinite or incomplete waveform')
++    if not (np.diff(t) > 0).all():
++        raise ValueError('Timestamps must be strictly increasing')
++    t0, t1 = 16*c.ui, (16 + case.bits)*c.ui
++    ts = np.r_[t0, t[(t > t0) & (t < t1)], t1]
++    energy = [float(np.trapezoid(-c.vdd*np.interp(ts, t, currents[:, k]), ts) / case.bits*1e12)
++              for k in range(2)]
++    margins, errors = [], []
++    for k, lane in enumerate((case.context.lane0, case.context.lane1)):
++        times = (np.arange(16, 16+case.bits)[:, None] + lane.coarse_latency_ui + case.phase_ui +
++                 lane.clock_offset_ui + np.linspace(-case.guard_ui, case.guard_ui, 9)[None, :])*lane.ui
++        if times.min() < t[0] or times.max() > t[-1] or t[-1] < t1:
++            raise ValueError('Incomplete sampling window')
++        v = np.interp(times.ravel(), t, rx[:, k]).reshape(times.shape) / lane.vdd
++        signed = (2*bits[k].astype(float)[:, None]-1)*(v-.5)
++        margins.append(float(signed.min()))
++        errors.append(int(np.count_nonzero((v[:, 4] >= .5) != bits[k])))
++    samples = rx[(t >= t0) & (t <= t1)] / c.vdd
++    overshoot = float(max(0., samples.max()-1., -samples.min()))
++    valid = bool(min(energy) > 0 and np.isfinite(energy).all() and np.abs(samples).max() < 10)
++    feasible = bool(valid and min(margins) >= case.margin_min and sum(errors) == 0 and
++                    overshoot <= case.overshoot_max)
++    return dict(valid=valid, feasible=feasible, margins=margins, errors=errors,
++                overshoot_fraction=overshoot, energy_lane_pj_bit=energy,
++                energy_pj_bit=float(np.mean(energy)), case=asdict(case))
++
++
++def aggregate(records):
++    valid = all(r.get('valid', False) for r in records)
++    if not valid:
++        return dict(valid=False, feasible=False, cases=records)
++    margins = np.min([r['margins'] for r in records], axis=0).tolist()
++    return dict(valid=True, feasible=all(r['feasible'] for r in records), margins=margins,
++                energy_pj_bit=float(np.mean([r['energy_pj_bit'] for r in records])),
++                overshoot_fraction=float(max(r['overshoot_fraction'] for r in records)), cases=records)
++
++
++def cost(result, margin=.08, overshoot=.2):
++    if not result['valid']:
++        return 1e6
++    if not result['feasible']:
++        violation = np.maximum(0., (margin-np.asarray(result['margins']))/margin).sum()
++        violation += max(0., (result['overshoot_fraction']-overshoot)/overshoot)
++        return float(1 + violation)
++    e = result['energy_pj_bit']
++    return float(e/(1+e))
++
++
++class Evaluator:
++    """Each request counts; physical transients and cache hits are separate."""
++    def __init__(self, cases, output, workers=1):
++        self.cases = list(cases)
++        if not self.cases or len({(c.margin_min,c.overshoot_max) for c in cases}) != 1:
++            raise ValueError('A nonempty suite with common quality limits is required')
++        if workers < 1:
++            raise ValueError('workers must be positive')
++        self.workers = workers
++        self.output = Path(output)
++        self.output.mkdir(parents=True, exist_ok=True)
++        self.calls = self.transients = self.cache_hits = self.failed = 0
++        self.design_queries = 0
++        self.binary, self.env = link.simulator()
++        self.simulator_version = subprocess.run([self.binary, '--version'], env=self.env,
++            capture_output=True, text=True, check=True).stdout.strip()
++        self.code_hash = file_hash(__file__)
++
++    def _case(self, x, case, query, case_index):
++        text = netlist(x, case)
++        model_hash = file_hash(LINK_ROOT/'assets/45nm_bulk.txt')
++        identity = dict(netlist=text.replace(str(LINK_ROOT), 'LINK_ROOT'), code=self.code_hash,
++                        simulator=self.simulator_version, model=model_hash, case=asdict(case))
++        digest = hashlib.sha256(json.dumps(identity, sort_keys=True).encode()).hexdigest()
++        folder = self.output/'cache'/digest
++        cached = folder/'measurement.json'
++        receipt = self.output/'receipts'/f'q{query:05d}_c{case_index:02d}.json'
++        if receipt.exists():
++            raise FileExistsError(f'Existing evaluator request: {receipt}')
++        hit = cached.exists()
++        write_json(receipt, dict(status='pending', fingerprint=digest, cache_hit=hit, query=query,
++                                 case_index=case_index, x=np.asarray(x).tolist()))
++        if hit:
++            data = json.loads(cached.read_text())
++            if data['fingerprint'] != digest:
++                raise ValueError('Measurement cache mismatch')
++            write_json(receipt, dict(status='complete', fingerprint=digest, cache_hit=True,
++                                     measurement_sha256=file_hash(cached)))
++            return data['measurement'], True, False
++        folder.mkdir(parents=True, exist_ok=True)
++        (folder/'circuit.cir').write_text(text)
++        start = time.perf_counter()
++        try:
++            proc = subprocess.run([self.binary, '-b', 'circuit.cir'], cwd=folder, env=self.env,
++                                  capture_output=True, text=True, timeout=120)
++            log = proc.stdout + proc.stderr
++            (folder/'ngspice.log').write_text(log)
++            if proc.returncode or re.search(r'(?im)^\s*(?:fatal error|error on line|error:|fatal:)', log):
++                raise RuntimeError(log[-1500:])
++            raw = np.loadtxt(folder/'wave.txt', skiprows=1, ndmin=2)
++            raw = raw[np.r_[np.diff(raw[:, 0]) > 0, True]]
++            if raw.shape[1] != 7:
++                raise ValueError('Unexpected SPICE columns')
++            wave = dict(t=raw[:, 0], tx=raw[:, [1, 4]], rx=raw[:, [2, 5]], ivdd=raw[:, [3, 6]])
++            result = measure(wave, case)
++            result['area_proxy_um2'] = area_proxy(x)
++            np.savez_compressed(folder/'wave.npz', **wave)
++            (folder/'wave.txt').unlink()
++            write_json(cached, dict(fingerprint=digest, measurement=result))
++            write_json(receipt, dict(status='complete', fingerprint=digest, cache_hit=False,
++                                     measurement_sha256=file_hash(cached), seconds=time.perf_counter()-start))
++            return result, False, False
++        except (RuntimeError, ValueError, OSError, subprocess.TimeoutExpired) as error:
++            result = dict(valid=False, feasible=False, reason=str(error), case=asdict(case))
++            write_json(receipt, dict(status='failed', fingerprint=digest, cache_hit=False,
++                                     seconds=time.perf_counter()-start, reason=str(error)))
++            return result, False, True
++
++    def evaluate(self, x):
++        x = validate_design(x)
++        self.design_queries += 1
++        jobs = [(x, c, self.design_queries, k) for k, c in enumerate(self.cases)]
++        with ThreadPoolExecutor(max_workers=self.workers) as pool:
++            results = list(pool.map(lambda args: self._case(*args), jobs))
++        self.calls += len(results)
++        self.cache_hits += sum(hit for _, hit, _ in results)
++        self.transients += sum(not hit for _, hit, _ in results)
++        self.failed += sum(failed for _, _, failed in results)
++        return aggregate([r for r, _, _ in results])
++
++    def accounting(self):
++        return dict(design_queries=self.design_queries, logical_measurements=self.calls,
++                    spice_transient_attempts=self.transients, cache_hits=self.cache_hits,
++                    failed_transients=self.failed, completed_transients=self.transients-self.failed,
++                    suite_sha256=suite_hash(self.cases), simulator_version=self.simulator_version)
+diff --git a/d2d_sizing/surrogate.py b/d2d_sizing/surrogate.py
+new file mode 100644
+index 0000000..b57bf67
+--- /dev/null
++++ b/d2d_sizing/surrogate.py
+@@ -0,0 +1,286 @@
++"""Measured-response regression/RNC, residual fitting and critic reuse.
++
++This is supervised circuit optimization, not a Bellman critic. Buffer scores
++the same residual-corrected predictor used for proposals, before measurement.
++"""
++import copy
++from dataclasses import dataclass
++import math
++
++import numpy as np
++import torch
++from torch import nn
++from torch.nn import functional as F
++
++from adc_driver.attention import CoordinateAttention, SearchOptions, metric_direction, project
++from adc_driver.rnc import rank_n_contrast
++from .circuit import NAMES, cost
++
++torch.set_num_threads(1)
++
++
++def target(result):
++    # Signed margins must NOT be logged or clipped to a positive epsilon.
++    return np.array([*result['margins'], np.log10(result['energy_pj_bit']),
++                     result['overshoot_fraction']], dtype=np.float32)
++
++
++class Model(nn.Module):
++    def __init__(self):
++        super().__init__()
++        self.encoder = nn.Sequential(nn.Linear(len(NAMES), 64), nn.SiLU(), nn.Linear(64, 64), nn.SiLU())
++        self.regressor = nn.Linear(64, 4)
++        self.validity = nn.Linear(64, 1)
++        self.projector = nn.Sequential(nn.Linear(64, 32), nn.SiLU(), nn.Linear(32, 16))
++
++    def forward(self, u):
++        h = self.encoder(u)
++        return self.regressor(h), self.validity(h)[:, 0], h, self.projector(h)
++
++
++def loss_components(model, rows, mean, std, method):
++    u = torch.tensor(np.array([r['u'] for r in rows]), dtype=torch.float32)
++    good = torch.tensor([r['oracle']['valid'] for r in rows])
++    pred, valid, _, z = model(u)
++    reg = pred.sum()*0
++    contrast = z.sum()*0
++    if good.any():
++        y = torch.tensor(np.array([target(r['oracle']) for r in rows if r['oracle']['valid']]))
++        yn = (y-mean)/std
++        reg = F.mse_loss(pred[good], yn)
++        if method == 'rnc':
++            contrast = rank_n_contrast(z[good], yn)
++    bce = F.binary_cross_entropy_with_logits(valid, good.float())
++    return reg, bce, contrast
++
++
++def train(rows, method, seed, epochs=100, checkpoint='validation'):
++    if method not in ('regression', 'rnc') or epochs < 1:
++        raise ValueError('Invalid training method or epochs')
++    if checkpoint not in ('validation', 'last'):
++        raise ValueError('Invalid checkpoint rule')
++    torch.manual_seed(seed)
++    rng = np.random.default_rng(seed+7001)
++    training = [r for r in rows if r.get('split', 'train') == 'train']
++    validation = [r for r in rows if r.get('split') == 'validation' and r['oracle']['valid']]
++    y = np.array([target(r['oracle']) for r in training if r['oracle']['valid']])
++    if len(y) < 4:
++        raise ValueError('Need >=4 valid train designs')
++    if checkpoint == 'validation' and not validation:
++        raise ValueError('Need >=1 valid validation design')
++    mean = torch.tensor(y.mean(0))
++    std = torch.tensor(np.maximum(y.std(0, ddof=1), [.05, .05, .05, .02]), dtype=torch.float32)
++    model = Model()
++    optimizer = torch.optim.AdamW(model.parameters(), lr=1e-3, weight_decay=1e-4)
++    best, state, logs = math.inf, None, []
++    scored = validation if checkpoint == 'validation' else [r for r in training if r['oracle']['valid']]
++    for epoch in range(epochs):
++        for ix in np.array_split(rng.permutation(len(training)), max(1, math.ceil(len(training)/32))):
++            reg, bce, rnc = loss_components(model, [training[i] for i in ix], mean, std, method)
++            loss = reg + .2*bce + .1*rnc
++            if not torch.isfinite(loss):
++                raise FloatingPointError('Nonfinite surrogate loss')
++            optimizer.zero_grad(set_to_none=True)
++            loss.backward()
++            nn.utils.clip_grad_norm_(model.parameters(), 5., error_if_nonfinite=True)
++            optimizer.step()
++        with torch.no_grad():
++            score = float(loss_components(model, scored, mean, std, 'regression')[0])
++        logs.append(dict(epoch=epoch+1, validation_mse=score if checkpoint == 'validation' else None,
++                         train_mse=score if checkpoint == 'last' else None,
++                         last_regression=float(reg.detach()), last_rnc=float(rnc.detach())))
++        if checkpoint == 'last' or score < best:
++            best, state, best_epoch = score, copy.deepcopy(model.state_dict()), epoch+1
++    return dict(state_dict=state, mean=mean, std=std, method=method, seed=seed,
++                checkpoint=checkpoint, best_epoch=best_epoch, validation_mse=best if checkpoint == 'validation' else None,
++                train_mse=best if checkpoint == 'last' else None, logs=logs)
++
++
++class Predictor:
++    def __init__(self, model, mean, std, rows):
++        self.model = model.eval().requires_grad_(False)
++        self.mean, self.std, self.coef = mean, std, None
++        good = [r for r in rows if r['oracle']['valid']]
++        if len(good) >= 2:
++            with torch.no_grad():
++                pred, _, h, _ = model(torch.tensor(np.array([r['u'] for r in good]), dtype=torch.float32))
++                self.hm, self.hs = h.mean(0), h.std(0).clamp_min(.2)
++                phi = torch.cat([(h-self.hm)/self.hs, torch.ones(len(h), 1)], 1)
++                y = torch.tensor(np.array([target(r['oracle']) for r in good]))
++                residual = (y-mean)/std-pred
++                self.coef = phi.T@torch.linalg.solve(phi@phi.T + .5*torch.eye(len(phi)), residual)
++
++    def predict(self, u):
++        pred, valid, h, _ = self.model(u)
++        if self.coef is not None:
++            phi = torch.cat([(h-self.hm)/self.hs, torch.ones(len(h), 1)], 1)
++            pred = pred+phi@self.coef
++        return pred*self.std+self.mean, valid
++
++    def objective(self, u, margin=.08, overshoot=.2):
++        y, valid = self.predict(u)
++        violation = ((margin-y[:, :2])/margin).clamp_min(0).sum(-1)
++        violation = violation + ((y[:, 3]-overshoot)/overshoot).clamp_min(0)
++        energy = torch.sigmoid(math.log(10)*y[:, 2])  # E / (1 + E)
++        return torch.where(valid < 0, 3+torch.sigmoid(-valid),
++                           torch.where(violation > 0, 1+violation/(1+violation), energy))
++
++
++@dataclass
++class Entry:
++    id: int
++    model: Model
++    errors: list
++    prior: float = 1.
++
++
++class Search:
++    def __init__(self, payload, offline, mode='buffer', attention='learned', online_epochs=20,
++                 margin=.08, overshoot=.2):
++        if mode not in ('frozen', 'latest', 'buffer') or online_epochs < 1:
++            raise ValueError('Invalid critic update options')
++        self.payload, self.offline, self.mode = payload, offline, mode
++        self.online_epochs, self.margin, self.overshoot = online_epochs, margin, overshoot
++        model = Model()
++        model.load_state_dict(payload['state_dict'])
++        self.entries = [Entry(0, model, [])]
++        self.current, self.next_id = self.entries[0], 1
++        self.mean, self.std = payload['mean'], payload['std']
++        self.options = SearchOptions(attention=attention)
++        self.attention = CoordinateAttention(len(NAMES)) if attention == 'learned' else None
++        self.events = []
++
++    @staticmethod
++    def score(entry):
++        if not entry.errors:
++            return entry.prior
++        errors = entry.errors[-32:]
++        weights = np.exp(-np.arange(len(errors)-1, -1, -1)/32)
++        return float(np.average(errors, weights=weights))
++
++    def _update(self, rows):
++        if self.mode == 'frozen':
++            return dict(mode=self.mode, updated=False, selected=self.current.id)
++        scores = np.array([self.score(e) for e in self.entries])
++        rng = np.random.default_rng(np.random.SeedSequence([self.payload['seed'], len(rows), 87231]))
++        probabilities = np.exp(-(scores-scores.min())/.25)
++        probabilities /= probabilities.sum()
++        parent = self.entries[int(rng.choice(len(self.entries), p=probabilities))] if self.mode == 'buffer' else self.current
++        model = copy.deepcopy(parent.model).train().requires_grad_(True)
++        optimizer = torch.optim.AdamW(model.parameters(), lr=3e-4, weight_decay=1e-4)
++        count = max(len(self.offline), len(rows))
++        for _ in range(self.online_epochs):
++            offline = rng.choice(len(self.offline), count, replace=len(self.offline) < count)
++            online = rng.choice(len(rows), count, replace=len(rows) < count)
++            replay = [self.offline[i] for i in offline] + [rows[i] for i in online]
++            for ix in np.array_split(rng.permutation(len(replay)), max(1, math.ceil(len(replay)/32))):
++                reg, bce, rnc = loss_components(model, [replay[i] for i in ix], self.mean, self.std, self.payload['method'])
++                loss = reg + .2*bce + .1*rnc
++                if not torch.isfinite(loss):
++                    raise FloatingPointError('Nonfinite online surrogate loss')
++                optimizer.zero_grad(set_to_none=True)
++                loss.backward()
++                nn.utils.clip_grad_norm_(model.parameters(), 5., error_if_nonfinite=True)
++                optimizer.step()
++        child = Entry(self.next_id, model.eval(), [], self.score(parent))
++        self.next_id += 1
++        event = dict(mode=self.mode, updated=True, parent=parent.id, selected=child.id,
++                     parent_scores=scores.tolist(), probabilities=probabilities.tolist())
++        if self.mode == 'latest':
++            self.entries = [child]
++        else:
++            if len(self.entries) >= 4:
++                self.entries.pop(int(scores.argmax()))
++            self.entries.append(child)
++        self.current = child
++        return event
++
++    def predictions(self, u, rows):
++        # Must be called before the oracle. Each candidate gets its own residual
++        # fit using exactly the already-paid rows, matching the proposer.
++        result = []
++        point = torch.tensor(np.asarray(u)[None], dtype=torch.float32)
++        for entry in self.entries:
++            predictor = Predictor(entry.model, self.mean, self.std, rows)
++            with torch.no_grad():
++                y, valid = predictor.predict(point)
++            result.append(dict(id=entry.id, targets=y[0].tolist(), valid_probability=float(valid.sigmoid()[0])))
++        return result
++
++    def observe(self, row, predictions):
++        entries = {e.id: e for e in self.entries}
++        for prediction in predictions:
++            valid = row['oracle']['valid']
++            error = .2*(prediction['valid_probability']-float(valid))**2
++            if valid:
++                error += float(np.mean(((np.asarray(prediction['targets'])-target(row['oracle']))/self.std.numpy())**2))
++            entries[prediction['id']].errors.append(error)
++
++    def propose(self, rows, rng):
++        event = self._update(rows)
++        predictor = Predictor(self.current.model, self.mean, self.std, rows)
++        objective = lambda u: predictor.objective(u, self.margin, self.overshoot)
++        attention_delta = 0.
++        if self.attention is not None:
++            good = [r for r in rows if r['oracle']['valid']]
++            if good:
++                arng = np.random.default_rng(np.random.SeedSequence([self.payload['seed'], len(rows), 41871]))
++                selected = arng.choice(len(good), min(32, len(good)), replace=False)
++                points = torch.tensor(np.array([good[i]['u'] for i in selected]), dtype=torch.float32, requires_grad=True)
++                gradient = torch.autograd.grad(objective(points).sum(), points)[0].detach()
++                points = points.detach()
++                active = gradient.norm(dim=-1) > 1e-8
++                points, gradient = points[active], gradient[active]
++                if len(points):
++                    optimizer = torch.optim.Adam(self.attention.parameters(), lr=self.options.attention_lr)
++                    def attention_loss():
++                        direction = metric_direction(gradient, self.attention(points), self.options)
++                        return objective(project(points+direction, points, self.options)).mean()
++                    with torch.no_grad():
++                        before = best = float(attention_loss())
++                    state = copy.deepcopy(self.attention.state_dict())
++                    for _ in range(self.options.attention_steps):
++                        loss = attention_loss()
++                        optimizer.zero_grad(set_to_none=True)
++                        loss.backward()
++                        nn.utils.clip_grad_norm_(self.attention.parameters(), 5., error_if_nonfinite=True)
++                        optimizer.step()
++                        with torch.no_grad():
++                            score = float(attention_loss())
++                        if score < best:
++                            best, state = score, copy.deepcopy(self.attention.state_dict())
++                    self.attention.load_state_dict(state)
++                    attention_delta = before-best
++        elites = sorted(rows, key=lambda r: cost(r['oracle'], self.margin, self.overshoot))[:3]
++        centers = [np.asarray(r['u']) for r in elites]
++        starts = centers + [np.clip(centers[0]+rng.normal(0, .15, len(NAMES)), 0, 1) for _ in range(2)]
++        candidates = []
++        for start in starts:
++            u = torch.tensor(start, dtype=torch.float32)
++            center = u.clone()
++            for _ in range(self.options.search_steps):
++                u = u.detach().requires_grad_(True)
++                gradient = torch.autograd.grad(objective(u[None]).sum(), u)[0]
++                if not torch.isfinite(gradient).all() or gradient.norm() < 1e-8:
++                    break
++                with torch.no_grad():
++                    p = self.attention(u) if self.attention is not None else torch.ones_like(u)/len(u)
++                    u = project(u+metric_direction(gradient, p, self.options), center, self.options)
++                    candidates.append(u.numpy())
++        candidates.extend(np.clip(centers[0]+rng.normal(0, .15, (64, len(NAMES))), 0, 1))
++        candidates.extend(rng.uniform(0, 1, (64, len(NAMES))))
++        a = np.asarray(candidates)
++        old = np.array([r['u'] for r in rows])
++        a = a[np.min(np.linalg.norm(a[:, None]-old[None], axis=-1), axis=1) > 1e-6]
++        if not len(a):
++            raise RuntimeError('No new design candidate')
++        with torch.no_grad():
++            scores = objective(torch.tensor(a, dtype=torch.float32)).numpy()
++        if not np.isfinite(scores).all():
++            raise FloatingPointError('Nonfinite candidate score')
++        selected = int(scores.argmin())
++        event.update(after_query=len(rows), predicted_cost=float(scores[selected]), candidates=len(a),
++                     attention_objective_improvement=attention_delta,
++                     selection_evidence='premeasurement residual-corrected prediction error')
++        self.events.append(event)
++        return a[selected], event

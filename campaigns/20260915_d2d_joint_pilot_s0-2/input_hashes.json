@@ -1,0 +1,18 @@
+{
+  "protocol.json": "0276285dc2bc68af9d40c9803c9ac1c8bded48094d0e61617c9a9fa21da2bdaa",
+  "code/d2d_coupled_calibration/link.py": "e88c13dcac52f5b17ad5b2f8f34fb8a32a24f7cc054b97008985847f5a19813a",
+  "code/d2d_coupled_calibration/coupled_link.py": "0e705c89876bab418b8bf9a580427e973a4d5e024dbf5a3674551588fc27a3ea",
+  "code/d2d_coupled_calibration/assets/45nm_bulk.txt": "42489e9aab3423fe868c6d249326535892ad87de7f8f5b18d790d0afe8401ef4",
+  "code/d2d_joint/__init__.py": "a3971c07b657e883904b2e1c0b1e665c12d43d2326f2c0624209cc9322614759",
+  "code/d2d_joint/environment.py": "07508dbedd461dff29491bd740c5968e89ed1d868d78cd7a5581c8f128c2afb7",
+  "code/d2d_joint/design.py": "af23461fd9bcd1d1895e38e74a61b256903cff66d9a175410877dd1b094291a7",
+  "code/d2d_joint/controllers.py": "5648d5eed9872cacc59d3d18441ba5b2da9fb35767e67c57c22043f5b458d55d",
+  "code/d2d_joint/physics.py": "31e952d43929641758ca51336cb94b9084b29431481e1e4027c57ec07b7554ee",
+  "code/d2d_joint/run.py": "428f8bb47431592f725d71565aa296015e1e65049ddad949e055f2c5252dddb6",
+  "code/d2d_joint/ppo.py": "afa90e77753d221eae1055f7b72390ae19c43a94ebdae944f3ed7ebbe652e348",
+  "code/d2d_sizing/__init__.py": "1dcd8efef5af14def4e84ae1f9265aef6de5a8a1606484729d1041e86cfaf767",
+  "code/d2d_sizing/surrogate.py": "e761b62c829051e8e87c00fa67c64c5d31b51b58f1de4b11ddaf5b11f91f95d4",
+  "code/d2d_sizing/circuit.py": "4f8320e4f421b9bef70cda99ea39b1f20b3e0aedee661518faf11ede63d65693",
+  "code/adc_driver/attention.py": "96cee3d65b878af4e07e541be6c197654fd4dfdeb8002174d347f2e6264cbc7d",
+  "code/adc_driver/rnc.py": "dbb29d7a016500b1ca816d1cfe821698169e147f131386c1be513726376df808"
+}

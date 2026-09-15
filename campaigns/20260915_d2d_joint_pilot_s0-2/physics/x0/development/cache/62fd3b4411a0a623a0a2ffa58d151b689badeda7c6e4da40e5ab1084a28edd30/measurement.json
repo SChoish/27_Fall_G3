@@ -1,0 +1,58 @@
+{
+  "fingerprint": "62fd3b4411a0a623a0a2ffa58d151b689badeda7c6e4da40e5ab1084a28edd30",
+  "measurement": {
+    "valid": true,
+    "feasible": true,
+    "margins": [
+      0.28139581013521064,
+      0.31704930409973775
+    ],
+    "errors": [
+      0,
+      0
+    ],
+    "overshoot_fraction": 0.04114389240105898,
+    "energy_lane_pj_bit": [
+      0.24327585124072026,
+      0.249299630663069
+    ],
+    "energy_pj_bit": 0.24628774095189465,
+    "case": {
+      "name": "development_e0_p0",
+      "context": {
+        "lane0": {
+          "vdd": 1.0,
+          "temperature_c": 27.0,
+          "rate_gbps": 2.0,
+          "resistance_ohm": 30.0,
+          "inductance_nh": 0.3,
+          "capacitance_pf": 0.3,
+          "rx_capacitance_pf": 0.06,
+          "clock_offset_ui": 0.0,
+          "coarse_latency_ui": 1.0
+        },
+        "lane1": {
+          "vdd": 1.0,
+          "temperature_c": 27.0,
+          "rate_gbps": 2.0,
+          "resistance_ohm": 32.0,
+          "inductance_nh": 0.3,
+          "capacitance_pf": 0.3,
+          "rx_capacitance_pf": 0.06,
+          "clock_offset_ui": 0.0,
+          "coarse_latency_ui": 1.0
+        },
+        "coupling_pf": 0.06
+      },
+      "pattern": "random",
+      "seed": 641000,
+      "bits": 64,
+      "phase_ui": 0.5,
+      "guard_ui": 0.1,
+      "margin_min": 0.08,
+      "overshoot_max": 0.2,
+      "points_per_ui": 64
+    },
+    "area_proxy_um2": 28.62
+  }
+}

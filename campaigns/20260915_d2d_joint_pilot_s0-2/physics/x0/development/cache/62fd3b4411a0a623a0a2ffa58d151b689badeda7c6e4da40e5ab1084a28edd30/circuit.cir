@@ -1,0 +1,370 @@
+D2D transmitter sizing: shared six-variable design, 72 fixed MOS
+.include "/home/svcho/27_fall_g3/campaigns/20260915_d2d_joint_pilot_s0-2/code/d2d_coupled_calibration/assets/45nm_bulk.txt"
+.temp 27
+.options reltol=1e-5 abstol=1e-12 vntol=1e-7
+VDD_0 vdd_0 0 1
+VIN_0 din_0 0 PWL(
++ 0 1
++ 5e-10 1
++ 5.2e-10 0
++ 1e-09 0
++ 1.02e-09 1
++ 1.5e-09 1
++ 1.52e-09 0
++ 2e-09 0
++ 2.02e-09 1
++ 2.5e-09 1
++ 2.52e-09 0
++ 3e-09 0
++ 3.02e-09 1
++ 3.5e-09 1
++ 3.52e-09 0
++ 4e-09 0
++ 4.02e-09 1
++ 4.5e-09 1
++ 4.52e-09 0
++ 5e-09 0
++ 5.02e-09 1
++ 5.5e-09 1
++ 5.52e-09 0
++ 6e-09 0
++ 6.02e-09 1
++ 6.5e-09 1
++ 6.52e-09 0
++ 7e-09 0
++ 7.02e-09 1
++ 7.5e-09 1
++ 7.52e-09 0
++ 8e-09 0
++ 8.02e-09 1
++ 9e-09 1
++ 9.02e-09 0
++ 9.5e-09 0
++ 9.52e-09 1
++ 1.05e-08 1
++ 1.052e-08 0
++ 1.1e-08 0
++ 1.102e-08 1
++ 1.15e-08 1
++ 1.152e-08 0
++ 1.2e-08 0
++ 1.202e-08 1
++ 1.25e-08 1
++ 1.252e-08 0
++ 1.35e-08 0
++ 1.352e-08 1
++ 1.45e-08 1
++ 1.452e-08 0
++ 1.5e-08 0
++ 1.502e-08 1
++ 1.55e-08 1
++ 1.552e-08 0
++ 1.65e-08 0
++ 1.652e-08 1
++ 1.7e-08 1
++ 1.702e-08 0
++ 1.85e-08 0
++ 1.852e-08 1
++ 2e-08 1
++ 2.002e-08 0
++ 2.1e-08 0
++ 2.102e-08 1
++ 2.3e-08 1
++ 2.302e-08 0
++ 2.35e-08 0
++ 2.352e-08 1
++ 2.4e-08 1
++ 2.402e-08 0
++ 2.45e-08 0
++ 2.452e-08 1
++ 2.5e-08 1
++ 2.502e-08 0
++ 2.55e-08 0
++ 2.552e-08 1
++ 2.6e-08 1
++ 2.602e-08 0
++ 2.7e-08 0
++ 2.702e-08 1
++ 2.75e-08 1
++ 2.752e-08 0
++ 2.8e-08 0
++ 2.802e-08 1
++ 2.95e-08 1
++ 2.952e-08 0
++ 3e-08 0
++ 3.002e-08 1
++ 3.1e-08 1
++ 3.102e-08 0
++ 3.25e-08 0
++ 3.252e-08 1
++ 3.35e-08 1
++ 3.352e-08 0
++ 3.5e-08 0
++ 3.502e-08 1
++ 3.6e-08 1
++ 3.602e-08 0
++ 3.9e-08 0
++ 3.902e-08 1
++ 4.05e-08 1
++ 4.052e-08 0
++ 4.1e-08 0
++ 4.102e-08 1
++ 4.15e-08 1
++ 4.152e-08 0
++ 4.2e-08 0
++ )
+MPRE1P_0 pre_0 din_0 vdd_0 vdd_0 pmos w=2u l=90n
+MPRE1N_0 pre_0 din_0 0 0 nmos w=1u l=90n
+MPRE2P_0 drive_0 pre_0 vdd_0 vdd_0 pmos w=8u l=90n
+MPRE2N_0 drive_0 pre_0 0 0 nmos w=4u l=90n
+VEN0_0 en0_0 0 1
+VENB0_0 enb0_0 0 0
+MH0_0 hp0_0 enb0_0 vdd_0 vdd_0 pmos w=8u l=90n
+MP0_0 tx_0 drive_0 hp0_0 vdd_0 pmos w=4u l=90n
+MN0_0 tx_0 drive_0 fn0_0 0 nmos w=2u l=90n
+MF0_0 fn0_0 en0_0 0 0 nmos w=4u l=90n
+VEN1_0 en1_0 0 1
+VENB1_0 enb1_0 0 0
+MH1_0 hp1_0 enb1_0 vdd_0 vdd_0 pmos w=8u l=90n
+MP1_0 tx_0 drive_0 hp1_0 vdd_0 pmos w=4u l=90n
+MN1_0 tx_0 drive_0 fn1_0 0 nmos w=2u l=90n
+MF1_0 fn1_0 en1_0 0 0 nmos w=4u l=90n
+VEN2_0 en2_0 0 1
+VENB2_0 enb2_0 0 0
+MH2_0 hp2_0 enb2_0 vdd_0 vdd_0 pmos w=8u l=90n
+MP2_0 tx_0 drive_0 hp2_0 vdd_0 pmos w=4u l=90n
+MN2_0 tx_0 drive_0 fn2_0 0 nmos w=2u l=90n
+MF2_0 fn2_0 en2_0 0 0 nmos w=4u l=90n
+VEN3_0 en3_0 0 1
+VENB3_0 enb3_0 0 0
+MH3_0 hp3_0 enb3_0 vdd_0 vdd_0 pmos w=8u l=90n
+MP3_0 tx_0 drive_0 hp3_0 vdd_0 pmos w=4u l=90n
+MN3_0 tx_0 drive_0 fn3_0 0 nmos w=2u l=90n
+MF3_0 fn3_0 en3_0 0 0 nmos w=4u l=90n
+VEN4_0 en4_0 0 1
+VENB4_0 enb4_0 0 0
+MH4_0 hp4_0 enb4_0 vdd_0 vdd_0 pmos w=8u l=90n
+MP4_0 tx_0 drive_0 hp4_0 vdd_0 pmos w=4u l=90n
+MN4_0 tx_0 drive_0 fn4_0 0 nmos w=2u l=90n
+MF4_0 fn4_0 en4_0 0 0 nmos w=4u l=90n
+VEN5_0 en5_0 0 1
+VENB5_0 enb5_0 0 0
+MH5_0 hp5_0 enb5_0 vdd_0 vdd_0 pmos w=8u l=90n
+MP5_0 tx_0 drive_0 hp5_0 vdd_0 pmos w=4u l=90n
+MN5_0 tx_0 drive_0 fn5_0 0 nmos w=2u l=90n
+MF5_0 fn5_0 en5_0 0 0 nmos w=4u l=90n
+VEN6_0 en6_0 0 1
+VENB6_0 enb6_0 0 0
+MH6_0 hp6_0 enb6_0 vdd_0 vdd_0 pmos w=8u l=90n
+MP6_0 tx_0 drive_0 hp6_0 vdd_0 pmos w=4u l=90n
+MN6_0 tx_0 drive_0 fn6_0 0 nmos w=2u l=90n
+MF6_0 fn6_0 en6_0 0 0 nmos w=4u l=90n
+VEN7_0 en7_0 0 1
+VENB7_0 enb7_0 0 0
+MH7_0 hp7_0 enb7_0 vdd_0 vdd_0 pmos w=8u l=90n
+MP7_0 tx_0 drive_0 hp7_0 vdd_0 pmos w=4u l=90n
+MN7_0 tx_0 drive_0 fn7_0 0 nmos w=2u l=90n
+MF7_0 fn7_0 en7_0 0 0 nmos w=4u l=90n
+RCH0_0 pad_0 rl0_0 10
+LCH0_0 rl0_0 ch0_0 0.1n
+CCH0_0 ch0_0 0 0.1p
+RCH1_0 ch0_0 rl1_0 10
+LCH1_0 rl1_0 ch1_0 0.1n
+CCH1_0 ch1_0 0 0.1p
+RCH2_0 ch1_0 rl2_0 10
+LCH2_0 rl2_0 rx_0 0.1n
+CCH2_0 rx_0 0 0.1p
+CRX_0 rx_0 0 0.06p
+VDD_1 vdd_1 0 1
+VIN_1 din_1 0 PWL(
++ 0 1
++ 5e-10 1
++ 5.2e-10 0
++ 1e-09 0
++ 1.02e-09 1
++ 1.5e-09 1
++ 1.52e-09 0
++ 2e-09 0
++ 2.02e-09 1
++ 2.5e-09 1
++ 2.52e-09 0
++ 3e-09 0
++ 3.02e-09 1
++ 3.5e-09 1
++ 3.52e-09 0
++ 4e-09 0
++ 4.02e-09 1
++ 4.5e-09 1
++ 4.52e-09 0
++ 5e-09 0
++ 5.02e-09 1
++ 5.5e-09 1
++ 5.52e-09 0
++ 6e-09 0
++ 6.02e-09 1
++ 6.5e-09 1
++ 6.52e-09 0
++ 7e-09 0
++ 7.02e-09 1
++ 7.5e-09 1
++ 7.52e-09 0
++ 9.5e-09 0
++ 9.52e-09 1
++ 1e-08 1
++ 1.002e-08 0
++ 1.05e-08 0
++ 1.052e-08 1
++ 1.1e-08 1
++ 1.102e-08 0
++ 1.3e-08 0
++ 1.302e-08 1
++ 1.35e-08 1
++ 1.352e-08 0
++ 1.45e-08 0
++ 1.452e-08 1
++ 1.5e-08 1
++ 1.502e-08 0
++ 1.6e-08 0
++ 1.602e-08 1
++ 1.75e-08 1
++ 1.752e-08 0
++ 1.95e-08 0
++ 1.952e-08 1
++ 2.2e-08 1
++ 2.202e-08 0
++ 2.25e-08 0
++ 2.252e-08 1
++ 2.4e-08 1
++ 2.402e-08 0
++ 2.45e-08 0
++ 2.452e-08 1
++ 2.5e-08 1
++ 2.502e-08 0
++ 2.55e-08 0
++ 2.552e-08 1
++ 2.65e-08 1
++ 2.652e-08 0
++ 2.7e-08 0
++ 2.702e-08 1
++ 2.75e-08 1
++ 2.752e-08 0
++ 2.8e-08 0
++ 2.802e-08 1
++ 2.85e-08 1
++ 2.852e-08 0
++ 3e-08 0
++ 3.002e-08 1
++ 3.05e-08 1
++ 3.052e-08 0
++ 3.25e-08 0
++ 3.252e-08 1
++ 3.3e-08 1
++ 3.302e-08 0
++ 3.35e-08 0
++ 3.352e-08 1
++ 3.4e-08 1
++ 3.402e-08 0
++ 3.45e-08 0
++ 3.452e-08 1
++ 3.5e-08 1
++ 3.502e-08 0
++ 3.55e-08 0
++ 3.552e-08 1
++ 3.65e-08 1
++ 3.652e-08 0
++ 3.7e-08 0
++ 3.702e-08 1
++ 3.8e-08 1
++ 3.802e-08 0
++ 3.85e-08 0
++ 3.852e-08 1
++ 3.9e-08 1
++ 3.902e-08 0
++ 4e-08 0
++ 4.002e-08 1
++ 4.05e-08 1
++ 4.052e-08 0
++ 4.1e-08 0
++ 4.102e-08 1
++ 4.15e-08 1
++ 4.152e-08 0
++ 4.2e-08 0
++ )
+MPRE1P_1 pre_1 din_1 vdd_1 vdd_1 pmos w=2u l=90n
+MPRE1N_1 pre_1 din_1 0 0 nmos w=1u l=90n
+MPRE2P_1 drive_1 pre_1 vdd_1 vdd_1 pmos w=8u l=90n
+MPRE2N_1 drive_1 pre_1 0 0 nmos w=4u l=90n
+VEN0_1 en0_1 0 1
+VENB0_1 enb0_1 0 0
+MH0_1 hp0_1 enb0_1 vdd_1 vdd_1 pmos w=8u l=90n
+MP0_1 tx_1 drive_1 hp0_1 vdd_1 pmos w=4u l=90n
+MN0_1 tx_1 drive_1 fn0_1 0 nmos w=2u l=90n
+MF0_1 fn0_1 en0_1 0 0 nmos w=4u l=90n
+VEN1_1 en1_1 0 1
+VENB1_1 enb1_1 0 0
+MH1_1 hp1_1 enb1_1 vdd_1 vdd_1 pmos w=8u l=90n
+MP1_1 tx_1 drive_1 hp1_1 vdd_1 pmos w=4u l=90n
+MN1_1 tx_1 drive_1 fn1_1 0 nmos w=2u l=90n
+MF1_1 fn1_1 en1_1 0 0 nmos w=4u l=90n
+VEN2_1 en2_1 0 1
+VENB2_1 enb2_1 0 0
+MH2_1 hp2_1 enb2_1 vdd_1 vdd_1 pmos w=8u l=90n
+MP2_1 tx_1 drive_1 hp2_1 vdd_1 pmos w=4u l=90n
+MN2_1 tx_1 drive_1 fn2_1 0 nmos w=2u l=90n
+MF2_1 fn2_1 en2_1 0 0 nmos w=4u l=90n
+VEN3_1 en3_1 0 1
+VENB3_1 enb3_1 0 0
+MH3_1 hp3_1 enb3_1 vdd_1 vdd_1 pmos w=8u l=90n
+MP3_1 tx_1 drive_1 hp3_1 vdd_1 pmos w=4u l=90n
+MN3_1 tx_1 drive_1 fn3_1 0 nmos w=2u l=90n
+MF3_1 fn3_1 en3_1 0 0 nmos w=4u l=90n
+VEN4_1 en4_1 0 1
+VENB4_1 enb4_1 0 0
+MH4_1 hp4_1 enb4_1 vdd_1 vdd_1 pmos w=8u l=90n
+MP4_1 tx_1 drive_1 hp4_1 vdd_1 pmos w=4u l=90n
+MN4_1 tx_1 drive_1 fn4_1 0 nmos w=2u l=90n
+MF4_1 fn4_1 en4_1 0 0 nmos w=4u l=90n
+VEN5_1 en5_1 0 1
+VENB5_1 enb5_1 0 0
+MH5_1 hp5_1 enb5_1 vdd_1 vdd_1 pmos w=8u l=90n
+MP5_1 tx_1 drive_1 hp5_1 vdd_1 pmos w=4u l=90n
+MN5_1 tx_1 drive_1 fn5_1 0 nmos w=2u l=90n
+MF5_1 fn5_1 en5_1 0 0 nmos w=4u l=90n
+VEN6_1 en6_1 0 1
+VENB6_1 enb6_1 0 0
+MH6_1 hp6_1 enb6_1 vdd_1 vdd_1 pmos w=8u l=90n
+MP6_1 tx_1 drive_1 hp6_1 vdd_1 pmos w=4u l=90n
+MN6_1 tx_1 drive_1 fn6_1 0 nmos w=2u l=90n
+MF6_1 fn6_1 en6_1 0 0 nmos w=4u l=90n
+VEN7_1 en7_1 0 1
+VENB7_1 enb7_1 0 0
+MH7_1 hp7_1 enb7_1 vdd_1 vdd_1 pmos w=8u l=90n
+MP7_1 tx_1 drive_1 hp7_1 vdd_1 pmos w=4u l=90n
+MN7_1 tx_1 drive_1 fn7_1 0 nmos w=2u l=90n
+MF7_1 fn7_1 en7_1 0 0 nmos w=4u l=90n
+RCH0_1 pad_1 rl0_1 10.6666666667
+LCH0_1 rl0_1 ch0_1 0.1n
+CCH0_1 ch0_1 0 0.1p
+RCH1_1 ch0_1 rl1_1 10.6666666667
+LCH1_1 rl1_1 ch1_1 0.1n
+CCH1_1 ch1_1 0 0.1p
+RCH2_1 ch1_1 rl2_1 10.6666666667
+LCH2_1 rl2_1 rx_1 0.1n
+CCH2_1 rx_1 0 0.1p
+CRX_1 rx_1 0 0.06p
+CCOUP0 ch0_0 ch0_1 0.02p
+CCOUP1 ch1_0 ch1_1 0.02p
+CCOUP2 rx_0 rx_1 0.02p
+RTERM_0 tx_0 pad_0 5
+RTERM_1 tx_1 pad_1 5
+.control
+set num_threads=1
+set noaskquit
+set wr_vecnames
+set wr_singlescale
+option numdgt=15
+tran 7.8125e-12 4.2e-08 0 7.8125e-12
+wrdata wave.txt v(tx_0) v(rx_0) i(vdd_0) v(tx_1) v(rx_1) i(vdd_1)
+quit
+.endc
+.end

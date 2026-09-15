@@ -1,0 +1,59 @@
+{
+  "physical": [
+    {
+      "design": "x0",
+      "split": "development",
+      "design_queries": 1,
+      "logical_measurements": 4,
+      "spice_transient_attempts": 4,
+      "cache_hits": 0,
+      "failed_transients": 0,
+      "completed_transients": 4,
+      "suite_sha256": "44c1bfbab63e18c7d9f4f08d96fec094798aa5b73c10d892b401722f14802eba",
+      "simulator_version": "******\n** ngspice-41 : Circuit level simulation program\n** The U. C. Berkeley CAD Group\n** Copyright 1985-1994, Regents of the University of California.\n** Copyright 2001-2023, The ngspice team.\n** Please get your ngspice manual from https://ngspice.sourceforge.io/docs.html\n** Please file your bug-reports at http://ngspice.sourceforge.net/bugrep.html\n** Creation Date: Mon Mar 25 19:05:40 UTC 2024\n******"
+    }
+  ],
+  "evaluation": [
+    {
+      "tag": "A_nominal_none",
+      "design": "x0",
+      "split": "development",
+      "blocks": 512,
+      "calibration_measurements": 0.0,
+      "phase_bank_lookups": 512,
+      "path": "rollouts/A_nominal_none.json",
+      "sha256": "471584a6c3148c174ffff3c2126afce11a01e30f4fe61d1d403acc4e5bb8b02e"
+    },
+    {
+      "tag": "A_nominal_periodic",
+      "design": "x0",
+      "split": "development",
+      "blocks": 512,
+      "calibration_measurements": 128.0,
+      "phase_bank_lookups": 896,
+      "path": "rollouts/A_nominal_periodic.json",
+      "sha256": "3ba98fd707b2786bb42715a45b45beb87599f538c46fa3e4089029fe6119445d"
+    },
+    {
+      "tag": "A_nominal_event",
+      "design": "x0",
+      "split": "development",
+      "blocks": 512,
+      "calibration_measurements": 92.0,
+      "phase_bank_lookups": 788,
+      "path": "rollouts/A_nominal_event.json",
+      "sha256": "e8df3174d5f4741f425ad2e56d9f04932cd39b06ba713ad74565659fd4a189aa"
+    },
+    {
+      "tag": "A_nominal_bang_bang",
+      "design": "x0",
+      "split": "development",
+      "blocks": 512,
+      "calibration_measurements": 512.0,
+      "phase_bank_lookups": 2048,
+      "path": "rollouts/A_nominal_bang_bang.json",
+      "sha256": "f6160e77466bbae52195b3ada3e727a0e4d523f5e5c3555b2dfa42f4340301e0"
+    }
+  ],
+  "training": []
+}

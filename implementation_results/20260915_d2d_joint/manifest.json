@@ -1,0 +1,33 @@
+{
+  "created_at": 1789442486.0169318,
+  "patches": {
+    "d2d_joint.patch": "06dc755ed370fa54472ec0c9b548298a5e4b17ba9cec4b8abcdb5661922d2e61",
+    "sizing_prerequisites.patch": "aa9e5678b5e6facd5016d8f0a1a1a65551dc594eea2392c112d832b4dd5abaf4"
+  },
+  "source": {
+    "d2d_joint/README.md": "a5679ce97dd81b85029d02057135505ce8cf8213d155041e7826accfb13f5a14",
+    "d2d_joint/REFERENCES.md": "1629ff1d66d169cb1548744a626f27c39b0babb4ec752815a9c50b4fc149d4c4",
+    "d2d_joint/SPEC.md": "56229155c371567833328824dd51f75eb49139987a9f3dc21bf3ee542f1ff21c",
+    "d2d_joint/__init__.py": "a3971c07b657e883904b2e1c0b1e665c12d43d2326f2c0624209cc9322614759",
+    "d2d_joint/controllers.py": "5648d5eed9872cacc59d3d18441ba5b2da9fb35767e67c57c22043f5b458d55d",
+    "d2d_joint/design.py": "af23461fd9bcd1d1895e38e74a61b256903cff66d9a175410877dd1b094291a7",
+    "d2d_joint/environment.py": "07508dbedd461dff29491bd740c5968e89ed1d868d78cd7a5581c8f128c2afb7",
+    "d2d_joint/physics.py": "31e952d43929641758ca51336cb94b9084b29431481e1e4027c57ec07b7554ee",
+    "d2d_joint/ppo.py": "afa90e77753d221eae1055f7b72390ae19c43a94ebdae944f3ed7ebbe652e348",
+    "d2d_joint/report.py": "2fb9f6d3edfb6776872dd723561438272980c384f684e460cb39cedbbc766d13",
+    "d2d_joint/run.py": "428f8bb47431592f725d71565aa296015e1e65049ddad949e055f2c5252dddb6",
+    "d2d_joint/tests/test_joint.py": "ba29faa0727d1cf06c5fe830fc30fe583b251e76d2e407d9cb857fac34f6af98",
+    "d2d_joint/tests/test_pipeline.py": "fff5943cea31f0cb09c8ab058ef795c4af8f8aed8bfe8e115c9274262547e4fa"
+  },
+  "results": {
+    "RESULTS.md": "9fcc8546ff57ba332481c750111a37c02d9e3a827621e67d8acf102a27f8cdcc",
+    "protocol.json": "0276285dc2bc68af9d40c9803c9ac1c8bded48094d0e61617c9a9fa21da2bdaa",
+    "costs.json": "9d4568688c1e47edf8a1c6b44a8fa4f203b60cd9984fe99472cb00c6de6780db",
+    "analysis/verification.json": "dac4f2eee23112b374091ec66826a3ed9199f1b3d4c798532d6ac892600332e0",
+    "analysis/software_tests.log": "02ed01d0ec19699220a0f9abf44a96f84aba9a96fe210f55617189b0af723d68",
+    "analysis/tracking.png": "d17ea149cd7568f2bcc7a728c2f66342dc0777d59dba5137fc9224ce6d8aedaf"
+  },
+  "physical_pilot": "gate_failed",
+  "physical_ppo_training_blocks": 0,
+  "patch_apply_check": true
+}
