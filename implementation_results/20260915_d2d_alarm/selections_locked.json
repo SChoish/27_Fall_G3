@@ -1,0 +1,1040 @@
+[
+  {
+    "seed": 0,
+    "selected": {
+      "alarm": {
+        "x": [
+          1.404950830008688,
+          2.8192587965962206,
+          1.1364577292141511,
+          2.2147604075835314,
+          1.5161930276991644,
+          77.8645900644294
+        ],
+        "development": {
+          "valid": true,
+          "feasible": true,
+          "margins": [
+            0.08014132395898654,
+            0.09511855877291453
+          ],
+          "energy_pj_bit": 0.22347409432739804,
+          "overshoot_fraction": 0.06539631910713789,
+          "cases": [
+            {
+              "valid": true,
+              "feasible": true,
+              "margins": [
+                0.19972380158324288,
+                0.19598637119487616
+              ],
+              "errors": [
+                0,
+                0
+              ],
+              "overshoot_fraction": 0.04863688526165347,
+              "energy_lane_pj_bit": [
+                0.1698566218559311,
+                0.14869587333650758
+              ],
+              "energy_pj_bit": 0.15927624759621933,
+              "area_proxy_um2": 15.681940212285475,
+              "case_name": "development_0_0_random"
+            },
+            {
+              "valid": true,
+              "feasible": true,
+              "margins": [
+                0.2767885368388424,
+                0.24829602154273434
+              ],
+              "errors": [
+                0,
+                0
+              ],
+              "overshoot_fraction": 0.0,
+              "energy_lane_pj_bit": [
+                0.30721142149083375,
+                0.30320415268632855
+              ],
+              "energy_pj_bit": 0.30520778708858115,
+              "area_proxy_um2": 15.681940212285475,
+              "case_name": "development_0_1_opposite"
+            },
+            {
+              "valid": true,
+              "feasible": true,
+              "margins": [
+                0.08014132395898654,
+                0.09511855877291453
+              ],
+              "errors": [
+                0,
+                0
+              ],
+              "overshoot_fraction": 0.06539631910713789,
+              "energy_lane_pj_bit": [
+                0.15433415546227897,
+                0.1509634580002503
+              ],
+              "energy_pj_bit": 0.15264880673126463,
+              "area_proxy_um2": 15.681940212285475,
+              "case_name": "development_1_0_random"
+            },
+            {
+              "valid": true,
+              "feasible": true,
+              "margins": [
+                0.19964387785762094,
+                0.14769662363782665
+              ],
+              "errors": [
+                0,
+                0
+              ],
+              "overshoot_fraction": 0.0,
+              "energy_lane_pj_bit": [
+                0.27838445664770906,
+                0.2751426151393452
+              ],
+              "energy_pj_bit": 0.2767635358935271,
+              "area_proxy_um2": 15.681940212285475,
+              "case_name": "development_1_1_opposite"
+            }
+          ]
+        },
+        "policy_seconds": 3.463244410006155,
+        "stats": {
+          "critic_fits": 16,
+          "critic_optimizer_steps": 3200,
+          "attention_updates": 128,
+          "buffer_pushes": 5,
+          "head_transfers": 15,
+          "duplicate_fallbacks": 0,
+          "critic_loss": 0.7174338787492112,
+          "attention_loss": -2.415385264592145,
+          "attention_gradient_norm": 0.1478983431035074,
+          "attempts": 24,
+          "imported_evaluations": 8,
+          "new_evaluations": 16,
+          "valid_evaluations": 24,
+          "failed_evaluations": 0,
+          "buffer_size": 5,
+          "success": false
+        }
+      },
+      "regression": {
+        "x": [
+          1.404950830008688,
+          2.8192587965962206,
+          1.1364577292141511,
+          2.2147604075835314,
+          1.5161930276991644,
+          77.8645900644294
+        ],
+        "development": {
+          "valid": true,
+          "feasible": true,
+          "margins": [
+            0.08014132395898654,
+            0.09511855877291453
+          ],
+          "energy_pj_bit": 0.22347409432739804,
+          "overshoot_fraction": 0.06539631910713789,
+          "cases": [
+            {
+              "valid": true,
+              "feasible": true,
+              "margins": [
+                0.19972380158324288,
+                0.19598637119487616
+              ],
+              "errors": [
+                0,
+                0
+              ],
+              "overshoot_fraction": 0.04863688526165347,
+              "energy_lane_pj_bit": [
+                0.1698566218559311,
+                0.14869587333650758
+              ],
+              "energy_pj_bit": 0.15927624759621933,
+              "area_proxy_um2": 15.681940212285475,
+              "case_name": "development_0_0_random"
+            },
+            {
+              "valid": true,
+              "feasible": true,
+              "margins": [
+                0.2767885368388424,
+                0.24829602154273434
+              ],
+              "errors": [
+                0,
+                0
+              ],
+              "overshoot_fraction": 0.0,
+              "energy_lane_pj_bit": [
+                0.30721142149083375,
+                0.30320415268632855
+              ],
+              "energy_pj_bit": 0.30520778708858115,
+              "area_proxy_um2": 15.681940212285475,
+              "case_name": "development_0_1_opposite"
+            },
+            {
+              "valid": true,
+              "feasible": true,
+              "margins": [
+                0.08014132395898654,
+                0.09511855877291453
+              ],
+              "errors": [
+                0,
+                0
+              ],
+              "overshoot_fraction": 0.06539631910713789,
+              "energy_lane_pj_bit": [
+                0.15433415546227897,
+                0.1509634580002503
+              ],
+              "energy_pj_bit": 0.15264880673126463,
+              "area_proxy_um2": 15.681940212285475,
+              "case_name": "development_1_0_random"
+            },
+            {
+              "valid": true,
+              "feasible": true,
+              "margins": [
+                0.19964387785762094,
+                0.14769662363782665
+              ],
+              "errors": [
+                0,
+                0
+              ],
+              "overshoot_fraction": 0.0,
+              "energy_lane_pj_bit": [
+                0.27838445664770906,
+                0.2751426151393452
+              ],
+              "energy_pj_bit": 0.2767635358935271,
+              "area_proxy_um2": 15.681940212285475,
+              "case_name": "development_1_1_opposite"
+            }
+          ]
+        },
+        "policy_seconds": 2.453779127004964,
+        "stats": {
+          "online_updates": 16
+        }
+      },
+      "random": {
+        "x": [
+          1.404950830008688,
+          2.8192587965962206,
+          1.1364577292141511,
+          2.2147604075835314,
+          1.5161930276991644,
+          77.8645900644294
+        ],
+        "development": {
+          "valid": true,
+          "feasible": true,
+          "margins": [
+            0.08014132395898654,
+            0.09511855877291453
+          ],
+          "energy_pj_bit": 0.22347409432739804,
+          "overshoot_fraction": 0.06539631910713789,
+          "cases": [
+            {
+              "valid": true,
+              "feasible": true,
+              "margins": [
+                0.19972380158324288,
+                0.19598637119487616
+              ],
+              "errors": [
+                0,
+                0
+              ],
+              "overshoot_fraction": 0.04863688526165347,
+              "energy_lane_pj_bit": [
+                0.1698566218559311,
+                0.14869587333650758
+              ],
+              "energy_pj_bit": 0.15927624759621933,
+              "area_proxy_um2": 15.681940212285475,
+              "case_name": "development_0_0_random"
+            },
+            {
+              "valid": true,
+              "feasible": true,
+              "margins": [
+                0.2767885368388424,
+                0.24829602154273434
+              ],
+              "errors": [
+                0,
+                0
+              ],
+              "overshoot_fraction": 0.0,
+              "energy_lane_pj_bit": [
+                0.30721142149083375,
+                0.30320415268632855
+              ],
+              "energy_pj_bit": 0.30520778708858115,
+              "area_proxy_um2": 15.681940212285475,
+              "case_name": "development_0_1_opposite"
+            },
+            {
+              "valid": true,
+              "feasible": true,
+              "margins": [
+                0.08014132395898654,
+                0.09511855877291453
+              ],
+              "errors": [
+                0,
+                0
+              ],
+              "overshoot_fraction": 0.06539631910713789,
+              "energy_lane_pj_bit": [
+                0.15433415546227897,
+                0.1509634580002503
+              ],
+              "energy_pj_bit": 0.15264880673126463,
+              "area_proxy_um2": 15.681940212285475,
+              "case_name": "development_1_0_random"
+            },
+            {
+              "valid": true,
+              "feasible": true,
+              "margins": [
+                0.19964387785762094,
+                0.14769662363782665
+              ],
+              "errors": [
+                0,
+                0
+              ],
+              "overshoot_fraction": 0.0,
+              "energy_lane_pj_bit": [
+                0.27838445664770906,
+                0.2751426151393452
+              ],
+              "energy_pj_bit": 0.2767635358935271,
+              "area_proxy_um2": 15.681940212285475,
+              "case_name": "development_1_1_opposite"
+            }
+          ]
+        },
+        "policy_seconds": 0.0034252510013175197,
+        "stats": {}
+      }
+    },
+    "cost": {
+      "design_queries": 56,
+      "logical_measurements": 224,
+      "spice_transient_attempts": 224,
+      "cache_hits": 0,
+      "failed_transients": 0,
+      "completed_transients": 224,
+      "suite_sha256": "8024cfd2479b9e0c832d77c29249df92e89e03eaef5cb72a85f274f6684eeff2",
+      "simulator_version": "******\n** ngspice-42 : Circuit level simulation program\n** Compiled with KLU Direct Linear Solver\n** The U. C. Berkeley CAD Group\n** Copyright 1985-1994, Regents of the University of California.\n** Copyright 2001-2023, The ngspice team.\n** Please get your ngspice manual from https://ngspice.sourceforge.io/docs.html\n** Please file your bug-reports at http://ngspice.sourceforge.net/bugrep.html\n** Creation Date: Sun Mar 31 20:15:14 UTC 2024\n******"
+    }
+  },
+  {
+    "seed": 1,
+    "selected": {
+      "alarm": {
+        "x": [
+          1.0,
+          4.0,
+          2.0,
+          2.0,
+          2.0,
+          5.0
+        ],
+        "development": {
+          "valid": true,
+          "feasible": true,
+          "margins": [
+            0.14018508611618652,
+            0.20355115998432805
+          ],
+          "energy_pj_bit": 0.3135192324643152,
+          "overshoot_fraction": 0.04132363317866283,
+          "cases": [
+            {
+              "valid": true,
+              "feasible": true,
+              "margins": [
+                0.2798451227077111,
+                0.278339412552979
+              ],
+              "errors": [
+                0,
+                0
+              ],
+              "overshoot_fraction": 0.03130495402410505,
+              "energy_lane_pj_bit": [
+                0.22770448983504876,
+                0.19288967281586322
+              ],
+              "energy_pj_bit": 0.210297081325456,
+              "area_proxy_um2": 28.62,
+              "case_name": "development_0_0_random"
+            },
+            {
+              "valid": true,
+              "feasible": true,
+              "margins": [
+                0.3329569067884256,
+                0.33894626217001356
+              ],
+              "errors": [
+                0,
+                0
+              ],
+              "overshoot_fraction": 0.019798866879801924,
+              "energy_lane_pj_bit": [
+                0.43384739824289764,
+                0.4293126550999766
+              ],
+              "energy_pj_bit": 0.43158002667143713,
+              "area_proxy_um2": 28.62,
+              "case_name": "development_0_1_opposite"
+            },
+            {
+              "valid": true,
+              "feasible": true,
+              "margins": [
+                0.14018508611618652,
+                0.20355115998432805
+              ],
+              "errors": [
+                0,
+                0
+              ],
+              "overshoot_fraction": 0.04132363317866283,
+              "energy_lane_pj_bit": [
+                0.20710953622690947,
+                0.20172477422987636
+              ],
+              "energy_pj_bit": 0.20441715522839293,
+              "area_proxy_um2": 28.62,
+              "case_name": "development_1_0_random"
+            },
+            {
+              "valid": true,
+              "feasible": true,
+              "margins": [
+                0.22627394327627437,
+                0.2357593677176668
+              ],
+              "errors": [
+                0,
+                0
+              ],
+              "overshoot_fraction": 0.0026024215352766777,
+              "energy_lane_pj_bit": [
+                0.4095268787112698,
+                0.40603845455267945
+              ],
+              "energy_pj_bit": 0.4077826666319746,
+              "area_proxy_um2": 28.62,
+              "case_name": "development_1_1_opposite"
+            }
+          ]
+        },
+        "policy_seconds": 3.6438554060114257,
+        "stats": {
+          "critic_fits": 16,
+          "critic_optimizer_steps": 3200,
+          "attention_updates": 128,
+          "buffer_pushes": 7,
+          "head_transfers": 14,
+          "duplicate_fallbacks": 0,
+          "critic_loss": 0.21654846671562714,
+          "attention_loss": -2.5708226677816395,
+          "attention_gradient_norm": 0.4452720220593347,
+          "attempts": 24,
+          "imported_evaluations": 8,
+          "new_evaluations": 16,
+          "valid_evaluations": 24,
+          "failed_evaluations": 0,
+          "buffer_size": 7,
+          "success": false
+        }
+      },
+      "regression": {
+        "x": [
+          2.0498127368383834,
+          3.644254754628289,
+          0.7589926241537625,
+          2.5057438371983767,
+          4.0,
+          16.028839423236064
+        ],
+        "development": {
+          "valid": true,
+          "feasible": true,
+          "margins": [
+            0.10165588572268686,
+            0.12595682288852533
+          ],
+          "energy_pj_bit": 0.23050204895508491,
+          "overshoot_fraction": 0.05909231716506062,
+          "cases": [
+            {
+              "valid": true,
+              "feasible": true,
+              "margins": [
+                0.17336097145900836,
+                0.17835066768221236
+              ],
+              "errors": [
+                0,
+                0
+              ],
+              "overshoot_fraction": 0.04335256993671439,
+              "energy_lane_pj_bit": [
+                0.17301412210906683,
+                0.14856269742490882
+              ],
+              "energy_pj_bit": 0.16078840976698783,
+              "area_proxy_um2": 22.751152308187915,
+              "case_name": "development_0_0_random"
+            },
+            {
+              "valid": true,
+              "feasible": true,
+              "margins": [
+                0.25930919574024847,
+                0.19646140315958138
+              ],
+              "errors": [
+                0,
+                0
+              ],
+              "overshoot_fraction": 0.0,
+              "energy_lane_pj_bit": [
+                0.320813260796613,
+                0.31535922143773676
+              ],
+              "energy_pj_bit": 0.3180862411171749,
+              "area_proxy_um2": 22.751152308187915,
+              "case_name": "development_0_1_opposite"
+            },
+            {
+              "valid": true,
+              "feasible": true,
+              "margins": [
+                0.10165588572268686,
+                0.15400645583928257
+              ],
+              "errors": [
+                0,
+                0
+              ],
+              "overshoot_fraction": 0.05909231716506062,
+              "energy_lane_pj_bit": [
+                0.15643749596007445,
+                0.15213200115387335
+              ],
+              "energy_pj_bit": 0.15428474855697388,
+              "area_proxy_um2": 22.751152308187915,
+              "case_name": "development_1_0_random"
+            },
+            {
+              "valid": true,
+              "feasible": true,
+              "margins": [
+                0.22898816757642876,
+                0.12595682288852533
+              ],
+              "errors": [
+                0,
+                0
+              ],
+              "overshoot_fraction": 0.0,
+              "energy_lane_pj_bit": [
+                0.29117507286943495,
+                0.28652251988897115
+              ],
+              "energy_pj_bit": 0.288848796379203,
+              "area_proxy_um2": 22.751152308187915,
+              "case_name": "development_1_1_opposite"
+            }
+          ]
+        },
+        "policy_seconds": 2.4671810519939754,
+        "stats": {
+          "online_updates": 16
+        }
+      },
+      "random": {
+        "x": [
+          1.0,
+          4.0,
+          2.0,
+          2.0,
+          2.0,
+          5.0
+        ],
+        "development": {
+          "valid": true,
+          "feasible": true,
+          "margins": [
+            0.14018508611618652,
+            0.20355115998432805
+          ],
+          "energy_pj_bit": 0.3135192324643152,
+          "overshoot_fraction": 0.04132363317866283,
+          "cases": [
+            {
+              "valid": true,
+              "feasible": true,
+              "margins": [
+                0.2798451227077111,
+                0.278339412552979
+              ],
+              "errors": [
+                0,
+                0
+              ],
+              "overshoot_fraction": 0.03130495402410505,
+              "energy_lane_pj_bit": [
+                0.22770448983504876,
+                0.19288967281586322
+              ],
+              "energy_pj_bit": 0.210297081325456,
+              "area_proxy_um2": 28.62,
+              "case_name": "development_0_0_random"
+            },
+            {
+              "valid": true,
+              "feasible": true,
+              "margins": [
+                0.3329569067884256,
+                0.33894626217001356
+              ],
+              "errors": [
+                0,
+                0
+              ],
+              "overshoot_fraction": 0.019798866879801924,
+              "energy_lane_pj_bit": [
+                0.43384739824289764,
+                0.4293126550999766
+              ],
+              "energy_pj_bit": 0.43158002667143713,
+              "area_proxy_um2": 28.62,
+              "case_name": "development_0_1_opposite"
+            },
+            {
+              "valid": true,
+              "feasible": true,
+              "margins": [
+                0.14018508611618652,
+                0.20355115998432805
+              ],
+              "errors": [
+                0,
+                0
+              ],
+              "overshoot_fraction": 0.04132363317866283,
+              "energy_lane_pj_bit": [
+                0.20710953622690947,
+                0.20172477422987636
+              ],
+              "energy_pj_bit": 0.20441715522839293,
+              "area_proxy_um2": 28.62,
+              "case_name": "development_1_0_random"
+            },
+            {
+              "valid": true,
+              "feasible": true,
+              "margins": [
+                0.22627394327627437,
+                0.2357593677176668
+              ],
+              "errors": [
+                0,
+                0
+              ],
+              "overshoot_fraction": 0.0026024215352766777,
+              "energy_lane_pj_bit": [
+                0.4095268787112698,
+                0.40603845455267945
+              ],
+              "energy_pj_bit": 0.4077826666319746,
+              "area_proxy_um2": 28.62,
+              "case_name": "development_1_1_opposite"
+            }
+          ]
+        },
+        "policy_seconds": 0.0012664110108744353,
+        "stats": {}
+      }
+    },
+    "cost": {
+      "design_queries": 56,
+      "logical_measurements": 224,
+      "spice_transient_attempts": 224,
+      "cache_hits": 0,
+      "failed_transients": 0,
+      "completed_transients": 224,
+      "suite_sha256": "8024cfd2479b9e0c832d77c29249df92e89e03eaef5cb72a85f274f6684eeff2",
+      "simulator_version": "******\n** ngspice-42 : Circuit level simulation program\n** Compiled with KLU Direct Linear Solver\n** The U. C. Berkeley CAD Group\n** Copyright 1985-1994, Regents of the University of California.\n** Copyright 2001-2023, The ngspice team.\n** Please get your ngspice manual from https://ngspice.sourceforge.io/docs.html\n** Please file your bug-reports at http://ngspice.sourceforge.net/bugrep.html\n** Creation Date: Sun Mar 31 20:15:14 UTC 2024\n******"
+    }
+  },
+  {
+    "seed": 2,
+    "selected": {
+      "alarm": {
+        "x": [
+          2.131977779533004,
+          2.5094736895206227,
+          1.355434877661442,
+          2.036846264824294,
+          3.1607603585274964,
+          11.83118216469138
+        ],
+        "development": {
+          "valid": true,
+          "feasible": true,
+          "margins": [
+            0.1811979228562084,
+            0.2549662331927334
+          ],
+          "energy_pj_bit": 0.26269879007496444,
+          "overshoot_fraction": 0.04995570412438564,
+          "cases": [
+            {
+              "valid": true,
+              "feasible": true,
+              "margins": [
+                0.30166747467486943,
+                0.30148051791833186
+              ],
+              "errors": [
+                0,
+                0
+              ],
+              "overshoot_fraction": 0.03433280053613091,
+              "energy_lane_pj_bit": [
+                0.19152496759382706,
+                0.16259042953962996
+              ],
+              "energy_pj_bit": 0.1770576985667285,
+              "area_proxy_um2": 27.199642464634064,
+              "case_name": "development_0_0_random"
+            },
+            {
+              "valid": true,
+              "feasible": true,
+              "margins": [
+                0.3378226062998877,
+                0.32397724038792286
+              ],
+              "errors": [
+                0,
+                0
+              ],
+              "overshoot_fraction": 0.008076550230494917,
+              "energy_lane_pj_bit": [
+                0.3662815251476268,
+                0.3606401852532288
+              ],
+              "energy_pj_bit": 0.3634608552004278,
+              "area_proxy_um2": 27.199642464634064,
+              "case_name": "development_0_1_opposite"
+            },
+            {
+              "valid": true,
+              "feasible": true,
+              "margins": [
+                0.1811979228562084,
+                0.27100387946601645
+              ],
+              "errors": [
+                0,
+                0
+              ],
+              "overshoot_fraction": 0.04995570412438564,
+              "energy_lane_pj_bit": [
+                0.17409102445228347,
+                0.1693460267023211
+              ],
+              "energy_pj_bit": 0.17171852557730227,
+              "area_proxy_um2": 27.199642464634064,
+              "case_name": "development_1_0_random"
+            },
+            {
+              "valid": true,
+              "feasible": true,
+              "margins": [
+                0.28174377584468024,
+                0.2549662331927334
+              ],
+              "errors": [
+                0,
+                0
+              ],
+              "overshoot_fraction": 0.0,
+              "energy_lane_pj_bit": [
+                0.34096053784545366,
+                0.33615562406534494
+              ],
+              "energy_pj_bit": 0.3385580809553993,
+              "area_proxy_um2": 27.199642464634064,
+              "case_name": "development_1_1_opposite"
+            }
+          ]
+        },
+        "policy_seconds": 3.652162501017301,
+        "stats": {
+          "critic_fits": 16,
+          "critic_optimizer_steps": 3200,
+          "attention_updates": 128,
+          "buffer_pushes": 5,
+          "head_transfers": 13,
+          "duplicate_fallbacks": 0,
+          "critic_loss": 0.13284897789310965,
+          "attention_loss": -0.8313113101750902,
+          "attention_gradient_norm": 0.4243657699289102,
+          "attempts": 24,
+          "imported_evaluations": 8,
+          "new_evaluations": 16,
+          "valid_evaluations": 24,
+          "failed_evaluations": 0,
+          "buffer_size": 5,
+          "success": false
+        }
+      },
+      "regression": {
+        "x": [
+          2.5,
+          2.078422023068929,
+          1.0657569260609843,
+          1.9995404086949407,
+          3.7830912448150653,
+          17.508306719566214
+        ],
+        "development": {
+          "valid": true,
+          "feasible": true,
+          "margins": [
+            0.08267857663506684,
+            0.17740473803240414
+          ],
+          "energy_pj_bit": 0.2278560768745045,
+          "overshoot_fraction": 0.054927863053419054,
+          "cases": [
+            {
+              "valid": true,
+              "feasible": true,
+              "margins": [
+                0.21740048213740393,
+                0.21664782301497276
+              ],
+              "errors": [
+                0,
+                0
+              ],
+              "overshoot_fraction": 0.03833851457930655,
+              "energy_lane_pj_bit": [
+                0.16885031766405365,
+                0.14572990282504306
+              ],
+              "energy_pj_bit": 0.15729011024454836,
+              "area_proxy_um2": 24.490282005034555,
+              "case_name": "development_0_0_random"
+            },
+            {
+              "valid": true,
+              "feasible": true,
+              "margins": [
+                0.27090974951922864,
+                0.25175910102107957
+              ],
+              "errors": [
+                0,
+                0
+              ],
+              "overshoot_fraction": 0.0,
+              "energy_lane_pj_bit": [
+                0.31680498237910676,
+                0.31188781314754704
+              ],
+              "energy_pj_bit": 0.3143463977633269,
+              "area_proxy_um2": 24.490282005034555,
+              "case_name": "development_0_1_opposite"
+            },
+            {
+              "valid": true,
+              "feasible": true,
+              "margins": [
+                0.08267857663506684,
+                0.18594284704707176
+              ],
+              "errors": [
+                0,
+                0
+              ],
+              "overshoot_fraction": 0.054927863053419054,
+              "energy_lane_pj_bit": [
+                0.1535195688991874,
+                0.15013519117650037
+              ],
+              "energy_pj_bit": 0.15182738003784388,
+              "area_proxy_um2": 24.490282005034555,
+              "case_name": "development_1_0_random"
+            },
+            {
+              "valid": true,
+              "feasible": true,
+              "margins": [
+                0.2136101491468363,
+                0.17740473803240414
+              ],
+              "errors": [
+                0,
+                0
+              ],
+              "overshoot_fraction": 0.0,
+              "energy_lane_pj_bit": [
+                0.2900139707552252,
+                0.2859068681493723
+              ],
+              "energy_pj_bit": 0.2879604194522988,
+              "area_proxy_um2": 24.490282005034555,
+              "case_name": "development_1_1_opposite"
+            }
+          ]
+        },
+        "policy_seconds": 2.506435891995352,
+        "stats": {
+          "online_updates": 16
+        }
+      },
+      "random": {
+        "x": [
+          2.131977779533004,
+          2.5094736895206227,
+          1.355434877661442,
+          2.036846264824294,
+          3.1607603585274964,
+          11.83118216469138
+        ],
+        "development": {
+          "valid": true,
+          "feasible": true,
+          "margins": [
+            0.1811979228562084,
+            0.2549662331927334
+          ],
+          "energy_pj_bit": 0.26269879007496444,
+          "overshoot_fraction": 0.04995570412438564,
+          "cases": [
+            {
+              "valid": true,
+              "feasible": true,
+              "margins": [
+                0.30166747467486943,
+                0.30148051791833186
+              ],
+              "errors": [
+                0,
+                0
+              ],
+              "overshoot_fraction": 0.03433280053613091,
+              "energy_lane_pj_bit": [
+                0.19152496759382706,
+                0.16259042953962996
+              ],
+              "energy_pj_bit": 0.1770576985667285,
+              "area_proxy_um2": 27.199642464634064,
+              "case_name": "development_0_0_random"
+            },
+            {
+              "valid": true,
+              "feasible": true,
+              "margins": [
+                0.3378226062998877,
+                0.32397724038792286
+              ],
+              "errors": [
+                0,
+                0
+              ],
+              "overshoot_fraction": 0.008076550230494917,
+              "energy_lane_pj_bit": [
+                0.3662815251476268,
+                0.3606401852532288
+              ],
+              "energy_pj_bit": 0.3634608552004278,
+              "area_proxy_um2": 27.199642464634064,
+              "case_name": "development_0_1_opposite"
+            },
+            {
+              "valid": true,
+              "feasible": true,
+              "margins": [
+                0.1811979228562084,
+                0.27100387946601645
+              ],
+              "errors": [
+                0,
+                0
+              ],
+              "overshoot_fraction": 0.04995570412438564,
+              "energy_lane_pj_bit": [
+                0.17409102445228347,
+                0.1693460267023211
+              ],
+              "energy_pj_bit": 0.17171852557730227,
+              "area_proxy_um2": 27.199642464634064,
+              "case_name": "development_1_0_random"
+            },
+            {
+              "valid": true,
+              "feasible": true,
+              "margins": [
+                0.28174377584468024,
+                0.2549662331927334
+              ],
+              "errors": [
+                0,
+                0
+              ],
+              "overshoot_fraction": 0.0,
+              "energy_lane_pj_bit": [
+                0.34096053784545366,
+                0.33615562406534494
+              ],
+              "energy_pj_bit": 0.3385580809553993,
+              "area_proxy_um2": 27.199642464634064,
+              "case_name": "development_1_1_opposite"
+            }
+          ]
+        },
+        "policy_seconds": 0.0012786100051016547,
+        "stats": {}
+      }
+    },
+    "cost": {
+      "design_queries": 56,
+      "logical_measurements": 224,
+      "spice_transient_attempts": 224,
+      "cache_hits": 0,
+      "failed_transients": 0,
+      "completed_transients": 224,
+      "suite_sha256": "8024cfd2479b9e0c832d77c29249df92e89e03eaef5cb72a85f274f6684eeff2",
+      "simulator_version": "******\n** ngspice-42 : Circuit level simulation program\n** Compiled with KLU Direct Linear Solver\n** The U. C. Berkeley CAD Group\n** Copyright 1985-1994, Regents of the University of California.\n** Copyright 2001-2023, The ngspice team.\n** Please get your ngspice manual from https://ngspice.sourceforge.io/docs.html\n** Please file your bug-reports at http://ngspice.sourceforge.net/bugrep.html\n** Creation Date: Sun Mar 31 20:15:14 UTC 2024\n******"
+    }
+  }
+]

@@ -1,0 +1,10 @@
+{
+  "original_summary_sha256": "0bbfc8e4f55a0f43df4de7ae2a46fd4d99a4af3df50a46136739234504830f9e",
+  "original_selection_sha256": "abb1f06d0e436a4ef5ab11bc0230248e7714597ec20b651e22069f429ce91dc6",
+  "published_selection_sha256": "39973919cbeadc51202eb99f6ae9b64fc3b3dcd7d1d1f3880737da321a5ee867",
+  "published_summary_sha256": "116522ef819e6b256eb221ed705a077e1bd3c0934dab31df6989774004427f8f",
+  "transformation": "Removed repeated case context payloads; each case_name maps to the frozen protocol.",
+  "original_records": 216,
+  "adapter_tests_passed": 4,
+  "source_preserved": true
+}

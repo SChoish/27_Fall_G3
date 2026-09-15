@@ -1,0 +1,1969 @@
+{
+  "protocol_sha256": "6097bfd23694c077b2c710b6873c01fa11ce5e6ff9c77cac8a78e0d69e62a1ae",
+  "selection_sha256": "abb1f06d0e436a4ef5ab11bc0230248e7714597ec20b651e22069f429ce91dc6",
+  "nominal": {
+    "valid": true,
+    "feasible": true,
+    "margins": [
+      0.13728685787122774,
+      0.13603384262002516
+    ],
+    "energy_pj_bit": 0.23750088664978036,
+    "overshoot_fraction": 0.05511915439001469,
+    "cases": [
+      {
+        "valid": true,
+        "feasible": true,
+        "margins": [
+          0.2729099984877338,
+          0.27898272131741275
+        ],
+        "errors": [
+          0,
+          0
+        ],
+        "overshoot_fraction": 0.039404822883734036,
+        "energy_lane_pj_bit": [
+          0.20646554956781468,
+          0.254573913430861
+        ],
+        "energy_pj_bit": 0.23051973149933785,
+        "area_proxy_um2": 28.62,
+        "case_name": "confirmation_0_0"
+      },
+      {
+        "valid": true,
+        "feasible": true,
+        "margins": [
+          0.2732520187178119,
+          0.2840401889152372
+        ],
+        "errors": [
+          0,
+          0
+        ],
+        "overshoot_fraction": 0.04310228151830198,
+        "energy_lane_pj_bit": [
+          0.22243271203377613,
+          0.22523989780667109
+        ],
+        "energy_pj_bit": 0.2238363049202236,
+        "area_proxy_um2": 28.62,
+        "case_name": "confirmation_0_1"
+      },
+      {
+        "valid": true,
+        "feasible": true,
+        "margins": [
+          0.4050349399959642,
+          0.404364585263822
+        ],
+        "errors": [
+          0,
+          0
+        ],
+        "overshoot_fraction": 0.0101155054361289,
+        "energy_lane_pj_bit": [
+          0.39734267038633525,
+          0.3972554082627651
+        ],
+        "energy_pj_bit": 0.3972990393245502,
+        "area_proxy_um2": 28.62,
+        "case_name": "confirmation_0_2"
+      },
+      {
+        "valid": true,
+        "feasible": true,
+        "margins": [
+          0.27286391277479216,
+          0.2717706664211681
+        ],
+        "errors": [
+          0,
+          0
+        ],
+        "overshoot_fraction": 0.028172152802357964,
+        "energy_lane_pj_bit": [
+          0.13205157037146326,
+          0.12744555283098413
+        ],
+        "energy_pj_bit": 0.1297485616012237,
+        "area_proxy_um2": 28.62,
+        "case_name": "confirmation_0_3"
+      },
+      {
+        "valid": true,
+        "feasible": true,
+        "margins": [
+          0.15217897668493519,
+          0.1363476483222742
+        ],
+        "errors": [
+          0,
+          0
+        ],
+        "overshoot_fraction": 0.05138681216091223,
+        "energy_lane_pj_bit": [
+          0.20377791241405488,
+          0.20118182868135115
+        ],
+        "energy_pj_bit": 0.202479870547703,
+        "area_proxy_um2": 28.62,
+        "case_name": "confirmation_1_0"
+      },
+      {
+        "valid": true,
+        "feasible": true,
+        "margins": [
+          0.14226900467813475,
+          0.13712886649720868
+        ],
+        "errors": [
+          0,
+          0
+        ],
+        "overshoot_fraction": 0.05511915439001469,
+        "energy_lane_pj_bit": [
+          0.22040327837792284,
+          0.207801712013038
+        ],
+        "energy_pj_bit": 0.2141024951954804,
+        "area_proxy_um2": 28.62,
+        "case_name": "confirmation_1_1"
+      },
+      {
+        "valid": true,
+        "feasible": true,
+        "margins": [
+          0.35180341309833907,
+          0.35109433452916494
+        ],
+        "errors": [
+          0,
+          0
+        ],
+        "overshoot_fraction": 0.0,
+        "energy_lane_pj_bit": [
+          0.37031805404800644,
+          0.37019529748788177
+        ],
+        "energy_pj_bit": 0.3702566757679441,
+        "area_proxy_um2": 28.62,
+        "case_name": "confirmation_1_2"
+      },
+      {
+        "valid": true,
+        "feasible": true,
+        "margins": [
+          0.13728685787122774,
+          0.13603384262002516
+        ],
+        "errors": [
+          0,
+          0
+        ],
+        "overshoot_fraction": 0.02345237977410841,
+        "energy_lane_pj_bit": [
+          0.13406400412040878,
+          0.12946482456315128
+        ],
+        "energy_pj_bit": 0.13176441434178005,
+        "area_proxy_um2": 28.62,
+        "case_name": "confirmation_1_3"
+      }
+    ]
+  },
+  "results": [
+    {
+      "seed": 0,
+      "method": "alarm",
+      "x": [
+        1.404950830008688,
+        2.8192587965962206,
+        1.1364577292141511,
+        2.2147604075835314,
+        1.5161930276991644,
+        77.8645900644294
+      ],
+      "confirmation": {
+        "valid": true,
+        "feasible": false,
+        "margins": [
+          0.07024584817817092,
+          0.06992691631237025
+        ],
+        "energy_pj_bit": 0.17939198827775144,
+        "overshoot_fraction": 0.07060905891482228,
+        "cases": [
+          {
+            "valid": true,
+            "feasible": true,
+            "margins": [
+              0.1932327358028224,
+              0.19012307811580131
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.04896899782890656,
+            "energy_lane_pj_bit": [
+              0.158038581027781,
+              0.19059067827866094
+            ],
+            "energy_pj_bit": 0.17431462965322098,
+            "area_proxy_um2": 15.681940212285475,
+            "case_name": "confirmation_0_0"
+          },
+          {
+            "valid": true,
+            "feasible": true,
+            "margins": [
+              0.18932878885031101,
+              0.21337974895567102
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.055485331328970044,
+            "energy_lane_pj_bit": [
+              0.16956416626815257,
+              0.17171803799794627
+            ],
+            "energy_pj_bit": 0.17064110213304942,
+            "area_proxy_um2": 15.681940212285475,
+            "case_name": "confirmation_0_1"
+          },
+          {
+            "valid": true,
+            "feasible": true,
+            "margins": [
+              0.3527833736606839,
+              0.35270725020606486
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.0,
+            "energy_lane_pj_bit": [
+              0.29443418067124044,
+              0.29431234230161574
+            ],
+            "energy_pj_bit": 0.29437326148642806,
+            "area_proxy_um2": 15.681940212285475,
+            "case_name": "confirmation_0_2"
+          },
+          {
+            "valid": true,
+            "feasible": true,
+            "margins": [
+              0.19293317180678293,
+              0.19228252162393467
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.024469041613661036,
+            "energy_lane_pj_bit": [
+              0.10932168700723255,
+              0.10543568297782953
+            ],
+            "energy_pj_bit": 0.10737868499253103,
+            "area_proxy_um2": 15.681940212285475,
+            "case_name": "confirmation_0_3"
+          },
+          {
+            "valid": true,
+            "feasible": false,
+            "margins": [
+              0.10233447555804087,
+              0.07856545132529913
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.06427575684022124,
+            "energy_lane_pj_bit": [
+              0.1510633959064301,
+              0.14941965515859257
+            ],
+            "energy_pj_bit": 0.15024152553251133,
+            "area_proxy_um2": 15.681940212285475,
+            "case_name": "confirmation_1_0"
+          },
+          {
+            "valid": true,
+            "feasible": true,
+            "margins": [
+              0.0919782346840573,
+              0.08129423392713808
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.07060905891482228,
+            "energy_lane_pj_bit": [
+              0.16580935271141564,
+              0.15609628886458035
+            ],
+            "energy_pj_bit": 0.160952820787998,
+            "area_proxy_um2": 15.681940212285475,
+            "case_name": "confirmation_1_1"
+          },
+          {
+            "valid": true,
+            "feasible": true,
+            "margins": [
+              0.302805490541577,
+              0.302432376137179
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.0,
+            "energy_lane_pj_bit": [
+              0.26668379846298046,
+              0.2665672231466881
+            ],
+            "energy_pj_bit": 0.2666255108048343,
+            "area_proxy_um2": 15.681940212285475,
+            "case_name": "confirmation_1_2"
+          },
+          {
+            "valid": true,
+            "feasible": false,
+            "margins": [
+              0.07024584817817092,
+              0.06992691631237025
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.019409009347624018,
+            "energy_lane_pj_bit": [
+              0.11254828012220826,
+              0.1086684615406688
+            ],
+            "energy_pj_bit": 0.11060837083143853,
+            "area_proxy_um2": 15.681940212285475,
+            "case_name": "confirmation_1_3"
+          }
+        ]
+      },
+      "savings_percent": 24.466813236666574,
+      "unchanged_nominal": false,
+      "policy_seconds": 3.463244410006155,
+      "stats": {
+        "critic_fits": 16,
+        "critic_optimizer_steps": 3200,
+        "attention_updates": 128,
+        "buffer_pushes": 5,
+        "head_transfers": 15,
+        "duplicate_fallbacks": 0,
+        "critic_loss": 0.7174338787492112,
+        "attention_loss": -2.415385264592145,
+        "attention_gradient_norm": 0.1478983431035074,
+        "attempts": 24,
+        "imported_evaluations": 8,
+        "new_evaluations": 16,
+        "valid_evaluations": 24,
+        "failed_evaluations": 0,
+        "buffer_size": 5,
+        "success": false
+      }
+    },
+    {
+      "seed": 0,
+      "method": "regression",
+      "x": [
+        1.404950830008688,
+        2.8192587965962206,
+        1.1364577292141511,
+        2.2147604075835314,
+        1.5161930276991644,
+        77.8645900644294
+      ],
+      "confirmation": {
+        "valid": true,
+        "feasible": false,
+        "margins": [
+          0.07024584817817092,
+          0.06992691631237025
+        ],
+        "energy_pj_bit": 0.17939198827775144,
+        "overshoot_fraction": 0.07060905891482228,
+        "cases": [
+          {
+            "valid": true,
+            "feasible": true,
+            "margins": [
+              0.1932327358028224,
+              0.19012307811580131
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.04896899782890656,
+            "energy_lane_pj_bit": [
+              0.158038581027781,
+              0.19059067827866094
+            ],
+            "energy_pj_bit": 0.17431462965322098,
+            "area_proxy_um2": 15.681940212285475,
+            "case_name": "confirmation_0_0"
+          },
+          {
+            "valid": true,
+            "feasible": true,
+            "margins": [
+              0.18932878885031101,
+              0.21337974895567102
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.055485331328970044,
+            "energy_lane_pj_bit": [
+              0.16956416626815257,
+              0.17171803799794627
+            ],
+            "energy_pj_bit": 0.17064110213304942,
+            "area_proxy_um2": 15.681940212285475,
+            "case_name": "confirmation_0_1"
+          },
+          {
+            "valid": true,
+            "feasible": true,
+            "margins": [
+              0.3527833736606839,
+              0.35270725020606486
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.0,
+            "energy_lane_pj_bit": [
+              0.29443418067124044,
+              0.29431234230161574
+            ],
+            "energy_pj_bit": 0.29437326148642806,
+            "area_proxy_um2": 15.681940212285475,
+            "case_name": "confirmation_0_2"
+          },
+          {
+            "valid": true,
+            "feasible": true,
+            "margins": [
+              0.19293317180678293,
+              0.19228252162393467
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.024469041613661036,
+            "energy_lane_pj_bit": [
+              0.10932168700723255,
+              0.10543568297782953
+            ],
+            "energy_pj_bit": 0.10737868499253103,
+            "area_proxy_um2": 15.681940212285475,
+            "case_name": "confirmation_0_3"
+          },
+          {
+            "valid": true,
+            "feasible": false,
+            "margins": [
+              0.10233447555804087,
+              0.07856545132529913
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.06427575684022124,
+            "energy_lane_pj_bit": [
+              0.1510633959064301,
+              0.14941965515859257
+            ],
+            "energy_pj_bit": 0.15024152553251133,
+            "area_proxy_um2": 15.681940212285475,
+            "case_name": "confirmation_1_0"
+          },
+          {
+            "valid": true,
+            "feasible": true,
+            "margins": [
+              0.0919782346840573,
+              0.08129423392713808
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.07060905891482228,
+            "energy_lane_pj_bit": [
+              0.16580935271141564,
+              0.15609628886458035
+            ],
+            "energy_pj_bit": 0.160952820787998,
+            "area_proxy_um2": 15.681940212285475,
+            "case_name": "confirmation_1_1"
+          },
+          {
+            "valid": true,
+            "feasible": true,
+            "margins": [
+              0.302805490541577,
+              0.302432376137179
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.0,
+            "energy_lane_pj_bit": [
+              0.26668379846298046,
+              0.2665672231466881
+            ],
+            "energy_pj_bit": 0.2666255108048343,
+            "area_proxy_um2": 15.681940212285475,
+            "case_name": "confirmation_1_2"
+          },
+          {
+            "valid": true,
+            "feasible": false,
+            "margins": [
+              0.07024584817817092,
+              0.06992691631237025
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.019409009347624018,
+            "energy_lane_pj_bit": [
+              0.11254828012220826,
+              0.1086684615406688
+            ],
+            "energy_pj_bit": 0.11060837083143853,
+            "area_proxy_um2": 15.681940212285475,
+            "case_name": "confirmation_1_3"
+          }
+        ]
+      },
+      "savings_percent": 24.466813236666574,
+      "unchanged_nominal": false,
+      "policy_seconds": 2.453779127004964,
+      "stats": {
+        "online_updates": 16
+      }
+    },
+    {
+      "seed": 0,
+      "method": "random",
+      "x": [
+        1.404950830008688,
+        2.8192587965962206,
+        1.1364577292141511,
+        2.2147604075835314,
+        1.5161930276991644,
+        77.8645900644294
+      ],
+      "confirmation": {
+        "valid": true,
+        "feasible": false,
+        "margins": [
+          0.07024584817817092,
+          0.06992691631237025
+        ],
+        "energy_pj_bit": 0.17939198827775144,
+        "overshoot_fraction": 0.07060905891482228,
+        "cases": [
+          {
+            "valid": true,
+            "feasible": true,
+            "margins": [
+              0.1932327358028224,
+              0.19012307811580131
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.04896899782890656,
+            "energy_lane_pj_bit": [
+              0.158038581027781,
+              0.19059067827866094
+            ],
+            "energy_pj_bit": 0.17431462965322098,
+            "area_proxy_um2": 15.681940212285475,
+            "case_name": "confirmation_0_0"
+          },
+          {
+            "valid": true,
+            "feasible": true,
+            "margins": [
+              0.18932878885031101,
+              0.21337974895567102
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.055485331328970044,
+            "energy_lane_pj_bit": [
+              0.16956416626815257,
+              0.17171803799794627
+            ],
+            "energy_pj_bit": 0.17064110213304942,
+            "area_proxy_um2": 15.681940212285475,
+            "case_name": "confirmation_0_1"
+          },
+          {
+            "valid": true,
+            "feasible": true,
+            "margins": [
+              0.3527833736606839,
+              0.35270725020606486
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.0,
+            "energy_lane_pj_bit": [
+              0.29443418067124044,
+              0.29431234230161574
+            ],
+            "energy_pj_bit": 0.29437326148642806,
+            "area_proxy_um2": 15.681940212285475,
+            "case_name": "confirmation_0_2"
+          },
+          {
+            "valid": true,
+            "feasible": true,
+            "margins": [
+              0.19293317180678293,
+              0.19228252162393467
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.024469041613661036,
+            "energy_lane_pj_bit": [
+              0.10932168700723255,
+              0.10543568297782953
+            ],
+            "energy_pj_bit": 0.10737868499253103,
+            "area_proxy_um2": 15.681940212285475,
+            "case_name": "confirmation_0_3"
+          },
+          {
+            "valid": true,
+            "feasible": false,
+            "margins": [
+              0.10233447555804087,
+              0.07856545132529913
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.06427575684022124,
+            "energy_lane_pj_bit": [
+              0.1510633959064301,
+              0.14941965515859257
+            ],
+            "energy_pj_bit": 0.15024152553251133,
+            "area_proxy_um2": 15.681940212285475,
+            "case_name": "confirmation_1_0"
+          },
+          {
+            "valid": true,
+            "feasible": true,
+            "margins": [
+              0.0919782346840573,
+              0.08129423392713808
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.07060905891482228,
+            "energy_lane_pj_bit": [
+              0.16580935271141564,
+              0.15609628886458035
+            ],
+            "energy_pj_bit": 0.160952820787998,
+            "area_proxy_um2": 15.681940212285475,
+            "case_name": "confirmation_1_1"
+          },
+          {
+            "valid": true,
+            "feasible": true,
+            "margins": [
+              0.302805490541577,
+              0.302432376137179
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.0,
+            "energy_lane_pj_bit": [
+              0.26668379846298046,
+              0.2665672231466881
+            ],
+            "energy_pj_bit": 0.2666255108048343,
+            "area_proxy_um2": 15.681940212285475,
+            "case_name": "confirmation_1_2"
+          },
+          {
+            "valid": true,
+            "feasible": false,
+            "margins": [
+              0.07024584817817092,
+              0.06992691631237025
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.019409009347624018,
+            "energy_lane_pj_bit": [
+              0.11254828012220826,
+              0.1086684615406688
+            ],
+            "energy_pj_bit": 0.11060837083143853,
+            "area_proxy_um2": 15.681940212285475,
+            "case_name": "confirmation_1_3"
+          }
+        ]
+      },
+      "savings_percent": 24.466813236666574,
+      "unchanged_nominal": false,
+      "policy_seconds": 0.0034252510013175197,
+      "stats": {}
+    },
+    {
+      "seed": 1,
+      "method": "alarm",
+      "x": [
+        1.0,
+        4.0,
+        2.0,
+        2.0,
+        2.0,
+        5.0
+      ],
+      "confirmation": {
+        "valid": true,
+        "feasible": true,
+        "margins": [
+          0.13728685787122774,
+          0.13603384262002516
+        ],
+        "energy_pj_bit": 0.23750088664978036,
+        "overshoot_fraction": 0.05511915439001469,
+        "cases": [
+          {
+            "valid": true,
+            "feasible": true,
+            "margins": [
+              0.2729099984877338,
+              0.27898272131741275
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.039404822883734036,
+            "energy_lane_pj_bit": [
+              0.20646554956781468,
+              0.254573913430861
+            ],
+            "energy_pj_bit": 0.23051973149933785,
+            "area_proxy_um2": 28.62,
+            "case_name": "confirmation_0_0"
+          },
+          {
+            "valid": true,
+            "feasible": true,
+            "margins": [
+              0.2732520187178119,
+              0.2840401889152372
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.04310228151830198,
+            "energy_lane_pj_bit": [
+              0.22243271203377613,
+              0.22523989780667109
+            ],
+            "energy_pj_bit": 0.2238363049202236,
+            "area_proxy_um2": 28.62,
+            "case_name": "confirmation_0_1"
+          },
+          {
+            "valid": true,
+            "feasible": true,
+            "margins": [
+              0.4050349399959642,
+              0.404364585263822
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.0101155054361289,
+            "energy_lane_pj_bit": [
+              0.39734267038633525,
+              0.3972554082627651
+            ],
+            "energy_pj_bit": 0.3972990393245502,
+            "area_proxy_um2": 28.62,
+            "case_name": "confirmation_0_2"
+          },
+          {
+            "valid": true,
+            "feasible": true,
+            "margins": [
+              0.27286391277479216,
+              0.2717706664211681
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.028172152802357964,
+            "energy_lane_pj_bit": [
+              0.13205157037146326,
+              0.12744555283098413
+            ],
+            "energy_pj_bit": 0.1297485616012237,
+            "area_proxy_um2": 28.62,
+            "case_name": "confirmation_0_3"
+          },
+          {
+            "valid": true,
+            "feasible": true,
+            "margins": [
+              0.15217897668493519,
+              0.1363476483222742
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.05138681216091223,
+            "energy_lane_pj_bit": [
+              0.20377791241405488,
+              0.20118182868135115
+            ],
+            "energy_pj_bit": 0.202479870547703,
+            "area_proxy_um2": 28.62,
+            "case_name": "confirmation_1_0"
+          },
+          {
+            "valid": true,
+            "feasible": true,
+            "margins": [
+              0.14226900467813475,
+              0.13712886649720868
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.05511915439001469,
+            "energy_lane_pj_bit": [
+              0.22040327837792284,
+              0.207801712013038
+            ],
+            "energy_pj_bit": 0.2141024951954804,
+            "area_proxy_um2": 28.62,
+            "case_name": "confirmation_1_1"
+          },
+          {
+            "valid": true,
+            "feasible": true,
+            "margins": [
+              0.35180341309833907,
+              0.35109433452916494
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.0,
+            "energy_lane_pj_bit": [
+              0.37031805404800644,
+              0.37019529748788177
+            ],
+            "energy_pj_bit": 0.3702566757679441,
+            "area_proxy_um2": 28.62,
+            "case_name": "confirmation_1_2"
+          },
+          {
+            "valid": true,
+            "feasible": true,
+            "margins": [
+              0.13728685787122774,
+              0.13603384262002516
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.02345237977410841,
+            "energy_lane_pj_bit": [
+              0.13406400412040878,
+              0.12946482456315128
+            ],
+            "energy_pj_bit": 0.13176441434178005,
+            "area_proxy_um2": 28.62,
+            "case_name": "confirmation_1_3"
+          }
+        ]
+      },
+      "savings_percent": 0.0,
+      "unchanged_nominal": true,
+      "policy_seconds": 3.6438554060114257,
+      "stats": {
+        "critic_fits": 16,
+        "critic_optimizer_steps": 3200,
+        "attention_updates": 128,
+        "buffer_pushes": 7,
+        "head_transfers": 14,
+        "duplicate_fallbacks": 0,
+        "critic_loss": 0.21654846671562714,
+        "attention_loss": -2.5708226677816395,
+        "attention_gradient_norm": 0.4452720220593347,
+        "attempts": 24,
+        "imported_evaluations": 8,
+        "new_evaluations": 16,
+        "valid_evaluations": 24,
+        "failed_evaluations": 0,
+        "buffer_size": 7,
+        "success": false
+      }
+    },
+    {
+      "seed": 1,
+      "method": "regression",
+      "x": [
+        2.0498127368383834,
+        3.644254754628289,
+        0.7589926241537625,
+        2.5057438371983767,
+        4.0,
+        16.028839423236064
+      ],
+      "confirmation": {
+        "valid": true,
+        "feasible": false,
+        "margins": [
+          0.06240410457487355,
+          0.07851698875024632
+        ],
+        "energy_pj_bit": 0.18245541784115143,
+        "overshoot_fraction": 0.06453306323408325,
+        "cases": [
+          {
+            "valid": true,
+            "feasible": true,
+            "margins": [
+              0.17991367318489931,
+              0.15472398654058217
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.04362437828058072,
+            "energy_lane_pj_bit": [
+              0.15954624514165017,
+              0.1932331629706611
+            ],
+            "energy_pj_bit": 0.17638970405615562,
+            "area_proxy_um2": 22.751152308187915,
+            "case_name": "confirmation_0_0"
+          },
+          {
+            "valid": true,
+            "feasible": true,
+            "margins": [
+              0.19702383987785366,
+              0.17358664106489824
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.04926105620262411,
+            "energy_lane_pj_bit": [
+              0.17271463212390836,
+              0.1739943267198508
+            ],
+            "energy_pj_bit": 0.1733544794218796,
+            "area_proxy_um2": 22.751152308187915,
+            "case_name": "confirmation_0_1"
+          },
+          {
+            "valid": true,
+            "feasible": true,
+            "margins": [
+              0.2983118907115711,
+              0.2985508760524519
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.0,
+            "energy_lane_pj_bit": [
+              0.305437162030952,
+              0.3053089443164141
+            ],
+            "energy_pj_bit": 0.305373053173683,
+            "area_proxy_um2": 22.751152308187915,
+            "case_name": "confirmation_0_2"
+          },
+          {
+            "valid": true,
+            "feasible": true,
+            "margins": [
+              0.28034147134475984,
+              0.27969219106515564
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.02331284111470211,
+            "energy_lane_pj_bit": [
+              0.10631428503588967,
+              0.10213172814428556
+            ],
+            "energy_pj_bit": 0.10422300659008762,
+            "area_proxy_um2": 22.751152308187915,
+            "case_name": "confirmation_0_3"
+          },
+          {
+            "valid": true,
+            "feasible": false,
+            "margins": [
+              0.06240410457487355,
+              0.09550783362341475
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.06137967707813896,
+            "energy_lane_pj_bit": [
+              0.15256946062804747,
+              0.15323020260654488
+            ],
+            "energy_pj_bit": 0.15289983161729617,
+            "area_proxy_um2": 22.751152308187915,
+            "case_name": "confirmation_1_0"
+          },
+          {
+            "valid": true,
+            "feasible": false,
+            "margins": [
+              0.10174758413651241,
+              0.07851698875024632
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.06453306323408325,
+            "energy_lane_pj_bit": [
+              0.16754029860488084,
+              0.15750715265415693
+            ],
+            "energy_pj_bit": 0.1625237256295189,
+            "area_proxy_um2": 22.751152308187915,
+            "case_name": "confirmation_1_1"
+          },
+          {
+            "valid": true,
+            "feasible": true,
+            "margins": [
+              0.2947300295139754,
+              0.294935261217424
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.0,
+            "energy_lane_pj_bit": [
+              0.27732038342952475,
+              0.27719721992636603
+            ],
+            "energy_pj_bit": 0.27725880167794537,
+            "area_proxy_um2": 22.751152308187915,
+            "case_name": "confirmation_1_2"
+          },
+          {
+            "valid": true,
+            "feasible": true,
+            "margins": [
+              0.14614882814422891,
+              0.14526507374163838
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.01849684443582844,
+            "energy_lane_pj_bit": [
+              0.10972002914564358,
+              0.10552145197964699
+            ],
+            "energy_pj_bit": 0.10762074056264528,
+            "area_proxy_um2": 22.751152308187915,
+            "case_name": "confirmation_1_3"
+          }
+        ]
+      },
+      "savings_percent": 23.17695297272686,
+      "unchanged_nominal": false,
+      "policy_seconds": 2.4671810519939754,
+      "stats": {
+        "online_updates": 16
+      }
+    },
+    {
+      "seed": 1,
+      "method": "random",
+      "x": [
+        1.0,
+        4.0,
+        2.0,
+        2.0,
+        2.0,
+        5.0
+      ],
+      "confirmation": {
+        "valid": true,
+        "feasible": true,
+        "margins": [
+          0.13728685787122774,
+          0.13603384262002516
+        ],
+        "energy_pj_bit": 0.23750088664978036,
+        "overshoot_fraction": 0.05511915439001469,
+        "cases": [
+          {
+            "valid": true,
+            "feasible": true,
+            "margins": [
+              0.2729099984877338,
+              0.27898272131741275
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.039404822883734036,
+            "energy_lane_pj_bit": [
+              0.20646554956781468,
+              0.254573913430861
+            ],
+            "energy_pj_bit": 0.23051973149933785,
+            "area_proxy_um2": 28.62,
+            "case_name": "confirmation_0_0"
+          },
+          {
+            "valid": true,
+            "feasible": true,
+            "margins": [
+              0.2732520187178119,
+              0.2840401889152372
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.04310228151830198,
+            "energy_lane_pj_bit": [
+              0.22243271203377613,
+              0.22523989780667109
+            ],
+            "energy_pj_bit": 0.2238363049202236,
+            "area_proxy_um2": 28.62,
+            "case_name": "confirmation_0_1"
+          },
+          {
+            "valid": true,
+            "feasible": true,
+            "margins": [
+              0.4050349399959642,
+              0.404364585263822
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.0101155054361289,
+            "energy_lane_pj_bit": [
+              0.39734267038633525,
+              0.3972554082627651
+            ],
+            "energy_pj_bit": 0.3972990393245502,
+            "area_proxy_um2": 28.62,
+            "case_name": "confirmation_0_2"
+          },
+          {
+            "valid": true,
+            "feasible": true,
+            "margins": [
+              0.27286391277479216,
+              0.2717706664211681
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.028172152802357964,
+            "energy_lane_pj_bit": [
+              0.13205157037146326,
+              0.12744555283098413
+            ],
+            "energy_pj_bit": 0.1297485616012237,
+            "area_proxy_um2": 28.62,
+            "case_name": "confirmation_0_3"
+          },
+          {
+            "valid": true,
+            "feasible": true,
+            "margins": [
+              0.15217897668493519,
+              0.1363476483222742
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.05138681216091223,
+            "energy_lane_pj_bit": [
+              0.20377791241405488,
+              0.20118182868135115
+            ],
+            "energy_pj_bit": 0.202479870547703,
+            "area_proxy_um2": 28.62,
+            "case_name": "confirmation_1_0"
+          },
+          {
+            "valid": true,
+            "feasible": true,
+            "margins": [
+              0.14226900467813475,
+              0.13712886649720868
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.05511915439001469,
+            "energy_lane_pj_bit": [
+              0.22040327837792284,
+              0.207801712013038
+            ],
+            "energy_pj_bit": 0.2141024951954804,
+            "area_proxy_um2": 28.62,
+            "case_name": "confirmation_1_1"
+          },
+          {
+            "valid": true,
+            "feasible": true,
+            "margins": [
+              0.35180341309833907,
+              0.35109433452916494
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.0,
+            "energy_lane_pj_bit": [
+              0.37031805404800644,
+              0.37019529748788177
+            ],
+            "energy_pj_bit": 0.3702566757679441,
+            "area_proxy_um2": 28.62,
+            "case_name": "confirmation_1_2"
+          },
+          {
+            "valid": true,
+            "feasible": true,
+            "margins": [
+              0.13728685787122774,
+              0.13603384262002516
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.02345237977410841,
+            "energy_lane_pj_bit": [
+              0.13406400412040878,
+              0.12946482456315128
+            ],
+            "energy_pj_bit": 0.13176441434178005,
+            "area_proxy_um2": 28.62,
+            "case_name": "confirmation_1_3"
+          }
+        ]
+      },
+      "savings_percent": 0.0,
+      "unchanged_nominal": true,
+      "policy_seconds": 0.0012664110108744353,
+      "stats": {}
+    },
+    {
+      "seed": 2,
+      "method": "alarm",
+      "x": [
+        2.131977779533004,
+        2.5094736895206227,
+        1.355434877661442,
+        2.036846264824294,
+        3.1607603585274964,
+        11.83118216469138
+      ],
+      "confirmation": {
+        "valid": true,
+        "feasible": true,
+        "margins": [
+          0.1832587973545261,
+          0.2022901410476301
+        ],
+        "energy_pj_bit": 0.20127776772463188,
+        "overshoot_fraction": 0.057889661643224066,
+        "cases": [
+          {
+            "valid": true,
+            "feasible": true,
+            "margins": [
+              0.29446899094275725,
+              0.28446261893846037
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.03905341340945401,
+            "energy_lane_pj_bit": [
+              0.17513182375891048,
+              0.21443710064976304
+            ],
+            "energy_pj_bit": 0.19478446220433676,
+            "area_proxy_um2": 27.199642464634064,
+            "case_name": "confirmation_0_0"
+          },
+          {
+            "valid": true,
+            "feasible": true,
+            "margins": [
+              0.2842903226080492,
+              0.3085798685261153
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.04347835082763196,
+            "energy_lane_pj_bit": [
+              0.1894631504905159,
+              0.19076247832116183
+            ],
+            "energy_pj_bit": 0.19011281440583888,
+            "area_proxy_um2": 27.199642464634064,
+            "case_name": "confirmation_0_1"
+          },
+          {
+            "valid": true,
+            "feasible": true,
+            "margins": [
+              0.386206673352522,
+              0.3864463142827643
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.0,
+            "energy_lane_pj_bit": [
+              0.3374593258354278,
+              0.3373254090280449
+            ],
+            "energy_pj_bit": 0.3373923674317364,
+            "area_proxy_um2": 27.199642464634064,
+            "case_name": "confirmation_0_2"
+          },
+          {
+            "valid": true,
+            "feasible": true,
+            "margins": [
+              0.34764725909052585,
+              0.3468746468312427
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.023720945987071085,
+            "energy_lane_pj_bit": [
+              0.1129200516363326,
+              0.10862092762648616
+            ],
+            "energy_pj_bit": 0.11077048963140938,
+            "area_proxy_um2": 27.199642464634064,
+            "case_name": "confirmation_0_3"
+          },
+          {
+            "valid": true,
+            "feasible": true,
+            "margins": [
+              0.2125053014848195,
+              0.21035925311249493
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.056173236199740906,
+            "energy_lane_pj_bit": [
+              0.1708082190839327,
+              0.17037305777501424
+            ],
+            "energy_pj_bit": 0.17059063842947347,
+            "area_proxy_um2": 27.199642464634064,
+            "case_name": "confirmation_1_0"
+          },
+          {
+            "valid": true,
+            "feasible": true,
+            "margins": [
+              0.1832587973545261,
+              0.2022901410476301
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.057889661643224066,
+            "energy_lane_pj_bit": [
+              0.18588821720811055,
+              0.17511285709555421
+            ],
+            "energy_pj_bit": 0.1805005371518324,
+            "area_proxy_um2": 27.199642464634064,
+            "case_name": "confirmation_1_1"
+          },
+          {
+            "valid": true,
+            "feasible": true,
+            "margins": [
+              0.3697250319486659,
+              0.3698798009062605
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.0,
+            "energy_lane_pj_bit": [
+              0.31217177443290467,
+              0.3120151065322163
+            ],
+            "energy_pj_bit": 0.3120934404825605,
+            "area_proxy_um2": 27.199642464634064,
+            "case_name": "confirmation_1_2"
+          },
+          {
+            "valid": true,
+            "feasible": true,
+            "margins": [
+              0.23177717287536537,
+              0.23081298539122475
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.01937729556629919,
+            "energy_lane_pj_bit": [
+              0.11614004177168323,
+              0.11181474234805137
+            ],
+            "energy_pj_bit": 0.1139773920598673,
+            "area_proxy_um2": 27.199642464634064,
+            "case_name": "confirmation_1_3"
+          }
+        ]
+      },
+      "savings_percent": 15.251782608526943,
+      "unchanged_nominal": false,
+      "policy_seconds": 3.652162501017301,
+      "stats": {
+        "critic_fits": 16,
+        "critic_optimizer_steps": 3200,
+        "attention_updates": 128,
+        "buffer_pushes": 5,
+        "head_transfers": 13,
+        "duplicate_fallbacks": 0,
+        "critic_loss": 0.13284897789310965,
+        "attention_loss": -0.8313113101750902,
+        "attention_gradient_norm": 0.4243657699289102,
+        "attempts": 24,
+        "imported_evaluations": 8,
+        "new_evaluations": 16,
+        "valid_evaluations": 24,
+        "failed_evaluations": 0,
+        "buffer_size": 5,
+        "success": false
+      }
+    },
+    {
+      "seed": 2,
+      "method": "regression",
+      "x": [
+        2.5,
+        2.078422023068929,
+        1.0657569260609843,
+        1.9995404086949407,
+        3.7830912448150653,
+        17.508306719566214
+      ],
+      "confirmation": {
+        "valid": true,
+        "feasible": true,
+        "margins": [
+          0.08748062658324052,
+          0.10911790944006827
+        ],
+        "energy_pj_bit": 0.17856623291030632,
+        "overshoot_fraction": 0.06180221758093363,
+        "cases": [
+          {
+            "valid": true,
+            "feasible": true,
+            "margins": [
+              0.208271382872109,
+              0.19298325266254224
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.03982695643210299,
+            "energy_lane_pj_bit": [
+              0.15603590548292612,
+              0.18966373838607475
+            ],
+            "energy_pj_bit": 0.17284982193450044,
+            "area_proxy_um2": 24.490282005034555,
+            "case_name": "confirmation_0_0"
+          },
+          {
+            "valid": true,
+            "feasible": true,
+            "margins": [
+              0.19269444079515596,
+              0.22881900262255683
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.046350592517399924,
+            "energy_lane_pj_bit": [
+              0.16825855829114644,
+              0.16960336451009886
+            ],
+            "energy_pj_bit": 0.16893096140062264,
+            "area_proxy_um2": 24.490282005034555,
+            "case_name": "confirmation_0_1"
+          },
+          {
+            "valid": true,
+            "feasible": true,
+            "margins": [
+              0.3315531527234544,
+              0.33180107869044395
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.0,
+            "energy_lane_pj_bit": [
+              0.2970721167288403,
+              0.29693598300090834
+            ],
+            "energy_pj_bit": 0.29700404986487433,
+            "area_proxy_um2": 24.490282005034555,
+            "case_name": "confirmation_0_2"
+          },
+          {
+            "valid": true,
+            "feasible": true,
+            "margins": [
+              0.2977662657894591,
+              0.2970322447057987
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.02038567279143999,
+            "energy_lane_pj_bit": [
+              0.10406472000152765,
+              0.10006776651468631
+            ],
+            "energy_pj_bit": 0.10206624325810698,
+            "area_proxy_um2": 24.490282005034555,
+            "case_name": "confirmation_0_3"
+          },
+          {
+            "valid": true,
+            "feasible": true,
+            "margins": [
+              0.12378901924590224,
+              0.1214169925020041
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.05824301867998316,
+            "energy_lane_pj_bit": [
+              0.15053937496713324,
+              0.14951773564908868
+            ],
+            "energy_pj_bit": 0.15002855530811096,
+            "area_proxy_um2": 24.490282005034555,
+            "case_name": "confirmation_1_0"
+          },
+          {
+            "valid": true,
+            "feasible": true,
+            "margins": [
+              0.08748062658324052,
+              0.10911790944006827
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.06180221758093363,
+            "energy_lane_pj_bit": [
+              0.1648724681465626,
+              0.1552603015523149
+            ],
+            "energy_pj_bit": 0.16006638484943875,
+            "area_proxy_um2": 24.490282005034555,
+            "case_name": "confirmation_1_1"
+          },
+          {
+            "valid": true,
+            "feasible": true,
+            "margins": [
+              0.3126512858454623,
+              0.3128614987790391
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.0,
+            "energy_lane_pj_bit": [
+              0.27177602992442357,
+              0.27163669771441556
+            ],
+            "energy_pj_bit": 0.2717063638194196,
+            "area_proxy_um2": 24.490282005034555,
+            "case_name": "confirmation_1_2"
+          },
+          {
+            "valid": true,
+            "feasible": true,
+            "margins": [
+              0.1701520736352139,
+              0.16937999403704884
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.016338579857342994,
+            "energy_lane_pj_bit": [
+              0.10788645514677346,
+              0.10386851054798044
+            ],
+            "energy_pj_bit": 0.10587748284737694,
+            "area_proxy_um2": 24.490282005034555,
+            "case_name": "confirmation_1_3"
+          }
+        ]
+      },
+      "savings_percent": 24.81449840916985,
+      "unchanged_nominal": false,
+      "policy_seconds": 2.506435891995352,
+      "stats": {
+        "online_updates": 16
+      }
+    },
+    {
+      "seed": 2,
+      "method": "random",
+      "x": [
+        2.131977779533004,
+        2.5094736895206227,
+        1.355434877661442,
+        2.036846264824294,
+        3.1607603585274964,
+        11.83118216469138
+      ],
+      "confirmation": {
+        "valid": true,
+        "feasible": true,
+        "margins": [
+          0.1832587973545261,
+          0.2022901410476301
+        ],
+        "energy_pj_bit": 0.20127776772463188,
+        "overshoot_fraction": 0.057889661643224066,
+        "cases": [
+          {
+            "valid": true,
+            "feasible": true,
+            "margins": [
+              0.29446899094275725,
+              0.28446261893846037
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.03905341340945401,
+            "energy_lane_pj_bit": [
+              0.17513182375891048,
+              0.21443710064976304
+            ],
+            "energy_pj_bit": 0.19478446220433676,
+            "area_proxy_um2": 27.199642464634064,
+            "case_name": "confirmation_0_0"
+          },
+          {
+            "valid": true,
+            "feasible": true,
+            "margins": [
+              0.2842903226080492,
+              0.3085798685261153
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.04347835082763196,
+            "energy_lane_pj_bit": [
+              0.1894631504905159,
+              0.19076247832116183
+            ],
+            "energy_pj_bit": 0.19011281440583888,
+            "area_proxy_um2": 27.199642464634064,
+            "case_name": "confirmation_0_1"
+          },
+          {
+            "valid": true,
+            "feasible": true,
+            "margins": [
+              0.386206673352522,
+              0.3864463142827643
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.0,
+            "energy_lane_pj_bit": [
+              0.3374593258354278,
+              0.3373254090280449
+            ],
+            "energy_pj_bit": 0.3373923674317364,
+            "area_proxy_um2": 27.199642464634064,
+            "case_name": "confirmation_0_2"
+          },
+          {
+            "valid": true,
+            "feasible": true,
+            "margins": [
+              0.34764725909052585,
+              0.3468746468312427
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.023720945987071085,
+            "energy_lane_pj_bit": [
+              0.1129200516363326,
+              0.10862092762648616
+            ],
+            "energy_pj_bit": 0.11077048963140938,
+            "area_proxy_um2": 27.199642464634064,
+            "case_name": "confirmation_0_3"
+          },
+          {
+            "valid": true,
+            "feasible": true,
+            "margins": [
+              0.2125053014848195,
+              0.21035925311249493
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.056173236199740906,
+            "energy_lane_pj_bit": [
+              0.1708082190839327,
+              0.17037305777501424
+            ],
+            "energy_pj_bit": 0.17059063842947347,
+            "area_proxy_um2": 27.199642464634064,
+            "case_name": "confirmation_1_0"
+          },
+          {
+            "valid": true,
+            "feasible": true,
+            "margins": [
+              0.1832587973545261,
+              0.2022901410476301
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.057889661643224066,
+            "energy_lane_pj_bit": [
+              0.18588821720811055,
+              0.17511285709555421
+            ],
+            "energy_pj_bit": 0.1805005371518324,
+            "area_proxy_um2": 27.199642464634064,
+            "case_name": "confirmation_1_1"
+          },
+          {
+            "valid": true,
+            "feasible": true,
+            "margins": [
+              0.3697250319486659,
+              0.3698798009062605
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.0,
+            "energy_lane_pj_bit": [
+              0.31217177443290467,
+              0.3120151065322163
+            ],
+            "energy_pj_bit": 0.3120934404825605,
+            "area_proxy_um2": 27.199642464634064,
+            "case_name": "confirmation_1_2"
+          },
+          {
+            "valid": true,
+            "feasible": true,
+            "margins": [
+              0.23177717287536537,
+              0.23081298539122475
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.01937729556629919,
+            "energy_lane_pj_bit": [
+              0.11614004177168323,
+              0.11181474234805137
+            ],
+            "energy_pj_bit": 0.1139773920598673,
+            "area_proxy_um2": 27.199642464634064,
+            "case_name": "confirmation_1_3"
+          }
+        ]
+      },
+      "savings_percent": 15.251782608526943,
+      "unchanged_nominal": false,
+      "policy_seconds": 0.0012786100051016547,
+      "stats": {}
+    }
+  ],
+  "search_costs": [
+    {
+      "design_queries": 56,
+      "logical_measurements": 224,
+      "spice_transient_attempts": 224,
+      "cache_hits": 0,
+      "failed_transients": 0,
+      "completed_transients": 224,
+      "suite_sha256": "8024cfd2479b9e0c832d77c29249df92e89e03eaef5cb72a85f274f6684eeff2",
+      "simulator_version": "******\n** ngspice-42 : Circuit level simulation program\n** Compiled with KLU Direct Linear Solver\n** The U. C. Berkeley CAD Group\n** Copyright 1985-1994, Regents of the University of California.\n** Copyright 2001-2023, The ngspice team.\n** Please get your ngspice manual from https://ngspice.sourceforge.io/docs.html\n** Please file your bug-reports at http://ngspice.sourceforge.net/bugrep.html\n** Creation Date: Sun Mar 31 20:15:14 UTC 2024\n******"
+    },
+    {
+      "design_queries": 56,
+      "logical_measurements": 224,
+      "spice_transient_attempts": 224,
+      "cache_hits": 0,
+      "failed_transients": 0,
+      "completed_transients": 224,
+      "suite_sha256": "8024cfd2479b9e0c832d77c29249df92e89e03eaef5cb72a85f274f6684eeff2",
+      "simulator_version": "******\n** ngspice-42 : Circuit level simulation program\n** Compiled with KLU Direct Linear Solver\n** The U. C. Berkeley CAD Group\n** Copyright 1985-1994, Regents of the University of California.\n** Copyright 2001-2023, The ngspice team.\n** Please get your ngspice manual from https://ngspice.sourceforge.io/docs.html\n** Please file your bug-reports at http://ngspice.sourceforge.net/bugrep.html\n** Creation Date: Sun Mar 31 20:15:14 UTC 2024\n******"
+    },
+    {
+      "design_queries": 56,
+      "logical_measurements": 224,
+      "spice_transient_attempts": 224,
+      "cache_hits": 0,
+      "failed_transients": 0,
+      "completed_transients": 224,
+      "suite_sha256": "8024cfd2479b9e0c832d77c29249df92e89e03eaef5cb72a85f274f6684eeff2",
+      "simulator_version": "******\n** ngspice-42 : Circuit level simulation program\n** Compiled with KLU Direct Linear Solver\n** The U. C. Berkeley CAD Group\n** Copyright 1985-1994, Regents of the University of California.\n** Copyright 2001-2023, The ngspice team.\n** Please get your ngspice manual from https://ngspice.sourceforge.io/docs.html\n** Please file your bug-reports at http://ngspice.sourceforge.net/bugrep.html\n** Creation Date: Sun Mar 31 20:15:14 UTC 2024\n******"
+    }
+  ],
+  "confirmation_cost": {
+    "design_queries": 10,
+    "logical_measurements": 80,
+    "spice_transient_attempts": 40,
+    "cache_hits": 40,
+    "failed_transients": 0,
+    "completed_transients": 40,
+    "suite_sha256": "53e41bf23453b0b5f803d4a01e46652a00ac094bb9b3c650b3f4bbc31846f91d",
+    "simulator_version": "******\n** ngspice-42 : Circuit level simulation program\n** Compiled with KLU Direct Linear Solver\n** The U. C. Berkeley CAD Group\n** Copyright 1985-1994, Regents of the University of California.\n** Copyright 2001-2023, The ngspice team.\n** Please get your ngspice manual from https://ngspice.sourceforge.io/docs.html\n** Please file your bug-reports at http://ngspice.sourceforge.net/bugrep.html\n** Creation Date: Sun Mar 31 20:15:14 UTC 2024\n******"
+  }
+}
