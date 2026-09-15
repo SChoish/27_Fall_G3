@@ -1,4 +1,4 @@
-"""Six sizing variables, 72 MOS, coupled RLC channels and a fixed RX aperture.
+"""Six sizing variables, 72 MOS, coupled RC/RLC channels and a fixed RX aperture.
 
 Uses the repository's PTM predictive MOS model, not a foundry PDK or a UCIe
 compliance model. Every design is physically re-simulated; calibration lookup
@@ -102,17 +102,24 @@ class Case:
         return np.stack([a, a if self.pattern == 'same' else 1 - a])
 
 
-def default_suite(split='development'):
-    """Small predeclared input suites, not statistically exhaustive PVT corners."""
+def default_suite(split='development', channel_model='rlc'):
+    """Small input suites. Use channel_model='rc' for the RC-only channel.
+
+    RLC remains the compatibility default for existing campaign scripts.
+    RC values are a controlled model ablation, not PDK-extracted parasitics.
+    """
     if split not in ('development', 'test'):
         raise ValueError(split)
+    if channel_model not in ('rc', 'rlc'):
+        raise ValueError('channel_model must be rc or rlc')
     development = split == 'development'
     settings = [(1., 27., 30., .30, .06), (.95, 65., 40., .34, .10)] if development else [
         (.98, 40., 35., .32, .08), (1.02, 55., 38., .33, .09)]
     result = []
     for j, (vdd, temp, resistance, cap, coupling) in enumerate(settings):
         lanes = [link.Context(vdd=vdd, temperature_c=temp, resistance_ohm=resistance + 2*k,
-                              capacitance_pf=cap, inductance_nh=.3, rx_capacitance_pf=.06,
+                              capacitance_pf=cap, inductance_nh=0. if channel_model == 'rc' else .3,
+                              rx_capacitance_pf=.06,
                               clock_offset_ui=0.) for k in range(2)]
         context = CoupledContext(*lanes, coupling_pf=coupling)
         patterns = ('random', 'opposite') if development else ('random', 'random', 'same', 'runs')

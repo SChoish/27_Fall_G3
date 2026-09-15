@@ -1,4 +1,4 @@
-"""Small D2D-inspired link: actual CMOS/RLC transient, behavioral receiver.
+"""Small D2D-inspired link: CMOS with RC or RLC transient, behavioral receiver.
 
 This is not a UCIe compliance model. Settings stay fixed during each packet;
 each measurement starts a fresh ngspice transient after a warmup sequence.
@@ -24,7 +24,7 @@ class Context:
     temperature_c: float = 27.0
     rate_gbps: float = 2.0
     resistance_ohm: float = 30.0
-    inductance_nh: float = 0.3
+    inductance_nh: float = 0.3  # Zero selects RC: no inductor is emitted.
     capacitance_pf: float = 0.3
     rx_capacitance_pf: float = 0.06
     clock_offset_ui: float = 0.0
@@ -36,8 +36,10 @@ class Context:
         if not all(np.isfinite(x) for x in asdict(self).values()):
             raise ValueError('Context must be finite')
         if min(self.vdd, self.rate_gbps, self.resistance_ohm,
-               self.inductance_nh, self.capacitance_pf, self.rx_capacitance_pf) <= 0:
-            raise ValueError('Supply, rate and passive values must be positive')
+               self.capacitance_pf, self.rx_capacitance_pf) <= 0:
+            raise ValueError('Supply, rate, resistance and capacitances must be positive')
+        if self.inductance_nh < 0:
+            raise ValueError('Inductance must be nonnegative; zero selects RC')
         if abs(self.clock_offset_ui) > .25:
             raise ValueError('This packet alignment model supports at most +/-0.25 UI skew')
         if not 0 <= self.coarse_latency_ui <= 2:
@@ -158,9 +160,14 @@ def netlist(context, cells, payload, points_per_ui=64, sections=3):
     prev = 'tx'
     for k in range(sections):
         node = 'rx' if k == sections-1 else f'ch{k}'
-        lines += [f'RCH{k} {prev} rl{k} {c.resistance_ohm/sections:.12g}',
-                  f'LCH{k} rl{k} {node} {c.inductance_nh/sections:.12g}n',
-                  f'CCH{k} {node} 0 {c.capacitance_pf/sections:.12g}p']
+        if c.inductance_nh == 0:
+            # Connect the resistor directly; removing L without reconnecting
+            # its terminals would leave an open channel.
+            lines.append(f'RCH{k} {prev} {node} {c.resistance_ohm/sections:.12g}')
+        else:
+            lines += [f'RCH{k} {prev} rl{k} {c.resistance_ohm/sections:.12g}',
+                      f'LCH{k} rl{k} {node} {c.inductance_nh/sections:.12g}n']
+        lines.append(f'CCH{k} {node} 0 {c.capacitance_pf/sections:.12g}p')
         prev = node
     lines += [f'CRX rx 0 {c.rx_capacitance_pf:.12g}p',
               '.control', 'set noaskquit', 'set wr_vecnames', 'set wr_singlescale',

@@ -1,0 +1,502 @@
+{
+  "base_commit": "e60ada39d6e4bce978ad2d6aef3a916657aa8036",
+  "checks": {
+    "rlc_netlist_unchanged_1_3_10_sections": true,
+    "invalid_inductance_rejected": true,
+    "rc_channel_connected_and_totals_preserved": true,
+    "sizing_mos_coupling_and_terminals_preserved": true,
+    "case_serialization_and_only_L_changed": true,
+    "suite_and_netlist_identity_separate": true
+  },
+  "scope": "Fixed nominal design, four development cases per channel. No optimization, training, or test evaluation.",
+  "runs": {
+    "rlc": {
+      "result": {
+        "valid": true,
+        "feasible": true,
+        "margins": [
+          0.14049490437959533,
+          0.2040828469236602
+        ],
+        "energy_pj_bit": 0.3137180231945983,
+        "overshoot_fraction": 0.04157683779696475,
+        "cases": [
+          {
+            "valid": true,
+            "feasible": true,
+            "margins": [
+              0.2804964923321961,
+              0.2789932491553825
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.03174553341757291,
+            "energy_lane_pj_bit": [
+              0.22783161814773922,
+              0.19298938144383618
+            ],
+            "energy_pj_bit": 0.2104104997957877,
+            "case": {
+              "name": "development_0_0_random",
+              "context": {
+                "lane0": {
+                  "vdd": 1.0,
+                  "temperature_c": 27.0,
+                  "rate_gbps": 2.0,
+                  "resistance_ohm": 30.0,
+                  "inductance_nh": 0.3,
+                  "capacitance_pf": 0.3,
+                  "rx_capacitance_pf": 0.06,
+                  "clock_offset_ui": 0.0,
+                  "coarse_latency_ui": 1.0
+                },
+                "lane1": {
+                  "vdd": 1.0,
+                  "temperature_c": 27.0,
+                  "rate_gbps": 2.0,
+                  "resistance_ohm": 32.0,
+                  "inductance_nh": 0.3,
+                  "capacitance_pf": 0.3,
+                  "rx_capacitance_pf": 0.06,
+                  "clock_offset_ui": 0.0,
+                  "coarse_latency_ui": 1.0
+                },
+                "coupling_pf": 0.06
+              },
+              "pattern": "random",
+              "seed": 71001,
+              "bits": 64,
+              "phase_ui": 0.5,
+              "guard_ui": 0.1,
+              "margin_min": 0.08,
+              "overshoot_max": 0.2,
+              "points_per_ui": 64
+            },
+            "area_proxy_um2": 28.62
+          },
+          {
+            "valid": true,
+            "feasible": true,
+            "margins": [
+              0.33355478405610983,
+              0.3395141800161784
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.020461081571339967,
+            "energy_lane_pj_bit": [
+              0.4341513580299433,
+              0.42961570729369036
+            ],
+            "energy_pj_bit": 0.43188353266181684,
+            "case": {
+              "name": "development_0_1_opposite",
+              "context": {
+                "lane0": {
+                  "vdd": 1.0,
+                  "temperature_c": 27.0,
+                  "rate_gbps": 2.0,
+                  "resistance_ohm": 30.0,
+                  "inductance_nh": 0.3,
+                  "capacitance_pf": 0.3,
+                  "rx_capacitance_pf": 0.06,
+                  "clock_offset_ui": 0.0,
+                  "coarse_latency_ui": 1.0
+                },
+                "lane1": {
+                  "vdd": 1.0,
+                  "temperature_c": 27.0,
+                  "rate_gbps": 2.0,
+                  "resistance_ohm": 32.0,
+                  "inductance_nh": 0.3,
+                  "capacitance_pf": 0.3,
+                  "rx_capacitance_pf": 0.06,
+                  "clock_offset_ui": 0.0,
+                  "coarse_latency_ui": 1.0
+                },
+                "coupling_pf": 0.06
+              },
+              "pattern": "opposite",
+              "seed": 71002,
+              "bits": 64,
+              "phase_ui": 0.5,
+              "guard_ui": 0.1,
+              "margin_min": 0.08,
+              "overshoot_max": 0.2,
+              "points_per_ui": 64
+            },
+            "area_proxy_um2": 28.62
+          },
+          {
+            "valid": true,
+            "feasible": true,
+            "margins": [
+              0.14049490437959533,
+              0.2040828469236602
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.04157683779696475,
+            "energy_lane_pj_bit": [
+              0.207217153162215,
+              0.20183601542619897
+            ],
+            "energy_pj_bit": 0.204526584294207,
+            "case": {
+              "name": "development_1_0_random",
+              "context": {
+                "lane0": {
+                  "vdd": 0.95,
+                  "temperature_c": 65.0,
+                  "rate_gbps": 2.0,
+                  "resistance_ohm": 40.0,
+                  "inductance_nh": 0.3,
+                  "capacitance_pf": 0.34,
+                  "rx_capacitance_pf": 0.06,
+                  "clock_offset_ui": 0.0,
+                  "coarse_latency_ui": 1.0
+                },
+                "lane1": {
+                  "vdd": 0.95,
+                  "temperature_c": 65.0,
+                  "rate_gbps": 2.0,
+                  "resistance_ohm": 42.0,
+                  "inductance_nh": 0.3,
+                  "capacitance_pf": 0.34,
+                  "rx_capacitance_pf": 0.06,
+                  "clock_offset_ui": 0.0,
+                  "coarse_latency_ui": 1.0
+                },
+                "coupling_pf": 0.1
+              },
+              "pattern": "random",
+              "seed": 71102,
+              "bits": 64,
+              "phase_ui": 0.5,
+              "guard_ui": 0.1,
+              "margin_min": 0.08,
+              "overshoot_max": 0.2,
+              "points_per_ui": 64
+            },
+            "area_proxy_um2": 28.62
+          },
+          {
+            "valid": true,
+            "feasible": true,
+            "margins": [
+              0.2265930430755958,
+              0.23600753689453435
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.0032773274238662164,
+            "energy_lane_pj_bit": [
+              0.4097957535876655,
+              0.406307198465498
+            ],
+            "energy_pj_bit": 0.40805147602658176,
+            "case": {
+              "name": "development_1_1_opposite",
+              "context": {
+                "lane0": {
+                  "vdd": 0.95,
+                  "temperature_c": 65.0,
+                  "rate_gbps": 2.0,
+                  "resistance_ohm": 40.0,
+                  "inductance_nh": 0.3,
+                  "capacitance_pf": 0.34,
+                  "rx_capacitance_pf": 0.06,
+                  "clock_offset_ui": 0.0,
+                  "coarse_latency_ui": 1.0
+                },
+                "lane1": {
+                  "vdd": 0.95,
+                  "temperature_c": 65.0,
+                  "rate_gbps": 2.0,
+                  "resistance_ohm": 42.0,
+                  "inductance_nh": 0.3,
+                  "capacitance_pf": 0.34,
+                  "rx_capacitance_pf": 0.06,
+                  "clock_offset_ui": 0.0,
+                  "coarse_latency_ui": 1.0
+                },
+                "coupling_pf": 0.1
+              },
+              "pattern": "opposite",
+              "seed": 71103,
+              "bits": 64,
+              "phase_ui": 0.5,
+              "guard_ui": 0.1,
+              "margin_min": 0.08,
+              "overshoot_max": 0.2,
+              "points_per_ui": 64
+            },
+            "area_proxy_um2": 28.62
+          }
+        ]
+      },
+      "cost": {
+        "design_queries": 1,
+        "logical_measurements": 4,
+        "spice_transient_attempts": 4,
+        "cache_hits": 0,
+        "failed_transients": 0,
+        "completed_transients": 4,
+        "suite_sha256": "b037ac9ff5f6e7b7945e9a224bb11d5a42825c9cee6d7a81310e6d858ce3c91e",
+        "simulator_version": "******\n** ngspice-42 : Circuit level simulation program\n** Compiled with KLU Direct Linear Solver\n** The U. C. Berkeley CAD Group\n** Copyright 1985-1994, Regents of the University of California.\n** Copyright 2001-2023, The ngspice team.\n** Please get your ngspice manual from https://ngspice.sourceforge.io/docs.html\n** Please file your bug-reports at http://ngspice.sourceforge.net/bugrep.html\n** Creation Date: Sun Mar 31 20:15:14 UTC 2024\n******"
+      }
+    },
+    "rc": {
+      "result": {
+        "valid": true,
+        "feasible": true,
+        "margins": [
+          0.14018508611618652,
+          0.20355115998432805
+        ],
+        "energy_pj_bit": 0.3135192324643152,
+        "overshoot_fraction": 0.04132363317866283,
+        "cases": [
+          {
+            "valid": true,
+            "feasible": true,
+            "margins": [
+              0.2798451227077111,
+              0.278339412552979
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.03130495402410505,
+            "energy_lane_pj_bit": [
+              0.22770448983504876,
+              0.19288967281586322
+            ],
+            "energy_pj_bit": 0.210297081325456,
+            "case": {
+              "name": "development_0_0_random",
+              "context": {
+                "lane0": {
+                  "vdd": 1.0,
+                  "temperature_c": 27.0,
+                  "rate_gbps": 2.0,
+                  "resistance_ohm": 30.0,
+                  "inductance_nh": 0.0,
+                  "capacitance_pf": 0.3,
+                  "rx_capacitance_pf": 0.06,
+                  "clock_offset_ui": 0.0,
+                  "coarse_latency_ui": 1.0
+                },
+                "lane1": {
+                  "vdd": 1.0,
+                  "temperature_c": 27.0,
+                  "rate_gbps": 2.0,
+                  "resistance_ohm": 32.0,
+                  "inductance_nh": 0.0,
+                  "capacitance_pf": 0.3,
+                  "rx_capacitance_pf": 0.06,
+                  "clock_offset_ui": 0.0,
+                  "coarse_latency_ui": 1.0
+                },
+                "coupling_pf": 0.06
+              },
+              "pattern": "random",
+              "seed": 71001,
+              "bits": 64,
+              "phase_ui": 0.5,
+              "guard_ui": 0.1,
+              "margin_min": 0.08,
+              "overshoot_max": 0.2,
+              "points_per_ui": 64
+            },
+            "area_proxy_um2": 28.62
+          },
+          {
+            "valid": true,
+            "feasible": true,
+            "margins": [
+              0.3329569067884256,
+              0.33894626217001356
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.019798866879801924,
+            "energy_lane_pj_bit": [
+              0.43384739824289764,
+              0.4293126550999766
+            ],
+            "energy_pj_bit": 0.43158002667143713,
+            "case": {
+              "name": "development_0_1_opposite",
+              "context": {
+                "lane0": {
+                  "vdd": 1.0,
+                  "temperature_c": 27.0,
+                  "rate_gbps": 2.0,
+                  "resistance_ohm": 30.0,
+                  "inductance_nh": 0.0,
+                  "capacitance_pf": 0.3,
+                  "rx_capacitance_pf": 0.06,
+                  "clock_offset_ui": 0.0,
+                  "coarse_latency_ui": 1.0
+                },
+                "lane1": {
+                  "vdd": 1.0,
+                  "temperature_c": 27.0,
+                  "rate_gbps": 2.0,
+                  "resistance_ohm": 32.0,
+                  "inductance_nh": 0.0,
+                  "capacitance_pf": 0.3,
+                  "rx_capacitance_pf": 0.06,
+                  "clock_offset_ui": 0.0,
+                  "coarse_latency_ui": 1.0
+                },
+                "coupling_pf": 0.06
+              },
+              "pattern": "opposite",
+              "seed": 71002,
+              "bits": 64,
+              "phase_ui": 0.5,
+              "guard_ui": 0.1,
+              "margin_min": 0.08,
+              "overshoot_max": 0.2,
+              "points_per_ui": 64
+            },
+            "area_proxy_um2": 28.62
+          },
+          {
+            "valid": true,
+            "feasible": true,
+            "margins": [
+              0.14018508611618652,
+              0.20355115998432805
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.04132363317866283,
+            "energy_lane_pj_bit": [
+              0.20710953622690947,
+              0.20172477422987636
+            ],
+            "energy_pj_bit": 0.20441715522839293,
+            "case": {
+              "name": "development_1_0_random",
+              "context": {
+                "lane0": {
+                  "vdd": 0.95,
+                  "temperature_c": 65.0,
+                  "rate_gbps": 2.0,
+                  "resistance_ohm": 40.0,
+                  "inductance_nh": 0.0,
+                  "capacitance_pf": 0.34,
+                  "rx_capacitance_pf": 0.06,
+                  "clock_offset_ui": 0.0,
+                  "coarse_latency_ui": 1.0
+                },
+                "lane1": {
+                  "vdd": 0.95,
+                  "temperature_c": 65.0,
+                  "rate_gbps": 2.0,
+                  "resistance_ohm": 42.0,
+                  "inductance_nh": 0.0,
+                  "capacitance_pf": 0.34,
+                  "rx_capacitance_pf": 0.06,
+                  "clock_offset_ui": 0.0,
+                  "coarse_latency_ui": 1.0
+                },
+                "coupling_pf": 0.1
+              },
+              "pattern": "random",
+              "seed": 71102,
+              "bits": 64,
+              "phase_ui": 0.5,
+              "guard_ui": 0.1,
+              "margin_min": 0.08,
+              "overshoot_max": 0.2,
+              "points_per_ui": 64
+            },
+            "area_proxy_um2": 28.62
+          },
+          {
+            "valid": true,
+            "feasible": true,
+            "margins": [
+              0.22627394327627437,
+              0.2357593677176668
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.0026024215352766777,
+            "energy_lane_pj_bit": [
+              0.4095268787112698,
+              0.40603845455267945
+            ],
+            "energy_pj_bit": 0.4077826666319746,
+            "case": {
+              "name": "development_1_1_opposite",
+              "context": {
+                "lane0": {
+                  "vdd": 0.95,
+                  "temperature_c": 65.0,
+                  "rate_gbps": 2.0,
+                  "resistance_ohm": 40.0,
+                  "inductance_nh": 0.0,
+                  "capacitance_pf": 0.34,
+                  "rx_capacitance_pf": 0.06,
+                  "clock_offset_ui": 0.0,
+                  "coarse_latency_ui": 1.0
+                },
+                "lane1": {
+                  "vdd": 0.95,
+                  "temperature_c": 65.0,
+                  "rate_gbps": 2.0,
+                  "resistance_ohm": 42.0,
+                  "inductance_nh": 0.0,
+                  "capacitance_pf": 0.34,
+                  "rx_capacitance_pf": 0.06,
+                  "clock_offset_ui": 0.0,
+                  "coarse_latency_ui": 1.0
+                },
+                "coupling_pf": 0.1
+              },
+              "pattern": "opposite",
+              "seed": 71103,
+              "bits": 64,
+              "phase_ui": 0.5,
+              "guard_ui": 0.1,
+              "margin_min": 0.08,
+              "overshoot_max": 0.2,
+              "points_per_ui": 64
+            },
+            "area_proxy_um2": 28.62
+          }
+        ]
+      },
+      "cost": {
+        "design_queries": 1,
+        "logical_measurements": 4,
+        "spice_transient_attempts": 4,
+        "cache_hits": 0,
+        "failed_transients": 0,
+        "completed_transients": 4,
+        "suite_sha256": "8024cfd2479b9e0c832d77c29249df92e89e03eaef5cb72a85f274f6684eeff2",
+        "simulator_version": "******\n** ngspice-42 : Circuit level simulation program\n** Compiled with KLU Direct Linear Solver\n** The U. C. Berkeley CAD Group\n** Copyright 1985-1994, Regents of the University of California.\n** Copyright 2001-2023, The ngspice team.\n** Please get your ngspice manual from https://ngspice.sourceforge.io/docs.html\n** Please file your bug-reports at http://ngspice.sourceforge.net/bugrep.html\n** Creation Date: Sun Mar 31 20:15:14 UTC 2024\n******"
+      }
+    }
+  }
+}
