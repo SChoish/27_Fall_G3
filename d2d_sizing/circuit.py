@@ -135,9 +135,14 @@ def suite_hash(cases):
 
 
 def netlist(x, case):
+    deck = link_netlist(case.context, (8, 8), case.payload(), case.points_per_ui)
+    return sized_netlist(x, deck, 2)
+
+
+def sized_netlist(x, deck, lanes):
     p1, p2, out, pn, en, rs = validate_design(x)
-    lines = link_netlist(case.context, (8, 8), case.payload(), case.points_per_ui).splitlines()
-    lines[0] = 'D2D transmitter sizing: shared six-variable design, 72 fixed MOS'
+    lines = deck.splitlines()
+    lines[0] = f'D2D transmitter sizing: shared six-variable design, {36*lanes} fixed MOS'
     mos_count = 0
     for i, line in enumerate(lines):
         tokens = line.split()
@@ -166,10 +171,10 @@ def netlist(x, case):
             lane = name.rsplit('_', 1)[1]
             tokens[1] = 'pad_' + lane
             lines[i] = ' '.join(tokens)
-    if mos_count != 72:
+    if mos_count != 36*lanes:
         raise ValueError('Unexpected transmitter topology')
     control = lines.index('.control')
-    lines[control:control] = [f'RTERM_{k} tx_{k} pad_{k} {rs:.12g}' for k in range(2)]
+    lines[control:control] = [f'RTERM_{k} tx_{k} pad_{k} {rs:.12g}' for k in range(lanes)]
     return '\n'.join(lines) + '\n'
 
 

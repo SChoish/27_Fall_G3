@@ -275,3 +275,16 @@ python -m experiments.report_d2d_replay --seeds 3 4 5 --output campaigns/replay_
 The confirmation script requires all five selection locks. It charges final test
 separately and evaluates both existing and freshly drawn RC channels. Repeated
 returned designs share final measurements across seeds and methods.
+
+### Three-lane sizing challenge
+
+Run from the repository root with ngspice on PATH or set `NGSPICE_BIN` to its executable.
+
+```bash
+python -m experiments.run_three_lane --calibrate --output campaigns/three_lane_grid
+for seed in 11 12 13; do
+  python -m experiments.run_three_lane --seed "$seed" --output "campaigns/three_lane_s$seed"
+done
+```
+
+Lane 0 has a left and a right neighbour. All three share six sizing parameters, have their own 36-MOS transmitter and supply, and receive their own payload. Each adjacent pair couples at three points along the RC line. Calibration uses a separate packet. Optimizers share eight initial designs, including the high-drive calibration reference. Each gets 18 short design evaluations (4 cases × 64 bits/lane) and 3 long evaluations (8 × 128). Validation ranks the three lowest-cost short designs, then selects the lowest-energy long-feasible design. The 16 held-out cases use distinct packets and previously unseen rate/coupling/clock-offset combinations. Each returned design must pass every lane and case. Energy is mean TX supply energy per transmitted lane-bit. The reference BO uses scenario-specific constraint outputs. Both neural methods predict aggregate worst lane margins and use the same candidate count. The local variant varies one or two device dimensions per local candidate.

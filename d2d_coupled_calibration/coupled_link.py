@@ -54,6 +54,19 @@ class CoupledSetting:
 
 def payloads(seed,n):return np.stack([link.bits_for(seed,n),link.bits_for(seed+100003,n)])
 
+def lane_body(lane, n, payload, points_per_ui, j):
+    lines = []
+    source=link.netlist(lane,n,payload,points_per_ui).splitlines()
+    body=source[source.index(next(x for x in source if x.startswith('VDD '))):source.index('.control')]
+    for line in body:
+        if line.startswith('+'):lines.append(line);continue
+        tok=line.split();device=tok[0][0];tok[0]+=f'_{j}'
+        terminals=4 if device=='M' else 2
+        for k in range(1,terminals+1):
+            if tok[k]!='0':tok[k]+=f'_{j}'
+        lines.append(' '.join(tok))
+    return lines
+
 def netlist(context,strengths,bits,points_per_ui=32):
     if np.shape(bits)[0]!=2 or not np.isin(bits,[0,1]).all():raise ValueError('Two binary packets required')
     if len(bits[0])!=len(bits[1]):raise ValueError('Equal lane packet sizes required')
@@ -62,15 +75,7 @@ def netlist(context,strengths,bits,points_per_ui=32):
            f'.include "{ROOT / "assets/45nm_bulk.txt"}"',f'.temp {c.temperature_c:.12g}',
            '.options reltol=1e-5 abstol=1e-12 vntol=1e-7']
     for j,(lane,n,payload) in enumerate(zip([context.lane0,context.lane1],strengths,bits)):
-        source=link.netlist(lane,n,payload,points_per_ui).splitlines()
-        body=source[source.index(next(x for x in source if x.startswith('VDD '))):source.index('.control')]
-        for line in body:
-            if line.startswith('+'):lines.append(line);continue
-            tok=line.split();device=tok[0][0];tok[0]+=f'_{j}'
-            terminals=4 if device=='M' else 2
-            for k in range(1,terminals+1):
-                if tok[k]!='0':tok[k]+=f'_{j}'
-            lines.append(' '.join(tok))
+        lines.extend(lane_body(lane,n,payload,points_per_ui,j))
     if context.coupling_pf>0:
         for k,node in enumerate(['ch0','ch1','rx']):
             lines.append(f'CCOUP{k} {node}_0 {node}_1 {context.coupling_pf/3:.12g}p')
