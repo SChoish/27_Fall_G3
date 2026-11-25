@@ -79,3 +79,11 @@ python -m experiments.report_probe_energy campaigns/phase_dev "$out/DEV_ENERGY_K
 python -m experiments.report_probe_energy campaigns/phase_test "$out/TEST_ENERGY_KO.md"
 python -m experiments.report_reserve_transfer campaigns/phase_reserve_transfer/summary.json "$out/RESERVE_PAIRED_KO.md"
 ```
+
+### 보정 비트를 128로 줄인 동등 비용 대조
+
+새 채널 seed 49106의 bo13 고정 회로에서 첫 64비트 패킷은 코드 32, 두 번째 64비트는 코드 16 또는 48로 보정한다. 고정 경로는 개발 채널 leave-one-out으로 한 방향을 고르고, 적응 경로는 첫 응답을 본 뒤 각 후보의 두 번째 관측이 가져올 개발 사전모형의 기대 효용을 비교한다. 두 방법은 같은 사전모형·최종 판정·128비트·TX 파형을 사용한다. 0회 및 1회 관측도 기록한다. 12채널(6 RC, 6 RLC), 채널당 4개 × 256비트의 새 검증 패킷에서 평가한다. 모든 설계·모형·규칙은 49106 결과를 보기 전에 확정했다.
+
+```bash
+python -m experiments.check_two_probes --model implementation_results/20261125_phase_feedback/dev_model.json --output campaigns/phase_two_49106 --workers 3
+```
