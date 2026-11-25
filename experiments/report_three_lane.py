@@ -5,7 +5,6 @@ import json
 
 import numpy as np
 
-from d2d_sizing.circuit import write_json
 
 
 def read(path):
@@ -18,7 +17,10 @@ def collect(folders):
         summary = read(folder/'summary.json')
         seed = summary['seed']
         protocol = read(folder/'protocol.json')
-        protocols[str(seed)] = {k:v for k,v in protocol.items() if k != 'suites'}
+        protocols[str(seed)] = dict(
+            **{k:v for k,v in protocol.items() if k != 'suites'},
+            wall_seconds=summary['wall_seconds'],
+            unique_transients=summary['unique_transients'])
         packets = protocol['suites']['test']
         for method, result in summary['scores'].items():
             lock = summary['locked'][method]
@@ -71,6 +73,12 @@ def report(data, calibration, effect):
         metrics='—|—|—' if r['energy'] is None else f"{r['energy']:.6f}|{r['weakest_margin']:.5f}|{r['errors']}"
         lines.append(f"|{r['seed']}|{r['method']}|{r['test_pass']}/{r['test_count']}|{metrics}|")
     lines += ['', '에너지는 세 송신기의 공급 에너지를 배선 비트당 평균낸 값이다. 최종 통과에는 모든 배선에서 중심 오류 0개, 판정 시점 ±0.1 UI 구간의 최저 마진 0.08 V/VDD 이상, overshoot 0.2 VDD 이하가 필요하다. 동일한 설계를 반환한 경우 시험 결과도 동일하다. 전체 링크 전력 및 실리콘 BER은 이 시뮬레이션에서 측정하지 않았다.']
+    means = {m:np.mean([r['energy'] for r in data['rows'] if r['method']==m])
+             for m in ('bo','replay','replay_local')
+             if all(r['all_pass'] for r in data['rows'] if r['method']==m)}
+    if len(means) == 3:
+        local, base = means['replay_local'], means['replay']
+        lines += ['', f"기본 MLP 대비 국소 수정 방식의 에너지 변화는 {(local/base-1)*100:+.2f}%이고 BO 대비 변화는 {(local/means['bo']-1)*100:+.2f}%이다. 이 비교에는 세 seed와 두 개의 새로운 전기 조건을 사용했다."]
     return '\n'.join(lines)+'\n'
 
 
@@ -80,5 +88,5 @@ if __name__ == '__main__':
     p.add_argument('runs',type=Path,nargs='+')
     a=p.parse_args()
     data=collect(a.runs)
-    write_json(a.output/'results.json',data)
+    (a.output/'results.json').write_text(json.dumps(data,allow_nan=False,separators=(',',':'))+'\n')
     (a.output/'REPORT_KO.md').write_text(report(data,read(a.output/'calibration.json'),read(a.output/'neighbour_effect.json')))
