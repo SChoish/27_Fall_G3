@@ -2,6 +2,8 @@ import unittest
 import numpy as np
 
 from experiments.analyze_phase_feedback import choose, GRID
+from experiments.check_sizing_shortlist import shortlist
+from experiments.confirm_phase_sizing import lane_quadratic
 from experiments.run_phase_feedback import CODES, suite
 from experiments.run_phase_sizing import oracle, bracket, init
 
@@ -18,6 +20,23 @@ class CalibrationTests(unittest.TestCase):
         self.assertEqual(CODES[code],40)
         self.assertEqual(queries,[16,32,48])
         self.assertEqual(calls,list(enumerate(GRID)))
+
+    def test_lane_curve_uses_only_allowed_observations(self):
+        queries = []
+        def measure(step, index):
+            queries.append((step, index))
+            phase = CODES[index]
+            return np.array([.3 - .001*(phase-24)**2, .3 - .001*(phase-48)**2, .5])
+        self.assertEqual(CODES[lane_quadratic(measure)], 36)
+        self.assertEqual(queries, list(enumerate(GRID)))
+
+    def test_reserve_replaces_only_one_slot(self):
+        rows = [dict(x=[i], oracle=dict(residuals=[-slack], energy_pj_bit=i+1))
+                for i, slack in enumerate([.04, .05, .3, .9])]
+        self.assertEqual([row['x'] for row in shortlist(rows)], [[0], [2], [3]])
+        rows[2]['oracle']['residuals'] = [-.1]
+        rows[3]['oracle']['residuals'] = [-.2]
+        self.assertEqual([row['x'] for row in shortlist(rows)], [[0], [1], [3]])
 
     def test_splits_and_geometry(self):
         a=suite(49101,1,256)

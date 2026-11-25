@@ -1,0 +1,19 @@
+{
+  "seed": 21,
+  "channels": [
+    12,
+    11,
+    14,
+    9
+  ],
+  "root_seed": 49101,
+  "model_sha": "7bc9f3ad62827fb10cc61d06389ee4142d21d966a9b903a2d26048d79607c9f5",
+  "solver_sha": "ac3405da2c35272dff76266baf79431a91d902303b26aa995487cdbc0495fc9d",
+  "methods": [
+    "bo",
+    "bracket",
+    "mlp_local"
+  ],
+  "short_calls": 72,
+  "long_calls": 24
+}
