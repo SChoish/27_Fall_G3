@@ -288,3 +288,11 @@ done
 ```
 
 Lane 0 has a left and a right neighbour. All three share six sizing parameters, have their own 36-MOS transmitter and supply, and receive their own payload. Each adjacent pair couples at three points along the RC line. Calibration uses a separate packet. Optimizers share eight initial designs, including the high-drive calibration reference. Each gets 18 short design evaluations (4 cases × 64 bits/lane) and 3 long evaluations (8 × 128). Validation ranks the three lowest-cost short designs, then selects the lowest-energy long-feasible design. The 16 held-out cases use distinct packets and previously unseen rate/coupling/clock-offset combinations. Each returned design must pass every lane and case. Energy is mean TX supply energy per transmitted lane-bit. The reference BO uses scenario-specific constraint outputs. Both neural methods predict aggregate worst lane margins and use the same candidate count. The local variant varies one or two device dimensions per local candidate.
+
+For the matched one-neighbour control and the Korean result table, run the following after calibration and the three seeds.
+
+```bash
+python -m experiments.check_neighbour_effect --calibration campaigns/three_lane_grid/calibration.json --output campaigns/one_neighbour
+cp campaigns/one_neighbour/neighbour_effect.json campaigns/three_lane_grid/
+python -m experiments.report_three_lane --output campaigns/three_lane_grid campaigns/three_lane_s{11,12,13}
+```

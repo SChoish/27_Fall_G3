@@ -1,0 +1,86 @@
+{
+  "rate": 2.15,
+  "coupling_pf_per_edge": 0.085,
+  "packet_seed": 12067,
+  "bits": 64,
+  "rows": [
+    {
+      "design": "nominal",
+      "x": [
+        1.0,
+        4.0,
+        2.0,
+        2.0,
+        2.0,
+        5.0
+      ],
+      "one_neighbour_margin": 0.13569572777203176,
+      "two_neighbour_margin": -0.010959823993397677,
+      "one_neighbour_pass": true,
+      "two_neighbour_pass": false,
+      "one_neighbour_errors": 0,
+      "two_neighbour_errors": 0
+    },
+    {
+      "design": "high_drive",
+      "x": [
+        1.4,
+        6.0,
+        3.0,
+        2.0,
+        2.0,
+        3.0
+      ],
+      "one_neighbour_margin": 0.2697940220968913,
+      "two_neighbour_margin": 0.15308138025974027,
+      "one_neighbour_pass": true,
+      "two_neighbour_pass": true,
+      "one_neighbour_errors": 0,
+      "two_neighbour_errors": 0
+    },
+    {
+      "design": "bo3",
+      "x": [
+        1.5510420522815604,
+        3.4837503954530593,
+        0.9259558396027472,
+        2.327681738929573,
+        2.0,
+        5.000000000000001
+      ],
+      "one_neighbour_margin": 0.13253680420898117,
+      "two_neighbour_margin": -0.028508657291187012,
+      "one_neighbour_pass": true,
+      "two_neighbour_pass": false,
+      "one_neighbour_errors": 0,
+      "two_neighbour_errors": 0
+    },
+    {
+      "design": "archive",
+      "x": [
+        1.3945718754465593,
+        2.064068978908268,
+        0.822009391179969,
+        2.3126135544533652,
+        4.0,
+        21.308311930369285
+      ],
+      "one_neighbour_margin": 0.10996735302948785,
+      "two_neighbour_margin": -0.04619622339032792,
+      "one_neighbour_pass": true,
+      "two_neighbour_pass": false,
+      "one_neighbour_errors": 0,
+      "two_neighbour_errors": 2
+    }
+  ],
+  "accounting": {
+    "design_queries": 4,
+    "logical_measurements": 4,
+    "spice_transient_attempts": 4,
+    "cache_hits": 0,
+    "failed_transients": 0,
+    "completed_transients": 4,
+    "suite_sha256": "2e3fcb1fef1a0f4abb25c5ab16c6f9b1b6e7523e271b496a3d2a6b364bb69120",
+    "simulator_version": "******\n** ngspice-39 : Circuit level simulation program\n** The U. C. Berkeley CAD Group\n** Copyright 1985-1994, Regents of the University of California.\n** Copyright 2001-2022, The ngspice team.\n** Please get your ngspice manual from http://ngspice.sourceforge.net/docs.html\n** Please file your bug-reports at http://ngspice.sourceforge.net/bugrep.html\n** Creation Date: Sun Feb  5 13:44:35 UTC 2023\n******"
+  }
+}
