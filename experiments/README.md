@@ -238,3 +238,21 @@ python -m experiments.diagnose_d2d_packets --campaign campaigns/robust_d2d \
 python -m experiments.refine_d2d_validation --campaign campaigns/robust_d2d \
   --output campaigns/long_validation
 ```
+
+### D2D neural replay comparison
+
+Run from the repository root with NumPy, SciPy, scikit-learn and ngspice available.
+Choose fresh output paths. The first command evaluates BO and two online MLP methods.
+The second evaluates bounded steady-state GA and uniform random on the same protocol.
+It can run after the first protocol file exists. See the campaign report for the measured results.
+
+```bash
+OPENBLAS_NUM_THREADS=1 python -m experiments.run_d2d_replay --seed 3 --packet-offset 88200 --output campaigns/replay_example_s3
+OPENBLAS_NUM_THREADS=1 python -m experiments.run_d2d_classical_controls --reference campaigns/replay_example_s3 --output campaigns/control_example_s3
+```
+
+The online replay contains measurements from the current run. Five regularized MLPs
+predict log energy, worst margin per lane and overshoot from the six sizing parameters.
+The feedback arm adds locally weighted increases in constraint violation observed on
+the longer development suite. Final selections must pass both suites. These runners
+store measurements and freeze designs before evaluating fresh packets.
