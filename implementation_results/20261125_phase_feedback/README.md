@@ -40,9 +40,9 @@ python -m experiments.confirm_phase_sizing --output campaigns/phase_transfer --r
 python -m experiments.report_phase_feedback sizing campaigns/phase_transfer/summary.json "$out/SIZING_KO.md"
 ```
 
-## 2026-11-25 실행 인계
+## 2026-11-25 실행 기록
 
-18:49 KST 시작, 21:49 KST 마감이다. 기존 scratch의 저장소에서 위 캠페인을 실행 중이며 `/tmp/g3_phase_dev.log`, `/tmp/g3_phase_test.log`, `/tmp/g3_phase_supervise.log`, `/tmp/g3_phase_size_*.log`에 로그를 남긴다. 개발 완료 → 모델 및 교차검증 동결 → 새 회로 세 seed → 512비트 완전 독립 시험 순서로 자동 진행한다. 24채널 기존 회로 평가 패킷은 별도로 생성하고 동결 후 정책에 적용한다. GitHub에서 이어받을 때 이미 올라온 DEV_KO, TEST_KO, SIZING_KO 보고서 및 캠페인 디렉터리를 먼저 확인한다. 종료된 단계의 소형 결과와 재현 명령을 같은 작업 브랜치에 보관한다. 동일한 실행이 진행 중이면 그 출력 디렉터리를 공유하는 두 번째 실행을 만들지 않는다.
+16채널 개발 자료로 사전모형을 동결한 뒤 기존 회로의 24채널 독립 평가와 3개 seed의 회로 탐색을 완료했다. 중단 지점부터 기존 BO 선택과 저장된 채널 측정을 재사용했다. 새 회로는 512비트 독립 시험에서 검증했고, 후보 검증 슬롯을 바꾼 설계에는 별도 holdout을 사용했다. 전체 단계의 완료 여부와 회계는 [최종 결과](FINAL_KO.md)에 기록했다.
 
 각 개발·독립 평가 후 `python -m experiments.diagnose_phase_limits campaigns/phase_dev implementation_results/20261125_phase_feedback/DEV_LIMITS_KO.md`를 실행한다. 독립 평가에는 phase_test와 TEST_LIMITS_KO.md를 사용한다. 고정 위상 통과, 공통 위상으로 회복, 배선별 독립 위상으로만 회복, 한 배선 이상에서 마진/오류 미달, 레일 초과를 배타적으로 집계한다.
 
@@ -140,4 +140,10 @@ python -m experiments.report_phase_gain campaigns/phase_transfer/summary.json im
 
 ```bash
 python -m experiments.plot_phase_tradeoff implementation_results/20261125_phase_feedback
+```
+
+512비트 주 시험에서 두 회로의 실제 송신·수신 결과까지 다시 검증하려면 저장소 루트에서 다음을 실행한다. 14개 transient 규모로, 원본 결과의 통과·오류 수와 마진·에너지 허용오차를 검사한다.
+
+```bash
+python -m experiments.recheck_published_pair implementation_results/20261125_phase_feedback
 ```

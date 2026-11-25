@@ -1,0 +1,49 @@
+{
+  "channel": 2,
+  "source_sha256": "88d2321a83bc839607ee0ab8c886ff69bb2dae3910f04ada889e0559b4a60f90",
+  "physical_calls": 14,
+  "records": [
+    {
+      "design": "BO",
+      "original": {
+        "code": 32,
+        "passes": 3,
+        "all_pass": false,
+        "margin": 0.050070846240646394,
+        "errors": 0,
+        "overshoot": 0.07813932933663126,
+        "energy": 0.21671701874583332
+      },
+      "repeated": {
+        "code": 32,
+        "passes": 3,
+        "all_pass": false,
+        "margin": 0.050070846240646394,
+        "errors": 0,
+        "overshoot": 0.07813932933663126,
+        "energy": 0.21671701874583332
+      }
+    },
+    {
+      "design": "\uad6d\uc18c MLP",
+      "original": {
+        "code": 32,
+        "passes": 4,
+        "all_pass": true,
+        "margin": 0.1064456540109604,
+        "errors": 0,
+        "overshoot": 0.08637206822673171,
+        "energy": 0.22771773848651533
+      },
+      "repeated": {
+        "code": 32,
+        "passes": 4,
+        "all_pass": true,
+        "margin": 0.1064456540109604,
+        "errors": 0,
+        "overshoot": 0.08637206822673171,
+        "energy": 0.22771773848651533
+      }
+    }
+  ]
+}
