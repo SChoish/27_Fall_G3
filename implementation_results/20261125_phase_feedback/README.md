@@ -68,3 +68,14 @@ done
 python -m experiments.confirm_phase_sizing --output campaigns/phase_reserve_transfer --root-seed 49105 --channels 12 --bits 256 --workers 4 campaigns/phase_reserve_s{21,22,23}
 python -m experiments.report_phase_feedback sizing campaigns/phase_reserve_transfer/summary.json implementation_results/20261125_phase_feedback/RESERVE_KO.md
 ```
+
+### 결과 및 실행 상태 확인
+
+[동결 설계와 개발 비용](SELECTION_KO.md), [고정 BO 보조 시험](LANE_49104_KO.md), [보정 패킷의 송신 에너지](DEV_ENERGY_KO.md)를 기록했다. 이 단계의 독립 시험 출력은 campaigns/phase_test (96조합), campaigns/phase_transfer (144조합), campaigns/phase_reserve_transfer (96조합)이다. 작업 공간 간 PID가 보이지 않을 수 있으므로 재시작 전 출력 파일의 최근 수정 시각과 개수 변화도 확인한다. 완료된 독립 시험만 최종 통계에 포함한다.
+
+```bash
+out=implementation_results/20261125_phase_feedback
+python -m experiments.report_probe_energy campaigns/phase_dev "$out/DEV_ENERGY_KO.md"
+python -m experiments.report_probe_energy campaigns/phase_test "$out/TEST_ENERGY_KO.md"
+python -m experiments.report_reserve_transfer campaigns/phase_reserve_transfer/summary.json "$out/RESERVE_PAIRED_KO.md"
+```
