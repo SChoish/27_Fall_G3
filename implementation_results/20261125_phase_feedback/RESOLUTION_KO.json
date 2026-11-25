@@ -1,0 +1,113 @@
+{
+  "physical_calls": 16,
+  "checks": [
+    {
+      "channel": 18,
+      "line": "RC",
+      "design": "bo11",
+      "old": {
+        "code": 32,
+        "probes": [
+          16,
+          32,
+          48
+        ],
+        "passes": 4,
+        "all_pass": true,
+        "margin": 0.09664358011770391,
+        "errors": 0,
+        "overshoot": 0.05762029368234378,
+        "energy": 0.19475023933212632
+      },
+      "new": {
+        "passes": 4,
+        "all_pass": true,
+        "margin": 0.09660662526383823,
+        "errors": 0,
+        "overshoot": 0.05765436689419068,
+        "energy": 0.19474159837498928
+      }
+    },
+    {
+      "channel": 0,
+      "line": "RC",
+      "design": "bo13",
+      "old": {
+        "code": 32,
+        "probes": [
+          16,
+          32,
+          48
+        ],
+        "passes": 1,
+        "all_pass": false,
+        "margin": 0.06268063309284988,
+        "errors": 0,
+        "overshoot": 0.07358211914759627,
+        "energy": 0.1877657982595413
+      },
+      "new": {
+        "passes": 1,
+        "all_pass": false,
+        "margin": 0.06279225597673277,
+        "errors": 0,
+        "overshoot": 0.07358280992214494,
+        "energy": 0.1877592743675252
+      }
+    },
+    {
+      "channel": 9,
+      "line": "RLC",
+      "design": "bo13",
+      "old": {
+        "code": 32,
+        "probes": [
+          16,
+          32,
+          48
+        ],
+        "passes": 4,
+        "all_pass": true,
+        "margin": 0.08085348191118213,
+        "errors": 0,
+        "overshoot": 0.07828588145887323,
+        "energy": 0.2401104801250591
+      },
+      "new": {
+        "passes": 4,
+        "all_pass": true,
+        "margin": 0.08091538635432632,
+        "errors": 0,
+        "overshoot": 0.07828410651883672,
+        "energy": 0.24010407798460792
+      }
+    },
+    {
+      "channel": 9,
+      "line": "RLC",
+      "design": "bo12",
+      "old": {
+        "code": 32,
+        "probes": [
+          16,
+          32,
+          48
+        ],
+        "passes": 2,
+        "all_pass": false,
+        "margin": 0.07961330038313907,
+        "errors": 0,
+        "overshoot": 0.07743578360439576,
+        "energy": 0.24597385225281954
+      },
+      "new": {
+        "passes": 2,
+        "all_pass": false,
+        "margin": 0.07967309296665848,
+        "errors": 0,
+        "overshoot": 0.07743145197447497,
+        "energy": 0.24596778400017472
+      }
+    }
+  ]
+}

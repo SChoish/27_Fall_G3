@@ -87,3 +87,13 @@ python -m experiments.report_reserve_transfer campaigns/phase_reserve_transfer/s
 ```bash
 python -m experiments.check_two_probes --model implementation_results/20261125_phase_feedback/dev_model.json --output campaigns/phase_two_49106 --workers 3
 ```
+
+시간 적분 확인에서는 49102의 RC/RLC별 grid 임계 통과·실패 각 1건에서 같은 설계·위상·패킷을 UI/128로 다시 계산한다. 통과율에는 원래 사전 지정한 UI/64 결과를 사용한다.
+
+```bash
+out=implementation_results/20261125_phase_feedback
+python -m experiments.check_phase_resolution campaigns/phase_test_scores.json "$out/RESOLUTION_KO.md"
+python -m experiments.report_two_probes campaigns/phase_two_49106/summary.json "$out/TWO_PROBES_KO.md"
+python -m experiments.report_phase_pairs campaigns/phase_transfer/summary.json "$out/SIZING_PAIRED_KO.md"
+python -m experiments.report_phase_pairs campaigns/phase_reserve_transfer/summary.json "$out/RESERVE_INTERVAL_KO.md"
+```
