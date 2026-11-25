@@ -154,3 +154,20 @@ python experiments/train_sac_online.py \
 python campaigns/20260915_sac_online_s0-2/train_sac_online.py \
   --output campaigns/20260915_sac_online_s0-2 --execute
 ```
+
+## 제약 베이지안 탐색
+
+기존 ADC와 D2D 회로 평가기에 `ConstrainedSearch`를 연결했다. 탐색 중 관측한
+에너지와 품질 지표를 각각 예측하고, 품질 통과 가능성과 예상 에너지 개선을 함께
+고려해 다음 SPICE 질의를 정한다. 시작점 8개와 실패한 시뮬레이션도 예산에 포함한다.
+
+```bash
+python -m experiments.run_constrained_search adc-multi --output campaigns/adc_constrained
+python -m experiments.run_constrained_search d2d --budget 24 --output campaigns/d2d_constrained
+python -m experiments.benchmark_constrained_search adc-multi --output campaigns/adc_multi_bench
+```
+
+실행에 NumPy, SciPy, ngspice가 필요하다. `adc`와 `adc-multi` 비교는 기존 GA를 위해
+`pymoo`를 사용하며, 단일 입력 `adc` 비교의 RNC 기준선은 PyTorch 체크포인트를 로드한다.
+비교 모드는 공통 초기점과 동일 질의 예산을 쓰고, 모든 반환점을 잠근 뒤 새 입력에서 평가한다.
+재사용하는 D2D 기준선의 원본 기록과 실제 재평가 비용은 실행 결과에 남는다.
