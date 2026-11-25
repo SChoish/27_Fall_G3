@@ -49,3 +49,10 @@ python -m experiments.report_phase_feedback sizing campaigns/phase_transfer/summ
 ### 512비트 독립 비교 사전 지정 (49103)
 
 개발 실패 분석에서 공통 위상 최적화의 병목이 일부 배선의 마진으로 나타났다. 새 후보 lane_quadratic은 코드 16·32·48에서 관측한 배선별 최악 마진에 각각 이차식을 맞춘 뒤, 세 예측값의 최솟값이 가장 큰 공통 코드를 반환한다. 외삽 없이 16~48을 사용한다. 고정 크기 회로에서 grid 및 기존 quadratic과 세 패킷·192비트/배선·TX 파형을 정확히 공유한다. 배선별 클록을 요구하지 않는다. 49103의 16채널(8 RC, 8 RLC) × 네 검증 패킷에서 통과 수와 같은 채널에서의 득실을 비교한다. 위의 confirm_phase_sizing 및 report_phase_feedback sizing 명령으로 재현한다.
+
+고정 bo11 회로에서도 설계 변경과 보정 효과를 분리한다. 보조 시험 seed 49104는 8개 채널에 128비트 패킷 네 개를 사용한다. 각 방법은 같은 세 관측을 사용하며 fixed32는 무보정 대조군이다. 새 사이징의 주 평가는 위에 지정한 49103이다.
+
+```bash
+python -m experiments.compare_lane_calibration --output campaigns/phase_lane_49104 --workers 4
+python -m experiments.report_phase_costs campaigns implementation_results/20261125_phase_feedback/COSTS_KO.md
+```
