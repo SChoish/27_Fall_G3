@@ -256,3 +256,22 @@ predict log energy, worst margin per lane and overshoot from the six sizing para
 The feedback arm adds locally weighted increases in constraint violation observed on
 the longer development suite. Final selections must pass both suites. These runners
 store measurements and freeze designs before evaluating fresh packets.
+
+For an archive-assisted comparison, use the six committed short development traces
+from seeds 0–2 (legacy and max-constraint BO). Both optimizers can propose new designs
+and can select from this same archive. archive-only selects candidates from the
+archive and pays only for the three long checks. The two optimizers each get 18 new
+short queries and up to three long checks. Repeated initial designs are still charged.
+This experiment uses the same BO shortlist and selection rules across arms.
+
+```bash
+for seed in 6 7 8 9 10; do
+  OPENBLAS_NUM_THREADS=1 python -m experiments.run_d2d_archive --seed "$seed" --output "campaigns/neural_replay_archive_s$seed"
+done
+python -m experiments.confirm_d2d_archive --output campaigns/neural_replay_confirmation
+python -m experiments.report_d2d_replay --seeds 3 4 5 --output campaigns/replay_pilot_audit.json
+```
+
+The confirmation script requires all five selection locks. It charges final test
+separately and evaluates both existing and freshly drawn RC channels. Repeated
+returned designs share final measurements across seeds and methods.

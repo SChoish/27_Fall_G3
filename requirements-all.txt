@@ -1,6 +1,7 @@
 # Combined deps for d2d_coupled_calibration + adc_driver
 numpy>=2.0,<3
 scipy>=1.13,<2
+scikit-learn>=1.3,<2
 matplotlib>=3.8,<4
 schemdraw>=0.19
 pymoo==0.6.2
