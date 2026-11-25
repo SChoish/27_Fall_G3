@@ -1,5 +1,7 @@
 # D2D 수신 시점 보정 실험 (2026-11-25)
 
+[최종 한국어 보고서](FINAL_KO.md) · [512비트 주 시험](ALL_512_KO.md) · [동일 관측 예산의 보정 효과](PHASE_EFFECT_KO.md)
+
 기존 3-lane BO seed 11–13의 회로와 이전 저에너지 버퍼 설계 하나를 고정한다. 각 채널은 3-lane 108 MOS, 합성 RC 또는 RLC이고, 전원·온도·임피던스·배선 결합·전송 속도·클록 오차를 채널별로 추출한다. 같은 채널을 모든 설계와 정책이 공유한다. 통계 단위는 독립 채널이다. 같은 채널의 네 설계와 네 패킷은 반복 측정이다.
 
 짧은 훈련 패킷 3개(각 배선당 64비트)에서 매번 선택한 수신 위상 하나의 세 배선별 최악 정규화 전압 마진을 관측한다. 실제 수신기에 이 값을 반환할 마진 모니터가 있다고 가정한다. 기존 장치의 지원 범위 0..64 중 코드 8..56을 4 단위로 사용한다. 장착 전 오프라인 학습에는 개발 회로 파형의 모든 코드를 허용한다. 링크를 켠 뒤 보정에는 선택한 위상의 관측만 허용한다. 독립 패킷 4개 전체에서 모든 배선의 aperture margin ≥ 0.08 V/VDD, 중심 오류 0, overshoot ≤ 0.2 VDD를 요구한다. 수신 위상 변경은 수동 측정이므로 동일 회로에서 TX 에너지는 같다.
@@ -128,4 +130,14 @@ python -m experiments.report_phase_feedback sizing campaigns/phase_midpoint_4910
 out=implementation_results/20261125_phase_feedback
 tar -xzf "$out/sizing_traces.tar.gz"
 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m experiments.audit_phase_mlp "$out/MLP_AUDIT_KO.md" campaigns/phase_size_s{21,22,23}
+```
+
+```bash
+python -m experiments.report_phase_gain campaigns/phase_transfer/summary.json implementation_results/20261125_phase_feedback/PHASE_EFFECT_KO.md
+```
+
+최종 그림은 저장소에 포함된 소형 JSON만으로 재생성할 수 있다.
+
+```bash
+python -m experiments.plot_phase_tradeoff implementation_results/20261125_phase_feedback
 ```

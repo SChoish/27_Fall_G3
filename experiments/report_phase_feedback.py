@@ -63,7 +63,7 @@ def sizing_report(data,path):
     lines+=['','|같은 seed의 BO 대비|함께 통과한 채널|그리드 에너지 차이 pJ/bit|추가 통과|새 실패|',
             '|---|---:|---:|---:|---:|']
     for name,idx in pt['members'].items():
-        if not name.startswith(('bracket_s','mlp_local_s','reserve_s')):
+        if not name.startswith(('bracket_s','mlp_local_s','reserve_s','midpoint_s')):
             continue
         baseline=pt['members']['bo_s'+name.rsplit('_s',1)[1]]
         arm={r['channel']:r['methods']['grid'] for r in data['rows'] if r['design']==idx}
