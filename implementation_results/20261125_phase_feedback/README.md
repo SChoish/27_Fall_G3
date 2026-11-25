@@ -106,3 +106,18 @@ python -m experiments.report_phase_pairs campaigns/phase_reserve_transfer/summar
 out=implementation_results/20261125_phase_feedback
 python -m experiments.extend_reserve_512 --primary campaigns/phase_transfer --runs "$out"/locks/phase_reserve_s{21,22,23} --output campaigns/phase_extend_512 --workers 3
 ```
+
+```bash
+python -m experiments.report_all_sizing campaigns/phase_transfer campaigns/phase_extend_512 implementation_results/20261125_phase_feedback/ALL_512_KO.md
+```
+
+### seed 21 중간 사이징 파일럿
+
+세 긴 검증 슬롯 중 두 번째에, 짧은 탐색의 마진 여유 슬롯 후보와 최대 여유 후보의 소자별 기하평균 회로를 넣는다. 첫 슬롯과 최대 여유 슬롯은 기존대로 두고 긴 검증을 통과한 최소 에너지 설계를 선택한다. 전체 예산은 짧은 72회와 긴 24회다. 49105와 분리한 49107의 6채널(3 RC·3 RLC), 256비트 패킷 네 개, 주 지표 grid로 한정했다. 시험 데이터로 혼합비를 추정하지 않고 1/2로 고정했다. 이 파일럿은 탐색 seed 21 하나에 국한된다.
+
+```bash
+out=implementation_results/20261125_phase_feedback
+python -m experiments.check_midpoint_slot campaigns/phase_size_s21 campaigns/phase_reserve_s21 campaigns/phase_midpoint_s21
+python -m experiments.confirm_phase_sizing --output campaigns/phase_midpoint_49107 --root-seed 49107 --channels 6 --bits 256 --workers 3 campaigns/phase_midpoint_s21
+python -m experiments.report_phase_feedback sizing campaigns/phase_midpoint_49107/summary.json "$out/MIDPOINT_KO.md"
+```
