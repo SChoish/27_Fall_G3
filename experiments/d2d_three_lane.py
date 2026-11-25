@@ -38,7 +38,7 @@ def deck(x, case):
     return d.sized_netlist(x, '\n'.join(lines), 3)
 
 
-def simulate(x, case):
+def transient(x, case):
     binary, env = d.link.simulator()
     with tempfile.TemporaryDirectory() as folder:
         path = Path(folder)
@@ -51,6 +51,10 @@ def simulate(x, case):
     if raw.shape[1] != 10:
         raise ValueError('Expected time and three signals per lane')
     raw = raw[np.r_[np.diff(raw[:, 0]) > 0, True]]
+    return raw
+
+
+def measure_transient(raw, case):
     pairs = []
     for third, offset in [(False, 3), (True, 6)]:
         wave = dict(t=raw[:, 0], rx=raw[:, [2, 2+offset]], ivdd=raw[:, [3, 3+offset]])
@@ -61,6 +65,10 @@ def simulate(x, case):
                 margins=a['margins'] + b['margins'][1:], errors=a['errors'] + b['errors'][1:],
                 overshoot_fraction=max(p['overshoot_fraction'] for p in pairs),
                 energy_lane_pj_bit=energy, energy_pj_bit=float(np.mean(energy)))
+
+
+def simulate(x, case):
+    return measure_transient(transient(x, case), case)
 
 
 def make_case(rate, coupling, seed, bits, correlated, skew=0.):
