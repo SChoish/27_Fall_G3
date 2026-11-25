@@ -59,6 +59,19 @@ def sizing_report(data,path):
         good=[r['methods']['grid']['energy'] for r in group if r['methods']['grid']['all_pass']]
         energy=f'{np.mean(good):.6f}' if good else '—'
         lines.append('|'+ '|'.join([name,*counts,energy])+'|')
+    lines+=['','|같은 seed의 BO 대비|함께 통과한 채널|그리드 에너지 차이 pJ/bit|추가 통과|새 실패|',
+            '|---|---:|---:|---:|---:|']
+    for name,idx in pt['members'].items():
+        if not name.startswith(('bracket_s','mlp_local_s')):
+            continue
+        baseline=pt['members']['bo_s'+name.rsplit('_s',1)[1]]
+        arm={r['channel']:r['methods']['grid'] for r in data['rows'] if r['design']==idx}
+        bo={r['channel']:r['methods']['grid'] for r in data['rows'] if r['design']==baseline}
+        common=[arm[c]['energy']-bo[c]['energy'] for c in arm if arm[c]['all_pass'] and bo[c]['all_pass']]
+        delta=f'{np.mean(common):+.6f}' if common else '—'
+        gains=sum(arm[c]['all_pass'] and not bo[c]['all_pass'] for c in arm)
+        losses=sum(bo[c]['all_pass'] and not arm[c]['all_pass'] for c in arm)
+        lines.append(f'|{name}|{len(common)}|{delta}|{gains}|{losses}|')
     lines+=['','에너지 평균의 분모는 방법별로 통과한 채널이다. 같은 채널에서 에너지 차이를 해석하려면 두 방법이 함께 통과한 채널을 사용한다. 결과 JSON은 채널별 값을 포함한다.']
     path.write_text('\n'.join(lines)+'\n')
     path.with_suffix('.json').write_text(json.dumps(data,separators=(',',':'))+'\n')

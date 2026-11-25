@@ -1,0 +1,151 @@
+{
+  "dev_seed": 49101,
+  "physical_new_transients": 24,
+  "bits": 256,
+  "rows": [
+    {
+      "intervention": "original",
+      "channel": 0,
+      "design": "bo11",
+      "category": "insufficient_margin_or_errors",
+      "fixed": -0.030630311728427673,
+      "shared": -0.001168830388465436,
+      "individual": -0.001168830388465436,
+      "best_shared": 36,
+      "best_individual": [
+        36,
+        36,
+        36
+      ],
+      "rail": 0.09332463864238671,
+      "limiting_lane": 0,
+      "energy": 0.20448356027472514
+    },
+    {
+      "intervention": "half_coupling",
+      "channel": 0,
+      "design": "bo11",
+      "category": "fixed_pass",
+      "fixed": 0.13227535498065768,
+      "shared": 0.16050454653481183,
+      "individual": 0.16050454653481183,
+      "best_shared": 36,
+      "best_individual": [
+        36,
+        36,
+        36
+      ],
+      "rail": 0.06073451607882796,
+      "limiting_lane": 0,
+      "energy": 0.19361741132042776
+    },
+    {
+      "intervention": "ten_percent_slower",
+      "channel": 0,
+      "design": "bo11",
+      "category": "insufficient_margin_or_errors",
+      "fixed": 0.07293214138332949,
+      "shared": 0.07293214138332949,
+      "individual": 0.07293214138332949,
+      "best_shared": 32,
+      "best_individual": [
+        32,
+        32,
+        32
+      ],
+      "rail": 0.08633964925492643,
+      "limiting_lane": 0,
+      "energy": 0.21395826220690028
+    },
+    {
+      "intervention": "high_drive",
+      "channel": 0,
+      "design": "high_drive",
+      "category": "shared_recovery",
+      "fixed": -0.0022851575020345627,
+      "shared": 0.16661218695094937,
+      "individual": 0.16661218695094937,
+      "best_shared": 44,
+      "best_individual": [
+        44,
+        40,
+        40
+      ],
+      "rail": 0.07059522705867449,
+      "limiting_lane": 0,
+      "energy": 0.30249242733878706
+    },
+    {
+      "intervention": "original",
+      "channel": 1,
+      "design": "bo11",
+      "category": "insufficient_margin_or_errors",
+      "fixed": 0.05038078893979159,
+      "shared": 0.05038078893979159,
+      "individual": 0.05038078893979159,
+      "best_shared": 32,
+      "best_individual": [
+        32,
+        32,
+        32
+      ],
+      "rail": 0.07289102313326734,
+      "limiting_lane": 0,
+      "energy": 0.18977368819794288
+    },
+    {
+      "intervention": "half_coupling",
+      "channel": 1,
+      "design": "bo11",
+      "category": "fixed_pass",
+      "fixed": 0.17883016991777578,
+      "shared": 0.17883016991777578,
+      "individual": 0.17883016991777578,
+      "best_shared": 32,
+      "best_individual": [
+        32,
+        32,
+        32
+      ],
+      "rail": 0.05069116154303366,
+      "limiting_lane": 0,
+      "energy": 0.18270531037007678
+    },
+    {
+      "intervention": "ten_percent_slower",
+      "channel": 1,
+      "design": "bo11",
+      "category": "fixed_pass",
+      "fixed": 0.11627414224112365,
+      "shared": 0.12535551000638467,
+      "individual": 0.12535551000638467,
+      "best_shared": 28,
+      "best_individual": [
+        28,
+        28,
+        28
+      ],
+      "rail": 0.06838916179790333,
+      "limiting_lane": 0,
+      "energy": 0.19943788676824672
+    },
+    {
+      "intervention": "high_drive",
+      "channel": 1,
+      "design": "high_drive",
+      "category": "shared_recovery",
+      "fixed": 0.049315913398176314,
+      "shared": 0.14173504952121008,
+      "individual": 0.14173504952121008,
+      "best_shared": 40,
+      "best_individual": [
+        40,
+        36,
+        36
+      ],
+      "rail": 0.05283976821284231,
+      "limiting_lane": 0,
+      "energy": 0.28125443559533087
+    }
+  ]
+}
