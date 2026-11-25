@@ -45,3 +45,7 @@ python -m experiments.report_phase_feedback sizing campaigns/phase_transfer/summ
 각 개발·독립 평가 후 `python -m experiments.diagnose_phase_limits campaigns/phase_dev implementation_results/20261125_phase_feedback/DEV_LIMITS_KO.md`를 실행한다. 독립 평가에는 phase_test와 TEST_LIMITS_KO.md를 사용한다. 고정 위상 통과, 공통 위상으로 회복, 배선별 독립 위상으로만 회복, 한 배선 이상에서 마진/오류 미달, 레일 초과를 배타적으로 집계한다.
 
 민감도 대조군을 재현하려면 `python -m experiments.check_phase_failure --dev campaigns/phase_dev --output implementation_results/20261125_phase_feedback`를 실행한다. 개발 채널 0과 1에서 패킷을 맞추고 결합, 비트율, 고구동 기준 설계의 효과를 각각 측정한다. `dev_model.json`이 있으면 고정된 모델로 독립 채널 평가와 다음 사이징 탐색을 재개할 수 있다.
+
+### 512비트 독립 비교 사전 지정 (49103)
+
+개발 실패 분석에서 공통 위상 최적화의 병목이 일부 배선의 마진으로 나타났다. 새 후보 lane_quadratic은 코드 16·32·48에서 관측한 배선별 최악 마진에 각각 이차식을 맞춘 뒤, 세 예측값의 최솟값이 가장 큰 공통 코드를 반환한다. 외삽 없이 16~48을 사용한다. 고정 크기 회로에서 grid 및 기존 quadratic과 세 패킷·192비트/배선·TX 파형을 정확히 공유한다. 배선별 클록을 요구하지 않는다. 49103의 16채널(8 RC, 8 RLC) × 네 검증 패킷에서 통과 수와 같은 채널에서의 득실을 비교한다. 위의 confirm_phase_sizing 및 report_phase_feedback sizing 명령으로 재현한다.

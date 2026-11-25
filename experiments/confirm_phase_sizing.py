@@ -5,8 +5,17 @@ from pathlib import Path
 import json
 
 import numpy as np
-from experiments.analyze_phase_feedback import choose,score
+from experiments.analyze_phase_feedback import GRID,choose,score
 from experiments.run_phase_feedback import CODES,curve,d,designs,suite,transient
+
+
+def lane_quadratic(observe):
+    """Use the same three probes as quadratic, fitting each lane before taking the minimum."""
+    samples = np.stack([observe(step, code) for step, code in enumerate(GRID)])
+    coeff = np.polynomial.polynomial.polyfit(CODES[GRID], samples, 2)
+    candidates = np.arange(GRID[0], GRID[-1] + 1)
+    fitted = np.polynomial.polynomial.polyval(CODES[candidates], coeff)
+    return int(candidates[np.argmax(fitted.min(axis=0))])
 
 
 def run(args):
@@ -24,7 +33,7 @@ def run(args):
     unique=list(dict.fromkeys(tuple(x) for x in candidates.values()))
     members={k:unique.index(tuple(x)) for k,x in candidates.items()}
     protocol=dict(locks=locks,channels=args.channels,root_seed=args.root_seed,bits=args.bits,
-                  methods=['fixed32','grid','quadratic','oracle'],designs=[list(u) for u in unique],members=members,
+                  methods=['fixed32','grid','quadratic','lane_quadratic','oracle'],designs=[list(u) for u in unique],members=members,
                   code=d.file_hash(__file__))
     manifest=out/'protocol.json'
     if manifest.exists() and json.loads(manifest.read_text())!=protocol:
@@ -38,6 +47,7 @@ def run(args):
         def observe(step,code):
             return np.asarray(probes[step]['margin'])[:,code]
         selected={k:choose(k,[],observe)[0] for k in ('fixed32','grid','quadratic')}
+        selected['lane_quadratic']=lane_quadratic(observe)
         episode=dict(validation=[curve(transient(unique[j],c),c) for c in panel[3:]])
         measurements=[score(episode,k) for k in range(len(CODES))]
         selected['oracle']=int(np.argmax([r['margin'] for r in measurements]))

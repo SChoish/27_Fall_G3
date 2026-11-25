@@ -49,10 +49,11 @@ def phase_report(data,path,title):
 
 def sizing_report(data,path):
     pt=data['protocol']
+    lane_header = '배선별 곡선 보정 통과|' if 'lane_quadratic' in pt['methods'] else ''
     lines=['# 새 회로 크기와 수신 위상 보정 독립 검증','',
         f"독립 채널 {pt['channels']}개, 채널별 보정 192비트/배선, 검증 패킷 4개 × {pt['bits']}비트/배선. 고유 설계 {len(pt['designs'])}개를 실제 ngspice로 {data['physical_calls']}회 측정했다.",
-        '', '|설계|고정 위상 통과 채널|3점 그리드 통과|포물선 보정 통과|공통 위상 사후 상한|그리드 통과 채널 평균 TX pJ/bit|',
-        '|---|---:|---:|---:|---:|---:|']
+        '', f'|설계|고정 위상 통과 채널|3점 그리드 통과|포물선 보정 통과|{lane_header}공통 위상 사후 상한|그리드 통과 채널 평균 TX pJ/bit|',
+        '|---|' + '---:|'*(len(pt['methods'])+1)]
     for name,idx in pt['members'].items():
         group=[r for r in data['rows'] if r['design']==idx]
         counts=[str(sum(r['methods'][m]['all_pass'] for r in group))+'/'+str(len(group)) for m in pt['methods']]
