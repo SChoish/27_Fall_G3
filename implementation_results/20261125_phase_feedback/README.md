@@ -56,3 +56,15 @@ python -m experiments.report_phase_feedback sizing campaigns/phase_transfer/summ
 python -m experiments.compare_lane_calibration --output campaigns/phase_lane_49104 --workers 4
 python -m experiments.report_phase_costs campaigns implementation_results/20261125_phase_feedback/COSTS_KO.md
 ```
+
+### 동일 탐색 기록에서 긴 검증 후보 선택 비교
+
+개발 bracket seed 21·23에서 에너지가 가장 낮은 두 후보 모두 짧은 패킷의 제약 여유가 작았다. 첫 슬롯과 최대 여유 슬롯은 유지하고, 두 번째 슬롯은 모든 정규화 잔차 ≤ −0.25인 후보 중 가장 저렴한 별도 설계에 준다. 후보 부족 시 기존 규칙으로 돌아간다. 두 bracket 방법은 같은 짧은 18설계를 보며, BO를 포함한 세 방법 모두 동일한 검증 조건 8개 × 3설계를 지불한다. 배치 시 grid를 주 지표로 고정한다. 최종 비교는 별도 seed 49105, 12채널, 256비트 시험으로 진행한다.
+
+```bash
+for seed in 21 22 23; do
+  python -m experiments.check_sizing_shortlist "campaigns/phase_size_s$seed" "campaigns/phase_reserve_s$seed"
+done
+python -m experiments.confirm_phase_sizing --output campaigns/phase_reserve_transfer --root-seed 49105 --channels 12 --bits 256 --workers 4 campaigns/phase_reserve_s{21,22,23}
+python -m experiments.report_phase_feedback sizing campaigns/phase_reserve_transfer/summary.json implementation_results/20261125_phase_feedback/RESERVE_KO.md
+```
