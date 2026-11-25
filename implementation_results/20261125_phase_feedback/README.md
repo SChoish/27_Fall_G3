@@ -97,3 +97,12 @@ python -m experiments.report_two_probes campaigns/phase_two_49106/summary.json "
 python -m experiments.report_phase_pairs campaigns/phase_transfer/summary.json "$out/SIZING_PAIRED_KO.md"
 python -m experiments.report_phase_pairs campaigns/phase_reserve_transfer/summary.json "$out/RESERVE_INTERVAL_KO.md"
 ```
+
+### 네 탐색법을 같은 512비트 채널에서 비교
+
+49105 재설계 시험과 별도로, 49103 기본 방법·여유 슬롯의 설계가 모두 동결된 상태에서 네 탐색법을 같은 512비트 패킷에 비교한다. 배치 정책은 grid로 고정했다. holdout 성적으로 재선택하지 않는다. 49103의 기존 고유 설계 9개는 재사용하며, 제조 seed 21·23에서 새로 선택한 여유 슬롯 설계 2개만 추가 측정한다. seed 22는 기존 bracket과 동일하다.
+
+```bash
+out=implementation_results/20261125_phase_feedback
+python -m experiments.extend_reserve_512 --primary campaigns/phase_transfer --runs "$out"/locks/phase_reserve_s{21,22,23} --output campaigns/phase_extend_512 --workers 3
+```
