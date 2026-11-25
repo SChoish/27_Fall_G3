@@ -1,0 +1,398 @@
+{
+  "21": [
+    {
+      "step": 8,
+      "warnings": 4,
+      "mlp": {
+        "relative_energy_error": 0.7009093967611129,
+        "predicted_feasible": true
+      },
+      "nearest": {
+        "relative_energy_error": 0.7739015748303182,
+        "predicted_feasible": false
+      },
+      "actual_feasible": false
+    },
+    {
+      "step": 9,
+      "warnings": 5,
+      "mlp": {
+        "relative_energy_error": 0.30475437429870644,
+        "predicted_feasible": true
+      },
+      "nearest": {
+        "relative_energy_error": 0.2699334358112866,
+        "predicted_feasible": false
+      },
+      "actual_feasible": false
+    },
+    {
+      "step": 10,
+      "warnings": 5,
+      "mlp": {
+        "relative_energy_error": 0.204532495931685,
+        "predicted_feasible": true
+      },
+      "nearest": {
+        "relative_energy_error": 0.07846605325457157,
+        "predicted_feasible": true
+      },
+      "actual_feasible": true
+    },
+    {
+      "step": 11,
+      "warnings": 5,
+      "mlp": {
+        "relative_energy_error": 0.10179022740953392,
+        "predicted_feasible": true
+      },
+      "nearest": {
+        "relative_energy_error": 0.11825169282630077,
+        "predicted_feasible": false
+      },
+      "actual_feasible": false
+    },
+    {
+      "step": 12,
+      "warnings": 5,
+      "mlp": {
+        "relative_energy_error": 0.9294796838364716,
+        "predicted_feasible": true
+      },
+      "nearest": {
+        "relative_energy_error": 1.7907416130631448,
+        "predicted_feasible": true
+      },
+      "actual_feasible": false
+    },
+    {
+      "step": 13,
+      "warnings": 5,
+      "mlp": {
+        "relative_energy_error": 0.03243017272025206,
+        "predicted_feasible": true
+      },
+      "nearest": {
+        "relative_energy_error": 0.20341516472616505,
+        "predicted_feasible": false
+      },
+      "actual_feasible": true
+    },
+    {
+      "step": 14,
+      "warnings": 5,
+      "mlp": {
+        "relative_energy_error": 0.06392863833251416,
+        "predicted_feasible": true
+      },
+      "nearest": {
+        "relative_energy_error": 0.0952721671001997,
+        "predicted_feasible": true
+      },
+      "actual_feasible": false
+    },
+    {
+      "step": 15,
+      "warnings": 5,
+      "mlp": {
+        "relative_energy_error": 0.05927432032388025,
+        "predicted_feasible": true
+      },
+      "nearest": {
+        "relative_energy_error": 0.10371350676661728,
+        "predicted_feasible": true
+      },
+      "actual_feasible": false
+    },
+    {
+      "step": 16,
+      "warnings": 5,
+      "mlp": {
+        "relative_energy_error": 0.014988338819941549,
+        "predicted_feasible": true
+      },
+      "nearest": {
+        "relative_energy_error": 0.04456883954072255,
+        "predicted_feasible": true
+      },
+      "actual_feasible": true
+    },
+    {
+      "step": 17,
+      "warnings": 5,
+      "mlp": {
+        "relative_energy_error": 0.02213670738729112,
+        "predicted_feasible": true
+      },
+      "nearest": {
+        "relative_energy_error": 0.04936736296797095,
+        "predicted_feasible": true
+      },
+      "actual_feasible": true
+    }
+  ],
+  "22": [
+    {
+      "step": 8,
+      "warnings": 5,
+      "mlp": {
+        "relative_energy_error": 0.2786448837594928,
+        "predicted_feasible": true
+      },
+      "nearest": {
+        "relative_energy_error": 0.10406272210193346,
+        "predicted_feasible": false
+      },
+      "actual_feasible": false
+    },
+    {
+      "step": 9,
+      "warnings": 5,
+      "mlp": {
+        "relative_energy_error": 0.04210909262941509,
+        "predicted_feasible": true
+      },
+      "nearest": {
+        "relative_energy_error": 0.2931534050205855,
+        "predicted_feasible": false
+      },
+      "actual_feasible": false
+    },
+    {
+      "step": 10,
+      "warnings": 4,
+      "mlp": {
+        "relative_energy_error": 0.0033953560291117846,
+        "predicted_feasible": true
+      },
+      "nearest": {
+        "relative_energy_error": 0.4287913267110457,
+        "predicted_feasible": true
+      },
+      "actual_feasible": true
+    },
+    {
+      "step": 11,
+      "warnings": 5,
+      "mlp": {
+        "relative_energy_error": 0.020839287120049566,
+        "predicted_feasible": true
+      },
+      "nearest": {
+        "relative_energy_error": 0.005813371600951411,
+        "predicted_feasible": true
+      },
+      "actual_feasible": true
+    },
+    {
+      "step": 12,
+      "warnings": 5,
+      "mlp": {
+        "relative_energy_error": 0.05407747148889319,
+        "predicted_feasible": true
+      },
+      "nearest": {
+        "relative_energy_error": 0.10010354010063471,
+        "predicted_feasible": true
+      },
+      "actual_feasible": true
+    },
+    {
+      "step": 13,
+      "warnings": 5,
+      "mlp": {
+        "relative_energy_error": 0.02836249429236326,
+        "predicted_feasible": true
+      },
+      "nearest": {
+        "relative_energy_error": 0.06432438877531932,
+        "predicted_feasible": true
+      },
+      "actual_feasible": false
+    },
+    {
+      "step": 14,
+      "warnings": 5,
+      "mlp": {
+        "relative_energy_error": 0.04947997491501588,
+        "predicted_feasible": true
+      },
+      "nearest": {
+        "relative_energy_error": 0.017714717162720106,
+        "predicted_feasible": false
+      },
+      "actual_feasible": false
+    },
+    {
+      "step": 15,
+      "warnings": 4,
+      "mlp": {
+        "relative_energy_error": 0.02869494426196595,
+        "predicted_feasible": true
+      },
+      "nearest": {
+        "relative_energy_error": 0.13658135418902106,
+        "predicted_feasible": true
+      },
+      "actual_feasible": true
+    },
+    {
+      "step": 16,
+      "warnings": 5,
+      "mlp": {
+        "relative_energy_error": 0.004625511486850309,
+        "predicted_feasible": true
+      },
+      "nearest": {
+        "relative_energy_error": 0.0031143913744935414,
+        "predicted_feasible": true
+      },
+      "actual_feasible": true
+    },
+    {
+      "step": 17,
+      "warnings": 5,
+      "mlp": {
+        "relative_energy_error": 0.014525986561865434,
+        "predicted_feasible": true
+      },
+      "nearest": {
+        "relative_energy_error": 0.029430696403662804,
+        "predicted_feasible": true
+      },
+      "actual_feasible": false
+    }
+  ],
+  "23": [
+    {
+      "step": 8,
+      "warnings": 5,
+      "mlp": {
+        "relative_energy_error": 0.14650330892776542,
+        "predicted_feasible": true
+      },
+      "nearest": {
+        "relative_energy_error": 0.12589271450889505,
+        "predicted_feasible": false
+      },
+      "actual_feasible": true
+    },
+    {
+      "step": 9,
+      "warnings": 5,
+      "mlp": {
+        "relative_energy_error": 0.030644868122987834,
+        "predicted_feasible": true
+      },
+      "nearest": {
+        "relative_energy_error": 0.4877561399049395,
+        "predicted_feasible": true
+      },
+      "actual_feasible": false
+    },
+    {
+      "step": 10,
+      "warnings": 5,
+      "mlp": {
+        "relative_energy_error": 0.167554615759397,
+        "predicted_feasible": true
+      },
+      "nearest": {
+        "relative_energy_error": 0.16012466020309568,
+        "predicted_feasible": true
+      },
+      "actual_feasible": false
+    },
+    {
+      "step": 11,
+      "warnings": 4,
+      "mlp": {
+        "relative_energy_error": 0.14806063178895668,
+        "predicted_feasible": true
+      },
+      "nearest": {
+        "relative_energy_error": 0.14262840749782357,
+        "predicted_feasible": false
+      },
+      "actual_feasible": true
+    },
+    {
+      "step": 12,
+      "warnings": 5,
+      "mlp": {
+        "relative_energy_error": 0.05554716388858716,
+        "predicted_feasible": true
+      },
+      "nearest": {
+        "relative_energy_error": 0.11643677008422726,
+        "predicted_feasible": true
+      },
+      "actual_feasible": true
+    },
+    {
+      "step": 13,
+      "warnings": 5,
+      "mlp": {
+        "relative_energy_error": 0.06250957913973987,
+        "predicted_feasible": true
+      },
+      "nearest": {
+        "relative_energy_error": 0.03914537208880797,
+        "predicted_feasible": true
+      },
+      "actual_feasible": true
+    },
+    {
+      "step": 14,
+      "warnings": 5,
+      "mlp": {
+        "relative_energy_error": 0.014770896440317594,
+        "predicted_feasible": true
+      },
+      "nearest": {
+        "relative_energy_error": 0.022264207276442516,
+        "predicted_feasible": true
+      },
+      "actual_feasible": true
+    },
+    {
+      "step": 15,
+      "warnings": 5,
+      "mlp": {
+        "relative_energy_error": 0.05120701912873571,
+        "predicted_feasible": true
+      },
+      "nearest": {
+        "relative_energy_error": 0.13496882957289236,
+        "predicted_feasible": true
+      },
+      "actual_feasible": false
+    },
+    {
+      "step": 16,
+      "warnings": 4,
+      "mlp": {
+        "relative_energy_error": 0.03717510871928076,
+        "predicted_feasible": true
+      },
+      "nearest": {
+        "relative_energy_error": 0.10897762265863198,
+        "predicted_feasible": true
+      },
+      "actual_feasible": false
+    },
+    {
+      "step": 17,
+      "warnings": 5,
+      "mlp": {
+        "relative_energy_error": 0.06337440773127545,
+        "predicted_feasible": true
+      },
+      "nearest": {
+        "relative_energy_error": 0.00025445805587986925,
+        "predicted_feasible": true
+      },
+      "actual_feasible": true
+    }
+  ]
+}

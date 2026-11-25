@@ -121,3 +121,11 @@ python -m experiments.check_midpoint_slot campaigns/phase_size_s21 campaigns/pha
 python -m experiments.confirm_phase_sizing --output campaigns/phase_midpoint_49107 --root-seed 49107 --channels 6 --bits 256 --workers 3 campaigns/phase_midpoint_s21
 python -m experiments.report_phase_feedback sizing campaigns/phase_midpoint_49107/summary.json "$out/MIDPOINT_KO.md"
 ```
+
+[사이징 개발 기록](sizing_traces.tar.gz)에는 3 seed × 3방법의 원래 순차 측정, 긴 검증 및 동결 파일이 들어 있다. 새 체크아웃의 저장소 루트에서 아래처럼 풀면 ngspice 재실행 없이 MLP의 당시 제안을 재현할 수 있다. 이미 캠페인 디렉터리가 있으면 기존 기록을 그대로 사용한다.
+
+```bash
+out=implementation_results/20261125_phase_feedback
+tar -xzf "$out/sizing_traces.tar.gz"
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m experiments.audit_phase_mlp "$out/MLP_AUDIT_KO.md" campaigns/phase_size_s{21,22,23}
+```
