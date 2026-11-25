@@ -1,0 +1,1938 @@
+[
+  {
+    "x": [
+      1.0,
+      4.0,
+      2.0,
+      2.0,
+      2.0,
+      5.0
+    ],
+    "oracle": {
+      "valid": true,
+      "feasible": true,
+      "margins": [
+        0.14018782142264863,
+        0.20356030258372926
+      ],
+      "energy_pj_bit": 0.31351916678113556,
+      "overshoot_fraction": 0.04132515917599955,
+      "cases": [
+        {
+          "valid": true,
+          "feasible": true,
+          "margins": [
+            0.27982541039851316,
+            0.2783356816419108
+          ],
+          "errors": [
+            0,
+            0
+          ],
+          "overshoot_fraction": 0.03133862060414794,
+          "energy_lane_pj_bit": [
+            0.2277042319773051,
+            0.1928900071312897
+          ],
+          "energy_pj_bit": 0.21029711955429742,
+          "case": {
+            "name": "development_0_0_random",
+            "context": {
+              "lane0": {
+                "vdd": 1.0,
+                "temperature_c": 27.0,
+                "rate_gbps": 2.0,
+                "resistance_ohm": 30.0,
+                "inductance_nh": 0.0,
+                "capacitance_pf": 0.3,
+                "rx_capacitance_pf": 0.06,
+                "clock_offset_ui": 0.0,
+                "coarse_latency_ui": 1.0
+              },
+              "lane1": {
+                "vdd": 1.0,
+                "temperature_c": 27.0,
+                "rate_gbps": 2.0,
+                "resistance_ohm": 32.0,
+                "inductance_nh": 0.0,
+                "capacitance_pf": 0.3,
+                "rx_capacitance_pf": 0.06,
+                "clock_offset_ui": 0.0,
+                "coarse_latency_ui": 1.0
+              },
+              "coupling_pf": 0.06
+            },
+            "pattern": "random",
+            "seed": 71001,
+            "bits": 64,
+            "phase_ui": 0.5,
+            "guard_ui": 0.1,
+            "margin_min": 0.08,
+            "overshoot_max": 0.2,
+            "points_per_ui": 64
+          },
+          "area_proxy_um2": 28.62
+        },
+        {
+          "valid": true,
+          "feasible": true,
+          "margins": [
+            0.33298417856235063,
+            0.3389418409874272
+          ],
+          "errors": [
+            0,
+            0
+          ],
+          "overshoot_fraction": 0.019797160877796927,
+          "energy_lane_pj_bit": [
+            0.43384766702685706,
+            0.4293123444048387
+          ],
+          "energy_pj_bit": 0.43158000571584787,
+          "case": {
+            "name": "development_0_1_opposite",
+            "context": {
+              "lane0": {
+                "vdd": 1.0,
+                "temperature_c": 27.0,
+                "rate_gbps": 2.0,
+                "resistance_ohm": 30.0,
+                "inductance_nh": 0.0,
+                "capacitance_pf": 0.3,
+                "rx_capacitance_pf": 0.06,
+                "clock_offset_ui": 0.0,
+                "coarse_latency_ui": 1.0
+              },
+              "lane1": {
+                "vdd": 1.0,
+                "temperature_c": 27.0,
+                "rate_gbps": 2.0,
+                "resistance_ohm": 32.0,
+                "inductance_nh": 0.0,
+                "capacitance_pf": 0.3,
+                "rx_capacitance_pf": 0.06,
+                "clock_offset_ui": 0.0,
+                "coarse_latency_ui": 1.0
+              },
+              "coupling_pf": 0.06
+            },
+            "pattern": "opposite",
+            "seed": 71002,
+            "bits": 64,
+            "phase_ui": 0.5,
+            "guard_ui": 0.1,
+            "margin_min": 0.08,
+            "overshoot_max": 0.2,
+            "points_per_ui": 64
+          },
+          "area_proxy_um2": 28.62
+        },
+        {
+          "valid": true,
+          "feasible": true,
+          "margins": [
+            0.14018782142264863,
+            0.20356030258372926
+          ],
+          "errors": [
+            0,
+            0
+          ],
+          "overshoot_fraction": 0.04132515917599955,
+          "energy_lane_pj_bit": [
+            0.20710943080176963,
+            0.20172431884547115
+          ],
+          "energy_pj_bit": 0.2044168748236204,
+          "case": {
+            "name": "development_1_0_random",
+            "context": {
+              "lane0": {
+                "vdd": 0.95,
+                "temperature_c": 65.0,
+                "rate_gbps": 2.0,
+                "resistance_ohm": 40.0,
+                "inductance_nh": 0.0,
+                "capacitance_pf": 0.34,
+                "rx_capacitance_pf": 0.06,
+                "clock_offset_ui": 0.0,
+                "coarse_latency_ui": 1.0
+              },
+              "lane1": {
+                "vdd": 0.95,
+                "temperature_c": 65.0,
+                "rate_gbps": 2.0,
+                "resistance_ohm": 42.0,
+                "inductance_nh": 0.0,
+                "capacitance_pf": 0.34,
+                "rx_capacitance_pf": 0.06,
+                "clock_offset_ui": 0.0,
+                "coarse_latency_ui": 1.0
+              },
+              "coupling_pf": 0.1
+            },
+            "pattern": "random",
+            "seed": 71102,
+            "bits": 64,
+            "phase_ui": 0.5,
+            "guard_ui": 0.1,
+            "margin_min": 0.08,
+            "overshoot_max": 0.2,
+            "points_per_ui": 64
+          },
+          "area_proxy_um2": 28.62
+        },
+        {
+          "valid": true,
+          "feasible": true,
+          "margins": [
+            0.22628258857303707,
+            0.23575933563540086
+          ],
+          "errors": [
+            0,
+            0
+          ],
+          "overshoot_fraction": 0.0025963378735447407,
+          "energy_lane_pj_bit": [
+            0.4095270466442389,
+            0.4060382874173144
+          ],
+          "energy_pj_bit": 0.40778266703077665,
+          "case": {
+            "name": "development_1_1_opposite",
+            "context": {
+              "lane0": {
+                "vdd": 0.95,
+                "temperature_c": 65.0,
+                "rate_gbps": 2.0,
+                "resistance_ohm": 40.0,
+                "inductance_nh": 0.0,
+                "capacitance_pf": 0.34,
+                "rx_capacitance_pf": 0.06,
+                "clock_offset_ui": 0.0,
+                "coarse_latency_ui": 1.0
+              },
+              "lane1": {
+                "vdd": 0.95,
+                "temperature_c": 65.0,
+                "rate_gbps": 2.0,
+                "resistance_ohm": 42.0,
+                "inductance_nh": 0.0,
+                "capacitance_pf": 0.34,
+                "rx_capacitance_pf": 0.06,
+                "clock_offset_ui": 0.0,
+                "coarse_latency_ui": 1.0
+              },
+              "coupling_pf": 0.1
+            },
+            "pattern": "opposite",
+            "seed": 71103,
+            "bits": 64,
+            "phase_ui": 0.5,
+            "guard_ui": 0.1,
+            "margin_min": 0.08,
+            "overshoot_max": 0.2,
+            "points_per_ui": 64
+          },
+          "area_proxy_um2": 28.62
+        }
+      ]
+    }
+  },
+  {
+    "x": [
+      1.0164381755479839,
+      4.560634214312227,
+      0.2575034458806057,
+      1.6285392774166614,
+      2.783034797733274,
+      20.527934208350246
+    ],
+    "oracle": {
+      "valid": true,
+      "feasible": false,
+      "margins": [
+        -0.3611707261120465,
+        -0.3845187491018529
+      ],
+      "energy_pj_bit": 0.08972991654991681,
+      "overshoot_fraction": 0.03456170710440772,
+      "cases": [
+        {
+          "valid": true,
+          "feasible": false,
+          "margins": [
+            -0.3611707261120465,
+            -0.3419055937486152
+          ],
+          "errors": [
+            15,
+            14
+          ],
+          "overshoot_fraction": 0.0276218069014618,
+          "energy_lane_pj_bit": [
+            0.07767598209927132,
+            0.07435559687614265
+          ],
+          "energy_pj_bit": 0.07601578948770699,
+          "case": {
+            "name": "development_0_0_random",
+            "context": {
+              "lane0": {
+                "vdd": 1.0,
+                "temperature_c": 27.0,
+                "rate_gbps": 2.0,
+                "resistance_ohm": 30.0,
+                "inductance_nh": 0.0,
+                "capacitance_pf": 0.3,
+                "rx_capacitance_pf": 0.06,
+                "clock_offset_ui": 0.0,
+                "coarse_latency_ui": 1.0
+              },
+              "lane1": {
+                "vdd": 1.0,
+                "temperature_c": 27.0,
+                "rate_gbps": 2.0,
+                "resistance_ohm": 32.0,
+                "inductance_nh": 0.0,
+                "capacitance_pf": 0.3,
+                "rx_capacitance_pf": 0.06,
+                "clock_offset_ui": 0.0,
+                "coarse_latency_ui": 1.0
+              },
+              "coupling_pf": 0.06
+            },
+            "pattern": "random",
+            "seed": 71001,
+            "bits": 64,
+            "phase_ui": 0.5,
+            "guard_ui": 0.1,
+            "margin_min": 0.08,
+            "overshoot_max": 0.2,
+            "points_per_ui": 64
+          },
+          "area_proxy_um2": 6.3259506707450255
+        },
+        {
+          "valid": true,
+          "feasible": false,
+          "margins": [
+            -0.24419498830583397,
+            -0.2346350368610749
+          ],
+          "errors": [
+            32,
+            31
+          ],
+          "overshoot_fraction": 0.0,
+          "energy_lane_pj_bit": [
+            0.11182689362039445,
+            0.11190174544411745
+          ],
+          "energy_pj_bit": 0.11186431953225595,
+          "case": {
+            "name": "development_0_1_opposite",
+            "context": {
+              "lane0": {
+                "vdd": 1.0,
+                "temperature_c": 27.0,
+                "rate_gbps": 2.0,
+                "resistance_ohm": 30.0,
+                "inductance_nh": 0.0,
+                "capacitance_pf": 0.3,
+                "rx_capacitance_pf": 0.06,
+                "clock_offset_ui": 0.0,
+                "coarse_latency_ui": 1.0
+              },
+              "lane1": {
+                "vdd": 1.0,
+                "temperature_c": 27.0,
+                "rate_gbps": 2.0,
+                "resistance_ohm": 32.0,
+                "inductance_nh": 0.0,
+                "capacitance_pf": 0.3,
+                "rx_capacitance_pf": 0.06,
+                "clock_offset_ui": 0.0,
+                "coarse_latency_ui": 1.0
+              },
+              "coupling_pf": 0.06
+            },
+            "pattern": "opposite",
+            "seed": 71002,
+            "bits": 64,
+            "phase_ui": 0.5,
+            "guard_ui": 0.1,
+            "margin_min": 0.08,
+            "overshoot_max": 0.2,
+            "points_per_ui": 64
+          },
+          "area_proxy_um2": 6.3259506707450255
+        },
+        {
+          "valid": true,
+          "feasible": false,
+          "margins": [
+            -0.35038196137326444,
+            -0.3845187491018529
+          ],
+          "errors": [
+            18,
+            15
+          ],
+          "overshoot_fraction": 0.03456170710440772,
+          "energy_lane_pj_bit": [
+            0.07006757614823927,
+            0.07025873009146832
+          ],
+          "energy_pj_bit": 0.0701631531198538,
+          "case": {
+            "name": "development_1_0_random",
+            "context": {
+              "lane0": {
+                "vdd": 0.95,
+                "temperature_c": 65.0,
+                "rate_gbps": 2.0,
+                "resistance_ohm": 40.0,
+                "inductance_nh": 0.0,
+                "capacitance_pf": 0.34,
+                "rx_capacitance_pf": 0.06,
+                "clock_offset_ui": 0.0,
+                "coarse_latency_ui": 1.0
+              },
+              "lane1": {
+                "vdd": 0.95,
+                "temperature_c": 65.0,
+                "rate_gbps": 2.0,
+                "resistance_ohm": 42.0,
+                "inductance_nh": 0.0,
+                "capacitance_pf": 0.34,
+                "rx_capacitance_pf": 0.06,
+                "clock_offset_ui": 0.0,
+                "coarse_latency_ui": 1.0
+              },
+              "coupling_pf": 0.1
+            },
+            "pattern": "random",
+            "seed": 71102,
+            "bits": 64,
+            "phase_ui": 0.5,
+            "guard_ui": 0.1,
+            "margin_min": 0.08,
+            "overshoot_max": 0.2,
+            "points_per_ui": 64
+          },
+          "area_proxy_um2": 6.3259506707450255
+        },
+        {
+          "valid": true,
+          "feasible": false,
+          "margins": [
+            -0.2673330048450583,
+            -0.25689826161124674
+          ],
+          "errors": [
+            32,
+            32
+          ],
+          "overshoot_fraction": 0.0,
+          "energy_lane_pj_bit": [
+            0.1008469646095705,
+            0.10090584351013045
+          ],
+          "energy_pj_bit": 0.10087640405985047,
+          "case": {
+            "name": "development_1_1_opposite",
+            "context": {
+              "lane0": {
+                "vdd": 0.95,
+                "temperature_c": 65.0,
+                "rate_gbps": 2.0,
+                "resistance_ohm": 40.0,
+                "inductance_nh": 0.0,
+                "capacitance_pf": 0.34,
+                "rx_capacitance_pf": 0.06,
+                "clock_offset_ui": 0.0,
+                "coarse_latency_ui": 1.0
+              },
+              "lane1": {
+                "vdd": 0.95,
+                "temperature_c": 65.0,
+                "rate_gbps": 2.0,
+                "resistance_ohm": 42.0,
+                "inductance_nh": 0.0,
+                "capacitance_pf": 0.34,
+                "rx_capacitance_pf": 0.06,
+                "clock_offset_ui": 0.0,
+                "coarse_latency_ui": 1.0
+              },
+              "coupling_pf": 0.1
+            },
+            "pattern": "opposite",
+            "seed": 71103,
+            "bits": 64,
+            "phase_ui": 0.5,
+            "guard_ui": 0.1,
+            "margin_min": 0.08,
+            "overshoot_max": 0.2,
+            "points_per_ui": 64
+          },
+          "area_proxy_um2": 6.3259506707450255
+        }
+      ]
+    }
+  },
+  {
+    "x": [
+      0.7992277076721499,
+      7.400598791428473,
+      0.2730048542049933,
+      2.871488532968365,
+      1.2737889320393427,
+      78.86690598948218
+    ],
+    "oracle": {
+      "valid": true,
+      "feasible": false,
+      "margins": [
+        -0.40666442543083803,
+        -0.3820498168773018
+      ],
+      "energy_pj_bit": 0.13512308104235088,
+      "overshoot_fraction": 0.03795326575213742,
+      "cases": [
+        {
+          "valid": true,
+          "feasible": false,
+          "margins": [
+            -0.3936664649295324,
+            -0.3808427740872655
+          ],
+          "errors": [
+            19,
+            19
+          ],
+          "overshoot_fraction": 0.02153673432693663,
+          "energy_lane_pj_bit": [
+            0.11353747483041285,
+            0.10221093359804417
+          ],
+          "energy_pj_bit": 0.10787420421422851,
+          "case": {
+            "name": "development_0_0_random",
+            "context": {
+              "lane0": {
+                "vdd": 1.0,
+                "temperature_c": 27.0,
+                "rate_gbps": 2.0,
+                "resistance_ohm": 30.0,
+                "inductance_nh": 0.0,
+                "capacitance_pf": 0.3,
+                "rx_capacitance_pf": 0.06,
+                "clock_offset_ui": 0.0,
+                "coarse_latency_ui": 1.0
+              },
+              "lane1": {
+                "vdd": 1.0,
+                "temperature_c": 27.0,
+                "rate_gbps": 2.0,
+                "resistance_ohm": 32.0,
+                "inductance_nh": 0.0,
+                "capacitance_pf": 0.3,
+                "rx_capacitance_pf": 0.06,
+                "clock_offset_ui": 0.0,
+                "coarse_latency_ui": 1.0
+              },
+              "coupling_pf": 0.06
+            },
+            "pattern": "random",
+            "seed": 71001,
+            "bits": 64,
+            "phase_ui": 0.5,
+            "guard_ui": 0.1,
+            "margin_min": 0.08,
+            "overshoot_max": 0.2,
+            "points_per_ui": 64
+          },
+          "area_proxy_um2": 9.174872530546502
+        },
+        {
+          "valid": true,
+          "feasible": false,
+          "margins": [
+            -0.26831885543412637,
+            -0.36824945618833216
+          ],
+          "errors": [
+            32,
+            32
+          ],
+          "overshoot_fraction": 0.0,
+          "energy_lane_pj_bit": [
+            0.16852794837386528,
+            0.1650900917303381
+          ],
+          "energy_pj_bit": 0.1668090200521017,
+          "case": {
+            "name": "development_0_1_opposite",
+            "context": {
+              "lane0": {
+                "vdd": 1.0,
+                "temperature_c": 27.0,
+                "rate_gbps": 2.0,
+                "resistance_ohm": 30.0,
+                "inductance_nh": 0.0,
+                "capacitance_pf": 0.3,
+                "rx_capacitance_pf": 0.06,
+                "clock_offset_ui": 0.0,
+                "coarse_latency_ui": 1.0
+              },
+              "lane1": {
+                "vdd": 1.0,
+                "temperature_c": 27.0,
+                "rate_gbps": 2.0,
+                "resistance_ohm": 32.0,
+                "inductance_nh": 0.0,
+                "capacitance_pf": 0.3,
+                "rx_capacitance_pf": 0.06,
+                "clock_offset_ui": 0.0,
+                "coarse_latency_ui": 1.0
+              },
+              "coupling_pf": 0.06
+            },
+            "pattern": "opposite",
+            "seed": 71002,
+            "bits": 64,
+            "phase_ui": 0.5,
+            "guard_ui": 0.1,
+            "margin_min": 0.08,
+            "overshoot_max": 0.2,
+            "points_per_ui": 64
+          },
+          "area_proxy_um2": 9.174872530546502
+        },
+        {
+          "valid": true,
+          "feasible": false,
+          "margins": [
+            -0.40666442543083803,
+            -0.37072909399480103
+          ],
+          "errors": [
+            20,
+            21
+          ],
+          "overshoot_fraction": 0.03795326575213742,
+          "energy_lane_pj_bit": [
+            0.10371305506443354,
+            0.10520930724283065
+          ],
+          "energy_pj_bit": 0.1044611811536321,
+          "case": {
+            "name": "development_1_0_random",
+            "context": {
+              "lane0": {
+                "vdd": 0.95,
+                "temperature_c": 65.0,
+                "rate_gbps": 2.0,
+                "resistance_ohm": 40.0,
+                "inductance_nh": 0.0,
+                "capacitance_pf": 0.34,
+                "rx_capacitance_pf": 0.06,
+                "clock_offset_ui": 0.0,
+                "coarse_latency_ui": 1.0
+              },
+              "lane1": {
+                "vdd": 0.95,
+                "temperature_c": 65.0,
+                "rate_gbps": 2.0,
+                "resistance_ohm": 42.0,
+                "inductance_nh": 0.0,
+                "capacitance_pf": 0.34,
+                "rx_capacitance_pf": 0.06,
+                "clock_offset_ui": 0.0,
+                "coarse_latency_ui": 1.0
+              },
+              "coupling_pf": 0.1
+            },
+            "pattern": "random",
+            "seed": 71102,
+            "bits": 64,
+            "phase_ui": 0.5,
+            "guard_ui": 0.1,
+            "margin_min": 0.08,
+            "overshoot_max": 0.2,
+            "points_per_ui": 64
+          },
+          "area_proxy_um2": 9.174872530546502
+        },
+        {
+          "valid": true,
+          "feasible": false,
+          "margins": [
+            -0.2806614526332887,
+            -0.3820498168773018
+          ],
+          "errors": [
+            32,
+            32
+          ],
+          "overshoot_fraction": 0.0,
+          "energy_lane_pj_bit": [
+            0.16306327380603516,
+            0.1596325636928474
+          ],
+          "energy_pj_bit": 0.16134791874944127,
+          "case": {
+            "name": "development_1_1_opposite",
+            "context": {
+              "lane0": {
+                "vdd": 0.95,
+                "temperature_c": 65.0,
+                "rate_gbps": 2.0,
+                "resistance_ohm": 40.0,
+                "inductance_nh": 0.0,
+                "capacitance_pf": 0.34,
+                "rx_capacitance_pf": 0.06,
+                "clock_offset_ui": 0.0,
+                "coarse_latency_ui": 1.0
+              },
+              "lane1": {
+                "vdd": 0.95,
+                "temperature_c": 65.0,
+                "rate_gbps": 2.0,
+                "resistance_ohm": 42.0,
+                "inductance_nh": 0.0,
+                "capacitance_pf": 0.34,
+                "rx_capacitance_pf": 0.06,
+                "clock_offset_ui": 0.0,
+                "coarse_latency_ui": 1.0
+              },
+              "coupling_pf": 0.1
+            },
+            "pattern": "opposite",
+            "seed": 71103,
+            "bits": 64,
+            "phase_ui": 0.5,
+            "guard_ui": 0.1,
+            "margin_min": 0.08,
+            "overshoot_max": 0.2,
+            "points_per_ui": 64
+          },
+          "area_proxy_um2": 9.174872530546502
+        }
+      ]
+    }
+  },
+  {
+    "x": [
+      0.5000019427127346,
+      8.531250743457633,
+      0.48192260322664515,
+      2.1638608469858656,
+      1.698339165823359,
+      1.7401799326724747
+    ],
+    "oracle": {
+      "valid": true,
+      "feasible": false,
+      "margins": [
+        -0.5318011076523383,
+        -0.5522315756529207
+      ],
+      "energy_pj_bit": 0.1379755349240662,
+      "overshoot_fraction": 0.05223758563505884,
+      "cases": [
+        {
+          "valid": true,
+          "feasible": false,
+          "margins": [
+            -0.5295201565925624,
+            -0.5044081603315363
+          ],
+          "errors": [
+            21,
+            19
+          ],
+          "overshoot_fraction": 0.03252259898246324,
+          "energy_lane_pj_bit": [
+            0.09678733725949826,
+            0.1152896376459269
+          ],
+          "energy_pj_bit": 0.10603848745271258,
+          "case": {
+            "name": "development_0_0_random",
+            "context": {
+              "lane0": {
+                "vdd": 1.0,
+                "temperature_c": 27.0,
+                "rate_gbps": 2.0,
+                "resistance_ohm": 30.0,
+                "inductance_nh": 0.0,
+                "capacitance_pf": 0.3,
+                "rx_capacitance_pf": 0.06,
+                "clock_offset_ui": 0.0,
+                "coarse_latency_ui": 1.0
+              },
+              "lane1": {
+                "vdd": 1.0,
+                "temperature_c": 27.0,
+                "rate_gbps": 2.0,
+                "resistance_ohm": 32.0,
+                "inductance_nh": 0.0,
+                "capacitance_pf": 0.3,
+                "rx_capacitance_pf": 0.06,
+                "clock_offset_ui": 0.0,
+                "coarse_latency_ui": 1.0
+              },
+              "coupling_pf": 0.06
+            },
+            "pattern": "random",
+            "seed": 71001,
+            "bits": 64,
+            "phase_ui": 0.5,
+            "guard_ui": 0.1,
+            "margin_min": 0.08,
+            "overshoot_max": 0.2,
+            "points_per_ui": 64
+          },
+          "area_proxy_um2": 11.067780042814647
+        },
+        {
+          "valid": true,
+          "feasible": false,
+          "margins": [
+            -0.371132095995224,
+            -0.3823050578661733
+          ],
+          "errors": [
+            32,
+            29
+          ],
+          "overshoot_fraction": 0.0,
+          "energy_lane_pj_bit": [
+            0.16807952770142418,
+            0.17832817518513938
+          ],
+          "energy_pj_bit": 0.17320385144328176,
+          "case": {
+            "name": "development_0_1_opposite",
+            "context": {
+              "lane0": {
+                "vdd": 1.0,
+                "temperature_c": 27.0,
+                "rate_gbps": 2.0,
+                "resistance_ohm": 30.0,
+                "inductance_nh": 0.0,
+                "capacitance_pf": 0.3,
+                "rx_capacitance_pf": 0.06,
+                "clock_offset_ui": 0.0,
+                "coarse_latency_ui": 1.0
+              },
+              "lane1": {
+                "vdd": 1.0,
+                "temperature_c": 27.0,
+                "rate_gbps": 2.0,
+                "resistance_ohm": 32.0,
+                "inductance_nh": 0.0,
+                "capacitance_pf": 0.3,
+                "rx_capacitance_pf": 0.06,
+                "clock_offset_ui": 0.0,
+                "coarse_latency_ui": 1.0
+              },
+              "coupling_pf": 0.06
+            },
+            "pattern": "opposite",
+            "seed": 71002,
+            "bits": 64,
+            "phase_ui": 0.5,
+            "guard_ui": 0.1,
+            "margin_min": 0.08,
+            "overshoot_max": 0.2,
+            "points_per_ui": 64
+          },
+          "area_proxy_um2": 11.067780042814647
+        },
+        {
+          "valid": true,
+          "feasible": false,
+          "margins": [
+            -0.5318011076523383,
+            -0.5522315756529207
+          ],
+          "errors": [
+            21,
+            23
+          ],
+          "overshoot_fraction": 0.05223758563505884,
+          "energy_lane_pj_bit": [
+            0.10419218112429761,
+            0.11348308017758756
+          ],
+          "energy_pj_bit": 0.10883763065094258,
+          "case": {
+            "name": "development_1_0_random",
+            "context": {
+              "lane0": {
+                "vdd": 0.95,
+                "temperature_c": 65.0,
+                "rate_gbps": 2.0,
+                "resistance_ohm": 40.0,
+                "inductance_nh": 0.0,
+                "capacitance_pf": 0.34,
+                "rx_capacitance_pf": 0.06,
+                "clock_offset_ui": 0.0,
+                "coarse_latency_ui": 1.0
+              },
+              "lane1": {
+                "vdd": 0.95,
+                "temperature_c": 65.0,
+                "rate_gbps": 2.0,
+                "resistance_ohm": 42.0,
+                "inductance_nh": 0.0,
+                "capacitance_pf": 0.34,
+                "rx_capacitance_pf": 0.06,
+                "clock_offset_ui": 0.0,
+                "coarse_latency_ui": 1.0
+              },
+              "coupling_pf": 0.1
+            },
+            "pattern": "random",
+            "seed": 71102,
+            "bits": 64,
+            "phase_ui": 0.5,
+            "guard_ui": 0.1,
+            "margin_min": 0.08,
+            "overshoot_max": 0.2,
+            "points_per_ui": 64
+          },
+          "area_proxy_um2": 11.067780042814647
+        },
+        {
+          "valid": true,
+          "feasible": false,
+          "margins": [
+            -0.430170637403126,
+            -0.3859650692982853
+          ],
+          "errors": [
+            32,
+            31
+          ],
+          "overshoot_fraction": 0.0,
+          "energy_lane_pj_bit": [
+            0.15787012134343129,
+            0.16977421895522435
+          ],
+          "energy_pj_bit": 0.16382217014932782,
+          "case": {
+            "name": "development_1_1_opposite",
+            "context": {
+              "lane0": {
+                "vdd": 0.95,
+                "temperature_c": 65.0,
+                "rate_gbps": 2.0,
+                "resistance_ohm": 40.0,
+                "inductance_nh": 0.0,
+                "capacitance_pf": 0.34,
+                "rx_capacitance_pf": 0.06,
+                "clock_offset_ui": 0.0,
+                "coarse_latency_ui": 1.0
+              },
+              "lane1": {
+                "vdd": 0.95,
+                "temperature_c": 65.0,
+                "rate_gbps": 2.0,
+                "resistance_ohm": 42.0,
+                "inductance_nh": 0.0,
+                "capacitance_pf": 0.34,
+                "rx_capacitance_pf": 0.06,
+                "clock_offset_ui": 0.0,
+                "coarse_latency_ui": 1.0
+              },
+              "coupling_pf": 0.1
+            },
+            "pattern": "opposite",
+            "seed": 71103,
+            "bits": 64,
+            "phase_ui": 0.5,
+            "guard_ui": 0.1,
+            "margin_min": 0.08,
+            "overshoot_max": 0.2,
+            "points_per_ui": 64
+          },
+          "area_proxy_um2": 11.067780042814647
+        }
+      ]
+    }
+  },
+  {
+    "x": [
+      1.2242741192316613,
+      1.9613779423155742,
+      3.9250621676578454,
+      1.5085207965673326,
+      1.9586239832717574,
+      2.576697805853399
+    ],
+    "oracle": {
+      "valid": true,
+      "feasible": false,
+      "margins": [
+        -0.44449153602951563,
+        -0.44652983723106277
+      ],
+      "energy_pj_bit": 0.23728378553430024,
+      "overshoot_fraction": 0.030297374242425956,
+      "cases": [
+        {
+          "valid": true,
+          "feasible": false,
+          "margins": [
+            -0.44449153602951563,
+            -0.44652983723106277
+          ],
+          "errors": [
+            12,
+            13
+          ],
+          "overshoot_fraction": 0.030297374242425956,
+          "energy_lane_pj_bit": [
+            0.19589336687587186,
+            0.1768277075116378
+          ],
+          "energy_pj_bit": 0.18636053719375484,
+          "case": {
+            "name": "development_0_0_random",
+            "context": {
+              "lane0": {
+                "vdd": 1.0,
+                "temperature_c": 27.0,
+                "rate_gbps": 2.0,
+                "resistance_ohm": 30.0,
+                "inductance_nh": 0.0,
+                "capacitance_pf": 0.3,
+                "rx_capacitance_pf": 0.06,
+                "clock_offset_ui": 0.0,
+                "coarse_latency_ui": 1.0
+              },
+              "lane1": {
+                "vdd": 1.0,
+                "temperature_c": 27.0,
+                "rate_gbps": 2.0,
+                "resistance_ohm": 32.0,
+                "inductance_nh": 0.0,
+                "capacitance_pf": 0.3,
+                "rx_capacitance_pf": 0.06,
+                "clock_offset_ui": 0.0,
+                "coarse_latency_ui": 1.0
+              },
+              "coupling_pf": 0.06
+            },
+            "pattern": "random",
+            "seed": 71001,
+            "bits": 64,
+            "phase_ui": 0.5,
+            "guard_ui": 0.1,
+            "margin_min": 0.08,
+            "overshoot_max": 0.2,
+            "points_per_ui": 64
+          },
+          "area_proxy_um2": 43.38693666809017
+        },
+        {
+          "valid": true,
+          "feasible": false,
+          "margins": [
+            -0.21392681011024783,
+            -0.43926269169829146
+          ],
+          "errors": [
+            32,
+            31
+          ],
+          "overshoot_fraction": 0.023908367230101035,
+          "energy_lane_pj_bit": [
+            0.29142436227557816,
+            0.2775620236765962
+          ],
+          "energy_pj_bit": 0.2844931929760872,
+          "case": {
+            "name": "development_0_1_opposite",
+            "context": {
+              "lane0": {
+                "vdd": 1.0,
+                "temperature_c": 27.0,
+                "rate_gbps": 2.0,
+                "resistance_ohm": 30.0,
+                "inductance_nh": 0.0,
+                "capacitance_pf": 0.3,
+                "rx_capacitance_pf": 0.06,
+                "clock_offset_ui": 0.0,
+                "coarse_latency_ui": 1.0
+              },
+              "lane1": {
+                "vdd": 1.0,
+                "temperature_c": 27.0,
+                "rate_gbps": 2.0,
+                "resistance_ohm": 32.0,
+                "inductance_nh": 0.0,
+                "capacitance_pf": 0.3,
+                "rx_capacitance_pf": 0.06,
+                "clock_offset_ui": 0.0,
+                "coarse_latency_ui": 1.0
+              },
+              "coupling_pf": 0.06
+            },
+            "pattern": "opposite",
+            "seed": 71002,
+            "bits": 64,
+            "phase_ui": 0.5,
+            "guard_ui": 0.1,
+            "margin_min": 0.08,
+            "overshoot_max": 0.2,
+            "points_per_ui": 64
+          },
+          "area_proxy_um2": 43.38693666809017
+        },
+        {
+          "valid": true,
+          "feasible": false,
+          "margins": [
+            -0.4323668292335976,
+            -0.43715988715211607
+          ],
+          "errors": [
+            13,
+            14
+          ],
+          "overshoot_fraction": 0.02799148572727539,
+          "energy_lane_pj_bit": [
+            0.1944803052758686,
+            0.18819699684604274
+          ],
+          "energy_pj_bit": 0.19133865106095566,
+          "case": {
+            "name": "development_1_0_random",
+            "context": {
+              "lane0": {
+                "vdd": 0.95,
+                "temperature_c": 65.0,
+                "rate_gbps": 2.0,
+                "resistance_ohm": 40.0,
+                "inductance_nh": 0.0,
+                "capacitance_pf": 0.34,
+                "rx_capacitance_pf": 0.06,
+                "clock_offset_ui": 0.0,
+                "coarse_latency_ui": 1.0
+              },
+              "lane1": {
+                "vdd": 0.95,
+                "temperature_c": 65.0,
+                "rate_gbps": 2.0,
+                "resistance_ohm": 42.0,
+                "inductance_nh": 0.0,
+                "capacitance_pf": 0.34,
+                "rx_capacitance_pf": 0.06,
+                "clock_offset_ui": 0.0,
+                "coarse_latency_ui": 1.0
+              },
+              "coupling_pf": 0.1
+            },
+            "pattern": "random",
+            "seed": 71102,
+            "bits": 64,
+            "phase_ui": 0.5,
+            "guard_ui": 0.1,
+            "margin_min": 0.08,
+            "overshoot_max": 0.2,
+            "points_per_ui": 64
+          },
+          "area_proxy_um2": 43.38693666809017
+        },
+        {
+          "valid": true,
+          "feasible": false,
+          "margins": [
+            -0.2145358073035707,
+            -0.43204313245964954
+          ],
+          "errors": [
+            32,
+            31
+          ],
+          "overshoot_fraction": 0.02425309286839883,
+          "energy_lane_pj_bit": [
+            0.2942231569138008,
+            0.27966236489900564
+          ],
+          "energy_pj_bit": 0.28694276090640325,
+          "case": {
+            "name": "development_1_1_opposite",
+            "context": {
+              "lane0": {
+                "vdd": 0.95,
+                "temperature_c": 65.0,
+                "rate_gbps": 2.0,
+                "resistance_ohm": 40.0,
+                "inductance_nh": 0.0,
+                "capacitance_pf": 0.34,
+                "rx_capacitance_pf": 0.06,
+                "clock_offset_ui": 0.0,
+                "coarse_latency_ui": 1.0
+              },
+              "lane1": {
+                "vdd": 0.95,
+                "temperature_c": 65.0,
+                "rate_gbps": 2.0,
+                "resistance_ohm": 42.0,
+                "inductance_nh": 0.0,
+                "capacitance_pf": 0.34,
+                "rx_capacitance_pf": 0.06,
+                "clock_offset_ui": 0.0,
+                "coarse_latency_ui": 1.0
+              },
+              "coupling_pf": 0.1
+            },
+            "pattern": "opposite",
+            "seed": 71103,
+            "bits": 64,
+            "phase_ui": 0.5,
+            "guard_ui": 0.1,
+            "margin_min": 0.08,
+            "overshoot_max": 0.2,
+            "points_per_ui": 64
+          },
+          "area_proxy_um2": 43.38693666809017
+        }
+      ]
+    }
+  },
+  {
+    "x": [
+      0.40621912681594063,
+      9.959930767114598,
+      0.6919959014265098,
+      2.350087937468266,
+      1.6793428051097816,
+      57.53825228016731
+    ],
+    "oracle": {
+      "valid": true,
+      "feasible": false,
+      "margins": [
+        -0.5440523036477609,
+        -0.541531209426618
+      ],
+      "energy_pj_bit": 0.1958343222510433,
+      "overshoot_fraction": 0.04624997476966622,
+      "cases": [
+        {
+          "valid": true,
+          "feasible": false,
+          "margins": [
+            -0.5314044775853077,
+            -0.5281334028409441
+          ],
+          "errors": [
+            20,
+            20
+          ],
+          "overshoot_fraction": 0.03255521989202444,
+          "energy_lane_pj_bit": [
+            0.11378056975493592,
+            0.13012836959760504
+          ],
+          "energy_pj_bit": 0.12195446967627048,
+          "case": {
+            "name": "development_0_0_random",
+            "context": {
+              "lane0": {
+                "vdd": 1.0,
+                "temperature_c": 27.0,
+                "rate_gbps": 2.0,
+                "resistance_ohm": 30.0,
+                "inductance_nh": 0.0,
+                "capacitance_pf": 0.3,
+                "rx_capacitance_pf": 0.06,
+                "clock_offset_ui": 0.0,
+                "coarse_latency_ui": 1.0
+              },
+              "lane1": {
+                "vdd": 1.0,
+                "temperature_c": 27.0,
+                "rate_gbps": 2.0,
+                "resistance_ohm": 32.0,
+                "inductance_nh": 0.0,
+                "capacitance_pf": 0.3,
+                "rx_capacitance_pf": 0.06,
+                "clock_offset_ui": 0.0,
+                "coarse_latency_ui": 1.0
+              },
+              "coupling_pf": 0.06
+            },
+            "pattern": "random",
+            "seed": 71001,
+            "bits": 64,
+            "phase_ui": 0.5,
+            "guard_ui": 0.1,
+            "margin_min": 0.08,
+            "overshoot_max": 0.2,
+            "points_per_ui": 64
+          },
+          "area_proxy_um2": 15.195337865128904
+        },
+        {
+          "valid": true,
+          "feasible": false,
+          "margins": [
+            -0.28363506315576414,
+            -0.5076857439832114
+          ],
+          "errors": [
+            12,
+            18
+          ],
+          "overshoot_fraction": 0.017639829068982094,
+          "energy_lane_pj_bit": [
+            0.2859755387888086,
+            0.26243998436692445
+          ],
+          "energy_pj_bit": 0.2742077615778665,
+          "case": {
+            "name": "development_0_1_opposite",
+            "context": {
+              "lane0": {
+                "vdd": 1.0,
+                "temperature_c": 27.0,
+                "rate_gbps": 2.0,
+                "resistance_ohm": 30.0,
+                "inductance_nh": 0.0,
+                "capacitance_pf": 0.3,
+                "rx_capacitance_pf": 0.06,
+                "clock_offset_ui": 0.0,
+                "coarse_latency_ui": 1.0
+              },
+              "lane1": {
+                "vdd": 1.0,
+                "temperature_c": 27.0,
+                "rate_gbps": 2.0,
+                "resistance_ohm": 32.0,
+                "inductance_nh": 0.0,
+                "capacitance_pf": 0.3,
+                "rx_capacitance_pf": 0.06,
+                "clock_offset_ui": 0.0,
+                "coarse_latency_ui": 1.0
+              },
+              "coupling_pf": 0.06
+            },
+            "pattern": "opposite",
+            "seed": 71002,
+            "bits": 64,
+            "phase_ui": 0.5,
+            "guard_ui": 0.1,
+            "margin_min": 0.08,
+            "overshoot_max": 0.2,
+            "points_per_ui": 64
+          },
+          "area_proxy_um2": 15.195337865128904
+        },
+        {
+          "valid": true,
+          "feasible": false,
+          "margins": [
+            -0.5440523036477609,
+            -0.541531209426618
+          ],
+          "errors": [
+            22,
+            20
+          ],
+          "overshoot_fraction": 0.04624997476966622,
+          "energy_lane_pj_bit": [
+            0.11687566337279857,
+            0.1394426718793262
+          ],
+          "energy_pj_bit": 0.1281591676260624,
+          "case": {
+            "name": "development_1_0_random",
+            "context": {
+              "lane0": {
+                "vdd": 0.95,
+                "temperature_c": 65.0,
+                "rate_gbps": 2.0,
+                "resistance_ohm": 40.0,
+                "inductance_nh": 0.0,
+                "capacitance_pf": 0.34,
+                "rx_capacitance_pf": 0.06,
+                "clock_offset_ui": 0.0,
+                "coarse_latency_ui": 1.0
+              },
+              "lane1": {
+                "vdd": 0.95,
+                "temperature_c": 65.0,
+                "rate_gbps": 2.0,
+                "resistance_ohm": 42.0,
+                "inductance_nh": 0.0,
+                "capacitance_pf": 0.34,
+                "rx_capacitance_pf": 0.06,
+                "clock_offset_ui": 0.0,
+                "coarse_latency_ui": 1.0
+              },
+              "coupling_pf": 0.1
+            },
+            "pattern": "random",
+            "seed": 71102,
+            "bits": 64,
+            "phase_ui": 0.5,
+            "guard_ui": 0.1,
+            "margin_min": 0.08,
+            "overshoot_max": 0.2,
+            "points_per_ui": 64
+          },
+          "area_proxy_um2": 15.195337865128904
+        },
+        {
+          "valid": true,
+          "feasible": false,
+          "margins": [
+            -0.34508905628008324,
+            -0.49364027439816305
+          ],
+          "errors": [
+            32,
+            27
+          ],
+          "overshoot_fraction": 0.006540932008709088,
+          "energy_lane_pj_bit": [
+            0.25599577776950794,
+            0.2620360024784397
+          ],
+          "energy_pj_bit": 0.25901589012397386,
+          "case": {
+            "name": "development_1_1_opposite",
+            "context": {
+              "lane0": {
+                "vdd": 0.95,
+                "temperature_c": 65.0,
+                "rate_gbps": 2.0,
+                "resistance_ohm": 40.0,
+                "inductance_nh": 0.0,
+                "capacitance_pf": 0.34,
+                "rx_capacitance_pf": 0.06,
+                "clock_offset_ui": 0.0,
+                "coarse_latency_ui": 1.0
+              },
+              "lane1": {
+                "vdd": 0.95,
+                "temperature_c": 65.0,
+                "rate_gbps": 2.0,
+                "resistance_ohm": 42.0,
+                "inductance_nh": 0.0,
+                "capacitance_pf": 0.34,
+                "rx_capacitance_pf": 0.06,
+                "clock_offset_ui": 0.0,
+                "coarse_latency_ui": 1.0
+              },
+              "coupling_pf": 0.1
+            },
+            "pattern": "opposite",
+            "seed": 71103,
+            "bits": 64,
+            "phase_ui": 0.5,
+            "guard_ui": 0.1,
+            "margin_min": 0.08,
+            "overshoot_max": 0.2,
+            "points_per_ui": 64
+          },
+          "area_proxy_um2": 15.195337865128904
+        }
+      ]
+    }
+  },
+  {
+    "x": [
+      1.3808979405821917,
+      4.889683164181652,
+      2.7448493120416053,
+      1.9796746671756116,
+      3.664130545759527,
+      25.281318063498723
+    ],
+    "oracle": {
+      "valid": true,
+      "feasible": true,
+      "margins": [
+        0.31268188428221355,
+        0.34995681530417955
+      ],
+      "energy_pj_bit": 0.38780310999665835,
+      "overshoot_fraction": 0.04204477138655086,
+      "cases": [
+        {
+          "valid": true,
+          "feasible": true,
+          "margins": [
+            0.4129703348058924,
+            0.40400313929325216
+          ],
+          "errors": [
+            0,
+            0
+          ],
+          "overshoot_fraction": 0.027700867473885005,
+          "energy_lane_pj_bit": [
+            0.2760661879208136,
+            0.22958886452435867
+          ],
+          "energy_pj_bit": 0.25282752622258614,
+          "case": {
+            "name": "development_0_0_random",
+            "context": {
+              "lane0": {
+                "vdd": 1.0,
+                "temperature_c": 27.0,
+                "rate_gbps": 2.0,
+                "resistance_ohm": 30.0,
+                "inductance_nh": 0.0,
+                "capacitance_pf": 0.3,
+                "rx_capacitance_pf": 0.06,
+                "clock_offset_ui": 0.0,
+                "coarse_latency_ui": 1.0
+              },
+              "lane1": {
+                "vdd": 1.0,
+                "temperature_c": 27.0,
+                "rate_gbps": 2.0,
+                "resistance_ohm": 32.0,
+                "inductance_nh": 0.0,
+                "capacitance_pf": 0.3,
+                "rx_capacitance_pf": 0.06,
+                "clock_offset_ui": 0.0,
+                "coarse_latency_ui": 1.0
+              },
+              "coupling_pf": 0.06
+            },
+            "pattern": "random",
+            "seed": 71001,
+            "bits": 64,
+            "phase_ui": 0.5,
+            "guard_ui": 0.1,
+            "margin_min": 0.08,
+            "overshoot_max": 0.2,
+            "points_per_ui": 64
+          },
+          "area_proxy_um2": 58.294557053745486
+        },
+        {
+          "valid": true,
+          "feasible": true,
+          "margins": [
+            0.4377266393645808,
+            0.4416049633134419
+          ],
+          "errors": [
+            0,
+            0
+          ],
+          "overshoot_fraction": 0.02265298657832604,
+          "energy_lane_pj_bit": [
+            0.5341869689902097,
+            0.5274719408073865
+          ],
+          "energy_pj_bit": 0.5308294548987981,
+          "case": {
+            "name": "development_0_1_opposite",
+            "context": {
+              "lane0": {
+                "vdd": 1.0,
+                "temperature_c": 27.0,
+                "rate_gbps": 2.0,
+                "resistance_ohm": 30.0,
+                "inductance_nh": 0.0,
+                "capacitance_pf": 0.3,
+                "rx_capacitance_pf": 0.06,
+                "clock_offset_ui": 0.0,
+                "coarse_latency_ui": 1.0
+              },
+              "lane1": {
+                "vdd": 1.0,
+                "temperature_c": 27.0,
+                "rate_gbps": 2.0,
+                "resistance_ohm": 32.0,
+                "inductance_nh": 0.0,
+                "capacitance_pf": 0.3,
+                "rx_capacitance_pf": 0.06,
+                "clock_offset_ui": 0.0,
+                "coarse_latency_ui": 1.0
+              },
+              "coupling_pf": 0.06
+            },
+            "pattern": "opposite",
+            "seed": 71002,
+            "bits": 64,
+            "phase_ui": 0.5,
+            "guard_ui": 0.1,
+            "margin_min": 0.08,
+            "overshoot_max": 0.2,
+            "points_per_ui": 64
+          },
+          "area_proxy_um2": 58.294557053745486
+        },
+        {
+          "valid": true,
+          "feasible": true,
+          "margins": [
+            0.31268188428221355,
+            0.34995681530417955
+          ],
+          "errors": [
+            0,
+            0
+          ],
+          "overshoot_fraction": 0.04204477138655086,
+          "energy_lane_pj_bit": [
+            0.2529304357110577,
+            0.24379058394632747
+          ],
+          "energy_pj_bit": 0.2483605098286926,
+          "case": {
+            "name": "development_1_0_random",
+            "context": {
+              "lane0": {
+                "vdd": 0.95,
+                "temperature_c": 65.0,
+                "rate_gbps": 2.0,
+                "resistance_ohm": 40.0,
+                "inductance_nh": 0.0,
+                "capacitance_pf": 0.34,
+                "rx_capacitance_pf": 0.06,
+                "clock_offset_ui": 0.0,
+                "coarse_latency_ui": 1.0
+              },
+              "lane1": {
+                "vdd": 0.95,
+                "temperature_c": 65.0,
+                "rate_gbps": 2.0,
+                "resistance_ohm": 42.0,
+                "inductance_nh": 0.0,
+                "capacitance_pf": 0.34,
+                "rx_capacitance_pf": 0.06,
+                "clock_offset_ui": 0.0,
+                "coarse_latency_ui": 1.0
+              },
+              "coupling_pf": 0.1
+            },
+            "pattern": "random",
+            "seed": 71102,
+            "bits": 64,
+            "phase_ui": 0.5,
+            "guard_ui": 0.1,
+            "margin_min": 0.08,
+            "overshoot_max": 0.2,
+            "points_per_ui": 64
+          },
+          "area_proxy_um2": 58.294557053745486
+        },
+        {
+          "valid": true,
+          "feasible": true,
+          "margins": [
+            0.3616490300803501,
+            0.3704868188803967
+          ],
+          "errors": [
+            0,
+            0
+          ],
+          "overshoot_fraction": 0.011777826917063194,
+          "energy_lane_pj_bit": [
+            0.5220333346761321,
+            0.516356563396981
+          ],
+          "energy_pj_bit": 0.5191949490365566,
+          "case": {
+            "name": "development_1_1_opposite",
+            "context": {
+              "lane0": {
+                "vdd": 0.95,
+                "temperature_c": 65.0,
+                "rate_gbps": 2.0,
+                "resistance_ohm": 40.0,
+                "inductance_nh": 0.0,
+                "capacitance_pf": 0.34,
+                "rx_capacitance_pf": 0.06,
+                "clock_offset_ui": 0.0,
+                "coarse_latency_ui": 1.0
+              },
+              "lane1": {
+                "vdd": 0.95,
+                "temperature_c": 65.0,
+                "rate_gbps": 2.0,
+                "resistance_ohm": 42.0,
+                "inductance_nh": 0.0,
+                "capacitance_pf": 0.34,
+                "rx_capacitance_pf": 0.06,
+                "clock_offset_ui": 0.0,
+                "coarse_latency_ui": 1.0
+              },
+              "coupling_pf": 0.1
+            },
+            "pattern": "opposite",
+            "seed": 71103,
+            "bits": 64,
+            "phase_ui": 0.5,
+            "guard_ui": 0.1,
+            "margin_min": 0.08,
+            "overshoot_max": 0.2,
+            "points_per_ui": 64
+          },
+          "area_proxy_um2": 58.294557053745486
+        }
+      ]
+    }
+  },
+  {
+    "x": [
+      1.1366319627679133,
+      5.468095612606117,
+      0.8419375503698721,
+      1.4237357880068577,
+      1.5141660057773085,
+      1.1981707141047038
+    ],
+    "oracle": {
+      "valid": true,
+      "feasible": false,
+      "margins": [
+        -0.30923796522365166,
+        -0.23399857373453842
+      ],
+      "energy_pj_bit": 0.14938380320292965,
+      "overshoot_fraction": 0.05420041296106877,
+      "cases": [
+        {
+          "valid": true,
+          "feasible": false,
+          "margins": [
+            -0.22019041601576833,
+            -0.23399857373453842
+          ],
+          "errors": [
+            11,
+            8
+          ],
+          "overshoot_fraction": 0.04182138919687078,
+          "energy_lane_pj_bit": [
+            0.12469020071832436,
+            0.11888216114050497
+          ],
+          "energy_pj_bit": 0.12178618092941466,
+          "case": {
+            "name": "development_0_0_random",
+            "context": {
+              "lane0": {
+                "vdd": 1.0,
+                "temperature_c": 27.0,
+                "rate_gbps": 2.0,
+                "resistance_ohm": 30.0,
+                "inductance_nh": 0.0,
+                "capacitance_pf": 0.3,
+                "rx_capacitance_pf": 0.06,
+                "clock_offset_ui": 0.0,
+                "coarse_latency_ui": 1.0
+              },
+              "lane1": {
+                "vdd": 1.0,
+                "temperature_c": 27.0,
+                "rate_gbps": 2.0,
+                "resistance_ohm": 32.0,
+                "inductance_nh": 0.0,
+                "capacitance_pf": 0.3,
+                "rx_capacitance_pf": 0.06,
+                "clock_offset_ui": 0.0,
+                "coarse_latency_ui": 1.0
+              },
+              "coupling_pf": 0.06
+            },
+            "pattern": "random",
+            "seed": 71001,
+            "bits": 64,
+            "phase_ui": 0.5,
+            "guard_ui": 0.1,
+            "margin_min": 0.08,
+            "overshoot_max": 0.2,
+            "points_per_ui": 64
+          },
+          "area_proxy_um2": 10.269370641637089
+        },
+        {
+          "valid": true,
+          "feasible": false,
+          "margins": [
+            -0.19219874721527197,
+            -0.1527572049896912
+          ],
+          "errors": [
+            32,
+            31
+          ],
+          "overshoot_fraction": 0.002460438559499337,
+          "energy_lane_pj_bit": [
+            0.19006032972139902,
+            0.19081150705065503
+          ],
+          "energy_pj_bit": 0.19043591838602703,
+          "case": {
+            "name": "development_0_1_opposite",
+            "context": {
+              "lane0": {
+                "vdd": 1.0,
+                "temperature_c": 27.0,
+                "rate_gbps": 2.0,
+                "resistance_ohm": 30.0,
+                "inductance_nh": 0.0,
+                "capacitance_pf": 0.3,
+                "rx_capacitance_pf": 0.06,
+                "clock_offset_ui": 0.0,
+                "coarse_latency_ui": 1.0
+              },
+              "lane1": {
+                "vdd": 1.0,
+                "temperature_c": 27.0,
+                "rate_gbps": 2.0,
+                "resistance_ohm": 32.0,
+                "inductance_nh": 0.0,
+                "capacitance_pf": 0.3,
+                "rx_capacitance_pf": 0.06,
+                "clock_offset_ui": 0.0,
+                "coarse_latency_ui": 1.0
+              },
+              "coupling_pf": 0.06
+            },
+            "pattern": "opposite",
+            "seed": 71002,
+            "bits": 64,
+            "phase_ui": 0.5,
+            "guard_ui": 0.1,
+            "margin_min": 0.08,
+            "overshoot_max": 0.2,
+            "points_per_ui": 64
+          },
+          "area_proxy_um2": 10.269370641637089
+        },
+        {
+          "valid": true,
+          "feasible": false,
+          "margins": [
+            -0.30923796522365166,
+            -0.22839441921598286
+          ],
+          "errors": [
+            14,
+            13
+          ],
+          "overshoot_fraction": 0.05420041296106877,
+          "energy_lane_pj_bit": [
+            0.11597329393799259,
+            0.11602356988448205
+          ],
+          "energy_pj_bit": 0.11599843191123732,
+          "case": {
+            "name": "development_1_0_random",
+            "context": {
+              "lane0": {
+                "vdd": 0.95,
+                "temperature_c": 65.0,
+                "rate_gbps": 2.0,
+                "resistance_ohm": 40.0,
+                "inductance_nh": 0.0,
+                "capacitance_pf": 0.34,
+                "rx_capacitance_pf": 0.06,
+                "clock_offset_ui": 0.0,
+                "coarse_latency_ui": 1.0
+              },
+              "lane1": {
+                "vdd": 0.95,
+                "temperature_c": 65.0,
+                "rate_gbps": 2.0,
+                "resistance_ohm": 42.0,
+                "inductance_nh": 0.0,
+                "capacitance_pf": 0.34,
+                "rx_capacitance_pf": 0.06,
+                "clock_offset_ui": 0.0,
+                "coarse_latency_ui": 1.0
+              },
+              "coupling_pf": 0.1
+            },
+            "pattern": "random",
+            "seed": 71102,
+            "bits": 64,
+            "phase_ui": 0.5,
+            "guard_ui": 0.1,
+            "margin_min": 0.08,
+            "overshoot_max": 0.2,
+            "points_per_ui": 64
+          },
+          "area_proxy_um2": 10.269370641637089
+        },
+        {
+          "valid": true,
+          "feasible": false,
+          "margins": [
+            -0.2553567957361196,
+            -0.21066633483245722
+          ],
+          "errors": [
+            32,
+            31
+          ],
+          "overshoot_fraction": 0.0,
+          "energy_lane_pj_bit": [
+            0.1687819994196967,
+            0.16984736375038242
+          ],
+          "energy_pj_bit": 0.16931468158503957,
+          "case": {
+            "name": "development_1_1_opposite",
+            "context": {
+              "lane0": {
+                "vdd": 0.95,
+                "temperature_c": 65.0,
+                "rate_gbps": 2.0,
+                "resistance_ohm": 40.0,
+                "inductance_nh": 0.0,
+                "capacitance_pf": 0.34,
+                "rx_capacitance_pf": 0.06,
+                "clock_offset_ui": 0.0,
+                "coarse_latency_ui": 1.0
+              },
+              "lane1": {
+                "vdd": 0.95,
+                "temperature_c": 65.0,
+                "rate_gbps": 2.0,
+                "resistance_ohm": 42.0,
+                "inductance_nh": 0.0,
+                "capacitance_pf": 0.34,
+                "rx_capacitance_pf": 0.06,
+                "clock_offset_ui": 0.0,
+                "coarse_latency_ui": 1.0
+              },
+              "coupling_pf": 0.1
+            },
+            "pattern": "opposite",
+            "seed": 71103,
+            "bits": 64,
+            "phase_ui": 0.5,
+            "guard_ui": 0.1,
+            "margin_min": 0.08,
+            "overshoot_max": 0.2,
+            "points_per_ui": 64
+          },
+          "area_proxy_um2": 10.269370641637089
+        }
+      ]
+    }
+  }
+]

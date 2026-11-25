@@ -1,0 +1,1009 @@
+{
+  "source_sha256": "69f7b30fd0a02d3af18c8572eaff4c0df5889119c9a2db70bd49c5ce639854fb",
+  "source_campaign_sha256": "50aabc46e9e11be890bb74a4ba03d02eac0e695c0c58bdbbfb90d8d3e1e75581",
+  "results": [
+    {
+      "seed": 0,
+      "method": "legacy",
+      "design": [
+        1.404950830008688,
+        2.8192587965962206,
+        1.1364577292141511,
+        2.2147604075835314,
+        1.5161930276991644,
+        77.8645900644294
+      ],
+      "measurement": {
+        "valid": true,
+        "feasible": false,
+        "margins": [
+          0.08343678921622188,
+          0.06899451519962185
+        ],
+        "energy_pj_bit": 0.16981311042538608,
+        "overshoot_fraction": 0.061704794052537926,
+        "cases": [
+          {
+            "valid": true,
+            "feasible": true,
+            "margins": [
+              0.08343678921622188,
+              0.084639577639119
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.05341333701325063,
+            "energy_lane_pj_bit": [
+              0.16457411914704026,
+              0.1935760049640206
+            ],
+            "energy_pj_bit": 0.17907506205553042,
+            "case": {
+              "name": "bits64_ppui64",
+              "context": {
+                "lane0": {
+                  "vdd": 0.95,
+                  "temperature_c": 65.0,
+                  "rate_gbps": 2.0,
+                  "resistance_ohm": 40.0,
+                  "inductance_nh": 0.0,
+                  "capacitance_pf": 0.34,
+                  "rx_capacitance_pf": 0.06,
+                  "clock_offset_ui": 0.0,
+                  "coarse_latency_ui": 1.0
+                },
+                "lane1": {
+                  "vdd": 0.95,
+                  "temperature_c": 65.0,
+                  "rate_gbps": 2.0,
+                  "resistance_ohm": 42.0,
+                  "inductance_nh": 0.0,
+                  "capacitance_pf": 0.34,
+                  "rx_capacitance_pf": 0.06,
+                  "clock_offset_ui": 0.0,
+                  "coarse_latency_ui": 1.0
+                },
+                "coupling_pf": 0.1
+              },
+              "pattern": "random",
+              "seed": 261126013,
+              "bits": 64,
+              "phase_ui": 0.5,
+              "guard_ui": 0.1,
+              "margin_min": 0.08,
+              "overshoot_max": 0.2,
+              "points_per_ui": 64,
+              "master_bits": 128
+            },
+            "area_proxy_um2": 15.681940212285475
+          },
+          {
+            "valid": true,
+            "feasible": true,
+            "margins": [
+              0.0834819601686837,
+              0.0846873065716911
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.05343407682814344,
+            "energy_lane_pj_bit": [
+              0.1645680528731597,
+              0.19356861596870592
+            ],
+            "energy_pj_bit": 0.1790683344209328,
+            "case": {
+              "name": "bits64_ppui128",
+              "context": {
+                "lane0": {
+                  "vdd": 0.95,
+                  "temperature_c": 65.0,
+                  "rate_gbps": 2.0,
+                  "resistance_ohm": 40.0,
+                  "inductance_nh": 0.0,
+                  "capacitance_pf": 0.34,
+                  "rx_capacitance_pf": 0.06,
+                  "clock_offset_ui": 0.0,
+                  "coarse_latency_ui": 1.0
+                },
+                "lane1": {
+                  "vdd": 0.95,
+                  "temperature_c": 65.0,
+                  "rate_gbps": 2.0,
+                  "resistance_ohm": 42.0,
+                  "inductance_nh": 0.0,
+                  "capacitance_pf": 0.34,
+                  "rx_capacitance_pf": 0.06,
+                  "clock_offset_ui": 0.0,
+                  "coarse_latency_ui": 1.0
+                },
+                "coupling_pf": 0.1
+              },
+              "pattern": "random",
+              "seed": 261126013,
+              "bits": 64,
+              "phase_ui": 0.5,
+              "guard_ui": 0.1,
+              "margin_min": 0.08,
+              "overshoot_max": 0.2,
+              "points_per_ui": 128,
+              "master_bits": 128
+            },
+            "area_proxy_um2": 15.681940212285475
+          },
+          {
+            "valid": true,
+            "feasible": false,
+            "margins": [
+              0.08343678921622188,
+              0.06899451519962185
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.06167914028363164,
+            "energy_lane_pj_bit": [
+              0.16679714146663013,
+              0.154318153562269
+            ],
+            "energy_pj_bit": 0.16055764751444956,
+            "case": {
+              "name": "bits128_ppui64",
+              "context": {
+                "lane0": {
+                  "vdd": 0.95,
+                  "temperature_c": 65.0,
+                  "rate_gbps": 2.0,
+                  "resistance_ohm": 40.0,
+                  "inductance_nh": 0.0,
+                  "capacitance_pf": 0.34,
+                  "rx_capacitance_pf": 0.06,
+                  "clock_offset_ui": 0.0,
+                  "coarse_latency_ui": 1.0
+                },
+                "lane1": {
+                  "vdd": 0.95,
+                  "temperature_c": 65.0,
+                  "rate_gbps": 2.0,
+                  "resistance_ohm": 42.0,
+                  "inductance_nh": 0.0,
+                  "capacitance_pf": 0.34,
+                  "rx_capacitance_pf": 0.06,
+                  "clock_offset_ui": 0.0,
+                  "coarse_latency_ui": 1.0
+                },
+                "coupling_pf": 0.1
+              },
+              "pattern": "random",
+              "seed": 261126013,
+              "bits": 128,
+              "phase_ui": 0.5,
+              "guard_ui": 0.1,
+              "margin_min": 0.08,
+              "overshoot_max": 0.2,
+              "points_per_ui": 64,
+              "master_bits": 128
+            },
+            "area_proxy_um2": 15.681940212285475
+          },
+          {
+            "valid": true,
+            "feasible": false,
+            "margins": [
+              0.0834819601686837,
+              0.06912228379868324
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.061704794052537926,
+            "energy_lane_pj_bit": [
+              0.1667905861539836,
+              0.1543122092672795
+            ],
+            "energy_pj_bit": 0.16055139771063154,
+            "case": {
+              "name": "bits128_ppui128",
+              "context": {
+                "lane0": {
+                  "vdd": 0.95,
+                  "temperature_c": 65.0,
+                  "rate_gbps": 2.0,
+                  "resistance_ohm": 40.0,
+                  "inductance_nh": 0.0,
+                  "capacitance_pf": 0.34,
+                  "rx_capacitance_pf": 0.06,
+                  "clock_offset_ui": 0.0,
+                  "coarse_latency_ui": 1.0
+                },
+                "lane1": {
+                  "vdd": 0.95,
+                  "temperature_c": 65.0,
+                  "rate_gbps": 2.0,
+                  "resistance_ohm": 42.0,
+                  "inductance_nh": 0.0,
+                  "capacitance_pf": 0.34,
+                  "rx_capacitance_pf": 0.06,
+                  "clock_offset_ui": 0.0,
+                  "coarse_latency_ui": 1.0
+                },
+                "coupling_pf": 0.1
+              },
+              "pattern": "random",
+              "seed": 261126013,
+              "bits": 128,
+              "phase_ui": 0.5,
+              "guard_ui": 0.1,
+              "margin_min": 0.08,
+              "overshoot_max": 0.2,
+              "points_per_ui": 128,
+              "master_bits": 128
+            },
+            "area_proxy_um2": 15.681940212285475
+          }
+        ]
+      }
+    },
+    {
+      "seed": 0,
+      "method": "legacy_validated",
+      "design": [
+        1.5040515035321844,
+        3.838644683919904,
+        0.7934789068739404,
+        2.9090558720818205,
+        3.7378639419308435,
+        1.3210042132206326
+      ],
+      "measurement": {
+        "valid": true,
+        "feasible": false,
+        "margins": [
+          0.07158013151682813,
+          0.07791106437599249
+        ],
+        "energy_pj_bit": 0.18517201754672064,
+        "overshoot_fraction": 0.05398142782424331,
+        "cases": [
+          {
+            "valid": true,
+            "feasible": false,
+            "margins": [
+              0.08729552645355265,
+              0.07791106437599249
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.04786638103148186,
+            "energy_lane_pj_bit": [
+              0.17954970139511742,
+              0.2111304911423807
+            ],
+            "energy_pj_bit": 0.19534009626874904,
+            "case": {
+              "name": "bits64_ppui64",
+              "context": {
+                "lane0": {
+                  "vdd": 0.95,
+                  "temperature_c": 65.0,
+                  "rate_gbps": 2.0,
+                  "resistance_ohm": 40.0,
+                  "inductance_nh": 0.0,
+                  "capacitance_pf": 0.34,
+                  "rx_capacitance_pf": 0.06,
+                  "clock_offset_ui": 0.0,
+                  "coarse_latency_ui": 1.0
+                },
+                "lane1": {
+                  "vdd": 0.95,
+                  "temperature_c": 65.0,
+                  "rate_gbps": 2.0,
+                  "resistance_ohm": 42.0,
+                  "inductance_nh": 0.0,
+                  "capacitance_pf": 0.34,
+                  "rx_capacitance_pf": 0.06,
+                  "clock_offset_ui": 0.0,
+                  "coarse_latency_ui": 1.0
+                },
+                "coupling_pf": 0.1
+              },
+              "pattern": "random",
+              "seed": 261126013,
+              "bits": 64,
+              "phase_ui": 0.5,
+              "guard_ui": 0.1,
+              "margin_min": 0.08,
+              "overshoot_max": 0.2,
+              "points_per_ui": 64,
+              "master_bits": 128
+            },
+            "area_proxy_um2": 24.92106873878916
+          },
+          {
+            "valid": true,
+            "feasible": false,
+            "margins": [
+              0.0873485116142057,
+              0.07793925490248249
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.04796635373594436,
+            "energy_lane_pj_bit": [
+              0.17954042522855515,
+              0.21112002515256975
+            ],
+            "energy_pj_bit": 0.19533022519056245,
+            "case": {
+              "name": "bits64_ppui128",
+              "context": {
+                "lane0": {
+                  "vdd": 0.95,
+                  "temperature_c": 65.0,
+                  "rate_gbps": 2.0,
+                  "resistance_ohm": 40.0,
+                  "inductance_nh": 0.0,
+                  "capacitance_pf": 0.34,
+                  "rx_capacitance_pf": 0.06,
+                  "clock_offset_ui": 0.0,
+                  "coarse_latency_ui": 1.0
+                },
+                "lane1": {
+                  "vdd": 0.95,
+                  "temperature_c": 65.0,
+                  "rate_gbps": 2.0,
+                  "resistance_ohm": 42.0,
+                  "inductance_nh": 0.0,
+                  "capacitance_pf": 0.34,
+                  "rx_capacitance_pf": 0.06,
+                  "clock_offset_ui": 0.0,
+                  "coarse_latency_ui": 1.0
+                },
+                "coupling_pf": 0.1
+              },
+              "pattern": "random",
+              "seed": 261126013,
+              "bits": 64,
+              "phase_ui": 0.5,
+              "guard_ui": 0.1,
+              "margin_min": 0.08,
+              "overshoot_max": 0.2,
+              "points_per_ui": 128,
+              "master_bits": 128
+            },
+            "area_proxy_um2": 24.92106873878916
+          },
+          {
+            "valid": true,
+            "feasible": false,
+            "margins": [
+              0.07158013151682813,
+              0.07791106437599249
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.05392595138098438,
+            "energy_lane_pj_bit": [
+              0.18305953553073978,
+              0.16696735344231262
+            ],
+            "energy_pj_bit": 0.1750134444865262,
+            "case": {
+              "name": "bits128_ppui64",
+              "context": {
+                "lane0": {
+                  "vdd": 0.95,
+                  "temperature_c": 65.0,
+                  "rate_gbps": 2.0,
+                  "resistance_ohm": 40.0,
+                  "inductance_nh": 0.0,
+                  "capacitance_pf": 0.34,
+                  "rx_capacitance_pf": 0.06,
+                  "clock_offset_ui": 0.0,
+                  "coarse_latency_ui": 1.0
+                },
+                "lane1": {
+                  "vdd": 0.95,
+                  "temperature_c": 65.0,
+                  "rate_gbps": 2.0,
+                  "resistance_ohm": 42.0,
+                  "inductance_nh": 0.0,
+                  "capacitance_pf": 0.34,
+                  "rx_capacitance_pf": 0.06,
+                  "clock_offset_ui": 0.0,
+                  "coarse_latency_ui": 1.0
+                },
+                "coupling_pf": 0.1
+              },
+              "pattern": "random",
+              "seed": 261126013,
+              "bits": 128,
+              "phase_ui": 0.5,
+              "guard_ui": 0.1,
+              "margin_min": 0.08,
+              "overshoot_max": 0.2,
+              "points_per_ui": 64,
+              "master_bits": 128
+            },
+            "area_proxy_um2": 24.92106873878916
+          },
+          {
+            "valid": true,
+            "feasible": false,
+            "margins": [
+              0.07163074095855565,
+              0.07793925490248249
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.05398142782424331,
+            "energy_lane_pj_bit": [
+              0.1830496200128945,
+              0.16695898846919519
+            ],
+            "energy_pj_bit": 0.17500430424104485,
+            "case": {
+              "name": "bits128_ppui128",
+              "context": {
+                "lane0": {
+                  "vdd": 0.95,
+                  "temperature_c": 65.0,
+                  "rate_gbps": 2.0,
+                  "resistance_ohm": 40.0,
+                  "inductance_nh": 0.0,
+                  "capacitance_pf": 0.34,
+                  "rx_capacitance_pf": 0.06,
+                  "clock_offset_ui": 0.0,
+                  "coarse_latency_ui": 1.0
+                },
+                "lane1": {
+                  "vdd": 0.95,
+                  "temperature_c": 65.0,
+                  "rate_gbps": 2.0,
+                  "resistance_ohm": 42.0,
+                  "inductance_nh": 0.0,
+                  "capacitance_pf": 0.34,
+                  "rx_capacitance_pf": 0.06,
+                  "clock_offset_ui": 0.0,
+                  "coarse_latency_ui": 1.0
+                },
+                "coupling_pf": 0.1
+              },
+              "pattern": "random",
+              "seed": 261126013,
+              "bits": 128,
+              "phase_ui": 0.5,
+              "guard_ui": 0.1,
+              "margin_min": 0.08,
+              "overshoot_max": 0.2,
+              "points_per_ui": 128,
+              "master_bits": 128
+            },
+            "area_proxy_um2": 24.92106873878916
+          }
+        ]
+      }
+    },
+    {
+      "seed": 2,
+      "method": "legacy",
+      "design": [
+        1.3945718754465593,
+        2.064068978908268,
+        0.822009391179969,
+        2.3126135544533652,
+        4.0,
+        21.308311930369285
+      ],
+      "measurement": {
+        "valid": true,
+        "feasible": false,
+        "margins": [
+          0.08360950856552213,
+          0.07564567883582507
+        ],
+        "energy_pj_bit": 0.15630013586212965,
+        "overshoot_fraction": 0.055988171095646244,
+        "cases": [
+          {
+            "valid": true,
+            "feasible": true,
+            "margins": [
+              0.10430271241801825,
+              0.09006821661123288
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.04757521519668843,
+            "energy_lane_pj_bit": [
+              0.15150494247638596,
+              0.178364568860996
+            ],
+            "energy_pj_bit": 0.16493475566869098,
+            "case": {
+              "name": "bits64_ppui64",
+              "context": {
+                "lane0": {
+                  "vdd": 0.95,
+                  "temperature_c": 65.0,
+                  "rate_gbps": 2.0,
+                  "resistance_ohm": 40.0,
+                  "inductance_nh": 0.0,
+                  "capacitance_pf": 0.34,
+                  "rx_capacitance_pf": 0.06,
+                  "clock_offset_ui": 0.0,
+                  "coarse_latency_ui": 1.0
+                },
+                "lane1": {
+                  "vdd": 0.95,
+                  "temperature_c": 65.0,
+                  "rate_gbps": 2.0,
+                  "resistance_ohm": 42.0,
+                  "inductance_nh": 0.0,
+                  "capacitance_pf": 0.34,
+                  "rx_capacitance_pf": 0.06,
+                  "clock_offset_ui": 0.0,
+                  "coarse_latency_ui": 1.0
+                },
+                "coupling_pf": 0.1
+              },
+              "pattern": "random",
+              "seed": 261126013,
+              "bits": 64,
+              "phase_ui": 0.5,
+              "guard_ui": 0.1,
+              "margin_min": 0.08,
+              "overshoot_max": 0.2,
+              "points_per_ui": 64,
+              "master_bits": 128
+            },
+            "area_proxy_um2": 21.667881351339165
+          },
+          {
+            "valid": true,
+            "feasible": true,
+            "margins": [
+              0.10433587012728285,
+              0.09012953481426766
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.0476021561530395,
+            "energy_lane_pj_bit": [
+              0.1514999121490699,
+              0.17835859163758508
+            ],
+            "energy_pj_bit": 0.1649292518933275,
+            "case": {
+              "name": "bits64_ppui128",
+              "context": {
+                "lane0": {
+                  "vdd": 0.95,
+                  "temperature_c": 65.0,
+                  "rate_gbps": 2.0,
+                  "resistance_ohm": 40.0,
+                  "inductance_nh": 0.0,
+                  "capacitance_pf": 0.34,
+                  "rx_capacitance_pf": 0.06,
+                  "clock_offset_ui": 0.0,
+                  "coarse_latency_ui": 1.0
+                },
+                "lane1": {
+                  "vdd": 0.95,
+                  "temperature_c": 65.0,
+                  "rate_gbps": 2.0,
+                  "resistance_ohm": 42.0,
+                  "inductance_nh": 0.0,
+                  "capacitance_pf": 0.34,
+                  "rx_capacitance_pf": 0.06,
+                  "clock_offset_ui": 0.0,
+                  "coarse_latency_ui": 1.0
+                },
+                "coupling_pf": 0.1
+              },
+              "pattern": "random",
+              "seed": 261126013,
+              "bits": 64,
+              "phase_ui": 0.5,
+              "guard_ui": 0.1,
+              "margin_min": 0.08,
+              "overshoot_max": 0.2,
+              "points_per_ui": 128,
+              "master_bits": 128
+            },
+            "area_proxy_um2": 21.667881351339165
+          },
+          {
+            "valid": true,
+            "feasible": false,
+            "margins": [
+              0.08360950856552213,
+              0.07564567883582507
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.055959936431187574,
+            "energy_lane_pj_bit": [
+              0.1536102820048146,
+              0.14173155764185164
+            ],
+            "energy_pj_bit": 0.14767091982333314,
+            "case": {
+              "name": "bits128_ppui64",
+              "context": {
+                "lane0": {
+                  "vdd": 0.95,
+                  "temperature_c": 65.0,
+                  "rate_gbps": 2.0,
+                  "resistance_ohm": 40.0,
+                  "inductance_nh": 0.0,
+                  "capacitance_pf": 0.34,
+                  "rx_capacitance_pf": 0.06,
+                  "clock_offset_ui": 0.0,
+                  "coarse_latency_ui": 1.0
+                },
+                "lane1": {
+                  "vdd": 0.95,
+                  "temperature_c": 65.0,
+                  "rate_gbps": 2.0,
+                  "resistance_ohm": 42.0,
+                  "inductance_nh": 0.0,
+                  "capacitance_pf": 0.34,
+                  "rx_capacitance_pf": 0.06,
+                  "clock_offset_ui": 0.0,
+                  "coarse_latency_ui": 1.0
+                },
+                "coupling_pf": 0.1
+              },
+              "pattern": "random",
+              "seed": 261126013,
+              "bits": 128,
+              "phase_ui": 0.5,
+              "guard_ui": 0.1,
+              "margin_min": 0.08,
+              "overshoot_max": 0.2,
+              "points_per_ui": 64,
+              "master_bits": 128
+            },
+            "area_proxy_um2": 21.667881351339165
+          },
+          {
+            "valid": true,
+            "feasible": false,
+            "margins": [
+              0.08368450182628145,
+              0.07566885413600566
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.055988171095646244,
+            "energy_lane_pj_bit": [
+              0.153604648804181,
+              0.14172658332215285
+            ],
+            "energy_pj_bit": 0.14766561606316692,
+            "case": {
+              "name": "bits128_ppui128",
+              "context": {
+                "lane0": {
+                  "vdd": 0.95,
+                  "temperature_c": 65.0,
+                  "rate_gbps": 2.0,
+                  "resistance_ohm": 40.0,
+                  "inductance_nh": 0.0,
+                  "capacitance_pf": 0.34,
+                  "rx_capacitance_pf": 0.06,
+                  "clock_offset_ui": 0.0,
+                  "coarse_latency_ui": 1.0
+                },
+                "lane1": {
+                  "vdd": 0.95,
+                  "temperature_c": 65.0,
+                  "rate_gbps": 2.0,
+                  "resistance_ohm": 42.0,
+                  "inductance_nh": 0.0,
+                  "capacitance_pf": 0.34,
+                  "rx_capacitance_pf": 0.06,
+                  "clock_offset_ui": 0.0,
+                  "coarse_latency_ui": 1.0
+                },
+                "coupling_pf": 0.1
+              },
+              "pattern": "random",
+              "seed": 261126013,
+              "bits": 128,
+              "phase_ui": 0.5,
+              "guard_ui": 0.1,
+              "margin_min": 0.08,
+              "overshoot_max": 0.2,
+              "points_per_ui": 128,
+              "master_bits": 128
+            },
+            "area_proxy_um2": 21.667881351339165
+          }
+        ]
+      }
+    },
+    {
+      "seed": 1,
+      "method": "legacy",
+      "design": [
+        1.4047043829912407,
+        4.011251422774516,
+        0.9981871882289783,
+        1.9620685434539995,
+        4.0,
+        5.418600942908743
+      ],
+      "measurement": {
+        "valid": true,
+        "feasible": true,
+        "margins": [
+          0.12537086616763626,
+          0.09318582254619423
+        ],
+        "energy_pj_bit": 0.17563216428345102,
+        "overshoot_fraction": 0.05892186714993586,
+        "cases": [
+          {
+            "valid": true,
+            "feasible": true,
+            "margins": [
+              0.12537086616763626,
+              0.09737035414426343
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.050482674502694946,
+            "energy_lane_pj_bit": [
+              0.16960193016806224,
+              0.2011924524087522
+            ],
+            "energy_pj_bit": 0.1853971912884072,
+            "case": {
+              "name": "bits64_ppui64",
+              "context": {
+                "lane0": {
+                  "vdd": 0.95,
+                  "temperature_c": 65.0,
+                  "rate_gbps": 2.0,
+                  "resistance_ohm": 40.0,
+                  "inductance_nh": 0.0,
+                  "capacitance_pf": 0.34,
+                  "rx_capacitance_pf": 0.06,
+                  "clock_offset_ui": 0.0,
+                  "coarse_latency_ui": 1.0
+                },
+                "lane1": {
+                  "vdd": 0.95,
+                  "temperature_c": 65.0,
+                  "rate_gbps": 2.0,
+                  "resistance_ohm": 42.0,
+                  "inductance_nh": 0.0,
+                  "capacitance_pf": 0.34,
+                  "rx_capacitance_pf": 0.06,
+                  "clock_offset_ui": 0.0,
+                  "coarse_latency_ui": 1.0
+                },
+                "coupling_pf": 0.1
+              },
+              "pattern": "random",
+              "seed": 261126013,
+              "bits": 64,
+              "phase_ui": 0.5,
+              "guard_ui": 0.1,
+              "margin_min": 0.08,
+              "overshoot_max": 0.2,
+              "points_per_ui": 64,
+              "master_bits": 128
+            },
+            "area_proxy_um2": 24.17586968776859
+          },
+          {
+            "valid": true,
+            "feasible": true,
+            "margins": [
+              0.12545279247329366,
+              0.0974401983548101
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.0505686125203102,
+            "energy_lane_pj_bit": [
+              0.16959466731846212,
+              0.2011839879543268
+            ],
+            "energy_pj_bit": 0.18538932763639446,
+            "case": {
+              "name": "bits64_ppui128",
+              "context": {
+                "lane0": {
+                  "vdd": 0.95,
+                  "temperature_c": 65.0,
+                  "rate_gbps": 2.0,
+                  "resistance_ohm": 40.0,
+                  "inductance_nh": 0.0,
+                  "capacitance_pf": 0.34,
+                  "rx_capacitance_pf": 0.06,
+                  "clock_offset_ui": 0.0,
+                  "coarse_latency_ui": 1.0
+                },
+                "lane1": {
+                  "vdd": 0.95,
+                  "temperature_c": 65.0,
+                  "rate_gbps": 2.0,
+                  "resistance_ohm": 42.0,
+                  "inductance_nh": 0.0,
+                  "capacitance_pf": 0.34,
+                  "rx_capacitance_pf": 0.06,
+                  "clock_offset_ui": 0.0,
+                  "coarse_latency_ui": 1.0
+                },
+                "coupling_pf": 0.1
+              },
+              "pattern": "random",
+              "seed": 261126013,
+              "bits": 64,
+              "phase_ui": 0.5,
+              "guard_ui": 0.1,
+              "margin_min": 0.08,
+              "overshoot_max": 0.2,
+              "points_per_ui": 128,
+              "master_bits": 128
+            },
+            "area_proxy_um2": 24.17586968776859
+          },
+          {
+            "valid": true,
+            "feasible": true,
+            "margins": [
+              0.12537086616763626,
+              0.09318582254619423
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.058857299757185455,
+            "energy_lane_pj_bit": [
+              0.1730465286909929,
+              0.15870289726316628
+            ],
+            "energy_pj_bit": 0.1658747129770796,
+            "case": {
+              "name": "bits128_ppui64",
+              "context": {
+                "lane0": {
+                  "vdd": 0.95,
+                  "temperature_c": 65.0,
+                  "rate_gbps": 2.0,
+                  "resistance_ohm": 40.0,
+                  "inductance_nh": 0.0,
+                  "capacitance_pf": 0.34,
+                  "rx_capacitance_pf": 0.06,
+                  "clock_offset_ui": 0.0,
+                  "coarse_latency_ui": 1.0
+                },
+                "lane1": {
+                  "vdd": 0.95,
+                  "temperature_c": 65.0,
+                  "rate_gbps": 2.0,
+                  "resistance_ohm": 42.0,
+                  "inductance_nh": 0.0,
+                  "capacitance_pf": 0.34,
+                  "rx_capacitance_pf": 0.06,
+                  "clock_offset_ui": 0.0,
+                  "coarse_latency_ui": 1.0
+                },
+                "coupling_pf": 0.1
+              },
+              "pattern": "random",
+              "seed": 261126013,
+              "bits": 128,
+              "phase_ui": 0.5,
+              "guard_ui": 0.1,
+              "margin_min": 0.08,
+              "overshoot_max": 0.2,
+              "points_per_ui": 64,
+              "master_bits": 128
+            },
+            "area_proxy_um2": 24.17586968776859
+          },
+          {
+            "valid": true,
+            "feasible": true,
+            "margins": [
+              0.12545279247329366,
+              0.0932958328868253
+            ],
+            "errors": [
+              0,
+              0
+            ],
+            "overshoot_fraction": 0.05892186714993586,
+            "energy_lane_pj_bit": [
+              0.17303887153770908,
+              0.15869597892613663
+            ],
+            "energy_pj_bit": 0.16586742523192285,
+            "case": {
+              "name": "bits128_ppui128",
+              "context": {
+                "lane0": {
+                  "vdd": 0.95,
+                  "temperature_c": 65.0,
+                  "rate_gbps": 2.0,
+                  "resistance_ohm": 40.0,
+                  "inductance_nh": 0.0,
+                  "capacitance_pf": 0.34,
+                  "rx_capacitance_pf": 0.06,
+                  "clock_offset_ui": 0.0,
+                  "coarse_latency_ui": 1.0
+                },
+                "lane1": {
+                  "vdd": 0.95,
+                  "temperature_c": 65.0,
+                  "rate_gbps": 2.0,
+                  "resistance_ohm": 42.0,
+                  "inductance_nh": 0.0,
+                  "capacitance_pf": 0.34,
+                  "rx_capacitance_pf": 0.06,
+                  "clock_offset_ui": 0.0,
+                  "coarse_latency_ui": 1.0
+                },
+                "coupling_pf": 0.1
+              },
+              "pattern": "random",
+              "seed": 261126013,
+              "bits": 128,
+              "phase_ui": 0.5,
+              "guard_ui": 0.1,
+              "margin_min": 0.08,
+              "overshoot_max": 0.2,
+              "points_per_ui": 128,
+              "master_bits": 128
+            },
+            "area_proxy_um2": 24.17586968776859
+          }
+        ]
+      }
+    }
+  ],
+  "interpretation": "Same exact two-lane master packet; 64-bit prefix versus full 128, crossed with solver resolution",
+  "cost": {
+    "design_queries": 4,
+    "logical_measurements": 16,
+    "spice_transient_attempts": 16,
+    "cache_hits": 0,
+    "failed_transients": 0,
+    "completed_transients": 16,
+    "suite_sha256": "ad266adc1231f7ffd9fdfb997560122f30bd9aa240a5ef5ab4b8233ebb855d04",
+    "simulator_version": "******\n** ngspice-39 : Circuit level simulation program\n** The U. C. Berkeley CAD Group\n** Copyright 1985-1994, Regents of the University of California.\n** Copyright 2001-2022, The ngspice team.\n** Please get your ngspice manual from http://ngspice.sourceforge.net/docs.html\n** Please file your bug-reports at http://ngspice.sourceforge.net/bugrep.html\n** Creation Date: Sun Feb  5 13:44:35 UTC 2023\n******"
+  }
+}

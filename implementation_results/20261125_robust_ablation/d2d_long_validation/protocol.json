@@ -1,0 +1,883 @@
+{
+  "parent_summary_sha256": "50aabc46e9e11be890bb74a4ba03d02eac0e695c0c58bdbbfb90d8d3e1e75581",
+  "source_sha256": "f26c57fb07e896f7b83af0284b0260b7390c8b17295c3268753d76443bde365f",
+  "validation": [
+    {
+      "name": "validation_0_0",
+      "context": {
+        "lane0": {
+          "vdd": 1.0,
+          "temperature_c": 27.0,
+          "rate_gbps": 2.0,
+          "resistance_ohm": 30.0,
+          "inductance_nh": 0.0,
+          "capacitance_pf": 0.3,
+          "rx_capacitance_pf": 0.06,
+          "clock_offset_ui": 0.0,
+          "coarse_latency_ui": 1.0
+        },
+        "lane1": {
+          "vdd": 1.0,
+          "temperature_c": 27.0,
+          "rate_gbps": 2.0,
+          "resistance_ohm": 32.0,
+          "inductance_nh": 0.0,
+          "capacitance_pf": 0.3,
+          "rx_capacitance_pf": 0.06,
+          "clock_offset_ui": 0.0,
+          "coarse_latency_ui": 1.0
+        },
+        "coupling_pf": 0.06
+      },
+      "pattern": "random",
+      "seed": 261125310,
+      "bits": 128,
+      "phase_ui": 0.5,
+      "guard_ui": 0.1,
+      "margin_min": 0.08,
+      "overshoot_max": 0.2,
+      "points_per_ui": 64
+    },
+    {
+      "name": "validation_0_1",
+      "context": {
+        "lane0": {
+          "vdd": 1.0,
+          "temperature_c": 27.0,
+          "rate_gbps": 2.0,
+          "resistance_ohm": 30.0,
+          "inductance_nh": 0.0,
+          "capacitance_pf": 0.3,
+          "rx_capacitance_pf": 0.06,
+          "clock_offset_ui": 0.0,
+          "coarse_latency_ui": 1.0
+        },
+        "lane1": {
+          "vdd": 1.0,
+          "temperature_c": 27.0,
+          "rate_gbps": 2.0,
+          "resistance_ohm": 32.0,
+          "inductance_nh": 0.0,
+          "capacitance_pf": 0.3,
+          "rx_capacitance_pf": 0.06,
+          "clock_offset_ui": 0.0,
+          "coarse_latency_ui": 1.0
+        },
+        "coupling_pf": 0.06
+      },
+      "pattern": "random",
+      "seed": 261125311,
+      "bits": 128,
+      "phase_ui": 0.5,
+      "guard_ui": 0.1,
+      "margin_min": 0.08,
+      "overshoot_max": 0.2,
+      "points_per_ui": 64
+    },
+    {
+      "name": "validation_0_2",
+      "context": {
+        "lane0": {
+          "vdd": 1.0,
+          "temperature_c": 27.0,
+          "rate_gbps": 2.0,
+          "resistance_ohm": 30.0,
+          "inductance_nh": 0.0,
+          "capacitance_pf": 0.3,
+          "rx_capacitance_pf": 0.06,
+          "clock_offset_ui": 0.0,
+          "coarse_latency_ui": 1.0
+        },
+        "lane1": {
+          "vdd": 1.0,
+          "temperature_c": 27.0,
+          "rate_gbps": 2.0,
+          "resistance_ohm": 32.0,
+          "inductance_nh": 0.0,
+          "capacitance_pf": 0.3,
+          "rx_capacitance_pf": 0.06,
+          "clock_offset_ui": 0.0,
+          "coarse_latency_ui": 1.0
+        },
+        "coupling_pf": 0.06
+      },
+      "pattern": "same",
+      "seed": 261125312,
+      "bits": 128,
+      "phase_ui": 0.5,
+      "guard_ui": 0.1,
+      "margin_min": 0.08,
+      "overshoot_max": 0.2,
+      "points_per_ui": 64
+    },
+    {
+      "name": "validation_0_3",
+      "context": {
+        "lane0": {
+          "vdd": 1.0,
+          "temperature_c": 27.0,
+          "rate_gbps": 2.0,
+          "resistance_ohm": 30.0,
+          "inductance_nh": 0.0,
+          "capacitance_pf": 0.3,
+          "rx_capacitance_pf": 0.06,
+          "clock_offset_ui": 0.0,
+          "coarse_latency_ui": 1.0
+        },
+        "lane1": {
+          "vdd": 1.0,
+          "temperature_c": 27.0,
+          "rate_gbps": 2.0,
+          "resistance_ohm": 32.0,
+          "inductance_nh": 0.0,
+          "capacitance_pf": 0.3,
+          "rx_capacitance_pf": 0.06,
+          "clock_offset_ui": 0.0,
+          "coarse_latency_ui": 1.0
+        },
+        "coupling_pf": 0.06
+      },
+      "pattern": "runs",
+      "seed": 261125313,
+      "bits": 128,
+      "phase_ui": 0.5,
+      "guard_ui": 0.1,
+      "margin_min": 0.08,
+      "overshoot_max": 0.2,
+      "points_per_ui": 64
+    },
+    {
+      "name": "validation_1_0",
+      "context": {
+        "lane0": {
+          "vdd": 0.95,
+          "temperature_c": 65.0,
+          "rate_gbps": 2.0,
+          "resistance_ohm": 40.0,
+          "inductance_nh": 0.0,
+          "capacitance_pf": 0.34,
+          "rx_capacitance_pf": 0.06,
+          "clock_offset_ui": 0.0,
+          "coarse_latency_ui": 1.0
+        },
+        "lane1": {
+          "vdd": 0.95,
+          "temperature_c": 65.0,
+          "rate_gbps": 2.0,
+          "resistance_ohm": 42.0,
+          "inductance_nh": 0.0,
+          "capacitance_pf": 0.34,
+          "rx_capacitance_pf": 0.06,
+          "clock_offset_ui": 0.0,
+          "coarse_latency_ui": 1.0
+        },
+        "coupling_pf": 0.1
+      },
+      "pattern": "random",
+      "seed": 261125411,
+      "bits": 128,
+      "phase_ui": 0.5,
+      "guard_ui": 0.1,
+      "margin_min": 0.08,
+      "overshoot_max": 0.2,
+      "points_per_ui": 64
+    },
+    {
+      "name": "validation_1_1",
+      "context": {
+        "lane0": {
+          "vdd": 0.95,
+          "temperature_c": 65.0,
+          "rate_gbps": 2.0,
+          "resistance_ohm": 40.0,
+          "inductance_nh": 0.0,
+          "capacitance_pf": 0.34,
+          "rx_capacitance_pf": 0.06,
+          "clock_offset_ui": 0.0,
+          "coarse_latency_ui": 1.0
+        },
+        "lane1": {
+          "vdd": 0.95,
+          "temperature_c": 65.0,
+          "rate_gbps": 2.0,
+          "resistance_ohm": 42.0,
+          "inductance_nh": 0.0,
+          "capacitance_pf": 0.34,
+          "rx_capacitance_pf": 0.06,
+          "clock_offset_ui": 0.0,
+          "coarse_latency_ui": 1.0
+        },
+        "coupling_pf": 0.1
+      },
+      "pattern": "random",
+      "seed": 261125412,
+      "bits": 128,
+      "phase_ui": 0.5,
+      "guard_ui": 0.1,
+      "margin_min": 0.08,
+      "overshoot_max": 0.2,
+      "points_per_ui": 64
+    },
+    {
+      "name": "validation_1_2",
+      "context": {
+        "lane0": {
+          "vdd": 0.95,
+          "temperature_c": 65.0,
+          "rate_gbps": 2.0,
+          "resistance_ohm": 40.0,
+          "inductance_nh": 0.0,
+          "capacitance_pf": 0.34,
+          "rx_capacitance_pf": 0.06,
+          "clock_offset_ui": 0.0,
+          "coarse_latency_ui": 1.0
+        },
+        "lane1": {
+          "vdd": 0.95,
+          "temperature_c": 65.0,
+          "rate_gbps": 2.0,
+          "resistance_ohm": 42.0,
+          "inductance_nh": 0.0,
+          "capacitance_pf": 0.34,
+          "rx_capacitance_pf": 0.06,
+          "clock_offset_ui": 0.0,
+          "coarse_latency_ui": 1.0
+        },
+        "coupling_pf": 0.1
+      },
+      "pattern": "same",
+      "seed": 261125413,
+      "bits": 128,
+      "phase_ui": 0.5,
+      "guard_ui": 0.1,
+      "margin_min": 0.08,
+      "overshoot_max": 0.2,
+      "points_per_ui": 64
+    },
+    {
+      "name": "validation_1_3",
+      "context": {
+        "lane0": {
+          "vdd": 0.95,
+          "temperature_c": 65.0,
+          "rate_gbps": 2.0,
+          "resistance_ohm": 40.0,
+          "inductance_nh": 0.0,
+          "capacitance_pf": 0.34,
+          "rx_capacitance_pf": 0.06,
+          "clock_offset_ui": 0.0,
+          "coarse_latency_ui": 1.0
+        },
+        "lane1": {
+          "vdd": 0.95,
+          "temperature_c": 65.0,
+          "rate_gbps": 2.0,
+          "resistance_ohm": 42.0,
+          "inductance_nh": 0.0,
+          "capacitance_pf": 0.34,
+          "rx_capacitance_pf": 0.06,
+          "clock_offset_ui": 0.0,
+          "coarse_latency_ui": 1.0
+        },
+        "coupling_pf": 0.1
+      },
+      "pattern": "runs",
+      "seed": 261125414,
+      "bits": 128,
+      "phase_ui": 0.5,
+      "guard_ui": 0.1,
+      "margin_min": 0.08,
+      "overshoot_max": 0.2,
+      "points_per_ui": 64
+    }
+  ],
+  "tests": {
+    "same_channels": [
+      {
+        "name": "same_channels_0_0_stage2",
+        "context": {
+          "lane0": {
+            "vdd": 1.0,
+            "temperature_c": 27.0,
+            "rate_gbps": 2.0,
+            "resistance_ohm": 30.0,
+            "inductance_nh": 0.0,
+            "capacitance_pf": 0.3,
+            "rx_capacitance_pf": 0.06,
+            "clock_offset_ui": 0.0,
+            "coarse_latency_ui": 1.0
+          },
+          "lane1": {
+            "vdd": 1.0,
+            "temperature_c": 27.0,
+            "rate_gbps": 2.0,
+            "resistance_ohm": 32.0,
+            "inductance_nh": 0.0,
+            "capacitance_pf": 0.3,
+            "rx_capacitance_pf": 0.06,
+            "clock_offset_ui": 0.0,
+            "coarse_latency_ui": 1.0
+          },
+          "coupling_pf": 0.06
+        },
+        "pattern": "random",
+        "seed": 261225910,
+        "bits": 128,
+        "phase_ui": 0.5,
+        "guard_ui": 0.1,
+        "margin_min": 0.08,
+        "overshoot_max": 0.2,
+        "points_per_ui": 128
+      },
+      {
+        "name": "same_channels_0_1_stage2",
+        "context": {
+          "lane0": {
+            "vdd": 1.0,
+            "temperature_c": 27.0,
+            "rate_gbps": 2.0,
+            "resistance_ohm": 30.0,
+            "inductance_nh": 0.0,
+            "capacitance_pf": 0.3,
+            "rx_capacitance_pf": 0.06,
+            "clock_offset_ui": 0.0,
+            "coarse_latency_ui": 1.0
+          },
+          "lane1": {
+            "vdd": 1.0,
+            "temperature_c": 27.0,
+            "rate_gbps": 2.0,
+            "resistance_ohm": 32.0,
+            "inductance_nh": 0.0,
+            "capacitance_pf": 0.3,
+            "rx_capacitance_pf": 0.06,
+            "clock_offset_ui": 0.0,
+            "coarse_latency_ui": 1.0
+          },
+          "coupling_pf": 0.06
+        },
+        "pattern": "random",
+        "seed": 261225911,
+        "bits": 128,
+        "phase_ui": 0.5,
+        "guard_ui": 0.1,
+        "margin_min": 0.08,
+        "overshoot_max": 0.2,
+        "points_per_ui": 128
+      },
+      {
+        "name": "same_channels_0_2_stage2",
+        "context": {
+          "lane0": {
+            "vdd": 1.0,
+            "temperature_c": 27.0,
+            "rate_gbps": 2.0,
+            "resistance_ohm": 30.0,
+            "inductance_nh": 0.0,
+            "capacitance_pf": 0.3,
+            "rx_capacitance_pf": 0.06,
+            "clock_offset_ui": 0.0,
+            "coarse_latency_ui": 1.0
+          },
+          "lane1": {
+            "vdd": 1.0,
+            "temperature_c": 27.0,
+            "rate_gbps": 2.0,
+            "resistance_ohm": 32.0,
+            "inductance_nh": 0.0,
+            "capacitance_pf": 0.3,
+            "rx_capacitance_pf": 0.06,
+            "clock_offset_ui": 0.0,
+            "coarse_latency_ui": 1.0
+          },
+          "coupling_pf": 0.06
+        },
+        "pattern": "random",
+        "seed": 261225912,
+        "bits": 128,
+        "phase_ui": 0.5,
+        "guard_ui": 0.1,
+        "margin_min": 0.08,
+        "overshoot_max": 0.2,
+        "points_per_ui": 128
+      },
+      {
+        "name": "same_channels_0_3_stage2",
+        "context": {
+          "lane0": {
+            "vdd": 1.0,
+            "temperature_c": 27.0,
+            "rate_gbps": 2.0,
+            "resistance_ohm": 30.0,
+            "inductance_nh": 0.0,
+            "capacitance_pf": 0.3,
+            "rx_capacitance_pf": 0.06,
+            "clock_offset_ui": 0.0,
+            "coarse_latency_ui": 1.0
+          },
+          "lane1": {
+            "vdd": 1.0,
+            "temperature_c": 27.0,
+            "rate_gbps": 2.0,
+            "resistance_ohm": 32.0,
+            "inductance_nh": 0.0,
+            "capacitance_pf": 0.3,
+            "rx_capacitance_pf": 0.06,
+            "clock_offset_ui": 0.0,
+            "coarse_latency_ui": 1.0
+          },
+          "coupling_pf": 0.06
+        },
+        "pattern": "random",
+        "seed": 261225913,
+        "bits": 128,
+        "phase_ui": 0.5,
+        "guard_ui": 0.1,
+        "margin_min": 0.08,
+        "overshoot_max": 0.2,
+        "points_per_ui": 128
+      },
+      {
+        "name": "same_channels_1_0_stage2",
+        "context": {
+          "lane0": {
+            "vdd": 0.95,
+            "temperature_c": 65.0,
+            "rate_gbps": 2.0,
+            "resistance_ohm": 40.0,
+            "inductance_nh": 0.0,
+            "capacitance_pf": 0.34,
+            "rx_capacitance_pf": 0.06,
+            "clock_offset_ui": 0.0,
+            "coarse_latency_ui": 1.0
+          },
+          "lane1": {
+            "vdd": 0.95,
+            "temperature_c": 65.0,
+            "rate_gbps": 2.0,
+            "resistance_ohm": 42.0,
+            "inductance_nh": 0.0,
+            "capacitance_pf": 0.34,
+            "rx_capacitance_pf": 0.06,
+            "clock_offset_ui": 0.0,
+            "coarse_latency_ui": 1.0
+          },
+          "coupling_pf": 0.1
+        },
+        "pattern": "random",
+        "seed": 261226011,
+        "bits": 128,
+        "phase_ui": 0.5,
+        "guard_ui": 0.1,
+        "margin_min": 0.08,
+        "overshoot_max": 0.2,
+        "points_per_ui": 128
+      },
+      {
+        "name": "same_channels_1_1_stage2",
+        "context": {
+          "lane0": {
+            "vdd": 0.95,
+            "temperature_c": 65.0,
+            "rate_gbps": 2.0,
+            "resistance_ohm": 40.0,
+            "inductance_nh": 0.0,
+            "capacitance_pf": 0.34,
+            "rx_capacitance_pf": 0.06,
+            "clock_offset_ui": 0.0,
+            "coarse_latency_ui": 1.0
+          },
+          "lane1": {
+            "vdd": 0.95,
+            "temperature_c": 65.0,
+            "rate_gbps": 2.0,
+            "resistance_ohm": 42.0,
+            "inductance_nh": 0.0,
+            "capacitance_pf": 0.34,
+            "rx_capacitance_pf": 0.06,
+            "clock_offset_ui": 0.0,
+            "coarse_latency_ui": 1.0
+          },
+          "coupling_pf": 0.1
+        },
+        "pattern": "random",
+        "seed": 261226012,
+        "bits": 128,
+        "phase_ui": 0.5,
+        "guard_ui": 0.1,
+        "margin_min": 0.08,
+        "overshoot_max": 0.2,
+        "points_per_ui": 128
+      },
+      {
+        "name": "same_channels_1_2_stage2",
+        "context": {
+          "lane0": {
+            "vdd": 0.95,
+            "temperature_c": 65.0,
+            "rate_gbps": 2.0,
+            "resistance_ohm": 40.0,
+            "inductance_nh": 0.0,
+            "capacitance_pf": 0.34,
+            "rx_capacitance_pf": 0.06,
+            "clock_offset_ui": 0.0,
+            "coarse_latency_ui": 1.0
+          },
+          "lane1": {
+            "vdd": 0.95,
+            "temperature_c": 65.0,
+            "rate_gbps": 2.0,
+            "resistance_ohm": 42.0,
+            "inductance_nh": 0.0,
+            "capacitance_pf": 0.34,
+            "rx_capacitance_pf": 0.06,
+            "clock_offset_ui": 0.0,
+            "coarse_latency_ui": 1.0
+          },
+          "coupling_pf": 0.1
+        },
+        "pattern": "random",
+        "seed": 261226013,
+        "bits": 128,
+        "phase_ui": 0.5,
+        "guard_ui": 0.1,
+        "margin_min": 0.08,
+        "overshoot_max": 0.2,
+        "points_per_ui": 128
+      },
+      {
+        "name": "same_channels_1_3_stage2",
+        "context": {
+          "lane0": {
+            "vdd": 0.95,
+            "temperature_c": 65.0,
+            "rate_gbps": 2.0,
+            "resistance_ohm": 40.0,
+            "inductance_nh": 0.0,
+            "capacitance_pf": 0.34,
+            "rx_capacitance_pf": 0.06,
+            "clock_offset_ui": 0.0,
+            "coarse_latency_ui": 1.0
+          },
+          "lane1": {
+            "vdd": 0.95,
+            "temperature_c": 65.0,
+            "rate_gbps": 2.0,
+            "resistance_ohm": 42.0,
+            "inductance_nh": 0.0,
+            "capacitance_pf": 0.34,
+            "rx_capacitance_pf": 0.06,
+            "clock_offset_ui": 0.0,
+            "coarse_latency_ui": 1.0
+          },
+          "coupling_pf": 0.1
+        },
+        "pattern": "random",
+        "seed": 261226014,
+        "bits": 128,
+        "phase_ui": 0.5,
+        "guard_ui": 0.1,
+        "margin_min": 0.08,
+        "overshoot_max": 0.2,
+        "points_per_ui": 128
+      }
+    ],
+    "new_channels": [
+      {
+        "name": "new_channels_0_0_stage2",
+        "context": {
+          "lane0": {
+            "vdd": 0.97,
+            "temperature_c": 48.0,
+            "rate_gbps": 2.0,
+            "resistance_ohm": 37.0,
+            "inductance_nh": 0.0,
+            "capacitance_pf": 0.325,
+            "rx_capacitance_pf": 0.06,
+            "clock_offset_ui": 0.0,
+            "coarse_latency_ui": 1.0
+          },
+          "lane1": {
+            "vdd": 0.97,
+            "temperature_c": 48.0,
+            "rate_gbps": 2.0,
+            "resistance_ohm": 39.0,
+            "inductance_nh": 0.0,
+            "capacitance_pf": 0.325,
+            "rx_capacitance_pf": 0.06,
+            "clock_offset_ui": 0.0,
+            "coarse_latency_ui": 1.0
+          },
+          "coupling_pf": 0.085
+        },
+        "pattern": "random",
+        "seed": 261226910,
+        "bits": 128,
+        "phase_ui": 0.5,
+        "guard_ui": 0.1,
+        "margin_min": 0.08,
+        "overshoot_max": 0.2,
+        "points_per_ui": 128
+      },
+      {
+        "name": "new_channels_0_1_stage2",
+        "context": {
+          "lane0": {
+            "vdd": 0.97,
+            "temperature_c": 48.0,
+            "rate_gbps": 2.0,
+            "resistance_ohm": 37.0,
+            "inductance_nh": 0.0,
+            "capacitance_pf": 0.325,
+            "rx_capacitance_pf": 0.06,
+            "clock_offset_ui": 0.0,
+            "coarse_latency_ui": 1.0
+          },
+          "lane1": {
+            "vdd": 0.97,
+            "temperature_c": 48.0,
+            "rate_gbps": 2.0,
+            "resistance_ohm": 39.0,
+            "inductance_nh": 0.0,
+            "capacitance_pf": 0.325,
+            "rx_capacitance_pf": 0.06,
+            "clock_offset_ui": 0.0,
+            "coarse_latency_ui": 1.0
+          },
+          "coupling_pf": 0.085
+        },
+        "pattern": "random",
+        "seed": 261226911,
+        "bits": 128,
+        "phase_ui": 0.5,
+        "guard_ui": 0.1,
+        "margin_min": 0.08,
+        "overshoot_max": 0.2,
+        "points_per_ui": 128
+      },
+      {
+        "name": "new_channels_0_2_stage2",
+        "context": {
+          "lane0": {
+            "vdd": 0.97,
+            "temperature_c": 48.0,
+            "rate_gbps": 2.0,
+            "resistance_ohm": 37.0,
+            "inductance_nh": 0.0,
+            "capacitance_pf": 0.325,
+            "rx_capacitance_pf": 0.06,
+            "clock_offset_ui": 0.0,
+            "coarse_latency_ui": 1.0
+          },
+          "lane1": {
+            "vdd": 0.97,
+            "temperature_c": 48.0,
+            "rate_gbps": 2.0,
+            "resistance_ohm": 39.0,
+            "inductance_nh": 0.0,
+            "capacitance_pf": 0.325,
+            "rx_capacitance_pf": 0.06,
+            "clock_offset_ui": 0.0,
+            "coarse_latency_ui": 1.0
+          },
+          "coupling_pf": 0.085
+        },
+        "pattern": "random",
+        "seed": 261226912,
+        "bits": 128,
+        "phase_ui": 0.5,
+        "guard_ui": 0.1,
+        "margin_min": 0.08,
+        "overshoot_max": 0.2,
+        "points_per_ui": 128
+      },
+      {
+        "name": "new_channels_0_3_stage2",
+        "context": {
+          "lane0": {
+            "vdd": 0.97,
+            "temperature_c": 48.0,
+            "rate_gbps": 2.0,
+            "resistance_ohm": 37.0,
+            "inductance_nh": 0.0,
+            "capacitance_pf": 0.325,
+            "rx_capacitance_pf": 0.06,
+            "clock_offset_ui": 0.0,
+            "coarse_latency_ui": 1.0
+          },
+          "lane1": {
+            "vdd": 0.97,
+            "temperature_c": 48.0,
+            "rate_gbps": 2.0,
+            "resistance_ohm": 39.0,
+            "inductance_nh": 0.0,
+            "capacitance_pf": 0.325,
+            "rx_capacitance_pf": 0.06,
+            "clock_offset_ui": 0.0,
+            "coarse_latency_ui": 1.0
+          },
+          "coupling_pf": 0.085
+        },
+        "pattern": "random",
+        "seed": 261226913,
+        "bits": 128,
+        "phase_ui": 0.5,
+        "guard_ui": 0.1,
+        "margin_min": 0.08,
+        "overshoot_max": 0.2,
+        "points_per_ui": 128
+      },
+      {
+        "name": "new_channels_1_0_stage2",
+        "context": {
+          "lane0": {
+            "vdd": 1.01,
+            "temperature_c": 35.0,
+            "rate_gbps": 2.0,
+            "resistance_ohm": 33.0,
+            "inductance_nh": 0.0,
+            "capacitance_pf": 0.315,
+            "rx_capacitance_pf": 0.06,
+            "clock_offset_ui": 0.0,
+            "coarse_latency_ui": 1.0
+          },
+          "lane1": {
+            "vdd": 1.01,
+            "temperature_c": 35.0,
+            "rate_gbps": 2.0,
+            "resistance_ohm": 35.0,
+            "inductance_nh": 0.0,
+            "capacitance_pf": 0.315,
+            "rx_capacitance_pf": 0.06,
+            "clock_offset_ui": 0.0,
+            "coarse_latency_ui": 1.0
+          },
+          "coupling_pf": 0.075
+        },
+        "pattern": "random",
+        "seed": 261227011,
+        "bits": 128,
+        "phase_ui": 0.5,
+        "guard_ui": 0.1,
+        "margin_min": 0.08,
+        "overshoot_max": 0.2,
+        "points_per_ui": 128
+      },
+      {
+        "name": "new_channels_1_1_stage2",
+        "context": {
+          "lane0": {
+            "vdd": 1.01,
+            "temperature_c": 35.0,
+            "rate_gbps": 2.0,
+            "resistance_ohm": 33.0,
+            "inductance_nh": 0.0,
+            "capacitance_pf": 0.315,
+            "rx_capacitance_pf": 0.06,
+            "clock_offset_ui": 0.0,
+            "coarse_latency_ui": 1.0
+          },
+          "lane1": {
+            "vdd": 1.01,
+            "temperature_c": 35.0,
+            "rate_gbps": 2.0,
+            "resistance_ohm": 35.0,
+            "inductance_nh": 0.0,
+            "capacitance_pf": 0.315,
+            "rx_capacitance_pf": 0.06,
+            "clock_offset_ui": 0.0,
+            "coarse_latency_ui": 1.0
+          },
+          "coupling_pf": 0.075
+        },
+        "pattern": "random",
+        "seed": 261227012,
+        "bits": 128,
+        "phase_ui": 0.5,
+        "guard_ui": 0.1,
+        "margin_min": 0.08,
+        "overshoot_max": 0.2,
+        "points_per_ui": 128
+      },
+      {
+        "name": "new_channels_1_2_stage2",
+        "context": {
+          "lane0": {
+            "vdd": 1.01,
+            "temperature_c": 35.0,
+            "rate_gbps": 2.0,
+            "resistance_ohm": 33.0,
+            "inductance_nh": 0.0,
+            "capacitance_pf": 0.315,
+            "rx_capacitance_pf": 0.06,
+            "clock_offset_ui": 0.0,
+            "coarse_latency_ui": 1.0
+          },
+          "lane1": {
+            "vdd": 1.01,
+            "temperature_c": 35.0,
+            "rate_gbps": 2.0,
+            "resistance_ohm": 35.0,
+            "inductance_nh": 0.0,
+            "capacitance_pf": 0.315,
+            "rx_capacitance_pf": 0.06,
+            "clock_offset_ui": 0.0,
+            "coarse_latency_ui": 1.0
+          },
+          "coupling_pf": 0.075
+        },
+        "pattern": "random",
+        "seed": 261227013,
+        "bits": 128,
+        "phase_ui": 0.5,
+        "guard_ui": 0.1,
+        "margin_min": 0.08,
+        "overshoot_max": 0.2,
+        "points_per_ui": 128
+      },
+      {
+        "name": "new_channels_1_3_stage2",
+        "context": {
+          "lane0": {
+            "vdd": 1.01,
+            "temperature_c": 35.0,
+            "rate_gbps": 2.0,
+            "resistance_ohm": 33.0,
+            "inductance_nh": 0.0,
+            "capacitance_pf": 0.315,
+            "rx_capacitance_pf": 0.06,
+            "clock_offset_ui": 0.0,
+            "coarse_latency_ui": 1.0
+          },
+          "lane1": {
+            "vdd": 1.01,
+            "temperature_c": 35.0,
+            "rate_gbps": 2.0,
+            "resistance_ohm": 35.0,
+            "inductance_nh": 0.0,
+            "capacitance_pf": 0.315,
+            "rx_capacitance_pf": 0.06,
+            "clock_offset_ui": 0.0,
+            "coarse_latency_ui": 1.0
+          },
+          "coupling_pf": 0.075
+        },
+        "pattern": "random",
+        "seed": 261227014,
+        "bits": 128,
+        "phase_ui": 0.5,
+        "guard_ui": 0.1,
+        "margin_min": 0.08,
+        "overshoot_max": 0.2,
+        "points_per_ui": 128
+      }
+    ]
+  },
+  "reason": "Stage-one test is now diagnostic/development evidence. All stage-two test seeds are fresh.",
+  "comparison": "Same 96 logical case calls; long validation has twice the simulated bits, so not equal wall time.",
+  "methods": [
+    "legacy",
+    "legacy_validated_64",
+    "legacy_validated_128"
+  ]
+}

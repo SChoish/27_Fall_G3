@@ -1,0 +1,38 @@
+{
+  "original": {
+    "protocol.json": "a390004817da8364adb945c58ba217c613ba7a15e1df31b021980b3baca0a924",
+    "summary.json": "525346f84dba9eaa6e32a15789c005cea831ad656a3269487d593ead8be3a4e6",
+    "selections_locked.json": "92f47d02de815e1b89b22b0630f95fadb0904fe215501714b9efec3964a4cd9f"
+  },
+  "compact": {
+    "protocol.json": "a390004817da8364adb945c58ba217c613ba7a15e1df31b021980b3baca0a924",
+    "seed_0/initial.json": "d65b1670ce2abd116d751fc12813a69a5f64647a2e1ee12ad7424b61e0a92702",
+    "seed_0/legacy.json": "3798c7c936c50bcd1fd88c49575c70722e19708dcb7f0e36913060c9749f6f8c",
+    "seed_0/legacy_shortlist_locked.json": "a2524c704c6e7ef91001957aaf3c024ead1f3b823d448b183babc8bda55f94d1",
+    "seed_0/legacy_validation.json": "626160c128fbbe8c14d398142cd2e0a176f662f2d4caea1a023d9ce371339410",
+    "seed_0/max_constraint.json": "317d3f60a4b7facc2b00ec15d173a98f0e08ece6fee42dbe70a936d347e9f669",
+    "seed_0/max_constraint_shortlist_locked.json": "a846fc12ee138e4ad3d7606dbd8973da664a4ca541d226c39fd7b7bbfcd4e123",
+    "seed_0/max_constraint_validation.json": "1877561d73f37e7439a8e6814b35159777e8b34324aab52980e8867618c1c235",
+    "seed_0/returns.json": "a11fade44b5c268f649fb20f86cbbd6dd44db77964536bbcbb2f3b71f2c64205",
+    "seed_1/initial.json": "cc4b4fcd7d22d271899328afe3d7c38d3e1ee6b7719ca35bd2c231fd37e91c9d",
+    "seed_1/legacy.json": "34b5ba7cca48e8f4309dbace9fe39c940f72317b7fe5715f0c3da92eb6f2201e",
+    "seed_1/legacy_shortlist_locked.json": "4a9b1c9469b3b58e6658f84b21355610ccbfad382786cd34e91b83839e920286",
+    "seed_1/legacy_validation.json": "811aa1c8c972642a4349e998e85c635d7ec417681e99dd759d70117392c32ac0",
+    "seed_1/max_constraint.json": "c8bb0f72a5c064d221523d65b33f40c07515b53dd4f7a2a3b9d1866375748e30",
+    "seed_1/max_constraint_shortlist_locked.json": "bc764c635de91e142bdc1993f98992bf3db874478bcd1c41301cfbd67f4314f5",
+    "seed_1/max_constraint_validation.json": "c0581d7ac58d63abd847adc7e85f3eae6b743b7d3870ff776644cfafecdbe3f9",
+    "seed_1/returns.json": "43b4acd2daf4360ae1afc8b8c6c0294d90ac8d9cd645b9025871c0894677b4e3",
+    "seed_2/initial.json": "bcf07c99f3cc61ae9404c14bad3746131198fcc320f5bb39be0bb713174b3215",
+    "seed_2/legacy.json": "30bffebab29ea10a9197a62fa7c0f296da672632f461baa7c08a27997cf7cc41",
+    "seed_2/legacy_shortlist_locked.json": "ffa82f159d3a7a1a60cff6b5a1982d3cfc34b4c336cac53d005ce06029e8aafc",
+    "seed_2/legacy_validation.json": "5ef9865c328240cc9f03cc073c535f0247b3e1c8ada4ebbf090725a8a75a7fd9",
+    "seed_2/max_constraint.json": "3992c3d07643b1eb2932945e82202dd33c5bcad7adc9aa109d15265d6d22ea2e",
+    "seed_2/max_constraint_shortlist_locked.json": "72b7da890b3ef26d5b4ba929f07a9881faef31a4501c95102ab0a7da8e4aab41",
+    "seed_2/max_constraint_validation.json": "764d4ebaefd49bc5836aba8527acb39937eac66dec45093bacba2d0ad28b585e",
+    "seed_2/returns.json": "209ec7b0b2026bd8be0caa363d53656b09e64625eabb530d9f6d08fe0fd39016",
+    "selections_locked.json": "d60606f0dc2b226cdf78750532688360edbd070fb0269fb2ca9d2ed955e7b8d3",
+    "summary.json": "cba2ea4f136981b41d4034208623f7dca50175f205a5aace816155fc580be7d8"
+  },
+  "checks": "Completed source snapshots, selection locks, prefix-only shortlists, budget and return rules verified",
+  "omitted": "Per-cycle ADC rows and raw transient waveforms; aggregate and per-context measurements retained"
+}

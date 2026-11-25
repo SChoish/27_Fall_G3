@@ -1,0 +1,23 @@
+{
+  "original_hashes": {
+    "protocol.json": "abe47fee1a4e049c9f52a00a0ee030dbb83283209169e17379652ebd54e9fe69",
+    "summary.json": "e4484368538c4f870ba6f428aca64bc338bf76e39d4c47cf07e48e1a79669daa",
+    "selections_locked.json": "af729167bd8603618aa7b065d5d2a07733bd9c3ccffc7eaf9927e48da2cda0f8"
+  },
+  "compact_hashes": {
+    "protocol.json": "abe47fee1a4e049c9f52a00a0ee030dbb83283209169e17379652ebd54e9fe69",
+    "analysis.json": "0b9fffc60cf2dff22e21af8b5da82cac26b8afe3a95362f6daa46b3c6e43a8dc",
+    "summary.json": "e4484368538c4f870ba6f428aca64bc338bf76e39d4c47cf07e48e1a79669daa",
+    "selections_locked.json": "af729167bd8603618aa7b065d5d2a07733bd9c3ccffc7eaf9927e48da2cda0f8",
+    "seed_1/shortlist_locked.json": "3b061644458f9b328d5e888a3c223d849052fa7757a5419de92fc2b49cbc8f34",
+    "seed_1/validation.json": "4d763521a5c814479011fa3fcf5f8c6015e64146bd6bf91e64d932bba24b4366",
+    "seed_1/returns.json": "0c7f255583aa3016b6dc8a41d0d067dcf543ead20555d98442449a8e6c543593",
+    "seed_0/shortlist_locked.json": "52c29e550fcf8b5307472e5bd3b05a89d117862ccfdb4af43fa5fd091cb32d6f",
+    "seed_0/validation.json": "786d92258ab7df7acffa15e59f82d6944be9cd2163f7ba0c47a643cd61430cda",
+    "seed_0/returns.json": "cb5b0ecd96c87072eb79afc4733056005a59b08d3cb89840e3f0965d16609a26",
+    "seed_2/shortlist_locked.json": "cb99475574595024c29cba6cfa1077ce23e3af61dc8e8dcfd4341406517a2ed7",
+    "seed_2/validation.json": "2d839bae109d0acdc76a83b07917a663b6022bb924c3b2df776a6efed55ae55f",
+    "seed_2/returns.json": "cc340ff26ff8d2aa00c6763d8d5259f05f71fdcc93e84bd86ee3436369cf0124"
+  },
+  "checks": "Protocol/source/selection hashes, all return rules and 96-call budgets verified; fresh stage-two seeds"
+}

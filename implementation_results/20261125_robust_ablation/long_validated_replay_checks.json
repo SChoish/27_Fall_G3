@@ -1,0 +1,29 @@
+[
+  {
+    "seed": 0,
+    "counts": [
+      18,
+      3
+    ],
+    "calls": 96,
+    "selection_matches": true
+  },
+  {
+    "seed": 1,
+    "counts": [
+      18,
+      3
+    ],
+    "calls": 96,
+    "selection_matches": true
+  },
+  {
+    "seed": 2,
+    "counts": [
+      18,
+      3
+    ],
+    "calls": 96,
+    "selection_matches": true
+  }
+]

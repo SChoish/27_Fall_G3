@@ -1,0 +1,1859 @@
+{
+  "kind": "d2d",
+  "aggregate": {
+    "legacy": {
+      "seeds": 3,
+      "returns": 3,
+      "passed_all": 1,
+      "mean_energy_all_valid_returns": 0.16845520276529088,
+      "passed_cases": 43,
+      "tested_cases": 48,
+      "logical_case_calls": [
+        96,
+        96,
+        96
+      ]
+    },
+    "legacy_validated": {
+      "seeds": 3,
+      "returns": 3,
+      "passed_all": 2,
+      "mean_energy_all_valid_returns": 0.17797796202616037,
+      "passed_cases": 45,
+      "tested_cases": 48,
+      "logical_case_calls": [
+        96,
+        96,
+        96
+      ]
+    },
+    "max_constraint": {
+      "seeds": 3,
+      "returns": 3,
+      "passed_all": 2,
+      "mean_energy_all_valid_returns": 0.17079547362869604,
+      "passed_cases": 44,
+      "tested_cases": 48,
+      "logical_case_calls": [
+        96,
+        96,
+        96
+      ]
+    },
+    "max_constraint_validated": {
+      "seeds": 3,
+      "returns": 3,
+      "passed_all": 2,
+      "mean_energy_all_valid_returns": 0.18555444662645962,
+      "passed_cases": 45,
+      "tested_cases": 48,
+      "logical_case_calls": [
+        96,
+        96,
+        96
+      ]
+    }
+  },
+  "seed_results": [
+    {
+      "seed": 0,
+      "method": "legacy",
+      "returned": true,
+      "pass_all": false,
+      "test": {
+        "same_channels": {
+          "pass_all": false,
+          "passed": 4,
+          "total": 8,
+          "energy": 0.16939359415907457
+        },
+        "new_channels": {
+          "pass_all": true,
+          "passed": 8,
+          "total": 8,
+          "energy": 0.17263612667722247
+        }
+      },
+      "logical_case_calls": 96
+    },
+    {
+      "seed": 0,
+      "method": "legacy_validated",
+      "returned": true,
+      "pass_all": false,
+      "test": {
+        "same_channels": {
+          "pass_all": false,
+          "passed": 5,
+          "total": 8,
+          "energy": 0.18474088689300794
+        },
+        "new_channels": {
+          "pass_all": true,
+          "passed": 8,
+          "total": 8,
+          "energy": 0.18816296515446354
+        }
+      },
+      "logical_case_calls": 96
+    },
+    {
+      "seed": 0,
+      "method": "max_constraint",
+      "returned": true,
+      "pass_all": false,
+      "test": {
+        "same_channels": {
+          "pass_all": false,
+          "passed": 4,
+          "total": 8,
+          "energy": 0.16939359415907457
+        },
+        "new_channels": {
+          "pass_all": true,
+          "passed": 8,
+          "total": 8,
+          "energy": 0.17263612667722247
+        }
+      },
+      "logical_case_calls": 96
+    },
+    {
+      "seed": 0,
+      "method": "max_constraint_validated",
+      "returned": true,
+      "pass_all": false,
+      "test": {
+        "same_channels": {
+          "pass_all": false,
+          "passed": 5,
+          "total": 8,
+          "energy": 0.18474088689300794
+        },
+        "new_channels": {
+          "pass_all": true,
+          "passed": 8,
+          "total": 8,
+          "energy": 0.18816296515446354
+        }
+      },
+      "logical_case_calls": 96
+    },
+    {
+      "seed": 1,
+      "method": "legacy",
+      "returned": true,
+      "pass_all": true,
+      "test": {
+        "same_channels": {
+          "pass_all": true,
+          "passed": 8,
+          "total": 8,
+          "energy": 0.17564388153591215
+        },
+        "new_channels": {
+          "pass_all": true,
+          "passed": 8,
+          "total": 8,
+          "energy": 0.17942762694729042
+        }
+      },
+      "logical_case_calls": 96
+    },
+    {
+      "seed": 1,
+      "method": "legacy_validated",
+      "returned": true,
+      "pass_all": true,
+      "test": {
+        "same_channels": {
+          "pass_all": true,
+          "passed": 8,
+          "total": 8,
+          "energy": 0.17564388153591215
+        },
+        "new_channels": {
+          "pass_all": true,
+          "passed": 8,
+          "total": 8,
+          "energy": 0.17942762694729042
+        }
+      },
+      "logical_case_calls": 96
+    },
+    {
+      "seed": 1,
+      "method": "max_constraint",
+      "returned": true,
+      "pass_all": true,
+      "test": {
+        "same_channels": {
+          "pass_all": true,
+          "passed": 8,
+          "total": 8,
+          "energy": 0.17114526712813777
+        },
+        "new_channels": {
+          "pass_all": true,
+          "passed": 8,
+          "total": 8,
+          "energy": 0.17470426158468982
+        }
+      },
+      "logical_case_calls": 96
+    },
+    {
+      "seed": 1,
+      "method": "max_constraint_validated",
+      "returned": true,
+      "pass_all": true,
+      "test": {
+        "same_channels": {
+          "pass_all": true,
+          "passed": 8,
+          "total": 8,
+          "energy": 0.17580545951208898
+        },
+        "new_channels": {
+          "pass_all": true,
+          "passed": 8,
+          "total": 8,
+          "energy": 0.17957407213339255
+        }
+      },
+      "logical_case_calls": 96
+    },
+    {
+      "seed": 2,
+      "method": "legacy",
+      "returned": true,
+      "pass_all": false,
+      "test": {
+        "same_channels": {
+          "pass_all": false,
+          "passed": 7,
+          "total": 8,
+          "energy": 0.15534871169294148
+        },
+        "new_channels": {
+          "pass_all": true,
+          "passed": 8,
+          "total": 8,
+          "energy": 0.15828127557930427
+        }
+      },
+      "logical_case_calls": 96
+    },
+    {
+      "seed": 2,
+      "method": "legacy_validated",
+      "returned": true,
+      "pass_all": true,
+      "test": {
+        "same_channels": {
+          "pass_all": true,
+          "passed": 8,
+          "total": 8,
+          "energy": 0.16826258704609126
+        },
+        "new_channels": {
+          "pass_all": true,
+          "passed": 8,
+          "total": 8,
+          "energy": 0.17162982458019704
+        }
+      },
+      "logical_case_calls": 96
+    },
+    {
+      "seed": 2,
+      "method": "max_constraint",
+      "returned": true,
+      "pass_all": true,
+      "test": {
+        "same_channels": {
+          "pass_all": true,
+          "passed": 8,
+          "total": 8,
+          "energy": 0.1667490516353018
+        },
+        "new_channels": {
+          "pass_all": true,
+          "passed": 8,
+          "total": 8,
+          "energy": 0.17014454058774986
+        }
+      },
+      "logical_case_calls": 96
+    },
+    {
+      "seed": 2,
+      "method": "max_constraint_validated",
+      "returned": true,
+      "pass_all": true,
+      "test": {
+        "same_channels": {
+          "pass_all": true,
+          "passed": 8,
+          "total": 8,
+          "energy": 0.19048760412682358
+        },
+        "new_channels": {
+          "pass_all": true,
+          "passed": 8,
+          "total": 8,
+          "energy": 0.19455569193898115
+        }
+      },
+      "logical_case_calls": 96
+    }
+  ],
+  "test_failures": [
+    {
+      "seed": 0,
+      "method": "legacy",
+      "split": "same_channels",
+      "case": 4,
+      "measurement": {
+        "valid": true,
+        "feasible": false,
+        "margins": [
+          0.08965089398361864,
+          0.07090977679253285
+        ],
+        "errors": [
+          0,
+          0
+        ],
+        "overshoot_fraction": 0.06581613199131187,
+        "energy_lane_pj_bit": [
+          0.14973643485098478,
+          0.15230787763955744
+        ],
+        "energy_pj_bit": 0.1510221562452711,
+        "case": {
+          "name": "same_channels_1_0",
+          "context": {
+            "lane0": {
+              "vdd": 0.95,
+              "temperature_c": 65.0,
+              "rate_gbps": 2.0,
+              "resistance_ohm": 40.0,
+              "inductance_nh": 0.0,
+              "capacitance_pf": 0.34,
+              "rx_capacitance_pf": 0.06,
+              "clock_offset_ui": 0.0,
+              "coarse_latency_ui": 1.0
+            },
+            "lane1": {
+              "vdd": 0.95,
+              "temperature_c": 65.0,
+              "rate_gbps": 2.0,
+              "resistance_ohm": 42.0,
+              "inductance_nh": 0.0,
+              "capacitance_pf": 0.34,
+              "rx_capacitance_pf": 0.06,
+              "clock_offset_ui": 0.0,
+              "coarse_latency_ui": 1.0
+            },
+            "coupling_pf": 0.1
+          },
+          "pattern": "random",
+          "seed": 261126011,
+          "bits": 128,
+          "phase_ui": 0.5,
+          "guard_ui": 0.1,
+          "margin_min": 0.08,
+          "overshoot_max": 0.2,
+          "points_per_ui": 128
+        },
+        "area_proxy_um2": 15.681940212285475
+      }
+    },
+    {
+      "seed": 0,
+      "method": "legacy",
+      "split": "same_channels",
+      "case": 5,
+      "measurement": {
+        "valid": true,
+        "feasible": false,
+        "margins": [
+          0.08619577849261428,
+          0.06937735579121074
+        ],
+        "errors": [
+          0,
+          0
+        ],
+        "overshoot_fraction": 0.06681856173243683,
+        "energy_lane_pj_bit": [
+          0.16782017965045654,
+          0.17296974446864272
+        ],
+        "energy_pj_bit": 0.17039496205954963,
+        "case": {
+          "name": "same_channels_1_1",
+          "context": {
+            "lane0": {
+              "vdd": 0.95,
+              "temperature_c": 65.0,
+              "rate_gbps": 2.0,
+              "resistance_ohm": 40.0,
+              "inductance_nh": 0.0,
+              "capacitance_pf": 0.34,
+              "rx_capacitance_pf": 0.06,
+              "clock_offset_ui": 0.0,
+              "coarse_latency_ui": 1.0
+            },
+            "lane1": {
+              "vdd": 0.95,
+              "temperature_c": 65.0,
+              "rate_gbps": 2.0,
+              "resistance_ohm": 42.0,
+              "inductance_nh": 0.0,
+              "capacitance_pf": 0.34,
+              "rx_capacitance_pf": 0.06,
+              "clock_offset_ui": 0.0,
+              "coarse_latency_ui": 1.0
+            },
+            "coupling_pf": 0.1
+          },
+          "pattern": "random",
+          "seed": 261126012,
+          "bits": 128,
+          "phase_ui": 0.5,
+          "guard_ui": 0.1,
+          "margin_min": 0.08,
+          "overshoot_max": 0.2,
+          "points_per_ui": 128
+        },
+        "area_proxy_um2": 15.681940212285475
+      }
+    },
+    {
+      "seed": 0,
+      "method": "legacy",
+      "split": "same_channels",
+      "case": 6,
+      "measurement": {
+        "valid": true,
+        "feasible": false,
+        "margins": [
+          0.0834819601686837,
+          0.06912228379868324
+        ],
+        "errors": [
+          0,
+          0
+        ],
+        "overshoot_fraction": 0.061704794052537926,
+        "energy_lane_pj_bit": [
+          0.1667905861539836,
+          0.1543122092672795
+        ],
+        "energy_pj_bit": 0.16055139771063154,
+        "case": {
+          "name": "same_channels_1_2",
+          "context": {
+            "lane0": {
+              "vdd": 0.95,
+              "temperature_c": 65.0,
+              "rate_gbps": 2.0,
+              "resistance_ohm": 40.0,
+              "inductance_nh": 0.0,
+              "capacitance_pf": 0.34,
+              "rx_capacitance_pf": 0.06,
+              "clock_offset_ui": 0.0,
+              "coarse_latency_ui": 1.0
+            },
+            "lane1": {
+              "vdd": 0.95,
+              "temperature_c": 65.0,
+              "rate_gbps": 2.0,
+              "resistance_ohm": 42.0,
+              "inductance_nh": 0.0,
+              "capacitance_pf": 0.34,
+              "rx_capacitance_pf": 0.06,
+              "clock_offset_ui": 0.0,
+              "coarse_latency_ui": 1.0
+            },
+            "coupling_pf": 0.1
+          },
+          "pattern": "random",
+          "seed": 261126013,
+          "bits": 128,
+          "phase_ui": 0.5,
+          "guard_ui": 0.1,
+          "margin_min": 0.08,
+          "overshoot_max": 0.2,
+          "points_per_ui": 128
+        },
+        "area_proxy_um2": 15.681940212285475
+      }
+    },
+    {
+      "seed": 0,
+      "method": "legacy",
+      "split": "same_channels",
+      "case": 7,
+      "measurement": {
+        "valid": true,
+        "feasible": false,
+        "margins": [
+          0.08840914345631756,
+          0.07674435041873362
+        ],
+        "errors": [
+          0,
+          0
+        ],
+        "overshoot_fraction": 0.07027833942624961,
+        "energy_lane_pj_bit": [
+          0.17973434278056696,
+          0.15884115617141958
+        ],
+        "energy_pj_bit": 0.1692877494759933,
+        "case": {
+          "name": "same_channels_1_3",
+          "context": {
+            "lane0": {
+              "vdd": 0.95,
+              "temperature_c": 65.0,
+              "rate_gbps": 2.0,
+              "resistance_ohm": 40.0,
+              "inductance_nh": 0.0,
+              "capacitance_pf": 0.34,
+              "rx_capacitance_pf": 0.06,
+              "clock_offset_ui": 0.0,
+              "coarse_latency_ui": 1.0
+            },
+            "lane1": {
+              "vdd": 0.95,
+              "temperature_c": 65.0,
+              "rate_gbps": 2.0,
+              "resistance_ohm": 42.0,
+              "inductance_nh": 0.0,
+              "capacitance_pf": 0.34,
+              "rx_capacitance_pf": 0.06,
+              "clock_offset_ui": 0.0,
+              "coarse_latency_ui": 1.0
+            },
+            "coupling_pf": 0.1
+          },
+          "pattern": "random",
+          "seed": 261126014,
+          "bits": 128,
+          "phase_ui": 0.5,
+          "guard_ui": 0.1,
+          "margin_min": 0.08,
+          "overshoot_max": 0.2,
+          "points_per_ui": 128
+        },
+        "area_proxy_um2": 15.681940212285475
+      }
+    },
+    {
+      "seed": 0,
+      "method": "legacy_validated",
+      "split": "same_channels",
+      "case": 4,
+      "measurement": {
+        "valid": true,
+        "feasible": false,
+        "margins": [
+          0.07367916321586376,
+          0.11381202682782943
+        ],
+        "errors": [
+          0,
+          0
+        ],
+        "overshoot_fraction": 0.058602265281506215,
+        "energy_lane_pj_bit": [
+          0.16150837581816818,
+          0.16935776935913613
+        ],
+        "energy_pj_bit": 0.16543307258865214,
+        "case": {
+          "name": "same_channels_1_0",
+          "context": {
+            "lane0": {
+              "vdd": 0.95,
+              "temperature_c": 65.0,
+              "rate_gbps": 2.0,
+              "resistance_ohm": 40.0,
+              "inductance_nh": 0.0,
+              "capacitance_pf": 0.34,
+              "rx_capacitance_pf": 0.06,
+              "clock_offset_ui": 0.0,
+              "coarse_latency_ui": 1.0
+            },
+            "lane1": {
+              "vdd": 0.95,
+              "temperature_c": 65.0,
+              "rate_gbps": 2.0,
+              "resistance_ohm": 42.0,
+              "inductance_nh": 0.0,
+              "capacitance_pf": 0.34,
+              "rx_capacitance_pf": 0.06,
+              "clock_offset_ui": 0.0,
+              "coarse_latency_ui": 1.0
+            },
+            "coupling_pf": 0.1
+          },
+          "pattern": "random",
+          "seed": 261126011,
+          "bits": 128,
+          "phase_ui": 0.5,
+          "guard_ui": 0.1,
+          "margin_min": 0.08,
+          "overshoot_max": 0.2,
+          "points_per_ui": 128
+        },
+        "area_proxy_um2": 24.92106873878916
+      }
+    },
+    {
+      "seed": 0,
+      "method": "legacy_validated",
+      "split": "same_channels",
+      "case": 5,
+      "measurement": {
+        "valid": true,
+        "feasible": false,
+        "margins": [
+          0.07311294465962637,
+          0.08506188244016716
+        ],
+        "errors": [
+          0,
+          0
+        ],
+        "overshoot_fraction": 0.058458726292764274,
+        "energy_lane_pj_bit": [
+          0.18612074240556112,
+          0.18794620447028876
+        ],
+        "energy_pj_bit": 0.18703347343792492,
+        "case": {
+          "name": "same_channels_1_1",
+          "context": {
+            "lane0": {
+              "vdd": 0.95,
+              "temperature_c": 65.0,
+              "rate_gbps": 2.0,
+              "resistance_ohm": 40.0,
+              "inductance_nh": 0.0,
+              "capacitance_pf": 0.34,
+              "rx_capacitance_pf": 0.06,
+              "clock_offset_ui": 0.0,
+              "coarse_latency_ui": 1.0
+            },
+            "lane1": {
+              "vdd": 0.95,
+              "temperature_c": 65.0,
+              "rate_gbps": 2.0,
+              "resistance_ohm": 42.0,
+              "inductance_nh": 0.0,
+              "capacitance_pf": 0.34,
+              "rx_capacitance_pf": 0.06,
+              "clock_offset_ui": 0.0,
+              "coarse_latency_ui": 1.0
+            },
+            "coupling_pf": 0.1
+          },
+          "pattern": "random",
+          "seed": 261126012,
+          "bits": 128,
+          "phase_ui": 0.5,
+          "guard_ui": 0.1,
+          "margin_min": 0.08,
+          "overshoot_max": 0.2,
+          "points_per_ui": 128
+        },
+        "area_proxy_um2": 24.92106873878916
+      }
+    },
+    {
+      "seed": 0,
+      "method": "legacy_validated",
+      "split": "same_channels",
+      "case": 6,
+      "measurement": {
+        "valid": true,
+        "feasible": false,
+        "margins": [
+          0.07163074095855565,
+          0.07793925490248249
+        ],
+        "errors": [
+          0,
+          0
+        ],
+        "overshoot_fraction": 0.05398142782424331,
+        "energy_lane_pj_bit": [
+          0.1830496200128945,
+          0.16695898846919519
+        ],
+        "energy_pj_bit": 0.17500430424104485,
+        "case": {
+          "name": "same_channels_1_2",
+          "context": {
+            "lane0": {
+              "vdd": 0.95,
+              "temperature_c": 65.0,
+              "rate_gbps": 2.0,
+              "resistance_ohm": 40.0,
+              "inductance_nh": 0.0,
+              "capacitance_pf": 0.34,
+              "rx_capacitance_pf": 0.06,
+              "clock_offset_ui": 0.0,
+              "coarse_latency_ui": 1.0
+            },
+            "lane1": {
+              "vdd": 0.95,
+              "temperature_c": 65.0,
+              "rate_gbps": 2.0,
+              "resistance_ohm": 42.0,
+              "inductance_nh": 0.0,
+              "capacitance_pf": 0.34,
+              "rx_capacitance_pf": 0.06,
+              "clock_offset_ui": 0.0,
+              "coarse_latency_ui": 1.0
+            },
+            "coupling_pf": 0.1
+          },
+          "pattern": "random",
+          "seed": 261126013,
+          "bits": 128,
+          "phase_ui": 0.5,
+          "guard_ui": 0.1,
+          "margin_min": 0.08,
+          "overshoot_max": 0.2,
+          "points_per_ui": 128
+        },
+        "area_proxy_um2": 24.92106873878916
+      }
+    },
+    {
+      "seed": 0,
+      "method": "max_constraint",
+      "split": "same_channels",
+      "case": 4,
+      "measurement": {
+        "valid": true,
+        "feasible": false,
+        "margins": [
+          0.08965089398361864,
+          0.07090977679253285
+        ],
+        "errors": [
+          0,
+          0
+        ],
+        "overshoot_fraction": 0.06581613199131187,
+        "energy_lane_pj_bit": [
+          0.14973643485098478,
+          0.15230787763955744
+        ],
+        "energy_pj_bit": 0.1510221562452711,
+        "case": {
+          "name": "same_channels_1_0",
+          "context": {
+            "lane0": {
+              "vdd": 0.95,
+              "temperature_c": 65.0,
+              "rate_gbps": 2.0,
+              "resistance_ohm": 40.0,
+              "inductance_nh": 0.0,
+              "capacitance_pf": 0.34,
+              "rx_capacitance_pf": 0.06,
+              "clock_offset_ui": 0.0,
+              "coarse_latency_ui": 1.0
+            },
+            "lane1": {
+              "vdd": 0.95,
+              "temperature_c": 65.0,
+              "rate_gbps": 2.0,
+              "resistance_ohm": 42.0,
+              "inductance_nh": 0.0,
+              "capacitance_pf": 0.34,
+              "rx_capacitance_pf": 0.06,
+              "clock_offset_ui": 0.0,
+              "coarse_latency_ui": 1.0
+            },
+            "coupling_pf": 0.1
+          },
+          "pattern": "random",
+          "seed": 261126011,
+          "bits": 128,
+          "phase_ui": 0.5,
+          "guard_ui": 0.1,
+          "margin_min": 0.08,
+          "overshoot_max": 0.2,
+          "points_per_ui": 128
+        },
+        "area_proxy_um2": 15.681940212285475
+      }
+    },
+    {
+      "seed": 0,
+      "method": "max_constraint",
+      "split": "same_channels",
+      "case": 5,
+      "measurement": {
+        "valid": true,
+        "feasible": false,
+        "margins": [
+          0.08619577849261428,
+          0.06937735579121074
+        ],
+        "errors": [
+          0,
+          0
+        ],
+        "overshoot_fraction": 0.06681856173243683,
+        "energy_lane_pj_bit": [
+          0.16782017965045654,
+          0.17296974446864272
+        ],
+        "energy_pj_bit": 0.17039496205954963,
+        "case": {
+          "name": "same_channels_1_1",
+          "context": {
+            "lane0": {
+              "vdd": 0.95,
+              "temperature_c": 65.0,
+              "rate_gbps": 2.0,
+              "resistance_ohm": 40.0,
+              "inductance_nh": 0.0,
+              "capacitance_pf": 0.34,
+              "rx_capacitance_pf": 0.06,
+              "clock_offset_ui": 0.0,
+              "coarse_latency_ui": 1.0
+            },
+            "lane1": {
+              "vdd": 0.95,
+              "temperature_c": 65.0,
+              "rate_gbps": 2.0,
+              "resistance_ohm": 42.0,
+              "inductance_nh": 0.0,
+              "capacitance_pf": 0.34,
+              "rx_capacitance_pf": 0.06,
+              "clock_offset_ui": 0.0,
+              "coarse_latency_ui": 1.0
+            },
+            "coupling_pf": 0.1
+          },
+          "pattern": "random",
+          "seed": 261126012,
+          "bits": 128,
+          "phase_ui": 0.5,
+          "guard_ui": 0.1,
+          "margin_min": 0.08,
+          "overshoot_max": 0.2,
+          "points_per_ui": 128
+        },
+        "area_proxy_um2": 15.681940212285475
+      }
+    },
+    {
+      "seed": 0,
+      "method": "max_constraint",
+      "split": "same_channels",
+      "case": 6,
+      "measurement": {
+        "valid": true,
+        "feasible": false,
+        "margins": [
+          0.0834819601686837,
+          0.06912228379868324
+        ],
+        "errors": [
+          0,
+          0
+        ],
+        "overshoot_fraction": 0.061704794052537926,
+        "energy_lane_pj_bit": [
+          0.1667905861539836,
+          0.1543122092672795
+        ],
+        "energy_pj_bit": 0.16055139771063154,
+        "case": {
+          "name": "same_channels_1_2",
+          "context": {
+            "lane0": {
+              "vdd": 0.95,
+              "temperature_c": 65.0,
+              "rate_gbps": 2.0,
+              "resistance_ohm": 40.0,
+              "inductance_nh": 0.0,
+              "capacitance_pf": 0.34,
+              "rx_capacitance_pf": 0.06,
+              "clock_offset_ui": 0.0,
+              "coarse_latency_ui": 1.0
+            },
+            "lane1": {
+              "vdd": 0.95,
+              "temperature_c": 65.0,
+              "rate_gbps": 2.0,
+              "resistance_ohm": 42.0,
+              "inductance_nh": 0.0,
+              "capacitance_pf": 0.34,
+              "rx_capacitance_pf": 0.06,
+              "clock_offset_ui": 0.0,
+              "coarse_latency_ui": 1.0
+            },
+            "coupling_pf": 0.1
+          },
+          "pattern": "random",
+          "seed": 261126013,
+          "bits": 128,
+          "phase_ui": 0.5,
+          "guard_ui": 0.1,
+          "margin_min": 0.08,
+          "overshoot_max": 0.2,
+          "points_per_ui": 128
+        },
+        "area_proxy_um2": 15.681940212285475
+      }
+    },
+    {
+      "seed": 0,
+      "method": "max_constraint",
+      "split": "same_channels",
+      "case": 7,
+      "measurement": {
+        "valid": true,
+        "feasible": false,
+        "margins": [
+          0.08840914345631756,
+          0.07674435041873362
+        ],
+        "errors": [
+          0,
+          0
+        ],
+        "overshoot_fraction": 0.07027833942624961,
+        "energy_lane_pj_bit": [
+          0.17973434278056696,
+          0.15884115617141958
+        ],
+        "energy_pj_bit": 0.1692877494759933,
+        "case": {
+          "name": "same_channels_1_3",
+          "context": {
+            "lane0": {
+              "vdd": 0.95,
+              "temperature_c": 65.0,
+              "rate_gbps": 2.0,
+              "resistance_ohm": 40.0,
+              "inductance_nh": 0.0,
+              "capacitance_pf": 0.34,
+              "rx_capacitance_pf": 0.06,
+              "clock_offset_ui": 0.0,
+              "coarse_latency_ui": 1.0
+            },
+            "lane1": {
+              "vdd": 0.95,
+              "temperature_c": 65.0,
+              "rate_gbps": 2.0,
+              "resistance_ohm": 42.0,
+              "inductance_nh": 0.0,
+              "capacitance_pf": 0.34,
+              "rx_capacitance_pf": 0.06,
+              "clock_offset_ui": 0.0,
+              "coarse_latency_ui": 1.0
+            },
+            "coupling_pf": 0.1
+          },
+          "pattern": "random",
+          "seed": 261126014,
+          "bits": 128,
+          "phase_ui": 0.5,
+          "guard_ui": 0.1,
+          "margin_min": 0.08,
+          "overshoot_max": 0.2,
+          "points_per_ui": 128
+        },
+        "area_proxy_um2": 15.681940212285475
+      }
+    },
+    {
+      "seed": 0,
+      "method": "max_constraint_validated",
+      "split": "same_channels",
+      "case": 4,
+      "measurement": {
+        "valid": true,
+        "feasible": false,
+        "margins": [
+          0.07367916321586376,
+          0.11381202682782943
+        ],
+        "errors": [
+          0,
+          0
+        ],
+        "overshoot_fraction": 0.058602265281506215,
+        "energy_lane_pj_bit": [
+          0.16150837581816818,
+          0.16935776935913613
+        ],
+        "energy_pj_bit": 0.16543307258865214,
+        "case": {
+          "name": "same_channels_1_0",
+          "context": {
+            "lane0": {
+              "vdd": 0.95,
+              "temperature_c": 65.0,
+              "rate_gbps": 2.0,
+              "resistance_ohm": 40.0,
+              "inductance_nh": 0.0,
+              "capacitance_pf": 0.34,
+              "rx_capacitance_pf": 0.06,
+              "clock_offset_ui": 0.0,
+              "coarse_latency_ui": 1.0
+            },
+            "lane1": {
+              "vdd": 0.95,
+              "temperature_c": 65.0,
+              "rate_gbps": 2.0,
+              "resistance_ohm": 42.0,
+              "inductance_nh": 0.0,
+              "capacitance_pf": 0.34,
+              "rx_capacitance_pf": 0.06,
+              "clock_offset_ui": 0.0,
+              "coarse_latency_ui": 1.0
+            },
+            "coupling_pf": 0.1
+          },
+          "pattern": "random",
+          "seed": 261126011,
+          "bits": 128,
+          "phase_ui": 0.5,
+          "guard_ui": 0.1,
+          "margin_min": 0.08,
+          "overshoot_max": 0.2,
+          "points_per_ui": 128
+        },
+        "area_proxy_um2": 24.92106873878916
+      }
+    },
+    {
+      "seed": 0,
+      "method": "max_constraint_validated",
+      "split": "same_channels",
+      "case": 5,
+      "measurement": {
+        "valid": true,
+        "feasible": false,
+        "margins": [
+          0.07311294465962637,
+          0.08506188244016716
+        ],
+        "errors": [
+          0,
+          0
+        ],
+        "overshoot_fraction": 0.058458726292764274,
+        "energy_lane_pj_bit": [
+          0.18612074240556112,
+          0.18794620447028876
+        ],
+        "energy_pj_bit": 0.18703347343792492,
+        "case": {
+          "name": "same_channels_1_1",
+          "context": {
+            "lane0": {
+              "vdd": 0.95,
+              "temperature_c": 65.0,
+              "rate_gbps": 2.0,
+              "resistance_ohm": 40.0,
+              "inductance_nh": 0.0,
+              "capacitance_pf": 0.34,
+              "rx_capacitance_pf": 0.06,
+              "clock_offset_ui": 0.0,
+              "coarse_latency_ui": 1.0
+            },
+            "lane1": {
+              "vdd": 0.95,
+              "temperature_c": 65.0,
+              "rate_gbps": 2.0,
+              "resistance_ohm": 42.0,
+              "inductance_nh": 0.0,
+              "capacitance_pf": 0.34,
+              "rx_capacitance_pf": 0.06,
+              "clock_offset_ui": 0.0,
+              "coarse_latency_ui": 1.0
+            },
+            "coupling_pf": 0.1
+          },
+          "pattern": "random",
+          "seed": 261126012,
+          "bits": 128,
+          "phase_ui": 0.5,
+          "guard_ui": 0.1,
+          "margin_min": 0.08,
+          "overshoot_max": 0.2,
+          "points_per_ui": 128
+        },
+        "area_proxy_um2": 24.92106873878916
+      }
+    },
+    {
+      "seed": 0,
+      "method": "max_constraint_validated",
+      "split": "same_channels",
+      "case": 6,
+      "measurement": {
+        "valid": true,
+        "feasible": false,
+        "margins": [
+          0.07163074095855565,
+          0.07793925490248249
+        ],
+        "errors": [
+          0,
+          0
+        ],
+        "overshoot_fraction": 0.05398142782424331,
+        "energy_lane_pj_bit": [
+          0.1830496200128945,
+          0.16695898846919519
+        ],
+        "energy_pj_bit": 0.17500430424104485,
+        "case": {
+          "name": "same_channels_1_2",
+          "context": {
+            "lane0": {
+              "vdd": 0.95,
+              "temperature_c": 65.0,
+              "rate_gbps": 2.0,
+              "resistance_ohm": 40.0,
+              "inductance_nh": 0.0,
+              "capacitance_pf": 0.34,
+              "rx_capacitance_pf": 0.06,
+              "clock_offset_ui": 0.0,
+              "coarse_latency_ui": 1.0
+            },
+            "lane1": {
+              "vdd": 0.95,
+              "temperature_c": 65.0,
+              "rate_gbps": 2.0,
+              "resistance_ohm": 42.0,
+              "inductance_nh": 0.0,
+              "capacitance_pf": 0.34,
+              "rx_capacitance_pf": 0.06,
+              "clock_offset_ui": 0.0,
+              "coarse_latency_ui": 1.0
+            },
+            "coupling_pf": 0.1
+          },
+          "pattern": "random",
+          "seed": 261126013,
+          "bits": 128,
+          "phase_ui": 0.5,
+          "guard_ui": 0.1,
+          "margin_min": 0.08,
+          "overshoot_max": 0.2,
+          "points_per_ui": 128
+        },
+        "area_proxy_um2": 24.92106873878916
+      }
+    },
+    {
+      "seed": 2,
+      "method": "legacy",
+      "split": "same_channels",
+      "case": 6,
+      "measurement": {
+        "valid": true,
+        "feasible": false,
+        "margins": [
+          0.08368450182628145,
+          0.07566885413600566
+        ],
+        "errors": [
+          0,
+          0
+        ],
+        "overshoot_fraction": 0.055988171095646244,
+        "energy_lane_pj_bit": [
+          0.153604648804181,
+          0.14172658332215285
+        ],
+        "energy_pj_bit": 0.14766561606316692,
+        "case": {
+          "name": "same_channels_1_2",
+          "context": {
+            "lane0": {
+              "vdd": 0.95,
+              "temperature_c": 65.0,
+              "rate_gbps": 2.0,
+              "resistance_ohm": 40.0,
+              "inductance_nh": 0.0,
+              "capacitance_pf": 0.34,
+              "rx_capacitance_pf": 0.06,
+              "clock_offset_ui": 0.0,
+              "coarse_latency_ui": 1.0
+            },
+            "lane1": {
+              "vdd": 0.95,
+              "temperature_c": 65.0,
+              "rate_gbps": 2.0,
+              "resistance_ohm": 42.0,
+              "inductance_nh": 0.0,
+              "capacitance_pf": 0.34,
+              "rx_capacitance_pf": 0.06,
+              "clock_offset_ui": 0.0,
+              "coarse_latency_ui": 1.0
+            },
+            "coupling_pf": 0.1
+          },
+          "pattern": "random",
+          "seed": 261126013,
+          "bits": 128,
+          "phase_ui": 0.5,
+          "guard_ui": 0.1,
+          "margin_min": 0.08,
+          "overshoot_max": 0.2,
+          "points_per_ui": 128
+        },
+        "area_proxy_um2": 21.667881351339165
+      }
+    }
+  ],
+  "prequential_diagnostics": {
+    "0/legacy": {
+      "predictions": [
+        {
+          "query": 9,
+          "predicted_score": 0.2672212680742191,
+          "valid": true,
+          "feasible": false
+        },
+        {
+          "query": 10,
+          "predicted_score": 0.29516007391149063,
+          "valid": true,
+          "feasible": false
+        },
+        {
+          "query": 11,
+          "predicted_score": 0.36258491360848133,
+          "valid": true,
+          "feasible": false
+        },
+        {
+          "query": 12,
+          "predicted_score": 0.3166350688072727,
+          "valid": true,
+          "feasible": false
+        },
+        {
+          "query": 13,
+          "predicted_score": 0.2721737412656256,
+          "valid": true,
+          "feasible": false
+        },
+        {
+          "query": 14,
+          "predicted_score": 0.26337787446179345,
+          "valid": true,
+          "feasible": false
+        },
+        {
+          "query": 15,
+          "predicted_score": 0.23950265759113454,
+          "valid": true,
+          "feasible": false
+        },
+        {
+          "query": 16,
+          "predicted_score": 0.3166217926948553,
+          "valid": true,
+          "feasible": false
+        },
+        {
+          "query": 17,
+          "predicted_score": 0.2601867765158159,
+          "valid": true,
+          "feasible": false
+        },
+        {
+          "query": 18,
+          "predicted_score": 0.22233857363469917,
+          "valid": true,
+          "feasible": false
+        },
+        {
+          "query": 19,
+          "predicted_score": 0.27509866832714464,
+          "valid": true,
+          "feasible": false
+        },
+        {
+          "query": 20,
+          "predicted_score": 0.2853396293055984,
+          "valid": true,
+          "feasible": false
+        },
+        {
+          "query": 21,
+          "predicted_score": 0.1639479004653979,
+          "valid": true,
+          "feasible": false
+        },
+        {
+          "query": 22,
+          "predicted_score": 0.22661560167178654,
+          "valid": true,
+          "feasible": false
+        },
+        {
+          "query": 23,
+          "predicted_score": 0.17968076460258162,
+          "valid": true,
+          "feasible": false
+        },
+        {
+          "query": 24,
+          "predicted_score": 0.3321371824734946,
+          "valid": true,
+          "feasible": false
+        }
+      ],
+      "score_at_least_point9": 0,
+      "failures_among_these": 0,
+      "scope": "Development feasibility, not unseen-packet generalization; legacy is a heuristic score"
+    },
+    "0/max_constraint": {
+      "predictions": [
+        {
+          "query": 9,
+          "predicted_score": 0.30636829329588977,
+          "valid": true,
+          "feasible": false
+        },
+        {
+          "query": 10,
+          "predicted_score": 0.2656750609299313,
+          "valid": true,
+          "feasible": false
+        },
+        {
+          "query": 11,
+          "predicted_score": 0.2596281899992887,
+          "valid": true,
+          "feasible": false
+        },
+        {
+          "query": 12,
+          "predicted_score": 0.2686590639545908,
+          "valid": true,
+          "feasible": false
+        },
+        {
+          "query": 13,
+          "predicted_score": 0.25873788826360244,
+          "valid": true,
+          "feasible": false
+        },
+        {
+          "query": 14,
+          "predicted_score": 0.2487914611768188,
+          "valid": true,
+          "feasible": false
+        },
+        {
+          "query": 15,
+          "predicted_score": 0.2587679194376643,
+          "valid": true,
+          "feasible": false
+        },
+        {
+          "query": 16,
+          "predicted_score": 0.2386131753126136,
+          "valid": true,
+          "feasible": false
+        },
+        {
+          "query": 17,
+          "predicted_score": 0.2816186696904148,
+          "valid": true,
+          "feasible": false
+        },
+        {
+          "query": 18,
+          "predicted_score": 0.19058933410747003,
+          "valid": true,
+          "feasible": false
+        },
+        {
+          "query": 19,
+          "predicted_score": 0.17577569787629455,
+          "valid": true,
+          "feasible": false
+        },
+        {
+          "query": 20,
+          "predicted_score": 0.2950452489110091,
+          "valid": true,
+          "feasible": false
+        },
+        {
+          "query": 21,
+          "predicted_score": 0.22849143985803,
+          "valid": true,
+          "feasible": false
+        },
+        {
+          "query": 22,
+          "predicted_score": 0.1693241686851077,
+          "valid": true,
+          "feasible": false
+        },
+        {
+          "query": 23,
+          "predicted_score": 0.14878291493397677,
+          "valid": true,
+          "feasible": false
+        },
+        {
+          "query": 24,
+          "predicted_score": 0.2228822253472054,
+          "valid": true,
+          "feasible": false
+        }
+      ],
+      "score_at_least_point9": 0,
+      "failures_among_these": 0,
+      "scope": "Development feasibility, not unseen-packet generalization; legacy is a heuristic score"
+    },
+    "1/legacy": {
+      "predictions": [
+        {
+          "query": 9,
+          "predicted_score": 0.37546422349282516,
+          "valid": true,
+          "feasible": false
+        },
+        {
+          "query": 10,
+          "predicted_score": 0.45921038685799437,
+          "valid": true,
+          "feasible": false
+        },
+        {
+          "query": 11,
+          "predicted_score": 0.4687374792753656,
+          "valid": true,
+          "feasible": false
+        },
+        {
+          "query": 12,
+          "predicted_score": 0.410018310208723,
+          "valid": true,
+          "feasible": false
+        },
+        {
+          "query": 13,
+          "predicted_score": 0.3971839234066584,
+          "valid": true,
+          "feasible": false
+        },
+        {
+          "query": 14,
+          "predicted_score": 0.41314735615349796,
+          "valid": true,
+          "feasible": false
+        },
+        {
+          "query": 15,
+          "predicted_score": 0.48813963295745555,
+          "valid": true,
+          "feasible": false
+        },
+        {
+          "query": 16,
+          "predicted_score": 0.4251829472044463,
+          "valid": true,
+          "feasible": false
+        },
+        {
+          "query": 17,
+          "predicted_score": 0.5093557972427186,
+          "valid": true,
+          "feasible": true
+        },
+        {
+          "query": 18,
+          "predicted_score": 0.2800995758696061,
+          "valid": true,
+          "feasible": false
+        },
+        {
+          "query": 19,
+          "predicted_score": 0.2366303390701924,
+          "valid": true,
+          "feasible": false
+        },
+        {
+          "query": 20,
+          "predicted_score": 0.2605714088966162,
+          "valid": true,
+          "feasible": false
+        },
+        {
+          "query": 21,
+          "predicted_score": 0.13621248694851198,
+          "valid": true,
+          "feasible": false
+        },
+        {
+          "query": 22,
+          "predicted_score": 0.16069926868813533,
+          "valid": true,
+          "feasible": false
+        },
+        {
+          "query": 23,
+          "predicted_score": 0.21476557802416768,
+          "valid": true,
+          "feasible": false
+        },
+        {
+          "query": 24,
+          "predicted_score": 0.2015869242446931,
+          "valid": true,
+          "feasible": false
+        }
+      ],
+      "score_at_least_point9": 0,
+      "failures_among_these": 0,
+      "scope": "Development feasibility, not unseen-packet generalization; legacy is a heuristic score"
+    },
+    "1/max_constraint": {
+      "predictions": [
+        {
+          "query": 9,
+          "predicted_score": 0.3315695557186713,
+          "valid": true,
+          "feasible": true
+        },
+        {
+          "query": 10,
+          "predicted_score": 0.19324790620870191,
+          "valid": true,
+          "feasible": false
+        },
+        {
+          "query": 11,
+          "predicted_score": 0.21456653295640693,
+          "valid": true,
+          "feasible": false
+        },
+        {
+          "query": 12,
+          "predicted_score": 0.15362969216581707,
+          "valid": true,
+          "feasible": false
+        },
+        {
+          "query": 13,
+          "predicted_score": 0.2095664489656548,
+          "valid": true,
+          "feasible": false
+        },
+        {
+          "query": 14,
+          "predicted_score": 0.17199197088810814,
+          "valid": true,
+          "feasible": false
+        },
+        {
+          "query": 15,
+          "predicted_score": 0.10885734722016936,
+          "valid": true,
+          "feasible": false
+        },
+        {
+          "query": 16,
+          "predicted_score": 0.25424658177855464,
+          "valid": true,
+          "feasible": false
+        },
+        {
+          "query": 17,
+          "predicted_score": 0.2717273407017249,
+          "valid": true,
+          "feasible": false
+        },
+        {
+          "query": 18,
+          "predicted_score": 0.17771732801859,
+          "valid": true,
+          "feasible": false
+        },
+        {
+          "query": 19,
+          "predicted_score": 0.20662964083787927,
+          "valid": true,
+          "feasible": true
+        },
+        {
+          "query": 20,
+          "predicted_score": 0.3932795160081032,
+          "valid": true,
+          "feasible": false
+        },
+        {
+          "query": 21,
+          "predicted_score": 0.36268227104336004,
+          "valid": true,
+          "feasible": false
+        },
+        {
+          "query": 22,
+          "predicted_score": 0.3415914997964281,
+          "valid": true,
+          "feasible": false
+        },
+        {
+          "query": 23,
+          "predicted_score": 0.17758433727017905,
+          "valid": true,
+          "feasible": false
+        },
+        {
+          "query": 24,
+          "predicted_score": 0.14498438334739733,
+          "valid": true,
+          "feasible": false
+        }
+      ],
+      "score_at_least_point9": 0,
+      "failures_among_these": 0,
+      "scope": "Development feasibility, not unseen-packet generalization; legacy is a heuristic score"
+    },
+    "2/legacy": {
+      "predictions": [
+        {
+          "query": 9,
+          "predicted_score": 0.4963070869136759,
+          "valid": true,
+          "feasible": false
+        },
+        {
+          "query": 10,
+          "predicted_score": 0.3987639074256121,
+          "valid": true,
+          "feasible": false
+        },
+        {
+          "query": 11,
+          "predicted_score": 0.5899891059734511,
+          "valid": true,
+          "feasible": false
+        },
+        {
+          "query": 12,
+          "predicted_score": 0.5480260458825065,
+          "valid": true,
+          "feasible": true
+        },
+        {
+          "query": 13,
+          "predicted_score": 0.40865608799283526,
+          "valid": true,
+          "feasible": false
+        },
+        {
+          "query": 14,
+          "predicted_score": 0.46673696295834366,
+          "valid": true,
+          "feasible": false
+        },
+        {
+          "query": 15,
+          "predicted_score": 0.37143508580417284,
+          "valid": true,
+          "feasible": false
+        },
+        {
+          "query": 16,
+          "predicted_score": 0.4838049885090287,
+          "valid": true,
+          "feasible": false
+        },
+        {
+          "query": 17,
+          "predicted_score": 0.5167330422939964,
+          "valid": true,
+          "feasible": true
+        },
+        {
+          "query": 18,
+          "predicted_score": 0.46809781636235775,
+          "valid": true,
+          "feasible": false
+        },
+        {
+          "query": 19,
+          "predicted_score": 0.4350634139375268,
+          "valid": true,
+          "feasible": false
+        },
+        {
+          "query": 20,
+          "predicted_score": 0.38286752793942225,
+          "valid": true,
+          "feasible": false
+        },
+        {
+          "query": 21,
+          "predicted_score": 0.5348416820261411,
+          "valid": true,
+          "feasible": true
+        },
+        {
+          "query": 22,
+          "predicted_score": 0.22584852234716415,
+          "valid": true,
+          "feasible": false
+        },
+        {
+          "query": 23,
+          "predicted_score": 0.2567393435274468,
+          "valid": true,
+          "feasible": false
+        },
+        {
+          "query": 24,
+          "predicted_score": 0.17596366170325134,
+          "valid": true,
+          "feasible": false
+        }
+      ],
+      "score_at_least_point9": 0,
+      "failures_among_these": 0,
+      "scope": "Development feasibility, not unseen-packet generalization; legacy is a heuristic score"
+    },
+    "2/max_constraint": {
+      "predictions": [
+        {
+          "query": 9,
+          "predicted_score": 0.37630208161464695,
+          "valid": true,
+          "feasible": false
+        },
+        {
+          "query": 10,
+          "predicted_score": 0.3195674570794296,
+          "valid": true,
+          "feasible": false
+        },
+        {
+          "query": 11,
+          "predicted_score": 0.373568538215615,
+          "valid": true,
+          "feasible": false
+        },
+        {
+          "query": 12,
+          "predicted_score": 0.386856901627716,
+          "valid": true,
+          "feasible": true
+        },
+        {
+          "query": 13,
+          "predicted_score": 0.2403925495173702,
+          "valid": true,
+          "feasible": false
+        },
+        {
+          "query": 14,
+          "predicted_score": 0.3341828523714159,
+          "valid": true,
+          "feasible": false
+        },
+        {
+          "query": 15,
+          "predicted_score": 0.3292042718641983,
+          "valid": true,
+          "feasible": false
+        },
+        {
+          "query": 16,
+          "predicted_score": 0.3467964075912163,
+          "valid": true,
+          "feasible": false
+        },
+        {
+          "query": 17,
+          "predicted_score": 0.3319180781833779,
+          "valid": true,
+          "feasible": false
+        },
+        {
+          "query": 18,
+          "predicted_score": 0.3277187447933483,
+          "valid": true,
+          "feasible": false
+        },
+        {
+          "query": 19,
+          "predicted_score": 0.314648580738199,
+          "valid": true,
+          "feasible": true
+        },
+        {
+          "query": 20,
+          "predicted_score": 0.30748620036102314,
+          "valid": true,
+          "feasible": false
+        },
+        {
+          "query": 21,
+          "predicted_score": 0.33366119075353895,
+          "valid": true,
+          "feasible": false
+        },
+        {
+          "query": 22,
+          "predicted_score": 0.3559760124399628,
+          "valid": true,
+          "feasible": false
+        },
+        {
+          "query": 23,
+          "predicted_score": 0.16891403255011664,
+          "valid": true,
+          "feasible": false
+        },
+        {
+          "query": 24,
+          "predicted_score": 0.3482306335034001,
+          "valid": true,
+          "feasible": false
+        }
+      ],
+      "score_at_least_point9": 0,
+      "failures_among_these": 0,
+      "scope": "Development feasibility, not unseen-packet generalization; legacy is a heuristic score"
+    }
+  },
+  "source_sha256": {
+    "experiments/robust_search_ablation.py": "874862150e03cb746d711f997cbd67b3c3b52325491d9c50165ad2528261fef7",
+    "experiments/constrained_search.py": "479e7b68d094df376dbdf9107bfdcad2fb71a5df9d3fe554dfd7c1057cce9b8e",
+    "experiments/benchmark_constrained_search.py": "0eacdac7b0021f348bab30d2a3049d2447c67e25b33dbf9a3ca78e360cf8223f",
+    "adc_driver/circuit.py": "8e749438b31064d4dd4ed047a243be3ede523cc6e7a9ec487bc37dc6b51b010a",
+    "d2d_sizing/circuit.py": "20e4be9f6d5aac89e449fd33bbd84f655be96bbd81f0a65fe8ebebe826798015",
+    "d2d_coupled_calibration/link.py": "6c0aa2e88c7da277333cce1274477aed003c9bd190f05def7b748c50915420e0",
+    "d2d_coupled_calibration/coupled_link.py": "0e705c89876bab418b8bf9a580427e973a4d5e024dbf5a3674551588fc27a3ea",
+    "adc_driver/models/sky130_1v8_tt.spice": "20b049c1a68762d62c49ba4249e2b75e5889ac97739c942cbe4934a71426f2f2",
+    "d2d_coupled_calibration/assets/45nm_bulk.txt": "42489e9aab3423fe868c6d249326535892ad87de7f8f5b18d790d0afe8401ef4"
+  }
+}

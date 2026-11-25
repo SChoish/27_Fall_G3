@@ -171,3 +171,70 @@ python -m experiments.benchmark_constrained_search adc-multi --output campaigns/
 `pymoo`를 사용하며, 단일 입력 `adc` 비교의 RNC 기준선은 PyTorch 체크포인트를 로드한다.
 비교 모드는 공통 초기점과 동일 질의 예산을 쓰고, 모든 반환점을 잠근 뒤 새 입력에서 평가한다.
 재사용하는 D2D 기준선의 원본 기록과 실제 재평가 비용은 실행 결과에 남는다.
+
+## 최악 제약 모델과 예산 내 검증 비교
+
+`MaxConstraintSearch`는 입력별 잔차 `g_j(x)`의 최댓값 `h(x)`를 하나의 GP로
+예측한다. `h(x) <= 0`은 개발 조건 전체 통과와 동치이므로, 서로 상관된
+제약의 통과 점수를 임의로 합치는 단계를 제거한다. GP 확률은 모델 근사이며
+새 입력에서의 통과율 보장은 아니다. 기존 `ConstrainedSearch`의 기본 동작은
+유지한다. 목적함수는 기존과 같은 log-energy expected improvement다.
+
+아래 비교는 기존/최악 제약 모델 × 별도 개발 입력 검증 유무의 네 조건이다.
+검증 조건은 전체 예산에서 개별 SPICE 24회를 미리 떼어, 저에너지 후보 두 개와
+측정한 제약 여유가 가장 큰 후보 한 개를 각각 새 개발 입력 8개로 검사한다.
+통과 후보 중 개발 에너지가 가장 낮은 후보를 반환하며 전부 실패하면 반환하지
+않는다. 검증 결과로 최종 test 후보를 다시 선택하지 않는다.
+
+| 회로 | 검증 없는 탐색 | 검증 포함 탐색 | 조건별 개별 SPICE 예산 |
+|---|---|---|---|
+| ADC | 40설계 × 4입력 | 34설계 × 4입력 + 최대 3설계 × 8입력 | 160 |
+| D2D | 24설계 × 4조건 | 18설계 × 4조건 + 최대 3설계 × 8조건 | 96 |
+
+모든 조건에서 초기 8개도 예산에 포함한다. 검증용 후보가 3개 미만이면 남은
+예산은 사용하지 않고 그 사실을 기록한다. 시간은 별도로 측정하며 동일 실행
+시간을 주장하지 않는다. 초기 측정과 같은 탐색 prefix는 물리적으로 공유하지만,
+조건별 논리적 비용은 전부 부과한다. 이 비교의 검증은 개발 데이터에 해당한다.
+
+```bash
+OPENBLAS_NUM_THREADS=1 python -m experiments.robust_search_ablation adc \
+  --output campaigns/robust_adc --seeds 0 1 2
+OPENBLAS_NUM_THREADS=1 python -m experiments.robust_search_ablation d2d \
+  --output campaigns/robust_d2d --seeds 0 1 2
+python -m experiments.report_robust_search \
+  --adc campaigns/robust_adc --d2d campaigns/robust_d2d \
+  --output implementation_results/robust_ablation
+python -m unittest experiments.tests.test_robust_constrained_search -v
+```
+
+프로토콜은 개발/검증/test 입력, 실행 파일과 코드 해시, 라이브러리 버전을
+실행 전에 기록한다. 모든 반환 설계를 잠근 후에만 촘촘한 시간 격자의 새
+test 파형을 평가한다. D2D는 기존 채널의 새 무작위 패킷과 새 채널의 새 패킷을
+따로 평가한다. 고정된 `same`/`runs` 패턴은 seed만 바꿔 새 패킷이라고 부르지
+않으며 여기서는 검증에만 쓴다. 보고 도구는 소스 동결, 선택 잠금, 예산 및
+prefix만을 사용한 선택 규칙을 확인한 뒤 집계한다.
+
+네 조건을 비교하지 않고 검증을 포함한 한 조건만 실행하려면 다음을 사용한다.
+이 실행기는 실제 탐색을 ADC 34점 / D2D 18점에서 중단하고 검증 예산을 사용한다.
+
+```bash
+python -m experiments.run_validated_search adc --output campaigns/adc_validated
+python -m experiments.run_validated_search d2d --validation-bits 128 \
+  --output campaigns/d2d_validated_long
+```
+
+`--method max_constraint`로 실험적 GP 대안을 선택할 수 있다. 기본은 기존 BO다.
+D2D의 `--validation-bits` 기본값은 후속 실험을 반영한 128이다. 1단계의 짧은 검증을
+재현할 때는 64를 명시한다. 탐색 패킷 길이는 64로 유지한다. SPICE 호출 수는 같아도
+검증에서 모사한 비트 수와 실행 시간은 증가한다.
+검증 통과는 미관측 패킷 전체의 안전 보장이 아니다.
+
+[2026-11-25 실패 분석·추가 실험 결과](../implementation_results/20261125_robust_ablation/REPORT_KO.md)
+에서 네 조건 비교, 동일 패킷 prefix 대조 및 독립 후속 시험을 확인할 수 있다.
+
+```bash
+python -m experiments.diagnose_d2d_packets --campaign campaigns/robust_d2d \
+  --output campaigns/packet_diagnostic
+python -m experiments.refine_d2d_validation --campaign campaigns/robust_d2d \
+  --output campaigns/long_validation
+```

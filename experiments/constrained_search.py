@@ -122,10 +122,22 @@ class ConstrainedSearch:
 
         x = history[valid]
         y = np.asarray([self.results[i] for i in valid])
-        model = Surrogate(x,y,self.radius)
+        model = Surrogate(x,self.model_targets(y),self.radius)
         mean, std = model.predict(candidates)
+        score = self.acquisition(mean,std,best)
+        self.pending = candidates[np.argmax(score)].copy()
+        return self.pending.copy()
+
+    def model_targets(self, y):
+        return y
+
+    def feasibility_log_score(self, mean, std):
         feasible = ndtr(-mean[:,1:]/std[:,1:]).clip(1e-10,1.)
-        log_prob = .7*np.log(feasible.min(axis=1))+.3*np.log(feasible).mean(axis=1)
+        # Legacy ranking heuristic, not a joint feasibility probability.
+        return .7*np.log(feasible.min(axis=1))+.3*np.log(feasible).mean(axis=1)
+
+    def acquisition(self, mean, std, best):
+        log_prob = self.feasibility_log_score(mean,std)
         if self.rank(best)[0] == 0:
             gain = best[0]-mean[:,0]
             z = gain/std[:,0]
@@ -134,5 +146,21 @@ class ConstrainedSearch:
         else:
             optimistic_violation = np.max(mean[:,1:]-.65*std[:,1:],axis=1)
             score = -optimistic_violation+.12*log_prob
-        self.pending = candidates[np.argmax(score)].copy()
-        return self.pending.copy()
+        return score
+
+
+class MaxConstraintSearch(ConstrainedSearch):
+    """Model h(x)=max_j g_j(x): h<=0 iff every observed-scenario constraint passes.
+
+    Uses a single surrogate for the joint event, without assuming independent
+    constraints. Its Gaussian probability is an approximation, not a calibrated
+    reliability guarantee or a prediction for unobserved input distributions.
+    Candidate generation, trust-region updates and objective model are unchanged.
+    """
+
+    def model_targets(self, y):
+        return np.c_[y[:,0],np.max(y[:,1:],axis=1)]
+
+    def feasibility_log_score(self, mean, std):
+        from scipy.special import log_ndtr
+        return log_ndtr(-mean[:,1]/std[:,1])

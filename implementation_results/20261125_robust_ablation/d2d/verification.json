@@ -1,0 +1,38 @@
+{
+  "original": {
+    "protocol.json": "6c8a818a9ff6f42f1e03a169431737000ead8edc3d4987ee0964a6a49d6502e5",
+    "summary.json": "50aabc46e9e11be890bb74a4ba03d02eac0e695c0c58bdbbfb90d8d3e1e75581",
+    "selections_locked.json": "a08cb7cb2b0856091d9d54a7114e46e8793e8e20b663ecac92e2ab5452e002bb"
+  },
+  "compact": {
+    "protocol.json": "6c8a818a9ff6f42f1e03a169431737000ead8edc3d4987ee0964a6a49d6502e5",
+    "seed_0/initial.json": "1c61f932f84785c3c43ada91dc9f5fe56dc511ee797f84d5d2081f39c58ac4a5",
+    "seed_0/legacy.json": "45b2ff61ecc8c673b9d74a66e4c675647c11eeec3b5613dbab245a644bc4b6e2",
+    "seed_0/legacy_shortlist_locked.json": "52c29e550fcf8b5307472e5bd3b05a89d117862ccfdb4af43fa5fd091cb32d6f",
+    "seed_0/legacy_validation.json": "5d97b51cd9a98364908762147d0dc3faf56cd69e48dddaa9524a4d19f1d61d10",
+    "seed_0/max_constraint.json": "4709463a0e2ee60e1feb59ecb71ebf51a67ea7caeaaed04538f84eda8c783508",
+    "seed_0/max_constraint_shortlist_locked.json": "52c29e550fcf8b5307472e5bd3b05a89d117862ccfdb4af43fa5fd091cb32d6f",
+    "seed_0/max_constraint_validation.json": "5d97b51cd9a98364908762147d0dc3faf56cd69e48dddaa9524a4d19f1d61d10",
+    "seed_0/returns.json": "b06604a1dac63c65786ef6c9d733264241debbe0e94db9d7c5c7750abc10969a",
+    "seed_1/initial.json": "907b8a51b373885eb83acf448899ce13e3def042ac3d32eb3d91767d1ca4984c",
+    "seed_1/legacy.json": "f9f60b37425082287a87df97b9cdcba4e146beb936dc32de1439896dc36655c9",
+    "seed_1/legacy_shortlist_locked.json": "3b061644458f9b328d5e888a3c223d849052fa7757a5419de92fc2b49cbc8f34",
+    "seed_1/legacy_validation.json": "17ca196f2bf4c6bba393279e5a1a23a7b3a2422a949a6e1d8b36cc777a026676",
+    "seed_1/max_constraint.json": "81dadd564f03c9b5a84de6607aa4891b8f60fd6352baf49714d6596e6536b7a8",
+    "seed_1/max_constraint_shortlist_locked.json": "33330d632ff208cbffb0663608e27c74dd26bf2fda8487e2bf124f570b4197bc",
+    "seed_1/max_constraint_validation.json": "13a4698c2e323563dcad9bcc735a0c0a446c34004f0e645d4e90dcea96d63fa1",
+    "seed_1/returns.json": "0a73d98fdf0e303ecdafb2d2093b00da08731f5eba0042798324149cc268790a",
+    "seed_2/initial.json": "4ce522a6bcf3460163aa215e64d55cbdf4c3e7b14ecf1479ec2ce35c13f80d7a",
+    "seed_2/legacy.json": "23790b12ca52ee9be3d595fbba5ae4f6e6bffd35f25eb1d78e3b26a93807cacb",
+    "seed_2/legacy_shortlist_locked.json": "cb99475574595024c29cba6cfa1077ce23e3af61dc8e8dcfd4341406517a2ed7",
+    "seed_2/legacy_validation.json": "108aa696c780c239668c59b865c9e7e1d5b235ba122c8933f80240b4c056f2de",
+    "seed_2/max_constraint.json": "1bb66a473ccc78534c81a7e6d8d63c5b8bf5179d1213bf93a75c5eafb5ed4bd9",
+    "seed_2/max_constraint_shortlist_locked.json": "7db073a78a23eae218854dadbc4ed84db41606d61c8735cad8ed80964e401450",
+    "seed_2/max_constraint_validation.json": "cd74e5ba3f6b6e6bfc8a70d119f24ae4639798c9963b422b37aa89b24a1f63ab",
+    "seed_2/returns.json": "433a7acf53a902633fddcb237d9636e22e114f885f045f8382d145590d796c34",
+    "selections_locked.json": "a08cb7cb2b0856091d9d54a7114e46e8793e8e20b663ecac92e2ab5452e002bb",
+    "summary.json": "50aabc46e9e11be890bb74a4ba03d02eac0e695c0c58bdbbfb90d8d3e1e75581"
+  },
+  "checks": "Completed source snapshots, selection locks, prefix-only shortlists, budget and return rules verified",
+  "omitted": "Per-cycle ADC rows and raw transient waveforms; aggregate and per-context measurements retained"
+}

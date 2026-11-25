@@ -1,0 +1,122 @@
+[
+  {
+    "kind": "adc",
+    "seed": 0,
+    "method": "legacy",
+    "counts": [
+      34,
+      3
+    ],
+    "calls": 160
+  },
+  {
+    "kind": "adc",
+    "seed": 0,
+    "method": "max_constraint",
+    "counts": [
+      34,
+      3
+    ],
+    "calls": 160
+  },
+  {
+    "kind": "adc",
+    "seed": 1,
+    "method": "legacy",
+    "counts": [
+      34,
+      3
+    ],
+    "calls": 160
+  },
+  {
+    "kind": "adc",
+    "seed": 1,
+    "method": "max_constraint",
+    "counts": [
+      34,
+      3
+    ],
+    "calls": 160
+  },
+  {
+    "kind": "adc",
+    "seed": 2,
+    "method": "legacy",
+    "counts": [
+      34,
+      3
+    ],
+    "calls": 160
+  },
+  {
+    "kind": "adc",
+    "seed": 2,
+    "method": "max_constraint",
+    "counts": [
+      34,
+      3
+    ],
+    "calls": 160
+  },
+  {
+    "kind": "d2d",
+    "seed": 0,
+    "method": "legacy",
+    "counts": [
+      18,
+      3
+    ],
+    "calls": 96
+  },
+  {
+    "kind": "d2d",
+    "seed": 0,
+    "method": "max_constraint",
+    "counts": [
+      18,
+      3
+    ],
+    "calls": 96
+  },
+  {
+    "kind": "d2d",
+    "seed": 1,
+    "method": "legacy",
+    "counts": [
+      18,
+      3
+    ],
+    "calls": 96
+  },
+  {
+    "kind": "d2d",
+    "seed": 1,
+    "method": "max_constraint",
+    "counts": [
+      18,
+      3
+    ],
+    "calls": 96
+  },
+  {
+    "kind": "d2d",
+    "seed": 2,
+    "method": "legacy",
+    "counts": [
+      18,
+      3
+    ],
+    "calls": 96
+  },
+  {
+    "kind": "d2d",
+    "seed": 2,
+    "method": "max_constraint",
+    "counts": [
+      18,
+      3
+    ],
+    "calls": 96
+  }
+]
