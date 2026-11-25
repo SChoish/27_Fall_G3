@@ -29,17 +29,21 @@ def prototype(episode):
 
 
 def choose(method,bank,observe):
-    target=np.asarray([p['quality'] for p in bank])
-    # Conservative development score; upper bound from invariant overshoot recorded separately.
-    static=int(np.argmax(np.quantile(target,.2,axis=0)))
+    if method not in METHODS:
+        raise ValueError('Unknown phase policy')
     if method=='fixed32':
         return GRID[1],[]
-    if method=='trained_static':
-        return static,[]
-    ref=np.asarray([p['probes'] for p in bank])
+    use_prior=method.startswith('prior_')
+    if method=='trained_static' or use_prior:
+        if not bank:
+            raise ValueError('The development prior needs channel measurements')
+        target=np.asarray([p['quality'] for p in bank])
+        fitted=int(np.argmax(np.quantile(target,.2,axis=0)))
+        if method=='trained_static':
+            return fitted,[]
+        ref=np.asarray([p['probes'] for p in bank])
+        weights=np.ones(len(bank))/len(bank)
     observed=[]
-    weights=np.ones(len(bank))/len(bank)
-    fitted=static
     for step in range(3):
         if method!='prior_adaptive':
             code=GRID[step]
