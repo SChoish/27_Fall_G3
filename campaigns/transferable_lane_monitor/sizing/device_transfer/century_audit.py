@@ -4,6 +4,7 @@ import hashlib
 import json
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
+from time import sleep
 from zipfile import ZipFile, ZIP_DEFLATED
 import numpy as np
 from audit import checks
@@ -38,9 +39,47 @@ def overview(runs,protocol):
     return rows
 
 
+def fine_measure(root,args,point):
+    fine_dir=root/"fine"
+    fine_dir.mkdir(exist_ok=True)
+    n,x=point
+    file=fine_dir/(hashlib.sha256(json.dumps([n,x]).encode()).hexdigest()+".json")
+    if not file.exists():
+        old=args.out/"warm"/"fine"/file.name
+        raw=json.loads(old.read_text())["raw"] if old.exists() else [simulate(DOMAINS[n],x,k,args) for k in range(4)]
+        file.write_text(json.dumps(dict(circuit=n,x=x,raw=raw,reused=old.exists())))
+    return json.loads(file.read_text())
+
+
+def follow(root,args):
+    expected=[folder/f"{name}-{arm}-{seed}.json"
+              for folder in (root,root/"strict") for name in DOMAINS for arm in ARMS
+              for seed in ((0,) if arm=="role_poll" else SEEDS)]
+    done=set()
+    seen=set()
+    with ThreadPoolExecutor(args.workers) as workers:
+        while len(seen)<len(expected):
+            points=set()
+            for f in expected:
+                if f in seen or not f.exists():continue
+                try:r=json.loads(f.read_text())
+                except json.JSONDecodeError:continue
+                for t in r["hits"].values():
+                    x=next(s["x"] for s in r["trace"] if s["calls"]==t)
+                    points.add((r["circuit"],tuple(x)))
+                    points.add((r["circuit"],tuple(np.ones(len(x)))))
+                seen.add(f)
+            new=sorted(points-done)
+            list(workers.map(lambda point:fine_measure(root,args,point),new))
+            done.update(new)
+            if len(seen)<len(expected):sleep(8)
+
+
 def main():
     args=arguments()
     root=args.out/"century"
+    args.step_ps=.25
+    if args.mode=="source":follow(root,args)
     runs=[]
     keys=set()
     data={n:{} for n in DOMAINS}
@@ -89,20 +128,10 @@ def main():
                         x=next(st["x"] for st in r["trace"] if st["calls"]==t)
                         keys.add((n,tuple(x)))
                     runs.append(r)
-    fine_dir=root/"fine"
-    fine_dir.mkdir(exist_ok=True)
-    def fine(point):
-        n,x=point
-        file=fine_dir/(hashlib.sha256(json.dumps([n,x]).encode()).hexdigest()+".json")
-        if not file.exists():
-            old=args.out/"warm"/"fine"/file.name
-            raw=json.loads(old.read_text())["raw"] if old.exists() else [simulate(DOMAINS[n],x,k,args) for k in range(4)]
-            file.write_text(json.dumps(dict(circuit=n,x=x,raw=raw,reused=old.exists())))
-        return json.loads(file.read_text())
     args.step_ps=.25
     points=sorted(keys|{(n,tuple(np.ones(len(upper(DOMAINS[n]))))) for n,x in keys})
     with ThreadPoolExecutor(args.workers) as workers:
-        fine_data=dict(zip(points,workers.map(fine,points)))
+        fine_data=dict(zip(points,workers.map(lambda point:fine_measure(root,args,point),points)))
     fails=[]
     hit_count=0
     for r in runs:
