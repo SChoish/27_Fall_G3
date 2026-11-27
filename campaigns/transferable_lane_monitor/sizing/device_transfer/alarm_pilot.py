@@ -1,7 +1,7 @@
 """Paired sequential SPICE benchmark for elite, metric and snapshot reuse."""
 from concurrent.futures import ThreadPoolExecutor
 from dataclasses import replace
-from pathlib import Path
+from time import sleep
 import hashlib
 import json
 
@@ -119,12 +119,14 @@ def trial(ledger,prior,beta,method,seed):
         trace.append(dict(x=x.tolist(),calls=calls,confirmed=verified,origin=origin))
     return dict(circuit=ledger.name,method=method,seed=seed,hits=hits,calls=calls,trace=trace)
 
-def main():
-    args=exp.arguments()
+def main(args=None, wait_for_primary=False):
+    if args is None:args=exp.arguments()
     root=args.out/"alarm";root.mkdir(exist_ok=True)
     models={s:train_source(args.out,s) for s in SEEDS}
     (root/"attention.json").write_text(json.dumps({s:b.tolist() for s,(_,b) in models.items()}))
     def run(name):
+        if wait_for_primary:
+            while not (root/f"{name}-scored_buffer-23.json").exists():sleep(5)
         ledger=Ledger(name,args)
         for seed in SEEDS:
             for method in METHODS:

@@ -5,3 +5,26 @@ Before measuring new targets, fix the primary targets and algorithms. Reuse two 
 Secondary controls fixed before inspecting outcome tables. Extend the deterministic role schedule to the same 40-call allowance with preset output/internal width and N/P perturbations. Compare full fine-tuning to source head retained vs reset with the same frozen encoder and identical head update count. Add one hybrid with the first two historical role proposals followed by the same attention search (target critic fit on all development data). All primary and secondary trails are first-hit verified separately. These are engineering variants of ALARM: shared device-role pooling and an MLP, a coordinate-softmax head fitted on short source surrogate moves, damped geometry, bounded candidate proposals and scored checkpoint reuse. Neither source-waveform labels at confirmation corners nor target confirmation feedback is available to the optimizer.
 
 For an independent feasibility witness use a four-parameter role/polarity local linear search. It may inspect all four corners and uses six trust-region iterations with finite differences; its raw evaluations are kept separately and never supplied to a competitor. A 10% witness establishes attainability in that circuit; a failure to find one leaves attainability open.
+
+In addition to the fastest witnesses, repeat every distinct design cited as a first hit for any arm, seed and threshold at 0.25 ps. These are post-selection checks of recorded designs and do not recalculate a counterfactual online trajectory. Count these calls separately from the fastest-witness and diagnostic checks.
+
+Post-hoc load_sky feasibility diagnostic: the symmetric four-variable reference did not reach 5%. Recheck that one load condition with eight independent widths, linearizing the individual port/corner constraints. This solver uses confirmation labels, is excluded from all rankings, and repeats its best feasible design at 0.25 ps.
+
+## Reproduce
+
+Use this directory and the same ngspice, model files, Node and Python+NumPy as in README.md. Restore the preceding experiment archive into a fresh runs directory with `python package.py --restore runs`, or regenerate its four sources as described there. With the same opts array:
+
+```bash
+python alarm_pilot.py search "${opts[@]}" --workers 5
+python alarm_controls.py search "${opts[@]}" --workers 5
+python alarm_witness.py search "${opts[@]}" --workers 2
+python alarm_load_probe.py search "${opts[@]}"
+python audit_alarm.py search "${opts[@]}"
+python alarm_first_hit.py search "${opts[@]}"
+python alarm_report.py
+```
+
+For a simulation-free review, restore alarm_measurements.zip into a fresh runs/alarm with `python package.py --archive alarm_measurements.zip --restore runs/alarm`, then run the command below to check the original first-hit counts directly from raw SPICE:
+```bash
+python -c 'from pathlib import Path; from audit_alarm import audit; audit(Path("runs/alarm"))'
+```
