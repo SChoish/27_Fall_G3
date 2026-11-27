@@ -43,9 +43,9 @@ def main():
         for n,c in DOMAINS.items():
             raw={(tuple(x),k):r for x,k,r in read("raw/"+n+".json")}
             ref=[raw[tuple(np.ones(len(upper(c)))),k] for k in range(4)]
-            counts=[0]*7
+            counts=[0]*6
             counts[0]=len([k for x,k in raw if k==0])-1
-            witnesses=[[],[]]
+            witnesses=[]
             for x,k in raw:
                 if k or x==tuple(np.ones(len(x))):continue
                 y=ratios([raw[x,j] for j in range(2)],ref[:2])
@@ -58,8 +58,8 @@ def main():
                     if verified(arr,ref,g):counts[4+i]+=1
                 p=[ratios(arr[j:j+2],ref[j:j+2]) for j in (0,2)]
                 if all(max(v[1:])<=0 for v in p):
-                    witnesses[0].append(float(np.exp(max(v[0] for v in p))))
-            constraints.append([n,*counts[:6],f"{min(witnesses[0]):.5f}" if witnesses[0] else "—"])
+                    witnesses.append(float(np.exp(max(v[0] for v in p))))
+            constraints.append([n,*counts[:6],f"{min(witnesses):.5f}" if witnesses else "—"])
         diagnostics=make_table(["조건","개발 후보","개발 EDP ≤.95","개발 제약도 통과","확인한 후보","4코너 5%","4코너 10%","최저 확인 EDP"],constraints)
         trials=[read(k) for k in z.namelist() if k.startswith("traces/")]
     pairings=[]
@@ -86,6 +86,8 @@ def main():
       "5%는 기존 기준과 같은 공동 추적의 첫 0.95 도달이고, 10% 단독은 0.90 가능 후보만 확인한다. 각 표는 성공 수/시행 수와 실패 포함 제한 평균 SPICE 호출 수다. 독립적인 회로 형상은 세 가지이며 각각 두 PDK를 짝지었다. 형상 두 가지와 부하 조건은 이전 실험에서 사용했고, 3출력 비대칭 병렬 회로 한 가지는 이번에 추가했다. 각 조건의 확률적 탐색은 3 seed, 결정적 역할 직접 탐색은 조건당 1회다. 방법 간 승패는 이 회로들의 기술 통계다.",
       "## 전체 탐색 비용",tables[0],
       "성공 여부는 동일한 소자 폭에서 개발·확인 코너의 에너지×최대 에지 지연과 모든 전기 제약을 실측하여 판정한다. 평균은 최초 도달까지의 호출 수와 미달 시 해당 상한으로 계산했다. 평균과 성공 수에는 100번째 호출에 성공한 경우가 서로 다르게 반영될 수 있다. 타깃의 기준 4회를 포함하고 워밍업과 확인도 유료다. 40회와 100회는 같은 실행에서 읽었다.",
+      f"BO 획득함수를 5%에 맞춘 추가 대조군은 40회 {cell('bo95','bo',.95,40)}, 100회 {cell('bo95','bo',.95)}였다. 공동 BO의 획득함수 문턱은 10%다. 두 실험에서 후보 풀, 커널과 seed를 동일하게 유지했다.",
+      "![최초 도달 누적 성공률](century_attainment.svg)",
       "## 전이 조건별 결과",split,"### 5% 목표, 100회 상한",tables[1],"### 10% 단독 목표, 100회 상한",tables[2],
       "## 같은 회로와 seed의 대응 비교",comp,
       "## 회로별 실측 가능성",diagnostics,
@@ -95,10 +97,10 @@ def main():
       "기본 대각 행렬 D, 역할 특징 Φ, 학습 행렬 B로 역 metric을 D^(-1/2) [I + Φ B Bᵀ Φᵀ] D^(-1/2)로 구성했다. 10×2 행렬 B는 측정 순위와 제안 방향 내적의 쌍대 로지스틱 손실로 학습했다. critic, 타깃 잔차 보정, 후보 수와 선탐색은 웜업 0과 같다. 표의 보류 조건은 한 소스 회로의 방향 라벨을 제외하고 B를 재학습한 결과다. 기반 critic은 기존 네 소스 회로의 324회 자료를 사용했다.",
       acc,
       "## 비용 검산과 재현",
-      f"공동 및 단독 목표를 합쳐 {audit['runs']}개 프로토콜별 궤적을 원시값에서 재계산했다. 독립 실행으로 청구한 타깃 호출 수는 공동 {audit['charged_target']['joint']:,}회, 단독 {audit['charged_target']['strict']:,}회다. 동일한 설계의 코너값을 재사용했으며 두 프로토콜을 합친 고유 타깃 코너 측정은 {audit['distinct_target_corner_rows']:,}개다. 실패 측정은 {audit['target_errors']}개다. 기본 학습 비용은 소스 324회, 방향 선호에는 추가 후보 192회와 nominal 기준 재측정 8회를 썼다. 모델과 무관한 탐색은 소스 비용이 0이다.",
+      f"공동 및 단독 목표를 합쳐 {audit['runs']}개 프로토콜별 궤적을 원시값에서 재계산했다. 독립 실행으로 청구한 타깃 호출 수는 공동 {audit['charged_target']['joint']:,}회, 10% 단독 {audit['charged_target']['strict']:,}회, 목표를 맞춘 5% BO {audit['charged_target']['bo95']:,}회다. 동일한 설계의 코너값을 재사용했으며 두 프로토콜을 합친 고유 타깃 코너 측정은 {audit['distinct_target_corner_rows']:,}개다. 실패 측정은 {audit['target_errors']}개다. 기본 학습 비용은 소스 324회, 방향 선호에는 추가 후보 192회와 nominal 기준 재측정 8회를 썼다. 모델과 무관한 탐색은 소스 비용이 0이다.",
       f"0.25 ps로 최초 도달 설계 {audit['distinct_first_hit_designs']}개와 해당 기준 설계를 검산했다. 재검산 비용은 {audit['precision_checks']}회이며 이전 동일 정밀도 자료 {audit['precision_reused']}회를 포함한다. 최초 도달 기록 {audit['hits']}건 중 재검산 미통과는 {len(audit['precision_failures'])}건이다.",
       "기본 ngspice 실행과 컴파일 모듈을 재사용하는 실행기를 동일한 6개 회로 × 4코너에서 비교해 에너지, 지연, slew, 레일 출력 측정값의 일치를 확인했다. 각 eval은 독립적인 ngspice 메모리·회로·동작점에서 수행한다.",
-      "기존 패키지의 ngspice 및 PDK 인자로 century_run.py search, century_run.py source, century_role.py search, century_strict.py search, century_audit.py search 순서로 실행한다. python century_restore.py는 시뮬레이터 없이 압축 원자료에서 모든 최초 도달과 표를 재생한다.",
+      "기존 패키지의 ngspice 및 PDK 인자로 century_run.py search, century_run.py source, century_role.py search, century_strict.py search, century_bo_goal.py search, century_audit.py search 순서로 실행한다. python century_restore.py는 시뮬레이터 없이 압축 원자료에서 모든 최초 도달과 표를 재생한다.",
       "[평가 규약](century_protocol.md) · [전체 수치](runs/century/summary.csv) · [원시 측정과 궤적](century_measurements.zip) · [검산](runs/century/audit.json)",
       "[Socha & Dorigo, ACOR](https://doi.org/10.1016/j.ejor.2006.06.046) · [Storn & Price, DE](https://doi.org/10.1023/A:1008202821328)"
     ]

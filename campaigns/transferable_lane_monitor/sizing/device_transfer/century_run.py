@@ -22,7 +22,7 @@ SEEDS = (31,32,33)
 CAP = 100
 
 
-def trial(name, circuit, arm, seed, args, model=None, metric=None, goals=(.95,.90)):
+def trial(name, circuit, arm, seed, args, model=None, metric=None, goals=(.95,.90), bo_goal=.90):
     store = Store(name, circuit, args)
     x0 = np.ones(len(upper(circuit)))
     ref = store.pair(x0,0) + store.pair(x0,2)
@@ -30,7 +30,7 @@ def trial(name, circuit, arm, seed, args, model=None, metric=None, goals=(.95,.9
         raise RuntimeError((name,ref))
     hist = [x0]
     labels = [ratios(ref[:2], ref[:2])]
-    policy = Heuristic(arm,circuit,seed) if arm in HEURISTICS else None
+    policy = Heuristic(arm,circuit,seed,bo_goal) if arm in HEURISTICS else None
     if policy is None:
         space = Continuous(circuit)
         space.inverse_direction = metric

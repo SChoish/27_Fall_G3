@@ -6,7 +6,8 @@ from proposal import propose
 
 
 class Heuristic:
-    def __init__(self, arm, circuit, seed):
+    def __init__(self, arm, circuit, seed, bo_goal=.90):
+        self.bo_goal = bo_goal
         self.arm = arm
         self.c = circuit
         self.rng = np.random.default_rng(seed)
@@ -36,7 +37,7 @@ class Heuristic:
             return np.where(self.term, .84, 1.)
         if self.arm == "bo":
             samples = pool(self.c, self.rng, hist[np.argmin(cost(labels))])
-            return propose("cold_bo", {}, self.c, hist, labels, samples, self.rng)
+            return propose("cold_bo", {}, self.c, hist, labels, samples, self.rng, goal=self.bo_goal)
         # Six members including the common nominal and electrical-role probe.
         if self.arm in ("random", "group_random") or len(hist) < 6:
             return self.decode(self.rng.uniform(self.lo, self.hi))

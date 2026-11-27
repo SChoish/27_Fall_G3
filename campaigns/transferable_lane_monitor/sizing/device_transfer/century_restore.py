@@ -7,7 +7,7 @@ from pathlib import Path
 from zipfile import ZipFile
 import numpy as np
 from audit import checks
-from century_audit import PROTOCOLS, ARMS, overview, verified
+from century_audit import PROTOCOLS, arms_for, overview, verified
 from century_run import CAP, DOMAINS, SEEDS
 from experiment import upper
 
@@ -26,7 +26,7 @@ def replay(path):
                 refx=tuple(np.ones(len(upper(DOMAINS[n]))))
                 def pair(x,k):return [raw[n][x,j] for j in (k,k+1)]
                 ref=pair(refx,0)+pair(refx,2)
-                for arm in ARMS:
+                for arm in arms_for(protocol):
                     for seed in ((0,) if arm=="role_poll" else SEEDS):
                         r=read(f"traces/{protocol}/{n}-{arm}-{seed}.json")
                         assert (r["circuit"],r["arm"],r["seed"])==(n,arm,seed)

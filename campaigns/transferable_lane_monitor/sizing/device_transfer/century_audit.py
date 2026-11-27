@@ -15,7 +15,10 @@ from warm_space import TEST
 
 GOALS=(.95,.90)
 ARMS=(*HEURISTICS,*LEARNED,"role_poll")
-PROTOCOLS={"joint":GOALS,"strict":(.90,)}
+PROTOCOLS={"joint":GOALS,"strict":(.90,),"bo95":(.95,)}
+
+def arms_for(protocol):
+    return ("bo",) if protocol=="bo95" else ARMS
 
 
 def verified(record,reference,goal):
@@ -25,7 +28,7 @@ def verified(record,reference,goal):
 
 def overview(runs,protocol):
     rows=[]
-    for arm in ARMS:
+    for arm in arms_for(protocol):
         for domain,names in (("all",DOMAINS),("previous",TEST),("fresh",set(DOMAINS)-set(TEST)),
                              *((n,[n]) for n in DOMAINS)):
             trials=[r for r in runs if r["arm"]==arm and r["circuit"] in names]
@@ -53,7 +56,8 @@ def fine_measure(root,args,point):
 
 def follow(root,args):
     expected=[folder/f"{name}-{arm}-{seed}.json"
-              for folder in (root,root/"strict") for name in DOMAINS for arm in ARMS
+              for p in PROTOCOLS for folder in [root if p=="joint" else root/p]
+              for name in DOMAINS for arm in arms_for(p)
               for seed in ((0,) if arm=="role_poll" else SEEDS)]
     done=set()
     seen=set()
@@ -88,9 +92,9 @@ def main():
         prior=data[n].setdefault(key,raw)
         assert prior==raw
     for protocol,goals in PROTOCOLS.items():
-        folder=root if protocol=="joint" else root/"strict"
+        folder=root if protocol=="joint" else root/protocol
         for n,c in DOMAINS.items():
-            for arm in ARMS:
+            for arm in arms_for(protocol):
                 for seed in ((0,) if arm=="role_poll" else SEEDS):
                     r=json.loads((folder/f"{n}-{arm}-{seed}.json").read_text())
                     r["protocol"]=protocol

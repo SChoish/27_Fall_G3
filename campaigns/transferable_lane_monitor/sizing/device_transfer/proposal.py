@@ -87,7 +87,7 @@ def train(root,seed):
 def loss(y):
     return y[:,0]+7*np.maximum(y[:,1:],0).sum(1)
 
-def propose(method,models,c,hist,y,candidates,rng):
+def propose(method,models,c,hist,y,candidates,rng,goal=.90):
     if method=="random":
         return rng.uniform(.58,upper(c))
     if method=="cold_bo":
@@ -99,7 +99,7 @@ def propose(method,models,c,hist,y,candidates,rng):
         pred=y.mean(0)+weights@(y-y.mean(0))
         sd=np.sqrt(np.maximum(.006,1-(cross*weights).sum(1)))[:,None]
         sig=sd*np.maximum(y.std(0),[.12,.10,.10,.12,.035])
-        z=(np.array([np.log(.90),0,0,0,0])-pred)/sig
+        z=(np.array([np.log(goal),0,0,0,0])-pred)/sig
         score=-np.log(np.maximum(.5*(1+np.vectorize(erf,otypes=[float])(z/np.sqrt(2))),1e-14)).sum(1)
         return candidates[score.argmin()]
 
