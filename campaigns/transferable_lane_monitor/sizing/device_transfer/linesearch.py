@@ -20,7 +20,8 @@ def line(method,models,c,hist,y,candidates,rng):
         if len(hist)>5:x*=np.exp(rng.normal(0,.045,len(x)))
         return np.clip(x,.58,exp.upper(c))
     f,e=exp.structure(c)
-    out,embedding=models["gat"].outputs(f,e)
+    if method=="gat_line":
+        out,embedding=models["gat"].outputs(f,e)
     # Start with a broad electrical role direction. Subsequent directions can be per device.
     directions=[np.where(terminal,np.log(.80),0.),np.where(terminal,np.log(.90),np.log(.80))]
     if method=="gat_line":
