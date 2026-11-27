@@ -11,7 +11,10 @@ from experiment import arguments
 from warm_space import DEV,TEST,Store
 from warm_policy import Config,Space,rollout,source_prior
 
-def write(path,value):path.write_text(json.dumps(value,allow_nan=False))
+def write(path,value):
+    tmp=path.with_suffix(".writing")
+    tmp.write_text(json.dumps(value,allow_nan=False))
+    tmp.replace(path)
 def ident(cfg):return json.dumps(asdict(cfg),sort_keys=True)
 
 class Table:
@@ -76,9 +79,10 @@ def tune(args):
     # Lock the 10%-target candidate separately from the primary 5% recommendation.
     pool=[*opts,*combo,*warms,*geometries]
     arms["strict_goal"]=min(pool,key=lambda c:(b.score(c)[1],b.score(c)[0],c.warm,c.cap,c.reuse,ident(c)))
+    scores={n:b.score(c) for n,c in arms.items()}
     write(b.root/"development_runs.json",b.runs)
     write(b.root/"lock.json",dict(arms={n:asdict(c) for n,c in arms.items()},
-          scores={n:b.score(c) for n,c in arms.items()},selection_domains=list(DEV),seeds=list(b.seeds)))
+          scores=scores,selection_domains=list(DEV),seeds=list(b.seeds)))
     print("development settings",len(b.runs),"selected",asdict(final),b.score(final),flush=True)
 
 def holdout(args):

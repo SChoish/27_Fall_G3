@@ -56,7 +56,7 @@ class Store:
         dest=self.root/key
         if dest.exists():return json.loads(dest.read_text())["raw"]
         old=self.args.out/"alarm"/"physical"/self.name/key
-        reuse=self.name in DEV and old.exists()
+        reuse=self.name in TARGETS and self.c==TARGETS[self.name] and old.exists()
         raw=json.loads(old.read_text())["raw"] if reuse else simulate(self.c,x,k,self.args)
         import tempfile,os
         with tempfile.NamedTemporaryFile(mode="w",dir=self.root,delete=False) as f:
