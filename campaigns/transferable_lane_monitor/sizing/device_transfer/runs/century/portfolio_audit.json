@@ -1,0 +1,21 @@
+{
+  "count": 112,
+  "hits": 62,
+  "unique_witnesses": 28,
+  "fine_failures": [
+    [
+      "long100_sky",
+      "prefix_warm4",
+      53,
+      0.95,
+      88
+    ],
+    [
+      "long100_sky",
+      "warm4",
+      53,
+      0.95,
+      86
+    ]
+  ]
+}

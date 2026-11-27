@@ -2,6 +2,10 @@
 
 The circuit-to-circuit transfer benchmark uses native-width vectors rather than the two endpoints from the earlier pilot. Each transistor receives its own multiplier. Forward models in this directory are trained offline on development SPICE and are queried against real transient measurements. See PROTOCOL.md for the test splits, benchmark commitments and exploratory additions.
 
+## 100-evaluation benchmark
+
+[Results and circuit-level first hits](CENTURY_RESULTS_KO.md) · [Electrical prefix on an independent PDK pair](PORTFOLIO_RESULTS_KO.md) · [Protocol](century_protocol.md) · [Raw corner measurements and traces](century_measurements.zip). Run `python century_restore.py` to verify both the joint 5%/10% and direct 10% target policies without ngspice.
+
 ## Reproduce
 
 Use the SKY130 TT and GF180 typical transistor model files from the preceding domain-transfer campaign (the parent domain_transfer/prepare_gf.py extracts the GF180 model from the pinned official source). Use the pinned Emscripten ngspice module and Node version listed in ../README.md. Python requires NumPy. Run from this directory with absolute paths:

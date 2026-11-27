@@ -20,7 +20,7 @@ NEW={"long100_sky":CHAIN,"long100_gf":replace(CHAIN,pdk="gf")}
 NEW_SEEDS=(51,52,53)
 
 
-def compose(name,c,seed,goal,mode,role,warm,store):
+def compose(name,c,seed,goal,mode,role,warm,store,precision_pass=None):
     ref=role["ref"]
     if warm is not None:assert ref==warm["ref"]
     if mode=="role":sequence=role["trace"]
@@ -42,7 +42,7 @@ def compose(name,c,seed,goal,mode,role,warm,store):
             val=step["validation"] or store.pair(x,2)
             calls+=2
             ok,e2=checks(val,ref[2:])
-            if ok and e2<=goal:hit=calls
+            if ok and e2<=goal and (precision_pass is None or precision_pass(x)):hit=calls
         trace.append(dict(x=x,calls=calls,dev=dev,validation=val))
         if hit is not None:break
     if hit is None and calls<100:
