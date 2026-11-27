@@ -3,6 +3,7 @@ import ast
 import csv
 import json
 from pathlib import Path
+from tempfile import TemporaryDirectory
 from zipfile import ZipFile, ZIP_DEFLATED
 
 from audit_alarm import ALL, GOALS
@@ -47,6 +48,7 @@ def report():
     s=["# ALARM 구성요소의 목표 도달 비용", "",
        "표는 성공 수/시행 수와 40회 제한 평균 SPICE 호출 수입니다. 미도달도 40회로 포함했으며 실제 40회째 성공은 성공 수에 포함합니다. 회로에 동일 가중치를 주었습니다. 목표는 모든 출력·동작점에서 EDP를 기준 대비 각각 5%, 10% 줄이면서 지연·slew·레일·전원 민감도 제약을 만족하는 것입니다. 최초 4회는 기준, 개발 2회와 확인 2회를 포함해 최솟값은 8회입니다.", "",
        "## 방법별 결과","","| 방법 | 전체 5% | 새 회로 조건 5% | 전체 10% | 새 회로 조건 10% |","|---|---:|---:|---:|---:|"]
+    s[2:2]=["5% 목표에서 다섯 조건의 제한 평균은 elite + ALARM 균일 대각 가중치가 19.20회로 가장 낮았고, 새 세 조건에서는 elite + 일반 경사가 21.33회로 가장 낮았습니다. 10% 목표는 다중 지표 metric이 34.40회로 가장 낮았으나 성공은 4/15회였고 모두 GF180에서 나왔습니다. 두 성과는 서로 다른 목표에 대한 것입니다.","","같은 일반 경사에 elite 시작점을 추가하면 새 조건에서 5% 도달 비용이 27.33회에서 21.33회로 줄었습니다. 학습 대각과 과거 critic의 점수 재사용은 5% 전체 평균을 개선하지 못했습니다. 기준 역할 규칙과 ALARM 균일 대각 방법의 5% 전체 타깃 비용차는 3.60회입니다. 같은 회로 분포와 평균 절감량을 가정하면 324회 소스 비용을 새로 지불하는 경우 약 90건의 타깃이 필요합니다. 이미 소스 데이터를 보유했다면 신규 타깃의 추가 비용을 따로 볼 수 있습니다.",""]
     for m in ALL:s.append("| "+" | ".join([NAMES[m],cell(TARGETS,m,.95),cell(NEW,m,.95),cell(TARGETS,m,.9),cell(NEW,m,.9)])+" |")
     s+=["","새 조건은 기존 SKY130 결합 2-lane의 부하·결합 용량을 바꾼 load_sky와, 동일한 새 7-inverter 배선을 두 PDK에서 평가한 seven_sky·seven_gf입니다. fork와 mixed_gf는 이전 연구에서 진단에 사용했습니다. 세 seed는 공통 회로 내에 중첩되어 있습니다. 결정적 역할 규칙은 조건당 한 번만 실행했습니다.",""]
     for g in GOALS:
@@ -100,12 +102,16 @@ def report():
     Path("ALARM_RESULTS_KO.md").write_text("\n".join(s)+"\n")
 
 def pack():
-    with ZipFile("alarm_measurements.zip","w",compression=ZIP_DEFLATED,compresslevel=9) as archive:
-        for f in sorted(root.iterdir()):
-            if f.is_file():archive.write(f,"runs/"+f.name)
-        for d in sorted((root/"physical").iterdir()):
-            archive.writestr("physical/"+d.name+".jsonl",b"\n".join(f.read_bytes() for f in sorted(d.glob("*.json")))+b"\n")
-    with ZipFile("alarm_measurements.zip") as archive:assert archive.testzip() is None
+    with TemporaryDirectory(dir=".") as scratch:
+        pending=Path(scratch)/"alarm_measurements.zip"
+        with ZipFile(pending,"w",compression=ZIP_DEFLATED,compresslevel=9) as archive:
+            for f in sorted(root.iterdir()):
+                if f.is_file():archive.write(f,"runs/"+f.name)
+            for d in sorted((root/"physical").iterdir()):
+                archive.writestr("physical/"+d.name+".jsonl",b"\n".join(f.read_bytes() for f in sorted(d.glob("*.json")))+b"\n")
+        with ZipFile(pending) as archive:assert archive.testzip() is None
+        pending.replace("alarm_measurements.zip")
+
 
 if __name__=="__main__":
     report()

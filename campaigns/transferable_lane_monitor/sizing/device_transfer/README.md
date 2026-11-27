@@ -26,3 +26,7 @@ Physical records use a SHA-256 key over six-decimal width multipliers and corner
 After the search run `python retry.py search "${opts[@]}"` to investigate simulator errors serially. These reruns use the recorded candidate designs and leave the original trajectory untouched. Include their calls and the finer-step runs as separate validation overhead. To audit an existing archive, run `python package.py --restore restored` followed by `python audit.py restored`.
 
 For the descriptive two-step test and the final deterministic policy run `python backtrack.py search "${opts[@]}"`, `python adaptive.py search "${opts[@]}"`, and `python verify_adaptive.py search "${opts[@]}"`. The last command audits all its records and independently repeats the successful policy witnesses at a 0.25 ps step. Run `python headroom.py` after the primary search to summarize the constraint margins, then `python package.py` once all result files exist.
+
+## ALARM transfer pilot
+
+[Protocol and commands](ALARM_PILOT.md) and [Korean results](ALARM_RESULTS_KO.md) cover the matched first-proposal study of elite anchors, metric geometry, critic snapshots and transfer heads. The separate [SPICE archive](alarm_measurements.zip) contains the 1 ps traces, independent attainability checks, 0.25 ps replications and exact policy replay timing.

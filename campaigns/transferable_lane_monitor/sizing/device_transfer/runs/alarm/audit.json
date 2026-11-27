@@ -1,0 +1,42 @@
+{
+  "trials": 175,
+  "standalone_calls": 6684,
+  "source_calls": 324,
+  "cost_by_circuit": {
+    "fork": {
+      "unique": 1096,
+      "reused": 18,
+      "errors": 0
+    },
+    "mixed_gf": {
+      "unique": 860,
+      "reused": 22,
+      "errors": 0
+    },
+    "load_sky": {
+      "unique": 1098,
+      "reused": 0,
+      "errors": 0
+    },
+    "seven_sky": {
+      "unique": 1106,
+      "reused": 0,
+      "errors": 0
+    },
+    "seven_gf": {
+      "unique": 940,
+      "reused": 0,
+      "errors": 0
+    }
+  },
+  "snapshot_selections_and_older": {
+    "random_buffer": [
+      143,
+      115
+    ],
+    "scored_buffer": [
+      158,
+      94
+    ]
+  }
+}
