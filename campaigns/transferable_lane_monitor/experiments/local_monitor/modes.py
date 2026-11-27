@@ -29,7 +29,7 @@ def hidden_model(table):
     return np.array(targets), trans
 
 
-def run_modes(data, char, q, model, replay=None, weights=None, rng=None, collect=False):
+def run_modes(data, char, q, model, replay=None, weights=None, rng=None, collect=False, correction=None):
     truth, readings, common, packets = data
     nominal, left, right, bank = char
     targets, transition = model
@@ -98,7 +98,8 @@ def run_modes(data, char, q, model, replay=None, weights=None, rng=None, collect
             base += error[:, :, None] * (column / denom[:, None])[:, None, :]
             cov -= column[:, :, None] * column[:, None, :] / denom[:, None, None]
         mean = (prob[:, None, :] @ (base + shift))[:, 0]
-        position = nominal + np.rint(SAMPLES * mean) - SAMPLES * truth[:, t] - GRID[0]
+        codes = np.rint(SAMPLES * mean) if correction is None else correction(mean)
+        position = nominal + codes - SAMPLES * truth[:, t] - GRID[0]
         assert position.min() >= 0 and position.max() < len(GRID) - 1
         idx = position.astype(int)
         a = bank[packets[:, t, None], LANES, idx]
