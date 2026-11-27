@@ -40,7 +40,9 @@ class Continuous(Space):
                     J+=weights.T@(kernel(anchor)[0,:,None]*(logh-np.log(anchor))/self.bandwidth2)
                 pen=3/(1+np.exp(-np.clip(60*(yp[1:]+.01),-40,40)))
                 gz=np.r_[1.,pen]@J;gu=gz*scale
-                pu=-gu/(.7*gu*gu+.015*np.mean(gu*gu)+.0001)
+                metric=getattr(self,"inverse_direction",None)
+                pu=(-gu/(.7*gu*gu+.015*np.mean(gu*gu)+.0001)
+                    if metric is None else metric(gu,self.desc[0]))
                 pz=pu*scale
                 pz/=max(np.max(abs(pz)),1e-10)
                 dz=pz+(0 if j<3 else .45)*noise
