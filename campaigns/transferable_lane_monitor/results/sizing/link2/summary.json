@@ -1,0 +1,39 @@
+{
+  "stages": 2,
+  "x": [
+    0.9954130808612695,
+    0.8656534632027898
+  ],
+  "source_method": "kernel",
+  "fresh_spice_evals": 60,
+  "conditions": {
+    "quiet": {
+      "reference": 0.274017333984375,
+      "candidate": 0.274017333984375,
+      "difference": 0.0,
+      "upper": 0.0,
+      "pass_screen": true
+    },
+    "persistent": {
+      "reference": 0.42230224609375,
+      "candidate": 0.415069580078125,
+      "difference": -0.007232666015625,
+      "upper": -0.003631591796875,
+      "pass_screen": true
+    },
+    "fast": {
+      "reference": 0.555908203125,
+      "candidate": 0.544586181640625,
+      "difference": -0.011322021484375,
+      "upper": -0.006927490234375,
+      "pass_screen": true
+    },
+    "offset": {
+      "reference": 0.739776611328125,
+      "candidate": 0.726470947265625,
+      "difference": -0.0133056640625,
+      "upper": -0.009796142578125,
+      "pass_screen": true
+    }
+  }
+}
