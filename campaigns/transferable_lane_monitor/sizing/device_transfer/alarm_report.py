@@ -80,11 +80,17 @@ def report():
     fine_load="전기 제약 초과" if probe["fine_edp"] is None else f"{probe['fine_edp']:.6f}"
     s+=["","## 비대칭 부하의 달성 가능성","",
         f"load_sky에서 같은 역할의 두 lane을 같은 폭으로 묶은 참조 탐색이 목표를 놓친 뒤, 독립적인 8개 폭을 조절하는 사후 참조 탐색을 수행했습니다. 네 동작점 모두 사용한 비용은 {probe['calls']}회이고, 가장 낮은 실측 EDP/기준은 {probe['edp_ratio']:.6f}입니다. 추가 8회로 검산한 값은 {fine_load}입니다. 이 확인은 타깃 알고리즘의 도달 기록에 포함하지 않았습니다."]
+    zoom=json.loads((root/"load_oracle_refined.json").read_text())
+    zoom_edp="전기 제약 초과" if zoom["fine_edp"] is None else f"{zoom['fine_edp']:.6f}"
+    s+=["",f"5% 경계 부근을 별도로 재탐색했습니다. 소자별 제약 선형화와 더 작은 차분폭을 사용한 추가 비용 {zoom['additional_spice_calls']}회, 최종 시간 간격 재검산 {zoom['fine_calls']}회에서 재검산 EDP/기준은 {zoom_edp}였습니다. 기존 두 참조 탐색 기록도 모두 남겼습니다."]
     costs=ledger["cost_by_circuit"].values()
     oracle=sum(json.loads((root/f"witness_{n}.json").read_text())["calls"] for n in TARGETS)
     s+=["","## 비용과 재현","",
         f"- 원시 측정에서 {ledger['trials']}개 시행의 모든 제약 판정과 최초 도달 호출 수를 다시 계산했습니다. 방법별 독립 실행 환산 비용은 {ledger['standalone_calls']:,}회입니다. 타깃 원시 측정 {sum(c['unique'] for c in costs):,}개 중 기존 실측 캐시에서 가져온 것은 {sum(c['reused'] for c in costs)}개이며, 시뮬레이터 오류는 {sum(c['errors'] for c in costs)}개였습니다.",
         f"- 역할 규칙과 BO는 소스 비용 0회, 학습 방법은 같은 SKY130 소스 324회입니다. 참조 탐색 {oracle}회, 0.25 ps 재검산 {sum(r['calls'] for r in fine)}회는 별도입니다."]
+    timing=json.loads((root/"timing.json").read_text())
+    trained=timing["source_per_seed_seconds"]
+    s.append(f"- 저장한 시뮬레이션 값을 메모리에서 읽어 {timing['traces_exact']}개 알고리즘 궤적을 완전히 재생했습니다. seed당 소스 critic 학습은 {trained['fit']:.3f} CPU초, 좌표 가중치 학습은 {trained['source_attention_fit']:.3f} CPU초였습니다. 전체 재생과 방법별 타깃 critic 학습·후보 제안 시간은 [시간 로그](runs/alarm/timing.json)에 있습니다. SPICE 실행 시간은 이 CPU 시간에 포함하지 않았습니다.")
     for m,(all_n,old_n) in ledger["snapshot_selections_and_older"].items():
         s.append(f"- {NAMES[m]}가 snapshot을 초기값으로 선택해 다시 학습한 횟수는 {all_n}회입니다. 직전 갱신보다 더 오래된 모델을 선택한 경우는 {old_n}회였습니다.")
     s+=["- critic의 해석적 Jacobian을 중앙 유한차분과 대조했고, 네 방향의 하강성, 소자 순열 불변성, encoder 고정 및 snapshot 복사 독립성을 확인했습니다.",

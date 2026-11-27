@@ -28,3 +28,7 @@ For a simulation-free review, restore alarm_measurements.zip into a fresh runs/a
 ```bash
 python -c 'from pathlib import Path; from audit_alarm import audit; audit(Path("runs/alarm"))'
 ```
+
+Run `python alarm_replay.py search "${opts[@]}"` after all arms finish. It replays each policy with a read-only in-memory SPICE ledger, checks every proposed width, selection and stopping point, and separately times source fitting, online critic fitting and proposal computation using thread CPU time. Run alarm_report.py last to include the timing results. The source attention fit is shared across metric comparisons in training. Role-based methods and BO do not consume source simulations.
+
+The first independent-width probe's 0.25 ps EDP was 0.953135, close to the 0.95 boundary. As a secondary, explicitly post-hoc diagnostic, run alarm_load_refine.py from its saved best point, with finer 0.004 finite differences and projection onto linearized per-port halfspaces for at most six updates. Record incremental and repeated high-resolution calls separately. This solver is excluded from rankings.
