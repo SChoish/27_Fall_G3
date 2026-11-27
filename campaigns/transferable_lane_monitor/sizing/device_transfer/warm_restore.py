@@ -40,6 +40,8 @@ def restore(dest):
         fine[n,x]=all(ok for ok,_ in ck),max(v for _,v in ck)
     audit(SimpleNamespace(out=dest),gather(root),{n:bank(c)[0] for n,c in CIRCUITS.items()},fine)
     after=json.loads((root/"audit.json").read_text())
+    for report in (before,after):
+        report['failures'].sort(key=lambda v:json.dumps(v,sort_keys=True))
     assert before==after
 if __name__=="__main__":
     p=argparse.ArgumentParser();p.add_argument("new_directory",type=Path);restore(p.parse_args().new_directory)
