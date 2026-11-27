@@ -74,6 +74,18 @@ def main():
             values.extend([f"{sum(diff<0)}/{sum(diff==0)}/{sum(diff>0)}",f"{diff.mean():+.2f}"])
         pairings.append([NAMES[a]+" vs "+NAMES[b],*values])
     comp=make_table(["대응 비교 A vs B","5% A 승/무/패","5% A−B 비용","10% A 승/무/패","10% A−B 비용"],pairings)
+    lookup={(r["circuit"],r["arm"],r["seed"]):r for r in trials if r["protocol"]=="joint"}
+    rms=[]
+    for n in DOMAINS:
+        for seed in (31,32,33):
+            a,b=[lookup[n,arm,seed]["trace"] for arm in ("residual","rank2")]
+            if min(len(a),len(b))>1:
+                delta=np.log(a[1][0])-np.log(b[1][0])
+                rms.append(float(np.sqrt(np.mean(delta**2))))
+    from century_metric_check import main as check_metric
+    if not (root/"metric_diagnostics.json").exists():check_metric()
+    diagnostic=json.loads((root/"metric_diagnostics.json").read_text())
+    angles=[a for r in diagnostic if r["arm"]=="rank2" for a in r["source_rotation_degrees"]]
     accuracy=[]
     for a in ("rank2","shuffled"):
         for seed in (31,32,33):
@@ -96,6 +108,7 @@ def main():
       "각 SKY130 소스 회로에서 3개 anchor와 anchor당 8개 방향을 사용했다. 방향은 로그 폭 공간에서 L2 길이 0.10이고 실제 폭 반올림 오차는 허용했다. 같은 anchor의 28쌍은 8번의 후보 측정을 공유한다. 실측에서 허용 제약을 충족한 방향을 먼저 선호하고 양의 로그 제약 위반 합, EDP 순으로 비교했다. 12개 방향 집합이 제공한 336개 비교를 독립적인 실험 횟수로 세지 않는다.",
       "기본 대각 행렬 D, 역할 특징 Φ, 학습 행렬 B로 역 metric을 D^(-1/2) [I + Φ B Bᵀ Φᵀ] D^(-1/2)로 구성했다. 10×2 행렬 B는 측정 순위와 제안 방향 내적의 쌍대 로지스틱 손실로 학습했다. critic, 타깃 잔차 보정, 후보 수와 선탐색은 웜업 0과 같다. 표의 보류 조건은 한 소스 회로의 방향 라벨을 제외하고 B를 재학습한 결과다. 기반 critic은 기존 네 소스 회로의 324회 자료를 사용했다.",
       acc,
+      f"소스에서 기본 방향과 rank-2 방향의 각도 중앙값은 {np.median(angles):.1f}°였다. 선호 손실 gradient를 유한차분으로 검사한 최대 절대 오차는 {max(r['gradient_error'] for r in diagnostic):.2e}다. 타깃에서는 역할 제안 뒤 두 번째 설계까지 진행된 {len(rms)}개 대응 시행 중 {sum(v>0 for v in rms)}개에서 rank-2가 실제로 다른 폭을 SPICE에 보냈다. 이 시점의 소자별 로그 폭 RMS 차이 중앙값은 {np.median(rms):.4f}였다.",
       "## 비용 검산과 재현",
       f"공동 및 단독 목표를 합쳐 {audit['runs']}개 프로토콜별 궤적을 원시값에서 재계산했다. 독립 실행으로 청구한 타깃 호출 수는 공동 {audit['charged_target']['joint']:,}회, 10% 단독 {audit['charged_target']['strict']:,}회, 목표를 맞춘 5% BO {audit['charged_target']['bo95']:,}회다. 동일한 설계의 코너값을 재사용했으며 두 프로토콜을 합친 고유 타깃 코너 측정은 {audit['distinct_target_corner_rows']:,}개다. 실패 측정은 {audit['target_errors']}개다. 기본 학습 비용은 소스 324회, 방향 선호에는 추가 후보 192회와 nominal 기준 재측정 8회를 썼다. 모델과 무관한 탐색은 소스 비용이 0이다.",
       f"0.25 ps로 최초 도달 설계 {audit['distinct_first_hit_designs']}개와 해당 기준 설계를 검산했다. 재검산 비용은 {audit['precision_checks']}회이며 이전 동일 정밀도 자료 {audit['precision_reused']}회를 포함한다. 최초 도달 기록 {audit['hits']}건 중 재검산 미통과는 {len(audit['precision_failures'])}건이다.",
