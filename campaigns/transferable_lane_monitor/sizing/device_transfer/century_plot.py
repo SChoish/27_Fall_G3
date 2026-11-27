@@ -49,7 +49,7 @@ def main():
                 axis.strokeColor=HexColor("#7b8494")
             chart.xValueAxis.valueSteps=[0,20,40,60,80,100]
             chart.yValueAxis.valueSteps=[0,25,50,75,100]
-            chart.yValueAxis.labels.labelTextFormat="%d%%"
+            chart.yValueAxis.labelTextFormat="%d%%"
             chart.yValueAxis.visibleGrid=1
             chart.yValueAxis.gridStrokeColor=HexColor("#e1e5e8")
             chart.yValueAxis.gridStrokeWidth=.5

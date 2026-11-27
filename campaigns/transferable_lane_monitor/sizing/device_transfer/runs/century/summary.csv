@@ -1,0 +1,613 @@
+protocol,arm,domain,goal,limit,n,hits,mean_calls,times
+joint,random,all,0.95,40,18,3,34.666666666666664,- - - - - - - - - - - - - - - 8 8 8
+joint,random,all,0.95,100,18,3,84.66666666666667,- - - - - - - - - - - - - - - 8 8 8
+joint,random,all,0.9,40,18,3,34.666666666666664,- - - - - - - - - - - - - - - 8 8 8
+joint,random,all,0.9,100,18,3,84.66666666666667,- - - - - - - - - - - - - - - 8 8 8
+joint,random,previous,0.95,40,12,0,40.0,- - - - - - - - - - - -
+joint,random,previous,0.95,100,12,0,100.0,- - - - - - - - - - - -
+joint,random,previous,0.9,40,12,0,40.0,- - - - - - - - - - - -
+joint,random,previous,0.9,100,12,0,100.0,- - - - - - - - - - - -
+joint,random,fresh,0.95,40,6,3,24.0,- - - 8 8 8
+joint,random,fresh,0.95,100,6,3,54.0,- - - 8 8 8
+joint,random,fresh,0.9,40,6,3,24.0,- - - 8 8 8
+joint,random,fresh,0.9,100,6,3,54.0,- - - 8 8 8
+joint,random,pair_new_sky,0.95,40,3,0,40.0,- - -
+joint,random,pair_new_sky,0.95,100,3,0,100.0,- - -
+joint,random,pair_new_sky,0.9,40,3,0,40.0,- - -
+joint,random,pair_new_sky,0.9,100,3,0,100.0,- - -
+joint,random,pair_new_gf,0.95,40,3,0,40.0,- - -
+joint,random,pair_new_gf,0.95,100,3,0,100.0,- - -
+joint,random,pair_new_gf,0.9,40,3,0,40.0,- - -
+joint,random,pair_new_gf,0.9,100,3,0,100.0,- - -
+joint,random,tree_new_sky,0.95,40,3,0,40.0,- - -
+joint,random,tree_new_sky,0.95,100,3,0,100.0,- - -
+joint,random,tree_new_sky,0.9,40,3,0,40.0,- - -
+joint,random,tree_new_sky,0.9,100,3,0,100.0,- - -
+joint,random,tree_new_gf,0.95,40,3,0,40.0,- - -
+joint,random,tree_new_gf,0.95,100,3,0,100.0,- - -
+joint,random,tree_new_gf,0.9,40,3,0,40.0,- - -
+joint,random,tree_new_gf,0.9,100,3,0,100.0,- - -
+joint,random,parallel100_sky,0.95,40,3,0,40.0,- - -
+joint,random,parallel100_sky,0.95,100,3,0,100.0,- - -
+joint,random,parallel100_sky,0.9,40,3,0,40.0,- - -
+joint,random,parallel100_sky,0.9,100,3,0,100.0,- - -
+joint,random,parallel100_gf,0.95,40,3,3,8.0,8 8 8
+joint,random,parallel100_gf,0.95,100,3,3,8.0,8 8 8
+joint,random,parallel100_gf,0.9,40,3,3,8.0,8 8 8
+joint,random,parallel100_gf,0.9,100,3,3,8.0,8 8 8
+joint,bo,all,0.95,40,18,5,34.22222222222222,- - - - 36 36 - - - - - - - - - 8 8 8
+joint,bo,all,0.95,100,18,8,71.66666666666667,- - - 54 36 36 - - - 54 86 - - - - 8 8 8
+joint,bo,all,0.9,40,18,3,34.666666666666664,- - - - - - - - - - - - - - - 8 8 8
+joint,bo,all,0.9,100,18,3,84.66666666666667,- - - - - - - - - - - - - - - 8 8 8
+joint,bo,previous,0.95,40,12,2,39.333333333333336,- - - - 36 36 - - - - - -
+joint,bo,previous,0.95,100,12,5,80.5,- - - 54 36 36 - - - 54 86 -
+joint,bo,previous,0.9,40,12,0,40.0,- - - - - - - - - - - -
+joint,bo,previous,0.9,100,12,0,100.0,- - - - - - - - - - - -
+joint,bo,fresh,0.95,40,6,3,24.0,- - - 8 8 8
+joint,bo,fresh,0.95,100,6,3,54.0,- - - 8 8 8
+joint,bo,fresh,0.9,40,6,3,24.0,- - - 8 8 8
+joint,bo,fresh,0.9,100,6,3,54.0,- - - 8 8 8
+joint,bo,pair_new_sky,0.95,40,3,0,40.0,- - -
+joint,bo,pair_new_sky,0.95,100,3,0,100.0,- - -
+joint,bo,pair_new_sky,0.9,40,3,0,40.0,- - -
+joint,bo,pair_new_sky,0.9,100,3,0,100.0,- - -
+joint,bo,pair_new_gf,0.95,40,3,2,37.333333333333336,- 36 36
+joint,bo,pair_new_gf,0.95,100,3,3,42.0,54 36 36
+joint,bo,pair_new_gf,0.9,40,3,0,40.0,- - -
+joint,bo,pair_new_gf,0.9,100,3,0,100.0,- - -
+joint,bo,tree_new_sky,0.95,40,3,0,40.0,- - -
+joint,bo,tree_new_sky,0.95,100,3,0,100.0,- - -
+joint,bo,tree_new_sky,0.9,40,3,0,40.0,- - -
+joint,bo,tree_new_sky,0.9,100,3,0,100.0,- - -
+joint,bo,tree_new_gf,0.95,40,3,0,40.0,- - -
+joint,bo,tree_new_gf,0.95,100,3,2,80.0,54 86 -
+joint,bo,tree_new_gf,0.9,40,3,0,40.0,- - -
+joint,bo,tree_new_gf,0.9,100,3,0,100.0,- - -
+joint,bo,parallel100_sky,0.95,40,3,0,40.0,- - -
+joint,bo,parallel100_sky,0.95,100,3,0,100.0,- - -
+joint,bo,parallel100_sky,0.9,40,3,0,40.0,- - -
+joint,bo,parallel100_sky,0.9,100,3,0,100.0,- - -
+joint,bo,parallel100_gf,0.95,40,3,3,8.0,8 8 8
+joint,bo,parallel100_gf,0.95,100,3,3,8.0,8 8 8
+joint,bo,parallel100_gf,0.9,40,3,3,8.0,8 8 8
+joint,bo,parallel100_gf,0.9,100,3,3,8.0,8 8 8
+joint,acor,all,0.95,40,18,3,34.666666666666664,- - - - - - - - - - - - - - - 8 8 8
+joint,acor,all,0.95,100,18,7,79.55555555555556,- - - 62 - 88 - - - 94 64 - - - - 8 8 8
+joint,acor,all,0.9,40,18,3,34.666666666666664,- - - - - - - - - - - - - - - 8 8 8
+joint,acor,all,0.9,100,18,3,84.66666666666667,- - - - - - - - - - - - - - - 8 8 8
+joint,acor,previous,0.95,40,12,0,40.0,- - - - - - - - - - - -
+joint,acor,previous,0.95,100,12,4,92.33333333333333,- - - 62 - 88 - - - 94 64 -
+joint,acor,previous,0.9,40,12,0,40.0,- - - - - - - - - - - -
+joint,acor,previous,0.9,100,12,0,100.0,- - - - - - - - - - - -
+joint,acor,fresh,0.95,40,6,3,24.0,- - - 8 8 8
+joint,acor,fresh,0.95,100,6,3,54.0,- - - 8 8 8
+joint,acor,fresh,0.9,40,6,3,24.0,- - - 8 8 8
+joint,acor,fresh,0.9,100,6,3,54.0,- - - 8 8 8
+joint,acor,pair_new_sky,0.95,40,3,0,40.0,- - -
+joint,acor,pair_new_sky,0.95,100,3,0,100.0,- - -
+joint,acor,pair_new_sky,0.9,40,3,0,40.0,- - -
+joint,acor,pair_new_sky,0.9,100,3,0,100.0,- - -
+joint,acor,pair_new_gf,0.95,40,3,0,40.0,- - -
+joint,acor,pair_new_gf,0.95,100,3,2,83.33333333333333,62 - 88
+joint,acor,pair_new_gf,0.9,40,3,0,40.0,- - -
+joint,acor,pair_new_gf,0.9,100,3,0,100.0,- - -
+joint,acor,tree_new_sky,0.95,40,3,0,40.0,- - -
+joint,acor,tree_new_sky,0.95,100,3,0,100.0,- - -
+joint,acor,tree_new_sky,0.9,40,3,0,40.0,- - -
+joint,acor,tree_new_sky,0.9,100,3,0,100.0,- - -
+joint,acor,tree_new_gf,0.95,40,3,0,40.0,- - -
+joint,acor,tree_new_gf,0.95,100,3,2,86.0,94 64 -
+joint,acor,tree_new_gf,0.9,40,3,0,40.0,- - -
+joint,acor,tree_new_gf,0.9,100,3,0,100.0,- - -
+joint,acor,parallel100_sky,0.95,40,3,0,40.0,- - -
+joint,acor,parallel100_sky,0.95,100,3,0,100.0,- - -
+joint,acor,parallel100_sky,0.9,40,3,0,40.0,- - -
+joint,acor,parallel100_sky,0.9,100,3,0,100.0,- - -
+joint,acor,parallel100_gf,0.95,40,3,3,8.0,8 8 8
+joint,acor,parallel100_gf,0.95,100,3,3,8.0,8 8 8
+joint,acor,parallel100_gf,0.9,40,3,3,8.0,8 8 8
+joint,acor,parallel100_gf,0.9,100,3,3,8.0,8 8 8
+joint,de,all,0.95,40,18,3,34.666666666666664,- - - - - - - - - - - - - - - 8 8 8
+joint,de,all,0.95,100,18,4,84.33333333333333,- - - - 94 - - - - - - - - - - 8 8 8
+joint,de,all,0.9,40,18,3,34.666666666666664,- - - - - - - - - - - - - - - 8 8 8
+joint,de,all,0.9,100,18,3,84.66666666666667,- - - - - - - - - - - - - - - 8 8 8
+joint,de,previous,0.95,40,12,0,40.0,- - - - - - - - - - - -
+joint,de,previous,0.95,100,12,1,99.5,- - - - 94 - - - - - - -
+joint,de,previous,0.9,40,12,0,40.0,- - - - - - - - - - - -
+joint,de,previous,0.9,100,12,0,100.0,- - - - - - - - - - - -
+joint,de,fresh,0.95,40,6,3,24.0,- - - 8 8 8
+joint,de,fresh,0.95,100,6,3,54.0,- - - 8 8 8
+joint,de,fresh,0.9,40,6,3,24.0,- - - 8 8 8
+joint,de,fresh,0.9,100,6,3,54.0,- - - 8 8 8
+joint,de,pair_new_sky,0.95,40,3,0,40.0,- - -
+joint,de,pair_new_sky,0.95,100,3,0,100.0,- - -
+joint,de,pair_new_sky,0.9,40,3,0,40.0,- - -
+joint,de,pair_new_sky,0.9,100,3,0,100.0,- - -
+joint,de,pair_new_gf,0.95,40,3,0,40.0,- - -
+joint,de,pair_new_gf,0.95,100,3,1,98.0,- 94 -
+joint,de,pair_new_gf,0.9,40,3,0,40.0,- - -
+joint,de,pair_new_gf,0.9,100,3,0,100.0,- - -
+joint,de,tree_new_sky,0.95,40,3,0,40.0,- - -
+joint,de,tree_new_sky,0.95,100,3,0,100.0,- - -
+joint,de,tree_new_sky,0.9,40,3,0,40.0,- - -
+joint,de,tree_new_sky,0.9,100,3,0,100.0,- - -
+joint,de,tree_new_gf,0.95,40,3,0,40.0,- - -
+joint,de,tree_new_gf,0.95,100,3,0,100.0,- - -
+joint,de,tree_new_gf,0.9,40,3,0,40.0,- - -
+joint,de,tree_new_gf,0.9,100,3,0,100.0,- - -
+joint,de,parallel100_sky,0.95,40,3,0,40.0,- - -
+joint,de,parallel100_sky,0.95,100,3,0,100.0,- - -
+joint,de,parallel100_sky,0.9,40,3,0,40.0,- - -
+joint,de,parallel100_sky,0.9,100,3,0,100.0,- - -
+joint,de,parallel100_gf,0.95,40,3,3,8.0,8 8 8
+joint,de,parallel100_gf,0.95,100,3,3,8.0,8 8 8
+joint,de,parallel100_gf,0.9,40,3,3,8.0,8 8 8
+joint,de,parallel100_gf,0.9,100,3,3,8.0,8 8 8
+joint,group_acor,all,0.95,40,18,5,34.333333333333336,- - - - 36 - - - - - 38 - - - - 8 8 8
+joint,group_acor,all,0.95,100,18,11,66.55555555555556,- - - 56 36 64 - - - 50 38 86 44 - 100 8 8 8
+joint,group_acor,all,0.9,40,18,3,34.666666666666664,- - - - - - - - - - - - - - - 8 8 8
+joint,group_acor,all,0.9,100,18,3,84.66666666666667,- - - - - - - - - - - - - - - 8 8 8
+joint,group_acor,previous,0.95,40,12,2,39.5,- - - - 36 - - - - - 38 -
+joint,group_acor,previous,0.95,100,12,6,77.5,- - - 56 36 64 - - - 50 38 86
+joint,group_acor,previous,0.9,40,12,0,40.0,- - - - - - - - - - - -
+joint,group_acor,previous,0.9,100,12,0,100.0,- - - - - - - - - - - -
+joint,group_acor,fresh,0.95,40,6,3,24.0,- - - 8 8 8
+joint,group_acor,fresh,0.95,100,6,5,44.666666666666664,44 - 100 8 8 8
+joint,group_acor,fresh,0.9,40,6,3,24.0,- - - 8 8 8
+joint,group_acor,fresh,0.9,100,6,3,54.0,- - - 8 8 8
+joint,group_acor,pair_new_sky,0.95,40,3,0,40.0,- - -
+joint,group_acor,pair_new_sky,0.95,100,3,0,100.0,- - -
+joint,group_acor,pair_new_sky,0.9,40,3,0,40.0,- - -
+joint,group_acor,pair_new_sky,0.9,100,3,0,100.0,- - -
+joint,group_acor,pair_new_gf,0.95,40,3,1,38.666666666666664,- 36 -
+joint,group_acor,pair_new_gf,0.95,100,3,3,52.0,56 36 64
+joint,group_acor,pair_new_gf,0.9,40,3,0,40.0,- - -
+joint,group_acor,pair_new_gf,0.9,100,3,0,100.0,- - -
+joint,group_acor,tree_new_sky,0.95,40,3,0,40.0,- - -
+joint,group_acor,tree_new_sky,0.95,100,3,0,100.0,- - -
+joint,group_acor,tree_new_sky,0.9,40,3,0,40.0,- - -
+joint,group_acor,tree_new_sky,0.9,100,3,0,100.0,- - -
+joint,group_acor,tree_new_gf,0.95,40,3,1,39.333333333333336,- 38 -
+joint,group_acor,tree_new_gf,0.95,100,3,3,58.0,50 38 86
+joint,group_acor,tree_new_gf,0.9,40,3,0,40.0,- - -
+joint,group_acor,tree_new_gf,0.9,100,3,0,100.0,- - -
+joint,group_acor,parallel100_sky,0.95,40,3,0,40.0,- - -
+joint,group_acor,parallel100_sky,0.95,100,3,2,81.33333333333333,44 - 100
+joint,group_acor,parallel100_sky,0.9,40,3,0,40.0,- - -
+joint,group_acor,parallel100_sky,0.9,100,3,0,100.0,- - -
+joint,group_acor,parallel100_gf,0.95,40,3,3,8.0,8 8 8
+joint,group_acor,parallel100_gf,0.95,100,3,3,8.0,8 8 8
+joint,group_acor,parallel100_gf,0.9,40,3,3,8.0,8 8 8
+joint,group_acor,parallel100_gf,0.9,100,3,3,8.0,8 8 8
+joint,group_random,all,0.95,40,18,3,34.666666666666664,- - - - - - - - - - - - - - - 8 8 8
+joint,group_random,all,0.95,100,18,3,84.66666666666667,- - - - - - - - - - - - - - - 8 8 8
+joint,group_random,all,0.9,40,18,3,34.666666666666664,- - - - - - - - - - - - - - - 8 8 8
+joint,group_random,all,0.9,100,18,3,84.66666666666667,- - - - - - - - - - - - - - - 8 8 8
+joint,group_random,previous,0.95,40,12,0,40.0,- - - - - - - - - - - -
+joint,group_random,previous,0.95,100,12,0,100.0,- - - - - - - - - - - -
+joint,group_random,previous,0.9,40,12,0,40.0,- - - - - - - - - - - -
+joint,group_random,previous,0.9,100,12,0,100.0,- - - - - - - - - - - -
+joint,group_random,fresh,0.95,40,6,3,24.0,- - - 8 8 8
+joint,group_random,fresh,0.95,100,6,3,54.0,- - - 8 8 8
+joint,group_random,fresh,0.9,40,6,3,24.0,- - - 8 8 8
+joint,group_random,fresh,0.9,100,6,3,54.0,- - - 8 8 8
+joint,group_random,pair_new_sky,0.95,40,3,0,40.0,- - -
+joint,group_random,pair_new_sky,0.95,100,3,0,100.0,- - -
+joint,group_random,pair_new_sky,0.9,40,3,0,40.0,- - -
+joint,group_random,pair_new_sky,0.9,100,3,0,100.0,- - -
+joint,group_random,pair_new_gf,0.95,40,3,0,40.0,- - -
+joint,group_random,pair_new_gf,0.95,100,3,0,100.0,- - -
+joint,group_random,pair_new_gf,0.9,40,3,0,40.0,- - -
+joint,group_random,pair_new_gf,0.9,100,3,0,100.0,- - -
+joint,group_random,tree_new_sky,0.95,40,3,0,40.0,- - -
+joint,group_random,tree_new_sky,0.95,100,3,0,100.0,- - -
+joint,group_random,tree_new_sky,0.9,40,3,0,40.0,- - -
+joint,group_random,tree_new_sky,0.9,100,3,0,100.0,- - -
+joint,group_random,tree_new_gf,0.95,40,3,0,40.0,- - -
+joint,group_random,tree_new_gf,0.95,100,3,0,100.0,- - -
+joint,group_random,tree_new_gf,0.9,40,3,0,40.0,- - -
+joint,group_random,tree_new_gf,0.9,100,3,0,100.0,- - -
+joint,group_random,parallel100_sky,0.95,40,3,0,40.0,- - -
+joint,group_random,parallel100_sky,0.95,100,3,0,100.0,- - -
+joint,group_random,parallel100_sky,0.9,40,3,0,40.0,- - -
+joint,group_random,parallel100_sky,0.9,100,3,0,100.0,- - -
+joint,group_random,parallel100_gf,0.95,40,3,3,8.0,8 8 8
+joint,group_random,parallel100_gf,0.95,100,3,3,8.0,8 8 8
+joint,group_random,parallel100_gf,0.9,40,3,3,8.0,8 8 8
+joint,group_random,parallel100_gf,0.9,100,3,3,8.0,8 8 8
+joint,residual,all,0.95,40,18,12,22.11111111111111,- - - 12 10 12 - - - 28 16 14 20 10 12 8 8 8
+joint,residual,all,0.95,100,18,12,42.111111111111114,- - - 12 10 12 - - - 28 16 14 20 10 12 8 8 8
+joint,residual,all,0.9,40,18,3,34.666666666666664,- - - - - - - - - - - - - - - 8 8 8
+joint,residual,all,0.9,100,18,3,84.66666666666667,- - - - - - - - - - - - - - - 8 8 8
+joint,residual,previous,0.95,40,12,6,27.666666666666668,- - - 12 10 12 - - - 28 16 14
+joint,residual,previous,0.95,100,12,6,57.666666666666664,- - - 12 10 12 - - - 28 16 14
+joint,residual,previous,0.9,40,12,0,40.0,- - - - - - - - - - - -
+joint,residual,previous,0.9,100,12,0,100.0,- - - - - - - - - - - -
+joint,residual,fresh,0.95,40,6,6,11.0,20 10 12 8 8 8
+joint,residual,fresh,0.95,100,6,6,11.0,20 10 12 8 8 8
+joint,residual,fresh,0.9,40,6,3,24.0,- - - 8 8 8
+joint,residual,fresh,0.9,100,6,3,54.0,- - - 8 8 8
+joint,residual,pair_new_sky,0.95,40,3,0,40.0,- - -
+joint,residual,pair_new_sky,0.95,100,3,0,100.0,- - -
+joint,residual,pair_new_sky,0.9,40,3,0,40.0,- - -
+joint,residual,pair_new_sky,0.9,100,3,0,100.0,- - -
+joint,residual,pair_new_gf,0.95,40,3,3,11.333333333333334,12 10 12
+joint,residual,pair_new_gf,0.95,100,3,3,11.333333333333334,12 10 12
+joint,residual,pair_new_gf,0.9,40,3,0,40.0,- - -
+joint,residual,pair_new_gf,0.9,100,3,0,100.0,- - -
+joint,residual,tree_new_sky,0.95,40,3,0,40.0,- - -
+joint,residual,tree_new_sky,0.95,100,3,0,100.0,- - -
+joint,residual,tree_new_sky,0.9,40,3,0,40.0,- - -
+joint,residual,tree_new_sky,0.9,100,3,0,100.0,- - -
+joint,residual,tree_new_gf,0.95,40,3,3,19.333333333333332,28 16 14
+joint,residual,tree_new_gf,0.95,100,3,3,19.333333333333332,28 16 14
+joint,residual,tree_new_gf,0.9,40,3,0,40.0,- - -
+joint,residual,tree_new_gf,0.9,100,3,0,100.0,- - -
+joint,residual,parallel100_sky,0.95,40,3,3,14.0,20 10 12
+joint,residual,parallel100_sky,0.95,100,3,3,14.0,20 10 12
+joint,residual,parallel100_sky,0.9,40,3,0,40.0,- - -
+joint,residual,parallel100_sky,0.9,100,3,0,100.0,- - -
+joint,residual,parallel100_gf,0.95,40,3,3,8.0,8 8 8
+joint,residual,parallel100_gf,0.95,100,3,3,8.0,8 8 8
+joint,residual,parallel100_gf,0.9,40,3,3,8.0,8 8 8
+joint,residual,parallel100_gf,0.9,100,3,3,8.0,8 8 8
+joint,warm4,all,0.95,40,18,13,25.444444444444443,18 - - 20 18 14 - 34 - 20 20 40 - 10 26 10 10 18
+joint,warm4,all,0.95,100,18,15,36.22222222222222,18 - - 20 18 14 - 34 44 20 20 40 50 10 26 10 10 18
+joint,warm4,all,0.9,40,18,3,36.111111111111114,- - - - - - - - - - - - - - - 18 14 18
+joint,warm4,all,0.9,100,18,3,86.11111111111111,- - - - - - - - - - - - - - - 18 14 18
+joint,warm4,previous,0.95,40,12,8,28.666666666666668,18 - - 20 18 14 - 34 - 20 20 40
+joint,warm4,previous,0.95,100,12,9,44.0,18 - - 20 18 14 - 34 44 20 20 40
+joint,warm4,previous,0.9,40,12,0,40.0,- - - - - - - - - - - -
+joint,warm4,previous,0.9,100,12,0,100.0,- - - - - - - - - - - -
+joint,warm4,fresh,0.95,40,6,5,19.0,- 10 26 10 10 18
+joint,warm4,fresh,0.95,100,6,6,20.666666666666668,50 10 26 10 10 18
+joint,warm4,fresh,0.9,40,6,3,28.333333333333332,- - - 18 14 18
+joint,warm4,fresh,0.9,100,6,3,58.333333333333336,- - - 18 14 18
+joint,warm4,pair_new_sky,0.95,40,3,1,32.666666666666664,18 - -
+joint,warm4,pair_new_sky,0.95,100,3,1,72.66666666666667,18 - -
+joint,warm4,pair_new_sky,0.9,40,3,0,40.0,- - -
+joint,warm4,pair_new_sky,0.9,100,3,0,100.0,- - -
+joint,warm4,pair_new_gf,0.95,40,3,3,17.333333333333332,20 18 14
+joint,warm4,pair_new_gf,0.95,100,3,3,17.333333333333332,20 18 14
+joint,warm4,pair_new_gf,0.9,40,3,0,40.0,- - -
+joint,warm4,pair_new_gf,0.9,100,3,0,100.0,- - -
+joint,warm4,tree_new_sky,0.95,40,3,1,38.0,- 34 -
+joint,warm4,tree_new_sky,0.95,100,3,2,59.333333333333336,- 34 44
+joint,warm4,tree_new_sky,0.9,40,3,0,40.0,- - -
+joint,warm4,tree_new_sky,0.9,100,3,0,100.0,- - -
+joint,warm4,tree_new_gf,0.95,40,3,3,26.666666666666668,20 20 40
+joint,warm4,tree_new_gf,0.95,100,3,3,26.666666666666668,20 20 40
+joint,warm4,tree_new_gf,0.9,40,3,0,40.0,- - -
+joint,warm4,tree_new_gf,0.9,100,3,0,100.0,- - -
+joint,warm4,parallel100_sky,0.95,40,3,2,25.333333333333332,- 10 26
+joint,warm4,parallel100_sky,0.95,100,3,3,28.666666666666668,50 10 26
+joint,warm4,parallel100_sky,0.9,40,3,0,40.0,- - -
+joint,warm4,parallel100_sky,0.9,100,3,0,100.0,- - -
+joint,warm4,parallel100_gf,0.95,40,3,3,12.666666666666666,10 10 18
+joint,warm4,parallel100_gf,0.95,100,3,3,12.666666666666666,10 10 18
+joint,warm4,parallel100_gf,0.9,40,3,3,16.666666666666668,18 14 18
+joint,warm4,parallel100_gf,0.9,100,3,3,16.666666666666668,18 14 18
+joint,rank2,all,0.95,40,18,11,22.77777777777778,- - - 10 10 12 - - - 16 12 14 22 10 - 8 8 8
+joint,rank2,all,0.95,100,18,12,42.888888888888886,- - - 10 10 12 - - - 16 12 14 22 10 42 8 8 8
+joint,rank2,all,0.9,40,18,3,34.666666666666664,- - - - - - - - - - - - - - - 8 8 8
+joint,rank2,all,0.9,100,18,4,83.44444444444444,- - - - - - - - - 78 - - - - - 8 8 8
+joint,rank2,previous,0.95,40,12,6,26.166666666666668,- - - 10 10 12 - - - 16 12 14
+joint,rank2,previous,0.95,100,12,6,56.166666666666664,- - - 10 10 12 - - - 16 12 14
+joint,rank2,previous,0.9,40,12,0,40.0,- - - - - - - - - - - -
+joint,rank2,previous,0.9,100,12,1,98.16666666666667,- - - - - - - - - 78 - -
+joint,rank2,fresh,0.95,40,6,5,16.0,22 10 - 8 8 8
+joint,rank2,fresh,0.95,100,6,6,16.333333333333332,22 10 42 8 8 8
+joint,rank2,fresh,0.9,40,6,3,24.0,- - - 8 8 8
+joint,rank2,fresh,0.9,100,6,3,54.0,- - - 8 8 8
+joint,rank2,pair_new_sky,0.95,40,3,0,40.0,- - -
+joint,rank2,pair_new_sky,0.95,100,3,0,100.0,- - -
+joint,rank2,pair_new_sky,0.9,40,3,0,40.0,- - -
+joint,rank2,pair_new_sky,0.9,100,3,0,100.0,- - -
+joint,rank2,pair_new_gf,0.95,40,3,3,10.666666666666666,10 10 12
+joint,rank2,pair_new_gf,0.95,100,3,3,10.666666666666666,10 10 12
+joint,rank2,pair_new_gf,0.9,40,3,0,40.0,- - -
+joint,rank2,pair_new_gf,0.9,100,3,0,100.0,- - -
+joint,rank2,tree_new_sky,0.95,40,3,0,40.0,- - -
+joint,rank2,tree_new_sky,0.95,100,3,0,100.0,- - -
+joint,rank2,tree_new_sky,0.9,40,3,0,40.0,- - -
+joint,rank2,tree_new_sky,0.9,100,3,0,100.0,- - -
+joint,rank2,tree_new_gf,0.95,40,3,3,14.0,16 12 14
+joint,rank2,tree_new_gf,0.95,100,3,3,14.0,16 12 14
+joint,rank2,tree_new_gf,0.9,40,3,0,40.0,- - -
+joint,rank2,tree_new_gf,0.9,100,3,1,92.66666666666667,78 - -
+joint,rank2,parallel100_sky,0.95,40,3,2,24.0,22 10 -
+joint,rank2,parallel100_sky,0.95,100,3,3,24.666666666666668,22 10 42
+joint,rank2,parallel100_sky,0.9,40,3,0,40.0,- - -
+joint,rank2,parallel100_sky,0.9,100,3,0,100.0,- - -
+joint,rank2,parallel100_gf,0.95,40,3,3,8.0,8 8 8
+joint,rank2,parallel100_gf,0.95,100,3,3,8.0,8 8 8
+joint,rank2,parallel100_gf,0.9,40,3,3,8.0,8 8 8
+joint,rank2,parallel100_gf,0.9,100,3,3,8.0,8 8 8
+joint,shuffled,all,0.95,40,18,11,23.22222222222222,- - - 10 10 22 - - - 12 12 14 20 14 - 8 8 8
+joint,shuffled,all,0.95,100,18,12,44.111111111111114,- - - 10 10 22 - - - 12 12 14 20 14 56 8 8 8
+joint,shuffled,all,0.9,40,18,3,34.666666666666664,- - - - - - - - - - - - - - - 8 8 8
+joint,shuffled,all,0.9,100,18,3,84.66666666666667,- - - - - - - - - - - - - - - 8 8 8
+joint,shuffled,previous,0.95,40,12,6,26.666666666666668,- - - 10 10 22 - - - 12 12 14
+joint,shuffled,previous,0.95,100,12,6,56.666666666666664,- - - 10 10 22 - - - 12 12 14
+joint,shuffled,previous,0.9,40,12,0,40.0,- - - - - - - - - - - -
+joint,shuffled,previous,0.9,100,12,0,100.0,- - - - - - - - - - - -
+joint,shuffled,fresh,0.95,40,6,5,16.333333333333332,20 14 - 8 8 8
+joint,shuffled,fresh,0.95,100,6,6,19.0,20 14 56 8 8 8
+joint,shuffled,fresh,0.9,40,6,3,24.0,- - - 8 8 8
+joint,shuffled,fresh,0.9,100,6,3,54.0,- - - 8 8 8
+joint,shuffled,pair_new_sky,0.95,40,3,0,40.0,- - -
+joint,shuffled,pair_new_sky,0.95,100,3,0,100.0,- - -
+joint,shuffled,pair_new_sky,0.9,40,3,0,40.0,- - -
+joint,shuffled,pair_new_sky,0.9,100,3,0,100.0,- - -
+joint,shuffled,pair_new_gf,0.95,40,3,3,14.0,10 10 22
+joint,shuffled,pair_new_gf,0.95,100,3,3,14.0,10 10 22
+joint,shuffled,pair_new_gf,0.9,40,3,0,40.0,- - -
+joint,shuffled,pair_new_gf,0.9,100,3,0,100.0,- - -
+joint,shuffled,tree_new_sky,0.95,40,3,0,40.0,- - -
+joint,shuffled,tree_new_sky,0.95,100,3,0,100.0,- - -
+joint,shuffled,tree_new_sky,0.9,40,3,0,40.0,- - -
+joint,shuffled,tree_new_sky,0.9,100,3,0,100.0,- - -
+joint,shuffled,tree_new_gf,0.95,40,3,3,12.666666666666666,12 12 14
+joint,shuffled,tree_new_gf,0.95,100,3,3,12.666666666666666,12 12 14
+joint,shuffled,tree_new_gf,0.9,40,3,0,40.0,- - -
+joint,shuffled,tree_new_gf,0.9,100,3,0,100.0,- - -
+joint,shuffled,parallel100_sky,0.95,40,3,2,24.666666666666668,20 14 -
+joint,shuffled,parallel100_sky,0.95,100,3,3,30.0,20 14 56
+joint,shuffled,parallel100_sky,0.9,40,3,0,40.0,- - -
+joint,shuffled,parallel100_sky,0.9,100,3,0,100.0,- - -
+joint,shuffled,parallel100_gf,0.95,40,3,3,8.0,8 8 8
+joint,shuffled,parallel100_gf,0.95,100,3,3,8.0,8 8 8
+joint,shuffled,parallel100_gf,0.9,40,3,3,8.0,8 8 8
+joint,shuffled,parallel100_gf,0.9,100,3,3,8.0,8 8 8
+joint,role_poll,all,0.95,40,6,4,21.333333333333332,- 10 - 20 10 8
+joint,role_poll,all,0.95,100,6,5,32.666666666666664,48 10 - 20 10 8
+joint,role_poll,all,0.9,40,6,1,34.666666666666664,- - - - - 8
+joint,role_poll,all,0.9,100,6,1,84.66666666666667,- - - - - 8
+joint,role_poll,previous,0.95,40,4,2,27.5,- 10 - 20
+joint,role_poll,previous,0.95,100,4,3,44.5,48 10 - 20
+joint,role_poll,previous,0.9,40,4,0,40.0,- - - -
+joint,role_poll,previous,0.9,100,4,0,100.0,- - - -
+joint,role_poll,fresh,0.95,40,2,2,9.0,10 8
+joint,role_poll,fresh,0.95,100,2,2,9.0,10 8
+joint,role_poll,fresh,0.9,40,2,1,24.0,- 8
+joint,role_poll,fresh,0.9,100,2,1,54.0,- 8
+joint,role_poll,pair_new_sky,0.95,40,1,0,40.0,-
+joint,role_poll,pair_new_sky,0.95,100,1,1,48.0,48
+joint,role_poll,pair_new_sky,0.9,40,1,0,40.0,-
+joint,role_poll,pair_new_sky,0.9,100,1,0,100.0,-
+joint,role_poll,pair_new_gf,0.95,40,1,1,10.0,10
+joint,role_poll,pair_new_gf,0.95,100,1,1,10.0,10
+joint,role_poll,pair_new_gf,0.9,40,1,0,40.0,-
+joint,role_poll,pair_new_gf,0.9,100,1,0,100.0,-
+joint,role_poll,tree_new_sky,0.95,40,1,0,40.0,-
+joint,role_poll,tree_new_sky,0.95,100,1,0,100.0,-
+joint,role_poll,tree_new_sky,0.9,40,1,0,40.0,-
+joint,role_poll,tree_new_sky,0.9,100,1,0,100.0,-
+joint,role_poll,tree_new_gf,0.95,40,1,1,20.0,20
+joint,role_poll,tree_new_gf,0.95,100,1,1,20.0,20
+joint,role_poll,tree_new_gf,0.9,40,1,0,40.0,-
+joint,role_poll,tree_new_gf,0.9,100,1,0,100.0,-
+joint,role_poll,parallel100_sky,0.95,40,1,1,10.0,10
+joint,role_poll,parallel100_sky,0.95,100,1,1,10.0,10
+joint,role_poll,parallel100_sky,0.9,40,1,0,40.0,-
+joint,role_poll,parallel100_sky,0.9,100,1,0,100.0,-
+joint,role_poll,parallel100_gf,0.95,40,1,1,8.0,8
+joint,role_poll,parallel100_gf,0.95,100,1,1,8.0,8
+joint,role_poll,parallel100_gf,0.9,40,1,1,8.0,8
+joint,role_poll,parallel100_gf,0.9,100,1,1,8.0,8
+strict,random,all,0.9,40,18,3,34.666666666666664,- - - - - - - - - - - - - - - 8 8 8
+strict,random,all,0.9,100,18,3,84.66666666666667,- - - - - - - - - - - - - - - 8 8 8
+strict,random,previous,0.9,40,12,0,40.0,- - - - - - - - - - - -
+strict,random,previous,0.9,100,12,0,100.0,- - - - - - - - - - - -
+strict,random,fresh,0.9,40,6,3,24.0,- - - 8 8 8
+strict,random,fresh,0.9,100,6,3,54.0,- - - 8 8 8
+strict,random,pair_new_sky,0.9,40,3,0,40.0,- - -
+strict,random,pair_new_sky,0.9,100,3,0,100.0,- - -
+strict,random,pair_new_gf,0.9,40,3,0,40.0,- - -
+strict,random,pair_new_gf,0.9,100,3,0,100.0,- - -
+strict,random,tree_new_sky,0.9,40,3,0,40.0,- - -
+strict,random,tree_new_sky,0.9,100,3,0,100.0,- - -
+strict,random,tree_new_gf,0.9,40,3,0,40.0,- - -
+strict,random,tree_new_gf,0.9,100,3,0,100.0,- - -
+strict,random,parallel100_sky,0.9,40,3,0,40.0,- - -
+strict,random,parallel100_sky,0.9,100,3,0,100.0,- - -
+strict,random,parallel100_gf,0.9,40,3,3,8.0,8 8 8
+strict,random,parallel100_gf,0.9,100,3,3,8.0,8 8 8
+strict,bo,all,0.9,40,18,3,34.666666666666664,- - - - - - - - - - - - - - - 8 8 8
+strict,bo,all,0.9,100,18,3,84.66666666666667,- - - - - - - - - - - - - - - 8 8 8
+strict,bo,previous,0.9,40,12,0,40.0,- - - - - - - - - - - -
+strict,bo,previous,0.9,100,12,0,100.0,- - - - - - - - - - - -
+strict,bo,fresh,0.9,40,6,3,24.0,- - - 8 8 8
+strict,bo,fresh,0.9,100,6,3,54.0,- - - 8 8 8
+strict,bo,pair_new_sky,0.9,40,3,0,40.0,- - -
+strict,bo,pair_new_sky,0.9,100,3,0,100.0,- - -
+strict,bo,pair_new_gf,0.9,40,3,0,40.0,- - -
+strict,bo,pair_new_gf,0.9,100,3,0,100.0,- - -
+strict,bo,tree_new_sky,0.9,40,3,0,40.0,- - -
+strict,bo,tree_new_sky,0.9,100,3,0,100.0,- - -
+strict,bo,tree_new_gf,0.9,40,3,0,40.0,- - -
+strict,bo,tree_new_gf,0.9,100,3,0,100.0,- - -
+strict,bo,parallel100_sky,0.9,40,3,0,40.0,- - -
+strict,bo,parallel100_sky,0.9,100,3,0,100.0,- - -
+strict,bo,parallel100_gf,0.9,40,3,3,8.0,8 8 8
+strict,bo,parallel100_gf,0.9,100,3,3,8.0,8 8 8
+strict,acor,all,0.9,40,18,3,34.666666666666664,- - - - - - - - - - - - - - - 8 8 8
+strict,acor,all,0.9,100,18,3,84.66666666666667,- - - - - - - - - - - - - - - 8 8 8
+strict,acor,previous,0.9,40,12,0,40.0,- - - - - - - - - - - -
+strict,acor,previous,0.9,100,12,0,100.0,- - - - - - - - - - - -
+strict,acor,fresh,0.9,40,6,3,24.0,- - - 8 8 8
+strict,acor,fresh,0.9,100,6,3,54.0,- - - 8 8 8
+strict,acor,pair_new_sky,0.9,40,3,0,40.0,- - -
+strict,acor,pair_new_sky,0.9,100,3,0,100.0,- - -
+strict,acor,pair_new_gf,0.9,40,3,0,40.0,- - -
+strict,acor,pair_new_gf,0.9,100,3,0,100.0,- - -
+strict,acor,tree_new_sky,0.9,40,3,0,40.0,- - -
+strict,acor,tree_new_sky,0.9,100,3,0,100.0,- - -
+strict,acor,tree_new_gf,0.9,40,3,0,40.0,- - -
+strict,acor,tree_new_gf,0.9,100,3,0,100.0,- - -
+strict,acor,parallel100_sky,0.9,40,3,0,40.0,- - -
+strict,acor,parallel100_sky,0.9,100,3,0,100.0,- - -
+strict,acor,parallel100_gf,0.9,40,3,3,8.0,8 8 8
+strict,acor,parallel100_gf,0.9,100,3,3,8.0,8 8 8
+strict,de,all,0.9,40,18,3,34.666666666666664,- - - - - - - - - - - - - - - 8 8 8
+strict,de,all,0.9,100,18,3,84.66666666666667,- - - - - - - - - - - - - - - 8 8 8
+strict,de,previous,0.9,40,12,0,40.0,- - - - - - - - - - - -
+strict,de,previous,0.9,100,12,0,100.0,- - - - - - - - - - - -
+strict,de,fresh,0.9,40,6,3,24.0,- - - 8 8 8
+strict,de,fresh,0.9,100,6,3,54.0,- - - 8 8 8
+strict,de,pair_new_sky,0.9,40,3,0,40.0,- - -
+strict,de,pair_new_sky,0.9,100,3,0,100.0,- - -
+strict,de,pair_new_gf,0.9,40,3,0,40.0,- - -
+strict,de,pair_new_gf,0.9,100,3,0,100.0,- - -
+strict,de,tree_new_sky,0.9,40,3,0,40.0,- - -
+strict,de,tree_new_sky,0.9,100,3,0,100.0,- - -
+strict,de,tree_new_gf,0.9,40,3,0,40.0,- - -
+strict,de,tree_new_gf,0.9,100,3,0,100.0,- - -
+strict,de,parallel100_sky,0.9,40,3,0,40.0,- - -
+strict,de,parallel100_sky,0.9,100,3,0,100.0,- - -
+strict,de,parallel100_gf,0.9,40,3,3,8.0,8 8 8
+strict,de,parallel100_gf,0.9,100,3,3,8.0,8 8 8
+strict,group_acor,all,0.9,40,18,3,34.666666666666664,- - - - - - - - - - - - - - - 8 8 8
+strict,group_acor,all,0.9,100,18,3,84.66666666666667,- - - - - - - - - - - - - - - 8 8 8
+strict,group_acor,previous,0.9,40,12,0,40.0,- - - - - - - - - - - -
+strict,group_acor,previous,0.9,100,12,0,100.0,- - - - - - - - - - - -
+strict,group_acor,fresh,0.9,40,6,3,24.0,- - - 8 8 8
+strict,group_acor,fresh,0.9,100,6,3,54.0,- - - 8 8 8
+strict,group_acor,pair_new_sky,0.9,40,3,0,40.0,- - -
+strict,group_acor,pair_new_sky,0.9,100,3,0,100.0,- - -
+strict,group_acor,pair_new_gf,0.9,40,3,0,40.0,- - -
+strict,group_acor,pair_new_gf,0.9,100,3,0,100.0,- - -
+strict,group_acor,tree_new_sky,0.9,40,3,0,40.0,- - -
+strict,group_acor,tree_new_sky,0.9,100,3,0,100.0,- - -
+strict,group_acor,tree_new_gf,0.9,40,3,0,40.0,- - -
+strict,group_acor,tree_new_gf,0.9,100,3,0,100.0,- - -
+strict,group_acor,parallel100_sky,0.9,40,3,0,40.0,- - -
+strict,group_acor,parallel100_sky,0.9,100,3,0,100.0,- - -
+strict,group_acor,parallel100_gf,0.9,40,3,3,8.0,8 8 8
+strict,group_acor,parallel100_gf,0.9,100,3,3,8.0,8 8 8
+strict,group_random,all,0.9,40,18,3,34.666666666666664,- - - - - - - - - - - - - - - 8 8 8
+strict,group_random,all,0.9,100,18,3,84.66666666666667,- - - - - - - - - - - - - - - 8 8 8
+strict,group_random,previous,0.9,40,12,0,40.0,- - - - - - - - - - - -
+strict,group_random,previous,0.9,100,12,0,100.0,- - - - - - - - - - - -
+strict,group_random,fresh,0.9,40,6,3,24.0,- - - 8 8 8
+strict,group_random,fresh,0.9,100,6,3,54.0,- - - 8 8 8
+strict,group_random,pair_new_sky,0.9,40,3,0,40.0,- - -
+strict,group_random,pair_new_sky,0.9,100,3,0,100.0,- - -
+strict,group_random,pair_new_gf,0.9,40,3,0,40.0,- - -
+strict,group_random,pair_new_gf,0.9,100,3,0,100.0,- - -
+strict,group_random,tree_new_sky,0.9,40,3,0,40.0,- - -
+strict,group_random,tree_new_sky,0.9,100,3,0,100.0,- - -
+strict,group_random,tree_new_gf,0.9,40,3,0,40.0,- - -
+strict,group_random,tree_new_gf,0.9,100,3,0,100.0,- - -
+strict,group_random,parallel100_sky,0.9,40,3,0,40.0,- - -
+strict,group_random,parallel100_sky,0.9,100,3,0,100.0,- - -
+strict,group_random,parallel100_gf,0.9,40,3,3,8.0,8 8 8
+strict,group_random,parallel100_gf,0.9,100,3,3,8.0,8 8 8
+strict,residual,all,0.9,40,18,3,34.666666666666664,- - - - - - - - - - - - - - - 8 8 8
+strict,residual,all,0.9,100,18,4,82.77777777777777,- - - - - - - - - 66 - - - - - 8 8 8
+strict,residual,previous,0.9,40,12,0,40.0,- - - - - - - - - - - -
+strict,residual,previous,0.9,100,12,1,97.16666666666667,- - - - - - - - - 66 - -
+strict,residual,fresh,0.9,40,6,3,24.0,- - - 8 8 8
+strict,residual,fresh,0.9,100,6,3,54.0,- - - 8 8 8
+strict,residual,pair_new_sky,0.9,40,3,0,40.0,- - -
+strict,residual,pair_new_sky,0.9,100,3,0,100.0,- - -
+strict,residual,pair_new_gf,0.9,40,3,0,40.0,- - -
+strict,residual,pair_new_gf,0.9,100,3,0,100.0,- - -
+strict,residual,tree_new_sky,0.9,40,3,0,40.0,- - -
+strict,residual,tree_new_sky,0.9,100,3,0,100.0,- - -
+strict,residual,tree_new_gf,0.9,40,3,0,40.0,- - -
+strict,residual,tree_new_gf,0.9,100,3,1,88.66666666666667,66 - -
+strict,residual,parallel100_sky,0.9,40,3,0,40.0,- - -
+strict,residual,parallel100_sky,0.9,100,3,0,100.0,- - -
+strict,residual,parallel100_gf,0.9,40,3,3,8.0,8 8 8
+strict,residual,parallel100_gf,0.9,100,3,3,8.0,8 8 8
+strict,warm4,all,0.9,40,18,3,35.77777777777778,- - - - - - - - - - - - - - - 16 12 16
+strict,warm4,all,0.9,100,18,3,85.77777777777777,- - - - - - - - - - - - - - - 16 12 16
+strict,warm4,previous,0.9,40,12,0,40.0,- - - - - - - - - - - -
+strict,warm4,previous,0.9,100,12,0,100.0,- - - - - - - - - - - -
+strict,warm4,fresh,0.9,40,6,3,27.333333333333332,- - - 16 12 16
+strict,warm4,fresh,0.9,100,6,3,57.333333333333336,- - - 16 12 16
+strict,warm4,pair_new_sky,0.9,40,3,0,40.0,- - -
+strict,warm4,pair_new_sky,0.9,100,3,0,100.0,- - -
+strict,warm4,pair_new_gf,0.9,40,3,0,40.0,- - -
+strict,warm4,pair_new_gf,0.9,100,3,0,100.0,- - -
+strict,warm4,tree_new_sky,0.9,40,3,0,40.0,- - -
+strict,warm4,tree_new_sky,0.9,100,3,0,100.0,- - -
+strict,warm4,tree_new_gf,0.9,40,3,0,40.0,- - -
+strict,warm4,tree_new_gf,0.9,100,3,0,100.0,- - -
+strict,warm4,parallel100_sky,0.9,40,3,0,40.0,- - -
+strict,warm4,parallel100_sky,0.9,100,3,0,100.0,- - -
+strict,warm4,parallel100_gf,0.9,40,3,3,14.666666666666666,16 12 16
+strict,warm4,parallel100_gf,0.9,100,3,3,14.666666666666666,16 12 16
+strict,rank2,all,0.9,40,18,3,34.666666666666664,- - - - - - - - - - - - - - - 8 8 8
+strict,rank2,all,0.9,100,18,4,83.0,- - - - - - - - - 70 - - - - - 8 8 8
+strict,rank2,previous,0.9,40,12,0,40.0,- - - - - - - - - - - -
+strict,rank2,previous,0.9,100,12,1,97.5,- - - - - - - - - 70 - -
+strict,rank2,fresh,0.9,40,6,3,24.0,- - - 8 8 8
+strict,rank2,fresh,0.9,100,6,3,54.0,- - - 8 8 8
+strict,rank2,pair_new_sky,0.9,40,3,0,40.0,- - -
+strict,rank2,pair_new_sky,0.9,100,3,0,100.0,- - -
+strict,rank2,pair_new_gf,0.9,40,3,0,40.0,- - -
+strict,rank2,pair_new_gf,0.9,100,3,0,100.0,- - -
+strict,rank2,tree_new_sky,0.9,40,3,0,40.0,- - -
+strict,rank2,tree_new_sky,0.9,100,3,0,100.0,- - -
+strict,rank2,tree_new_gf,0.9,40,3,0,40.0,- - -
+strict,rank2,tree_new_gf,0.9,100,3,1,90.0,70 - -
+strict,rank2,parallel100_sky,0.9,40,3,0,40.0,- - -
+strict,rank2,parallel100_sky,0.9,100,3,0,100.0,- - -
+strict,rank2,parallel100_gf,0.9,40,3,3,8.0,8 8 8
+strict,rank2,parallel100_gf,0.9,100,3,3,8.0,8 8 8
+strict,shuffled,all,0.9,40,18,3,34.666666666666664,- - - - - - - - - - - - - - - 8 8 8
+strict,shuffled,all,0.9,100,18,5,82.88888888888889,- - - - - - - - - - 72 96 - - - 8 8 8
+strict,shuffled,previous,0.9,40,12,0,40.0,- - - - - - - - - - - -
+strict,shuffled,previous,0.9,100,12,2,97.33333333333333,- - - - - - - - - - 72 96
+strict,shuffled,fresh,0.9,40,6,3,24.0,- - - 8 8 8
+strict,shuffled,fresh,0.9,100,6,3,54.0,- - - 8 8 8
+strict,shuffled,pair_new_sky,0.9,40,3,0,40.0,- - -
+strict,shuffled,pair_new_sky,0.9,100,3,0,100.0,- - -
+strict,shuffled,pair_new_gf,0.9,40,3,0,40.0,- - -
+strict,shuffled,pair_new_gf,0.9,100,3,0,100.0,- - -
+strict,shuffled,tree_new_sky,0.9,40,3,0,40.0,- - -
+strict,shuffled,tree_new_sky,0.9,100,3,0,100.0,- - -
+strict,shuffled,tree_new_gf,0.9,40,3,0,40.0,- - -
+strict,shuffled,tree_new_gf,0.9,100,3,2,89.33333333333333,- 72 96
+strict,shuffled,parallel100_sky,0.9,40,3,0,40.0,- - -
+strict,shuffled,parallel100_sky,0.9,100,3,0,100.0,- - -
+strict,shuffled,parallel100_gf,0.9,40,3,3,8.0,8 8 8
+strict,shuffled,parallel100_gf,0.9,100,3,3,8.0,8 8 8
+strict,role_poll,all,0.9,40,6,1,34.666666666666664,- - - - - 8
+strict,role_poll,all,0.9,100,6,1,84.66666666666667,- - - - - 8
+strict,role_poll,previous,0.9,40,4,0,40.0,- - - -
+strict,role_poll,previous,0.9,100,4,0,100.0,- - - -
+strict,role_poll,fresh,0.9,40,2,1,24.0,- 8
+strict,role_poll,fresh,0.9,100,2,1,54.0,- 8
+strict,role_poll,pair_new_sky,0.9,40,1,0,40.0,-
+strict,role_poll,pair_new_sky,0.9,100,1,0,100.0,-
+strict,role_poll,pair_new_gf,0.9,40,1,0,40.0,-
+strict,role_poll,pair_new_gf,0.9,100,1,0,100.0,-
+strict,role_poll,tree_new_sky,0.9,40,1,0,40.0,-
+strict,role_poll,tree_new_sky,0.9,100,1,0,100.0,-
+strict,role_poll,tree_new_gf,0.9,40,1,0,40.0,-
+strict,role_poll,tree_new_gf,0.9,100,1,0,100.0,-
+strict,role_poll,parallel100_sky,0.9,40,1,0,40.0,-
+strict,role_poll,parallel100_sky,0.9,100,1,0,100.0,-
+strict,role_poll,parallel100_gf,0.9,40,1,1,8.0,8
+strict,role_poll,parallel100_gf,0.9,100,1,1,8.0,8
+bo95,bo,all,0.95,40,18,7,29.666666666666668,- - - 10 10 32 - - - - - - 18 - - 8 8 8
+bo95,bo,all,0.95,100,18,12,58.22222222222222,- - 84 10 10 32 - - - 60 84 60 18 66 - 8 8 8
+bo95,bo,previous,0.95,40,12,3,34.333333333333336,- - - 10 10 32 - - - - - -
+bo95,bo,previous,0.95,100,12,7,70.0,- - 84 10 10 32 - - - 60 84 60
+bo95,bo,fresh,0.95,40,6,4,20.333333333333332,18 - - 8 8 8
+bo95,bo,fresh,0.95,100,6,5,34.666666666666664,18 66 - 8 8 8
+bo95,bo,pair_new_sky,0.95,40,3,0,40.0,- - -
+bo95,bo,pair_new_sky,0.95,100,3,1,94.66666666666667,- - 84
+bo95,bo,pair_new_gf,0.95,40,3,3,17.333333333333332,10 10 32
+bo95,bo,pair_new_gf,0.95,100,3,3,17.333333333333332,10 10 32
+bo95,bo,tree_new_sky,0.95,40,3,0,40.0,- - -
+bo95,bo,tree_new_sky,0.95,100,3,0,100.0,- - -
+bo95,bo,tree_new_gf,0.95,40,3,0,40.0,- - -
+bo95,bo,tree_new_gf,0.95,100,3,3,68.0,60 84 60
+bo95,bo,parallel100_sky,0.95,40,3,1,32.666666666666664,18 - -
+bo95,bo,parallel100_sky,0.95,100,3,2,61.333333333333336,18 66 -
+bo95,bo,parallel100_gf,0.95,40,3,3,8.0,8 8 8
+bo95,bo,parallel100_gf,0.95,100,3,3,8.0,8 8 8

@@ -1,0 +1,15 @@
+{
+  "runs": 390,
+  "charged_target": {
+    "joint": 15752,
+    "strict": 15672,
+    "bo95": 1048
+  },
+  "distinct_target_corner_rows": 16726,
+  "target_errors": 0,
+  "hits": 171,
+  "distinct_first_hit_designs": 78,
+  "precision_checks": 336,
+  "precision_reused": 76,
+  "precision_failures": []
+}
