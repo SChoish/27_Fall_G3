@@ -9,7 +9,9 @@ from circuit import simulate
 from experiment import arguments,upper
 from warm_space import bank,DEV,TEST,TARGETS
 
-CIRCUITS={**DEV,**TEST,"seven_gf":TARGETS["seven_gf"]}
+from warm_port import DOMAINS as PORTS
+
+CIRCUITS={**PORTS,**DEV,**TEST,"seven_gf":TARGETS["seven_gf"]}
 def read(file):
     return json.loads(file.read_text())
 def gather(root):
@@ -18,7 +20,7 @@ def gather(root):
         f=root/(split+".json")
         if f.exists():
             for key,rs in read(f).items():groups[tag,key]=rs
-    for pattern,tag in (("continuous-*.json","continuous"),("strict-*.json","strict")):
+    for pattern,tag in (("continuous-*.json","continuous"),("strict-*.json","strict"),("port-*.json","port")):
         for f in root.glob(pattern):
             try:r=read(f)
             except json.JSONDecodeError:continue
@@ -100,7 +102,7 @@ def main():
                 pair=[checks(record[k:k+2],ref[k:k+2]) for k in (0,2)]
                 done[name,x]=(all(p[0] for p in pair),max(p[1] for p in pair))
             ready=((root/"sensitivity_runs.json").exists() and len(list(root.glob("continuous-*.json")))==108
-                   and len(list(root.glob("strict-*.json")))==66)
+                   and len(list(root.glob("strict-*.json")))==66 and len(list(root.glob("port-*.json")))==18)
             if ready and targets(gather(root),xs)<=done.keys():
                 audit(args,gather(root),xs,done);return
             time.sleep(8)

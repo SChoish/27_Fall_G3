@@ -30,3 +30,7 @@ For the descriptive two-step test and the final deterministic policy run `python
 ## ALARM transfer pilot
 
 [Protocol and commands](ALARM_PILOT.md) and [Korean results](ALARM_RESULTS_KO.md) cover the matched first-proposal study of elite anchors, metric geometry, critic snapshots and transfer heads. The separate [SPICE archive](alarm_measurements.zip) contains the 1 ps traces, independent attainability checks, 0.25 ps replications and exact policy replay timing.
+
+## Attention-free search, warm-up and coordinates
+
+[Study design](WARM_PROTOCOL.md) and [results](WARM_RESULTS_KO.md) cover paired random warm-up, snapshot hyperparameters, log-width chart scaling and continuous per-output second-step controls.

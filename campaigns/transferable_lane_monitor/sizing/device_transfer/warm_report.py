@@ -67,15 +67,49 @@ def report():
                 cfg=replace(geom,warm=k,first=order,region=region) if k else geom
                 cells.append(cell(group["holdout_bank",ident(cfg)],"0.95"))
             s.append("| "+" | ".join([region+" · "+order,*cells])+" |")
+    s+=["","다음은 개발에서 고른 국소 랜덤 우선 순서에서 5% 성공 또는 40회 중단까지 지불한 평균 웜업 비용입니다. 0개 대비 총비용 증가량에서 웜업 비용을 빼면 뒤의 역할·metric 제안에 지불한 비용 변화를 볼 수 있습니다. 서로 다른 궤적 사이의 비용 분해입니다.","","| 랜덤 설계 | 평균 유료 웜업 호출 | 5%를 웜업에서 직접 달성 | 0개 대비 전체 호출 변화 |","|---:|---:|---:|---:|"]
+    base_rmst=stats(group["holdout_bank",ident(geom)],"0.95")[2]
+    for k in (0,1,2,4):
+        rs=group["holdout_bank",ident(arms[f"warm_count_{k}"])]
+        spend=direct=0
+        for r in rs:
+            limit=r["hits"].get("0.95",40);prev=4
+            for step in r["trace"]:
+                if step["calls"]>limit:break
+                if step["stage"]=="warm":
+                    spend+=step["calls"]-prev
+                    direct+=int(step["calls"]==r["hits"].get("0.95"))
+                prev=step["calls"]
+        s.append(f"| {k} | {spend/len(rs):.2f} | {direct}/{len(rs)} | {stats(rs,'0.95')[2]-base_rmst:+.2f} |")
     s+=["","## Critic buffer 민감도","","같은 기본 geometry, 랜덤 웜업 0개에서의 미사용 후보표 결과입니다. cap은 현재 모델과 별도로 보관하는 과거 snapshot 수입니다. 매 모델 단계 20회 업데이트를 일치시켰습니다. score는 마지막 신규 개발 설계의 정규화된 예측오차로 과거 모델을 선택하고, guard는 그 모델의 오차가 현재 모델보다 낮을 때만 복귀합니다. 복귀 확률 난수와 웜업 난수는 분리했습니다.","","| 복귀 방식 | cap | 확률 0.25 | 확률 0.5 | 확률 1 |","|---|---:|---:|---:|---:|"]
     for sel in ("random","score","guard"):
         for cap in (2,4,8):
             cells=[cell(group["holdout_bank",ident(replace(geom,cap=cap,reuse=p,select=sel))],"0.95") for p in (.25,.5,1.)]
             s.append("| "+" | ".join([sel,str(cap),*cells])+" |")
+    s+=["","## 별도의 미사용 2단·4단 lane 쌍에서 출력별 보폭 검증","","앞선 네 회로 결과와 분리한 추가 실험입니다. 같은 SPICE 파형에서 출력별 상승 지연·slew는 PMOS, 하강 지연·slew는 NMOS에 연결해 두 번째 폭을 각자 계산했습니다. 최초 역할 제안과 그 이후의 scalar critic, 동일한 seed를 공유합니다.","","| 방법 | 5% 목표 | 10% 목표 |","|---|---:|---:|"]
+    for key in ("base","electrical","electrical_probe"):
+        rs=group["port",key]
+        s.append(f"| {key} | {cell(rs,'0.95')} | {cell(rs,'0.9')} |")
     s+=["","## 선택과 비용","","개발 회로 4개와 seed 21–23에서 설정을 고르고, 미사용 쌍과 seed 31–35에서 고정된 구성을 비교했습니다. 연속 평가는 seed 31–33입니다. 개발 후보표에는 10% 목표를 통과하는 설계가 없어, 이를 달성한 전력이 있는 기존 GF180 두 회로에서 9개 설정을 별도 연속 탐색으로 비교했습니다. 이 10% 선정 결과는 GF180 개발 표본에 의존합니다.","",
         "5% 선정 설정은 `"+ident(arms["combined"])+"`입니다. 강제 웜업 설정은 `"+ident(arms["nonzero_warm"])+"`입니다. 10% 별도 개발에서 선정한 설정은 `"+strict["winner"]+"`이며 `"+json.dumps(strict["config"],sort_keys=True)+"`입니다.","",
         "고정 후보표 제한, 연속 검색, source 측정과 재검산 비용을 구분했습니다. 표를 만드는 데 사용한 모든 SPICE 값을 각 온라인 방법에 제공하지 않았습니다. 원래의 연속 검색에서 같은 설정을 별칭으로 저장한 행도 있으며 독립 실행 환산 비용에 포함됐습니다. 정확히 같은 측정은 캐시에서 재사용했습니다. 연속 검색 원시 자료와 수치감사 결과는 아래에 있습니다.","","| 구간 | 시행 | 독립 실행 환산 SPICE |","|---|---:|---:|"]
     for phase,values in audit["phase_counts"].items():s.append(f'| {phase} | {values["trials"]} | {values["standalone"]} |')
+    from audit import checks
+    s+=["","## 고정 후보표가 포함한 실제 통과 설계 수","","각 행은 정책 시행 횟수와 별개로, 사전에 만든 140개 설계를 전수 확인한 결과입니다. 0이면 그 후보표에서 어떤 순서를 써도 해당 목표에 도달할 수 없습니다.","","| 회로 | 5% 통과 설계 | 10% 통과 설계 |","|---|---:|---:|"]
+    for name in (*DEV,*TEST):
+        batch=read(name+".json");ref=batch["reference"]
+        ok=[]
+        for row in batch["records"]:
+            if row["val"] is None:continue
+            d,e=checks(row["dev"],ref[:2]);v,f=checks(row["val"],ref[2:])
+            if d and v:ok.append(max(e,f))
+        s.append(f"| {name} | {sum(x<=.95 for x in ok)} | {sum(x<=.90 for x in ok)} |")
+    strict_dev=[r for (phase,k),rows in group.items() if phase=="strict" and k!="strict_selected" for r in rows]
+    strict_test=group["strict","strict_selected"]
+    s+=["",f"별도 연속 10% 튜닝 구간에서 개발 {len(strict_dev)}시행에 독립 환산 {sum(r['calls'] for r in strict_dev)}회, 고정 설정 테스트 {len(strict_test)}시행에 {sum(r['calls'] for r in strict_test)}회를 사용했습니다. 기존 scalar 개발 실행은 동일 2개 회로 × 3 seed의 이전 폭 궤적과 대조했습니다."]
+    for r in group["strict","scalar"]:
+        old=json.loads((ROOT.parent/"alarm"/f"{r['circuit']}-scalar-{r['seed']}.json").read_text())
+        assert old['hits']==r['hits'] and [s['x'] for s in old['trace']]==[s['x'] for s in r['trace']]
     physical=audit["physical"]
     s+=["",f'소스 학습은 기존 324회입니다. 이 연구에 저장된 고유 타깃·개발 단일 동작점 측정은 {sum(v["unique"] for v in physical.values()):,}개이고, 이전 실험 캐시에서 읽은 것은 {sum(v["reused"] for v in physical.values()):,}개입니다. 이는 동일점 동시 실행을 식별할 수 없는 고유 키 기준입니다. 실패 측정은 {sum(v["errors"] for v in physical.values())}개입니다.',
         "",f'모든 기록의 기준·후보·확인 호출 장부를 1 ps 원시값에서 다시 계산했습니다. 최초 도달에 쓰인 서로 다른 후보 {audit["unique_first_hits"]}개를 0.25 ps로 다시 실행했고 기준을 포함한 별도 수치 검산 비용은 {audit["fine_calls"]}회입니다. 재검산에서 원래 목표를 놓친 기록은 {len(audit["failures"])}건입니다. 이는 재검산 시점의 재최적화 결과가 아닙니다.',
