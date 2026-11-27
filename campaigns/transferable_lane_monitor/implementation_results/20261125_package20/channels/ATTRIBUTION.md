@@ -1,0 +1,7 @@
+The three NPZ files are derived from Chiplet-SI by Lihao Liu et al., © 2024 Lihao Liu, licensed under CC BY 4.0. https://github.com/Koyomi1999/Chiplet-SI · https://creativecommons.org/licenses/by/4.0/
+
+L. Liu, Y. Li, B. Lu, L. Shang, and F. Yang, “GNN-SP: Fast S-Parameter Estimation of Chiplet Interconnect via Graph Neural Network,” IEEE Transactions on Components, Packaging and Manufacturing Technology, vol. 14, no. 10, pp. 1862–1871, 2024. https://doi.org/10.1109/TCPMT.2024.3449330
+
+Changes for this study: selected three M1 geometries from stack_0 and the middle 20 traces at each geometry's common longitudinal midpoint. Converted the 61 complex frequency samples per recorded forward path from dB/degrees to real and imaginary components. Kept through and far-end paths directed from left TX to right RX. Arrays are receivers × transmitters × frequency (0:1:60 GHz). Unrecorded paths are zero in these arrays. Outside lanes have no incident excitation. No endorsement by the original authors is implied. See the per-layout JSON files for the source commit, archive paths and file hashes.
+
+To reconstruct inputs via prepare.py, extract each named archive's TXT to layout0.txt, layout1.txt, layout2.txt. Copy the corresponding layouts/<macro coordinates>/<layout name>_m1.txt to geo0.txt, geo1.txt, geo2.txt. Put the three archive paths from the JSON files (in index order) on separate lines in sources.txt. Pass that directory to prepare.py. The provided NPZ files are sufficient to reproduce the reported scores.

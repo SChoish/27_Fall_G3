@@ -1,0 +1,29 @@
+{
+  "path": "s_parameter_files/stack_0/2900000_875000_x_32_col_10_pitch_38__x_32_col_10_pitch_38_m1.7z",
+  "url": "https://github.com/Koyomi1999/Chiplet-SI",
+  "commit": "a9408b5ed373ee76b41bb000c412cc8fd39154a7",
+  "source_sha256": "1421709d2ab4f33d0d4990d7b31508479a93f1dfcb0ef2b88f875a870c4bff1f",
+  "geometry_sha256": "1b34b59f465768866ce62d7c8bd6dc5c9e2d4d2e41df5d9bcb60946e8fac1891",
+  "nets": [
+    54,
+    57,
+    58,
+    59,
+    60,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51,
+    36,
+    37,
+    27,
+    26,
+    35,
+    25,
+    17
+  ]
+}
