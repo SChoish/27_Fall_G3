@@ -45,7 +45,7 @@ def structure(c):
             feats.append([j,np.log2(c.sizes[i]*(1+j))/3,depth/4,float(p<0),
                           float(terminal),load,c.parents.count(i)/2,1.])
     if c.coupling:
-        a,b=c.outputs
+        a,b=c.outputs[0],c.outputs[-1]
         edge[2*a:2*a+2,2*b:2*b+2]=5
         edge[2*b:2*b+2,2*a:2*a+2]=5
     return np.array(feats),edge

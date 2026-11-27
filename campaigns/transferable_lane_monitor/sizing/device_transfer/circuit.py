@@ -50,7 +50,7 @@ def deck(c,x,k):
     for i,load in zip(c.outputs,c.loads):
         lines.append(f"Cload{i} n{i} 0 {cl*load}f")
     if c.coupling:
-        a,b=c.outputs
+        a,b=c.outputs[0],c.outputs[-1]
         lines.append(f"Cmut n{a} n{b} {c.coupling}f")
     lines+=[".tran 1p 4.49n",".meas tran charge integ i(Vdd) from=2.45n to=4.45n"]
     for o,i in enumerate(c.outputs):
