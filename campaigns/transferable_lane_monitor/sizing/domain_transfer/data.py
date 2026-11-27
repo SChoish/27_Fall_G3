@@ -12,12 +12,12 @@ import campaign
 
 GRID=list(itertools.product([.64,.76,.88,.96,1.],[.65,.76,.85,.94,1.1]))
 DOMAINS={"sky2":("sky",2,1),"sky4":("sky",4,1),"sky2_light":("sky",2,.75),"sky4_light":("sky",4,.75),"lane":("sky",4,2),
-         "pdk":("gf",4,1),"both":("gf",4,2),"topology":("gf",6,2)}
+         "wire":("sky",4,1),"pdk":("gf",4,1),"both":("gf",4,2),"topology":("gf",6,2)}
 WIDTHS={2:[1,2],4:[1,2,2,4],6:[1,1,2,2,3,4]}
 base_deck=campaign.deck
 
 
-def make_deck(pdk,stages,x,corner,model,step_ps=1):
+def make_deck(pdk,stages,x,corner,model,step_ps=1,wire=False):
     # Same measurement harness, with a variable-length non-inverting chain.
     harness=base_deck(2,(1.,1.),corner,model,step_ps)
     harness=(harness.replace("3.8n","4.45n").replace("from=1.75n to=3.75n","from=2.40n to=4.40n")
@@ -25,14 +25,22 @@ def make_deck(pdk,stages,x,corner,model,step_ps=1):
     body=[]
     for i,w in enumerate(np.array(WIDTHS[stages])*np.geomspace(*x,stages)):
         prev=f"n{i}" if i else "in"
-        out=f"n{i+1}" if i<stages-1 else "out"
+        out=f"n{i+1}" if i<stages-1 else ("driver" if wire else "out")
         for pol,factor,rail in (("n",1,"0"),("p",2,"dd")):
             if pdk=="gf":
                 line=f"M{pol}{i} {out} {prev} {rail} {rail} {pol}mos_3p3 w={w*factor:.9f}u l=.28u"
             else:
                 line=f"X{pol}{i} {out} {prev} {rail} {rail} sky130_fd_pr__{pol}fet_01v8 w={w*factor:.9f} l=.15"
             body.append(line)
-    return re.sub(r"^Xn0.*?(?=^Cload)","\n".join(body)+"\n",harness,flags=re.M|re.S)
+    harness,count=re.subn(r"^Xn0.*?(?=^Cload)","\n".join(body)+"\n",harness,flags=re.M|re.S)
+    assert count==1 and len(body)==2*stages
+    if wire:
+        capacitance=corner[1]/2
+        harness=harness.replace(f"Cload out 0 {corner[1]}f",
+                                f"Cnear driver 0 {capacitance}f\nRline driver out 120\nCfar out 0 {capacitance}f")
+        assert "Rline driver out 120" in harness
+    return harness
+
 
 
 def corners(pdk,load):
@@ -41,7 +49,7 @@ def corners(pdk,load):
 
 def collect(name,args):
     pdk,stages,load=DOMAINS[name]
-    campaign.deck=lambda *parts:make_deck(pdk,*parts)
+    campaign.deck=lambda *parts:make_deck(pdk,*parts,wire=name=="wire")
     args.model=args.gf if pdk=="gf" else args.sky
     conditions=corners(pdk,load)
     inputs=[((1.,1.),c) for c in conditions]+[(x,c) for x in GRID for c in conditions]

@@ -1,0 +1,14 @@
+{
+  "replays": 300,
+  "domains": 9,
+  "physical_grid_evals": 936,
+  "additional_physical_checks": 142,
+  "live_domains": [
+    "lane",
+    "pdk",
+    "both",
+    "topology",
+    "wire"
+  ],
+  "all_hits_match": true
+}
