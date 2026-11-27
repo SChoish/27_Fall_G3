@@ -22,7 +22,7 @@ SEEDS = (31,32,33)
 CAP = 100
 
 
-def trial(name, circuit, arm, seed, args, model=None, metric=None):
+def trial(name, circuit, arm, seed, args, model=None, metric=None, goals=(.95,.90)):
     store = Store(name, circuit, args)
     x0 = np.ones(len(upper(circuit)))
     ref = store.pair(x0,0) + store.pair(x0,2)
@@ -40,7 +40,7 @@ def trial(name, circuit, arm, seed, args, model=None, metric=None):
         indices = [0]
         model = model.copy()
     calls, hits, trace = 4, {}, []
-    while calls+2<=CAP and len(hits)<2:
+    while calls+2<=CAP and len(hits)<len(goals):
         t = len(trace)
         if policy:
             x = policy.ask(np.array(hist), np.array(labels))
@@ -57,13 +57,13 @@ def trial(name, circuit, arm, seed, args, model=None, metric=None):
         dev=store.pair(x,0)
         ok,edp=checks(dev,ref[:2])
         calls+=2
-        confirmed=bool(ok and edp<=.95 and calls+2<=CAP)
+        confirmed=bool(ok and edp<=max(goals) and calls+2<=CAP)
         val=None
         if confirmed:
             val=store.pair(x,2)
             valid,e=checks(val,ref[2:])
             calls+=2
-            for goal in (.95,.90):
+            for goal in goals:
                 if valid and max(e,edp)<=goal:
                     hits.setdefault(str(goal),calls)
         hist.append(x)
@@ -74,6 +74,8 @@ def trial(name, circuit, arm, seed, args, model=None, metric=None):
 
 def main():
     args=arguments()
+    from century_engine import enable
+    enable()
     root=args.out/"century"
     root.mkdir(parents=True,exist_ok=True)
     methods=HEURISTICS if args.mode=="search" else LEARNED
