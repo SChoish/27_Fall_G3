@@ -33,7 +33,7 @@ class Critic:
         w,b,v,d=self.params
         return np.tanh(x@w+b)@v+d
 
-    def fit(self,x,y,steps,lr):
+    def fit(self,x,y,steps,lr,freeze_encoder=False):
         m=[np.zeros_like(p) for p in self.params]
         v=[np.zeros_like(p) for p in self.params]
         for i in range(1,steps+1):
@@ -43,6 +43,8 @@ class Critic:
             inner=(delta@out.T)*(1-h*h)
             grads=(x.T@inner,inner.sum(0),h.T@delta,delta.sum(0))
             for j,g in enumerate(grads):
+                if freeze_encoder and j<2:
+                    continue
                 m[j]=.9*m[j]+.1*g
                 v[j]=.999*v[j]+.001*g*g
                 self.params[j]-=lr*(m[j]/(1-.9**i))/(np.sqrt(v[j]/(1-.999**i))+1e-8)

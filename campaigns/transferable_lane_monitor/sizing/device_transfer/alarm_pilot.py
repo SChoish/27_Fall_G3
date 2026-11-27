@@ -71,10 +71,18 @@ def trial(ledger,prior,beta,method,seed):
     if any("error" in r for r in ref):raise RuntimeError(ledger.name)
     history=[nominal];labels=[ratios(ref[:2],ref[:2])]
     model=prior.copy();bank=[];rng=np.random.default_rng(seed)
+    if method=="reset_head":
+        model.params[2][:]=0.
+        model.params[3][:]=labels[0]
     trace=[];hits={};calls=4
     while calls+2<=40 and len(hits)<2:
         t=len(trace);snapshot=None;origin=None
-        if t==0 or method=="role":
+        if method=="role40" and t>=len(POLICY):
+            pairs=[(.92,.9,1.),(.90,.94,.96),(.88,.98,1.04),(.95,.86,.96),(.90,.90,1.04),(.85,.95,.96),(.94,.82,1.04),(.89,.96,1.)]
+            a,b,p=pairs[(t-len(POLICY))%len(pairs)]
+            terminal=np.repeat([j in c.outputs for j in range(len(c.parents))],2)
+            x=np.clip(np.where(terminal,a,b)*np.tile([p,1/p],len(c.parents)),.58,hi)
+        elif t==0 or method in ("role","role40") or (method=="prefix_attention" and t==1):
             if t==len(POLICY):break
             x=size_move(c,POLICY,t,history,labels)
         elif method=="bo":
@@ -87,9 +95,9 @@ def trial(ledger,prior,beta,method,seed):
                 snapshot=choose_snapshot(bank,center,base,rng,method=="scored_buffer")
                 origin=bank[snapshot][-1]
                 model=bank[snapshot][0].copy()
-            model.fit(inputs(history,desc),np.array(labels),20,.0018)
+            model.fit(inputs(history,desc),np.array(labels),20,.0018,freeze_encoder=method in ('keep_head','reset_head'))
             kind=method if method in ("scalar","attention","pullback") else "euclid"
-            if "buffer" in method:kind="attention"
+            if "buffer" in method or method in ("keep_head","reset_head","prefix_attention"):kind="attention"
             x=local_search(model,desc,hi,history,labels,kind,1 if method=="single" else 3,beta,seed,t)
         x=np.round(x,6)
         dev=ledger.pair(x,0);calls+=2
@@ -120,7 +128,7 @@ def main():
         ledger=Ledger(name,args)
         for seed in SEEDS:
             for method in METHODS:
-                if method=="role" and seed!=21:continue
+                if method in ("role","role40") and seed!=21:continue
                 path=root/f"{name}-{method}-{seed}.json"
                 if path.exists():continue
                 result=trial(ledger,*models[seed],method,seed)
