@@ -1,0 +1,41 @@
+{
+  "stages": 4,
+  "x": [
+    0.9946819757765202,
+    0.8789690081077625
+  ],
+  "source_method": "residual",
+  "fresh_spice_evals": 30,
+  "packet_base": 834000,
+  "seed_base": 961000,
+  "conditions": {
+    "quiet": {
+      "reference": 0.2791748046875,
+      "candidate": 0.2791748046875,
+      "difference": 0.0,
+      "upper": 0.0,
+      "pass_screen": true
+    },
+    "persistent": {
+      "reference": 0.4954833984375,
+      "candidate": 0.493011474609375,
+      "difference": -0.002471923828125,
+      "upper": 0.000823974609375,
+      "pass_screen": true
+    },
+    "fast": {
+      "reference": 0.708343505859375,
+      "candidate": 0.706298828125,
+      "difference": -0.002044677734375,
+      "upper": 0.0013126373291015847,
+      "pass_screen": true
+    },
+    "offset": {
+      "reference": 0.891571044921875,
+      "candidate": 0.89117431640625,
+      "difference": -0.000396728515625,
+      "upper": 0.000579833984375,
+      "pass_screen": true
+    }
+  }
+}

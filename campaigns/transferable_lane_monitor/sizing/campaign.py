@@ -16,7 +16,7 @@ NOMINAL = [1., 1.]
 CAP = 40
 
 
-def deck(stages, x, corner, model):
+def deck(stages, x, corner, model, step_ps=1):
     v, load, temp = corner
     widths = np.array([1,2] if stages == 2 else [1,2,2,4])*np.geomspace(*x, stages)
     lines = ["SKY130 buffer width search", f'.include "{model}"', f".temp {temp}",
@@ -27,7 +27,7 @@ def deck(stages, x, corner, model):
         lines.extend([f"Xn{i} {node} {upstream} 0 0 sky130_fd_pr__nfet_01v8 w={width:.9f} l=.15",
                       f"Xp{i} {node} {upstream} dd dd sky130_fd_pr__pfet_01v8 w={2*width:.9f} l=.15"])
         upstream = node
-    lines.extend([f"Cload out 0 {load}f", ".tran 1p 3.8n",
+    lines.extend([f"Cload out 0 {load}f", f".tran {step_ps:g}p 3.8n",
                   ".meas tran charge integ i(Vdd) from=1.75n to=3.75n",
                   ".meas tran high find v(out) at=3.40n",
                   ".meas tran low find v(out) at=3.79n"])
@@ -42,7 +42,7 @@ def transient(stages, x, corner, args):
     with tempfile.TemporaryDirectory() as temp:
         path = (Path(temp)/"design.cir").resolve()
         wasm = args.wasm is not None
-        path.write_text(deck(stages,x,corner,"/model.spice" if wasm else model))
+        path.write_text(deck(stages,x,corner,"/model.spice" if wasm else model, getattr(args,"step_ps",1)))
         if wasm:
             module = args.wasm.resolve()
             cmd = [args.node,"--permission",*(f"--allow-fs-read={p}" for p in

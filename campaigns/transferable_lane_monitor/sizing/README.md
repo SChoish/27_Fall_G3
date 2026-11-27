@@ -33,3 +33,5 @@ Each JSON file contains the parameters proposed, the physical measurements for e
 
 The probability rule multiplies marginal Gaussian feasibility probabilities; dependent electrical metrics make this an acquisition approximation. The reported target hits use measured transients. See [Gardner et al., ICML 2014](https://proceedings.mlr.press/v32/gardner14.html) for constrained Bayesian optimization.
 For the separately labelled 10% transfer witness, use the link_check.py command with --stages 4 --target-ten.
+
+For numerical refinement, run `python sizing/refine.py --model "$model" --dir rerun` after the witness runs. It remeasures all four corners for each witness and its reference at 0.25 ps. The pilot first-hit times use the preregistered 1 ps setting.

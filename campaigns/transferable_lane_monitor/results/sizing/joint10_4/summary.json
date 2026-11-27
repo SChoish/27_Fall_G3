@@ -1,0 +1,41 @@
+{
+  "stages": 4,
+  "x": [
+    0.9909498939526951,
+    0.8361676363087894
+  ],
+  "source_method": "target_transfer",
+  "fresh_spice_evals": 30,
+  "packet_base": 844000,
+  "seed_base": 971000,
+  "conditions": {
+    "quiet": {
+      "reference": 0.281280517578125,
+      "candidate": 0.281280517578125,
+      "difference": 0.0,
+      "upper": 0.0,
+      "pass_screen": true
+    },
+    "persistent": {
+      "reference": 0.49176025390625,
+      "candidate": 0.490936279296875,
+      "difference": -0.000823974609375,
+      "upper": 0.00250244140625,
+      "pass_screen": true
+    },
+    "fast": {
+      "reference": 0.704864501953125,
+      "candidate": 0.702972412109375,
+      "difference": -0.00189208984375,
+      "upper": 0.0025634765625,
+      "pass_screen": true
+    },
+    "offset": {
+      "reference": 0.895111083984375,
+      "candidate": 0.892974853515625,
+      "difference": -0.00213623046875,
+      "upper": -0.00091552734375,
+      "pass_screen": true
+    }
+  }
+}
