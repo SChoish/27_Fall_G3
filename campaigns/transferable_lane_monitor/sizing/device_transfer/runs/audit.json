@@ -1,0 +1,29 @@
+{
+  "runs": 159,
+  "physical": {
+    "mixed_gf": 1250,
+    "fork": 1248,
+    "source_pair": 94,
+    "short": 70,
+    "pair_gf": 1086,
+    "chain": 78,
+    "pair_sky": 1194,
+    "fork_pair_sky": 444,
+    "source_fork": 82
+  },
+  "physical_failures": {
+    "mixed_gf": 1,
+    "fork": 1,
+    "source_pair": 0,
+    "short": 0,
+    "pair_gf": 1,
+    "chain": 0,
+    "pair_sky": 1,
+    "fork_pair_sky": 0,
+    "source_fork": 0
+  },
+  "source_base": 230,
+  "source_expanded": 324,
+  "target_physical": 5222,
+  "stand_alone_target_cost": 6264
+}
