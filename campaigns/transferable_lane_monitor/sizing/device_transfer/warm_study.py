@@ -85,6 +85,8 @@ def holdout(args):
     b=Benchmark(args,TEST,(31,32,33,34,35))
     lock=json.loads((b.root/"lock.json").read_text())
     for cfg in lock["arms"].values():b.evaluate(Config(**cfg))
+    for unit in (False,True):
+        for residual in (False,True):b.evaluate(Config(unit=unit,residual=residual))
     write(b.root/"test_runs.json",b.runs)
     print("held-out settings",len(b.runs),flush=True)
 

@@ -38,7 +38,7 @@ class Space:
         self.bandwidth2=.11**2*self.z.shape[1]
         self.kernel=np.exp(-.5*(dz**2).sum(-1)/self.bandwidth2)
 
-    def rank(self,model,history,labels,cfg):
+    def rank(self,model,history,labels,cfg,seed,t):
         y=np.array(labels); h=np.array(history)
         prediction=model.predict(self.encoded)
         weights=None
@@ -101,7 +101,7 @@ def rollout(space,env,prior,cfg,seed):
                     if cfg.select!="guard" or err(selected[1])<err(model):
                         restored,net=selected;model=net.copy()
             model.fit(space.encoded[hist],np.array(y),20,.0018)
-            idx=space.rank(model,hist,y,cfg);stage="metric"
+            idx=space.rank(model,hist,y,cfg,seed,t);stage="metric"
             if cfg.cap:
                 snapshots.append((t,model.copy()))
                 snapshots=snapshots[-(cfg.cap+1):]  # cap eligible older snapshots plus the live one

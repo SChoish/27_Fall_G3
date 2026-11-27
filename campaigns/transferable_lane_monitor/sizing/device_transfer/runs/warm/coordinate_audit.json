@@ -1,0 +1,32 @@
+{
+  "pdks": {
+    "sky": {
+      "length_um": 0.15,
+      "multiplicity": "implicit 1, no instance sweep"
+    },
+    "gf": {
+      "length_um": 0.28,
+      "multiplicity": "implicit 1, no instance sweep"
+    }
+  },
+  "log_spans": [
+    0.5447271754416722,
+    0.8070914399091632
+  ],
+  "jacobian_max_error": 1.2065543009143198e-11,
+  "unit_invariance_error": 0.0,
+  "source_label_std": [
+    0.09150587232576897,
+    0.05180925535846219,
+    0.10850969095977966,
+    0.06828760495908295,
+    9.71445146547012e-17
+  ],
+  "source_label_range": [
+    0.4649035057361866,
+    0.25697757113564224,
+    0.45081280331563456,
+    0.4186636228717001,
+    0.0
+  ]
+}
