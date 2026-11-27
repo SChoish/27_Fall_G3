@@ -30,7 +30,7 @@ TARGETS=("fork","pair_sky","pair_gf","mixed_gf")
 MEAS=("rise","fall","sr","sf","hi","lo")
 BASE=Path(__file__).resolve().parents[1]
 
-def deck(c,x,k):
+def deck(c,x,k,step_ps=1):
     nominal=1.8 if c.pdk=="sky" else 3.3
     v=nominal*(1,1.66/1.8,1, .90)[k]
     temp=(27,27,70,70)[k]
@@ -52,7 +52,7 @@ def deck(c,x,k):
     if c.coupling:
         a,b=c.outputs[0],c.outputs[-1]
         lines.append(f"Cmut n{a} n{b} {c.coupling}f")
-    lines+=[".tran 1p 4.49n",".meas tran charge integ i(Vdd) from=2.45n to=4.45n"]
+    lines+=[f".tran {step_ps:g}p 4.49n",".meas tran charge integ i(Vdd) from=2.45n to=4.45n"]
     for o,i in enumerate(c.outputs):
         p=i
         depth=0
@@ -74,7 +74,7 @@ def deck(c,x,k):
     return "\n".join(lines+[".end",""]),v
 
 def simulate(c,x,k,args):
-    net,v=deck(c,x,k)
+    net,v=deck(c,x,k,getattr(args,"step_ps",1))
     model=(args.sky if c.pdk=="sky" else args.gf).resolve()
     wasm=args.wasm.resolve()
     with tempfile.TemporaryDirectory() as folder:
