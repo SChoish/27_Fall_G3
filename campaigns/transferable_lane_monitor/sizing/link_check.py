@@ -41,16 +41,44 @@ def main():
     p.add_argument("--wasm",type=Path)
     p.add_argument("--node",default="node")
     p.add_argument("--ngspice",default="ngspice")
+    p.add_argument("--verified-five",action="store_true")
+    p.add_argument("--target-ten",action="store_true",help="Audit the first verified 10% target-transfer hit, seed 11")
     args=p.parse_args()
+    if args.target_ten and (args.verified_five or args.stages!=4):
+        p.error("--target-ten requires stages 4 and is independent of --verified-five")
     n=args.stages
     method={2:"kernel",4:"residual"}[n]
     record=json.loads((args.dir/f"s{n}_{method}_11.json").read_text())
-    x=choose(record)
-    out=args.dir/f"link{n}"
+    prior=args.dir/f"link{n}"
+    if args.target_ten:
+        method="target_transfer"
+        record=json.loads((args.dir/method/"s4_target_bo_11.json").read_text())
+        hit=record["hits"]["0.9"]
+        x=next(r["x"] for r in record["rows"] if r["calls"]==hit)
+        out=args.dir/"joint10_4"
+    elif args.verified_five:
+        hit=record["hits"].get("0.95")
+        if hit is None:
+            raise ValueError("The specified trace has no verified 5% hit")
+        x=next(r["x"] for r in record["rows"] if r["calls"]==hit)
+        out=args.dir/f"joint{n}"
+    else:
+        x=choose(record)
+        out=prior
     out.mkdir(exist_ok=False)
-    tables=[sweep(n,design,args,out/(name+".csv"))
-            for design,name in [(NOMINAL,"reference"),(x,"candidate")]]
-    char,_,_=characterize_circuit("original",2,824000)
+    fresh=0
+    tables=[]
+    for design,name in [(NOMINAL,"reference"),(x,"candidate")]:
+        reuse=args.verified_five and (name=="reference" or x==choose(record))
+        reuse=reuse or (args.target_ten and name=="reference")
+        if reuse:
+            tables.append(load_delay_table(prior/(name+".csv")))
+        else:
+            tables.append(sweep(n,design,args,out/(name+".csv")))
+            fresh+=30
+    packet_base=844000 if args.target_ten else (834000 if args.verified_five else 824000)
+    seed_base=971000 if args.target_ten else (961000 if args.verified_five else 951000)
+    char,_,_=characterize_circuit("original",2,packet_base)
     model=hidden_model(tables[0])
     q=np.load(BASE/"belief_weights.npz")["q"]
     summary={}
@@ -60,7 +88,7 @@ def main():
         for mode in CONDITIONS:
             pairs=[]
             for chunk in range(0,256,16):
-                seeds=np.arange(951000+chunk,951016+chunk)
+                seeds=np.arange(seed_base+chunk,seed_base+16+chunk)
                 rates=[]
                 for tbl in tables:
                     data=panel(2,seeds,mode,tbl,len(char[-1]))
@@ -76,7 +104,7 @@ def main():
             summary[mode]=dict(reference=values[:,0].mean(),candidate=values[:,1].mean(),
                                difference=delta.mean(),upper=upper,pass_screen=upper<=.01)
     (out/"summary.json").write_text(json.dumps(dict(stages=n,x=x,source_method=method,
-        fresh_spice_evals=60,conditions=summary),indent=2)+"\n")
+        fresh_spice_evals=fresh,packet_base=packet_base,seed_base=seed_base,conditions=summary),indent=2)+"\n")
     print(summary,flush=True)
 
 

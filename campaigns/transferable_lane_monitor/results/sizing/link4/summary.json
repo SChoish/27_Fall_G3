@@ -1,0 +1,39 @@
+{
+  "stages": 4,
+  "x": [
+    0.980168954996455,
+    0.8090349839795771
+  ],
+  "source_method": "residual",
+  "fresh_spice_evals": 60,
+  "conditions": {
+    "quiet": {
+      "reference": 0.27777099609375,
+      "candidate": 0.27777099609375,
+      "difference": 0.0,
+      "upper": 0.0,
+      "pass_screen": true
+    },
+    "persistent": {
+      "reference": 0.489776611328125,
+      "candidate": 0.484222412109375,
+      "difference": -0.00555419921875,
+      "upper": -0.0025020599365234153,
+      "pass_screen": true
+    },
+    "fast": {
+      "reference": 0.7095947265625,
+      "candidate": 0.70458984375,
+      "difference": -0.0050048828125,
+      "upper": -0.000885009765625,
+      "pass_screen": true
+    },
+    "offset": {
+      "reference": 0.892669677734375,
+      "candidate": 0.89031982421875,
+      "difference": -0.002349853515625,
+      "upper": -0.0010986328125,
+      "pass_screen": true
+    }
+  }
+}
