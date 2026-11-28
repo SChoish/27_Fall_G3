@@ -10,7 +10,7 @@ import numpy as np
 from adaptive_prior_run import TEST
 from alarm_pilot import SOURCE_NETS
 from blind_width_audit import audit
-from blind_width_policy import evaluate_candidates, rank_candidates
+from blind_width_policy import evaluate_candidates, generate_candidates, rank_candidates
 from blind_width_run import GOALS, run
 from century_engine import enable
 from experiment import arguments, upper
@@ -33,6 +33,25 @@ def action_features(pred,sig,score,goal,count):
     return -score/.12,np.column_stack((scaled,sig,sig*progress,sig*scaled[:,0],
                                        scaled[:,0]*np.max(scaled[:,1:],axis=1),
                                        sig*float(goal==.90)))
+
+
+def observed_features(history, outcomes, candidates, lo, hi, goal):
+    # Every coordinate is a log width relative to its own nominal value.
+    # All reductions are invariant to simultaneous permutations of the devices.
+    scores=outcomes[:,0]+4*np.maximum(outcomes[:,1:],0).sum(axis=1)
+    anchor=history[np.argmin(scores)]
+    relative=candidates/(hi-lo)
+    mean=relative.mean(axis=1)
+    spread=relative.std(axis=1)
+    motion=(candidates-anchor)/(hi-lo)
+    distance=np.sqrt(np.mean(motion**2,axis=1))
+    novelty=np.sqrt(np.mean(((candidates[:,None,:]-history)/(hi-lo))**2,axis=2)).min(axis=1)
+    unmet=np.maximum(outcomes[:,0]-np.log(goal),0)+np.maximum(outcomes[:,1:],0).sum(axis=1)
+    gap=np.tanh(unmet.min()/.1)
+    progress=min(len(history)/48,1.)
+    features=np.column_stack((mean,spread,mean**2,motion.mean(axis=1),distance,novelty,
+                              mean*gap,distance*gap,novelty*progress,mean*float(goal==.90)))
+    return np.zeros(len(candidates)),features
 
 
 def softmax(v):
@@ -71,7 +90,10 @@ def train_actor(rows,models,gamma,buffer_size=1):
             for t in range(16):
                 def features(_,pred,sig,score):
                     return action_features(pred,sig,score,goal,len(visited))
-                base,F=evaluate_candidates(x[visited],y[visited],lo,hi,x[available],network=model,decision=features)
+                if model is None:
+                    base,F=observed_features(x[visited],y[visited],x[available],lo,hi,goal)
+                else:
+                    base,F=evaluate_candidates(x[visited],y[visited],lo,hi,x[available],network=model,decision=features)
                 probs=softmax(base+F@actor)
                 choice=int(rng.choice(len(available),p=probs))
                 new=available.pop(choice)
@@ -130,6 +152,11 @@ def chooser(model,weights,goal):
     def select(arm,hist,y,lo,hi,seed,unused):
         rng=np.random.default_rng([seed,len(hist),6481])
         if len(hist)<=4:return rng.uniform(lo,hi)
+        if arm=="standalone":
+            z=np.asarray(hist);outcomes=np.asarray(y)
+            candidates=generate_candidates(z,outcomes,lo,hi,rng)
+            _,features=observed_features(z,outcomes,candidates,lo,hi,goal)
+            return candidates[np.argmax(features@weights[arm])]
         def decide(candidates,pred,sig,score):
             base,F=action_features(pred,sig,score,goal,len(hist))
             return candidates[np.argmax(base+F@weights[arm])]
@@ -155,7 +182,7 @@ def policies(sources,training):
     result={}
     for p,rows in sources.items():
         assert len(rows)==4 and all(r["pdk"]==p and len(r["x"])==25 for r in rows)
-        model=train(rows,only=("anon400",))["anon400"]
+        model=None if set(training[p])=={"standalone"} else train(rows,only=("anon400",))["anon400"]
         weights={a:np.array(v["weights"]) for a,v in training[p].items()}
         result[p]={g:chooser(model,weights,g) for g in GOALS}
     return result

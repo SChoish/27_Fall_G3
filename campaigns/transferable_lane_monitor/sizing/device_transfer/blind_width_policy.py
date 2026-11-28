@@ -41,7 +41,12 @@ def propose(arm,history,observations,lower,upper,seed,prior=None):
 
 
 def rank_candidates(z,y,lower,upper,rng,prior=None,network=None,gp=True,calibrated=None,local_builder=None,adjust=None,decision=None):
-    t,dim=z.shape
+    candidates=generate_candidates(z,y,lower,upper,rng,local_builder)
+    return evaluate_candidates(z,y,lower,upper,candidates,prior,network,gp,calibrated,adjust,decision)
+
+
+def generate_candidates(z,y,lower,upper,rng,local_builder=None):
+    dim=z.shape[1]
     penalty=lambda values: values[...,0]+4*np.maximum(values[...,1:],0).sum(axis=-1)
     center=z[np.argmin(penalty(y))]
     span=upper-lower
@@ -50,8 +55,7 @@ def rank_candidates(z,y,lower,upper,rng,prior=None,network=None,gp=True,calibrat
         local=rng.uniform(np.maximum(lower,center-radius),np.minimum(upper,center+radius))
     else:
         local=local_builder(z,y,lower,upper,radius,rng)
-    candidates=np.vstack((local,rng.uniform(lower,upper,(256,dim))))
-    return evaluate_candidates(z,y,lower,upper,candidates,prior,network,gp,calibrated,adjust,decision)
+    return np.vstack((local,rng.uniform(lower,upper,(256,dim))))
 
 
 def evaluate_candidates(z,y,lower,upper,candidates,prior=None,network=None,gp=True,
