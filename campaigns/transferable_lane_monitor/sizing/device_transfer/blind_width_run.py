@@ -37,7 +37,7 @@ def source(args,root):
     (root/"source.json").write_text(json.dumps(records))
 
 
-def run(job,args,prior,root):
+def run(job,args,prior,root,selector=None):
     name,c,arm,seed,goal=job
     dest=root/f"{name}-{arm}-{seed}-{goal}.json"
     if dest.exists():return
@@ -52,7 +52,10 @@ def run(job,args,prior,root):
     calls=4;fine_ref=None;hit=None;trace=[]
     hist=[np.zeros(dim)];y=[ratios(ref[:2],ref[:2])]
     while calls+2<=100 and hit is None:
-        z=propose(arm,hist,y,lo,hi,seed,prior if arm=="transfer_bo" else None)
+        if selector is None:
+            z=propose(arm,hist,y,lo,hi,seed,prior if arm=="transfer_bo" else None)
+        else:
+            z=selector(arm,hist,y,lo,hi,seed,prior)
         x=np.round(np.exp(z)[inv],6)
         dev=coarse.pair(x,0);calls+=2
         ok,e=checks(dev,ref[:2]);val=fraw=None

@@ -37,22 +37,38 @@ def propose(arm,history,observations,lower,upper,seed,prior=None):
         return lower+span-np.abs((sample-lower)%(2*span)-span)
     if arm not in ("bo","transfer_bo"):raise ValueError(arm)
     if (arm=="transfer_bo")!=(prior is not None):raise ValueError("source prior mismatch")
+    return rank_candidates(z,y,lower,upper,rng,prior=prior)
+
+
+def rank_candidates(z,y,lower,upper,rng,prior=None,network=None,gp=True):
+    t,dim=z.shape
+    penalty=lambda values: values[...,0]+4*np.maximum(values[...,1:],0).sum(axis=-1)
     center=z[np.argmin(penalty(y))]
     span=upper-lower
     radius=rng.uniform(.04,.55,(256,1))*span
     local=rng.uniform(np.maximum(lower,center-radius),np.minimum(upper,center+radius))
     candidates=np.vstack((local,rng.uniform(lower,upper,(256,dim))))
+    if network is not None:
+        feature=network.encode(z)
+        test_feature=network.encode(candidates)
+        mean=y[0]+network.readout(feature)
+        pred=y[0]+network.readout(test_feature)
+        if not gp:
+            ridge=feature.T@feature+.01*np.eye(feature.shape[1])
+            head=np.linalg.solve(ridge,feature.T@(y-mean))
+            return candidates[np.argmin(penalty(pred+test_feature@head))]
     u=(z-lower)/span
     v=(candidates-lower)/span
     K=kernel(u,u)+.004*np.eye(t)
     cross=kernel(v,u)
     w=np.linalg.solve(K,cross.T).T
-    mu=np.broadcast_to(y[0],y.shape)
-    pred=y[0]+np.zeros((len(v),y.shape[1]))
+    if network is None:
+        mean=np.broadcast_to(y[0],y.shape)
+        pred=y[0]+np.zeros((len(v),y.shape[1]))
     if prior is not None:
-        mu=mu+moments(z)@prior
+        mean=mean+moments(z)@prior
         pred+=moments(candidates)@prior
-    pred+=w@(y-mu)
+    pred+=w@(y-mean)
     sig=np.sqrt(np.maximum(0.,1-(w*cross).sum(1)))
     scale=np.maximum(y.std(axis=0),.02)
     score=penalty(pred-.7*sig[:,None]*scale)

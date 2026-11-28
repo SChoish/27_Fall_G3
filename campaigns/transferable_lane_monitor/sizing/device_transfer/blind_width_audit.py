@@ -12,7 +12,7 @@ from circuit import ratios
 from experiment import upper
 
 
-def audit(source,runs):
+def audit(source,runs,arms=ARMS,selectors=None):
     examples=[]
     for r in source:
         x=np.asarray(r["x"])
@@ -25,11 +25,11 @@ def audit(source,runs):
         examples.append((z,y-y[0]))
     prior=fit_prior(examples)
     seen={};keys=set();prefix={}
-    assert len(runs)==len(NEW)*len(ARMS)*len(SEEDS)*len(GOALS)
+    assert len(runs)==len(NEW)*len(arms)*len(SEEDS)*len(GOALS)
     fine_witnesses=0
     for r in runs:
         n,arm,seed,g=(r[k] for k in ("name","arm","seed","goal"))
-        assert (n,arm,seed,g) not in keys and n in NEW and arm in ARMS and seed in SEEDS and g in GOALS
+        assert (n,arm,seed,g) not in keys and n in NEW and arm in arms and seed in SEEDS and g in GOALS
         keys.add((n,arm,seed,g))
         p=np.array(r["perm"]);dim=len(p);inv=np.argsort(p)
         np.testing.assert_array_equal(p,np.random.default_rng([seed,886]).permutation(dim))
@@ -44,7 +44,11 @@ def audit(source,runs):
         calls=4;fine_ref=None;hit=None
         for t,s in enumerate(r["trace"]):
             assert hit is None
-            z=propose(arm,hist,labels,lo,hi,seed,prior if arm=="transfer_bo" else None)
+            if selectors and arm in selectors:
+                select,net=selectors[arm]
+                z=select(arm,hist,labels,lo,hi,seed,net)
+            else:
+                z=propose(arm,hist,labels,lo,hi,seed,prior if arm=="transfer_bo" else None)
             x=np.round(np.exp(z)[inv],6);np.testing.assert_allclose(x,s["x"],rtol=0,atol=1e-6)
             x=np.array(s["x"])
             if t<4:assert prefix.setdefault((n,seed,t),x.tolist())==x.tolist()
@@ -70,7 +74,7 @@ def audit(source,runs):
         assert r["hit"]==hit and r["calls"]==calls and (hit is not None or calls==100)
     summary=[]
     for n in ("combined",*NEW):
-        for a in ARMS:
+        for a in arms:
             for g in GOALS:
                 ts=[r["hit"] for r in runs if r["arm"]==a and r["goal"]==g and n in ("combined",r["name"])]
                 for cap in (40,100):
