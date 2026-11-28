@@ -16,7 +16,8 @@ from surrogate_buffer_run import models
 
 TOPOLOGY = Circuit("sky",(-1,0,0,0),(1.,1.55,2.05,2.65),(1,2,3),(.72,1.07,1.41),2.75)
 TARGETS = {f"surrogate_three_{p}":replace(TOPOLOGY,pdk=p) for p in ("sky","gf")}
-ARMS = ("mlp200","fresh","mae")
+PLANNED = ("mlp200","fresh","mae")
+ARMS = (*PLANNED,"source_guard")
 SEEDS = (131,132,133)
 GOAL = .95
 ARCHIVE = ROOT/"surrogate_buffer_transfer_measurements.zip"
@@ -28,7 +29,7 @@ def source_pdk(circuit):
 
 def verify(sources,runs):
     nets=models(sources)
-    assert len(runs)==18
+    assert len(runs)==len(TARGETS)*len(SEEDS)*len(ARMS)
     reports={}
     for n,c in TARGETS.items():
         p=source_pdk(c)
@@ -43,7 +44,7 @@ def main():
         with ZipFile(ARCHIVE) as z:
             sources,runs,stats=[json.loads(z.read(k+".json")) for k in ("source","runs","audit")]
         assert verify(sources,runs)==stats
-        print("Replayed 18 prospective runs.")
+        print("Replayed 18 preselected runs and 6 exploratory source-fallback runs.")
         return
     args=arguments()
     enable()

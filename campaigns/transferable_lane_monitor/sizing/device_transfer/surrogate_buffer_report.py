@@ -106,7 +106,7 @@ def transfer_report():
         cells=[score([r for r in group if r["name"].endswith(p)]) for p in ("gf","sky")]
         print("| "+" | ".join([NAMES[arm],*cells,score(group)])+" |")
     print("\n| 타깃 | seed | "+" | ".join(NAMES[a] for a in holdout_arms)+" |")
-    print("|---|---:|---:|---:|---:|")
+    print("|---|---:|" + "---:|"*len(holdout_arms))
     for name,seed in sorted({(r["name"],r["seed"]) for r in rows}):
         hits={r["arm"]:r["hit"] for r in rows if r["name"]==name and r["seed"]==seed}
         print("| "+" | ".join([name,str(seed),*(str(hits[a] or "미달") for a in holdout_arms)])+" |")

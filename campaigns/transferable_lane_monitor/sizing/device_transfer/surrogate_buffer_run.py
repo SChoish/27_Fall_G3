@@ -1,7 +1,7 @@
 """Cross-PDK first-hit experiment and independent proposal/measurement replay."""
 import json
 from concurrent.futures import ThreadPoolExecutor
-from zipfile import ZipFile, ZIP_DEFLATED
+from zipfile import ZipFile, ZIP_LZMA
 import sys
 from blind_width_audit import audit
 from blind_width_run import GOALS, run
@@ -67,7 +67,7 @@ def main():
     if guard_only:
         return
     stats, decisions=verify(sources,runs)
-    with ZipFile(ARCHIVE,"w",compression=ZIP_DEFLATED,compresslevel=9) as z:
+    with ZipFile(ARCHIVE,"w",compression=ZIP_LZMA) as z:
         for key,data in (("source",sources),("runs",runs),("audit",stats),("decisions",decisions)):
             z.writestr(key+".json",json.dumps(data,separators=(",",":"),allow_nan=False))
     print(f"Verified {len(runs)} runs.")
