@@ -63,7 +63,7 @@ def hit(y,goal):
     return (y[...,0]<=np.log(goal)) & (y[...,1:]<=0).all(axis=-1)
 
 
-def train_actor(rows,models,gamma,buffer_size=1):
+def train_actor(rows,models,gamma,buffer_size=1,*,observe_baseline=None):
     rng=np.random.default_rng(14019)
     actor=np.zeros(NFEATURES)
     adam1=np.zeros_like(actor);adam2=adam1.copy()
@@ -122,6 +122,8 @@ def train_actor(rows,models,gamma,buffer_size=1):
                     continue
                 mse=np.mean((returns[~held,None]-predictions[~held])**2,axis=0)
                 age=int(np.argmin(mse))
+                if observe_baseline is not None:
+                    observe_baseline(returns[held],predictions[held,0],predictions[held,age])
                 critic_age_counts[age]+=1
                 adv[held]=returns[held]-predictions[held,age]
         value_critic=np.linalg.solve(states.T@states+.1*np.eye(4),states.T@returns)

@@ -126,3 +126,18 @@ python ppo_critic_buffer.py --replay
 python ppo_standalone.py --replay
 python ppo_sizing_report.py
 ```
+
+## PPO value critic이 더 정확해졌는지 재검산
+
+5% 목표에서 단일 value critic과 buffer의 대응 성공 여부를 보면, buffer만 성공한 경우가 5개, 단일 critic만 성공한 경우가 1개, 둘 다 성공한 경우가 2개, 둘 다 미달인 경우가 4개다. 따라서 성공 수는 3/12에서 7/12로 늘었다. 10%에서는 0/12에서 1/12였다. 공정별 소스 학습 seed는 한 개다. 세 타깃 시작 seed는 같은 학습 정책을 평가하므로 학습 seed 반복을 대신할 수 없다.
+
+buffer 정책의 학습을 재생해 같은 transition에서 최신 value critic과 실제로 선택한 critic이 예측한 Monte Carlo return의 제곱오차를 구했다. 각 에피소드는 critic을 선택하는 데 쓰지 않은 fold에 있을 때 채점하고, 모든 transition에 같은 가중치를 주었다. 재학습한 actor 가중치와 critic 선택 횟수도 보관된 기록과 대조했다.
+
+| 소스 | transition 수 | 최신 critic MSE | 선택된 critic MSE | 상대 변화 |
+|---|---:|---:|---:|---:|
+| SKY130 | 8,129 | 0.275146 | 0.277691 | +0.93% |
+| GF180 | 5,964 | 0.229104 | 0.247405 | +7.99% |
+
+두 소스 모두 선택된 critic의 return 예측오차가 더 컸다. 이 결과는 buffer 정책 자체가 방문한 이력에서의 비교다. 정책경사 분산과 독립 학습 seed에서의 타깃 성능은 이 진단으로 추정하지 않았다. 또한 기존 학습에서는 웜업과 행동 표본추출이 같은 난수 생성기를 소비한다. 정책에 따라 종료 시점이 바뀌면 이후 에피소드의 웜업도 달라질 수 있다. 예컨대 SKY130의 768개 학습 에피소드 중 웜업 성공은 단일 critic 75개, buffer 51개였다. 타깃 평가의 대응 웜업은 동일하다.
+
+재현 명령은 `python ppo_value_audit.py`다.
