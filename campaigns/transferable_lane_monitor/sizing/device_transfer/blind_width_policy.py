@@ -40,13 +40,16 @@ def propose(arm,history,observations,lower,upper,seed,prior=None):
     return rank_candidates(z,y,lower,upper,rng,prior=prior)
 
 
-def rank_candidates(z,y,lower,upper,rng,prior=None,network=None,gp=True,calibrated=None):
+def rank_candidates(z,y,lower,upper,rng,prior=None,network=None,gp=True,calibrated=None,local_builder=None):
     t,dim=z.shape
     penalty=lambda values: values[...,0]+4*np.maximum(values[...,1:],0).sum(axis=-1)
     center=z[np.argmin(penalty(y))]
     span=upper-lower
     radius=rng.uniform(.04,.55,(256,1))*span
-    local=rng.uniform(np.maximum(lower,center-radius),np.minimum(upper,center+radius))
+    if local_builder is None:
+        local=rng.uniform(np.maximum(lower,center-radius),np.minimum(upper,center+radius))
+    else:
+        local=local_builder(z,y,lower,upper,radius,rng)
     candidates=np.vstack((local,rng.uniform(lower,upper,(256,dim))))
     if network is not None:
         feature=network.encode(z)
