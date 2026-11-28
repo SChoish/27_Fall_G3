@@ -4,7 +4,7 @@ import numpy as np
 from blind_width_policy import kernel, rank_candidates
 
 RULES = ("mae", "near_goal", "ranking", "false_pass")
-ARMS = ("mlp200", "fresh", "latest", "random_head", *RULES)
+ARMS = ("mlp200", "fresh", "latest", "random_head", *RULES, "source_guard")
 WINDOW = 4
 RIDGE = .01
 
@@ -61,6 +61,10 @@ def select_head(arm, net, z, y, lo, hi, goal, seed):
         end = len(y)
         return fit_head(feature, residual, end), end
     heads = [fit_head(feature, residual, e) for e in ends]
+    if arm == "source_guard":
+        # Include the unmodified source readout as a permanent fallback. Prefer it on ties.
+        heads.insert(0, np.zeros_like(heads[0]))
+        ends.insert(0, 0)
     if arm == "random_head":
         i = np.random.default_rng([seed,len(y),635]).integers(len(ends))
     elif arm == "latest" or len(ends)==1:
@@ -75,7 +79,7 @@ def select_head(arm, net, z, y, lo, hi, goal, seed):
         for head in heads:
             delta = feature @ head
             pred = base[stop:] + delta[stop:] + w @ (residual[:stop]-delta[:stop])
-            scores.append(losses(arm,pred,y[stop:],goal,scale))
+            scores.append(losses("mae" if arm=="source_guard" else arm,pred,y[stop:],goal,scale))
         i = min(range(len(ends)),key=scores.__getitem__)
     return heads[i], ends[i]
 

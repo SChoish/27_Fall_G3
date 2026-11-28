@@ -41,6 +41,9 @@ def main():
         assert verify(sources,runs)==(stats,decisions)
         print(f"Replayed {len(runs)} runs including all selected head ages.")
         return
+    guard_only="--guard-only" in sys.argv
+    if guard_only:
+        sys.argv.remove("--guard-only")
     args=arguments()
     enable()
     with ZipFile(ROOT/"ppo_sizing_measurements.zip") as z:
@@ -53,7 +56,7 @@ def main():
     def evaluate(job):
         name,seed=job
         local=[]
-        for arm in ARMS[1:]:
+        for arm in (("source_guard",) if guard_only else ARMS[1:]):
             for goal in GOALS:
                 run((name,DOMAINS[name],arm,seed,goal),args,None,root,selector(nets[source_for(name)],goal))
                 local.append(json.loads((root/f"{name}-{arm}-{seed}-{goal}.json").read_text()))
@@ -61,6 +64,8 @@ def main():
 
     with ThreadPoolExecutor(args.workers) as pool:
         runs=baselines+[r for block in pool.map(evaluate,[(n,s) for n in DOMAINS for s in seeds(n)]) for r in block]
+    if guard_only:
+        return
     stats, decisions=verify(sources,runs)
     with ZipFile(ARCHIVE,"w",compression=ZIP_DEFLATED,compresslevel=9) as z:
         for key,data in (("source",sources),("runs",runs),("audit",stats),("decisions",decisions)):
