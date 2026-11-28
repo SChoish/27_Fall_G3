@@ -1,4 +1,4 @@
-"""Replay-only comparison on prior circuits and an untuned random-donor counterfactual."""
+"""Reapply frozen donor selection on prior circuits and an untuned random-donor counterfactual."""
 from concurrent.futures import ThreadPoolExecutor
 import json
 import sys
