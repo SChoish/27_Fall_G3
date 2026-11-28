@@ -12,7 +12,7 @@ from circuit import ratios
 from experiment import upper
 
 
-def audit(source,runs,arms=ARMS,selectors=None,domains=NEW,seeds=SEEDS):
+def audit(source,runs,arms=ARMS,selectors=None,domains=NEW,seeds=SEEDS,goals=GOALS,width_upper=upper):
     examples=[]
     for r in source:
         x=np.asarray(r["x"])
@@ -25,11 +25,11 @@ def audit(source,runs,arms=ARMS,selectors=None,domains=NEW,seeds=SEEDS):
         examples.append((z,y-y[0]))
     prior=fit_prior(examples)
     seen={};keys=set();prefix={}
-    assert len(runs)==len(domains)*len(arms)*len(seeds)*len(GOALS)
+    assert len(runs)==len(domains)*len(arms)*len(seeds)*len(goals)
     fine_witnesses=0
     for r in runs:
         n,arm,seed,g=(r[k] for k in ("name","arm","seed","goal"))
-        assert (n,arm,seed,g) not in keys and n in domains and arm in arms and seed in seeds and g in GOALS
+        assert (n,arm,seed,g) not in keys and n in domains and arm in arms and seed in seeds and g in goals
         keys.add((n,arm,seed,g))
         p=np.array(r["perm"]);dim=len(p);inv=np.argsort(p)
         np.testing.assert_array_equal(p,np.random.default_rng([seed,886]).permutation(dim))
@@ -39,7 +39,7 @@ def audit(source,runs,arms=ARMS,selectors=None,domains=NEW,seeds=SEEDS):
                 key=(n,tuple(x),k,fine)
                 assert seen.setdefault(key,v)==v
         base=np.ones(dim);record(base,0,r["ref"])
-        lo=np.full(dim,np.log(.58));hi=np.log(upper(domains[n])[p])
+        lo=np.full(dim,np.log(.58));hi=np.log(width_upper(domains[n])[p])
         hist=[np.zeros(dim)];labels=[ratios(r["ref"][:2],r["ref"][:2])]
         calls=4;fine_ref=None;hit=None
         for t,s in enumerate(r["trace"]):
@@ -52,7 +52,7 @@ def audit(source,runs,arms=ARMS,selectors=None,domains=NEW,seeds=SEEDS):
             x=np.round(np.exp(z)[inv],6);np.testing.assert_allclose(x,s["x"],rtol=0,atol=1e-6)
             x=np.array(s["x"])
             if t<4:assert prefix.setdefault((n,seed,t),x.tolist())==x.tolist()
-            assert np.all((x>=.58)&(x<=upper(domains[n])))
+            assert np.all((x>=.58)&(x<=width_upper(domains[n])))
             record(x,0,s["dev"]);calls+=2
             ok,e=checks(s["dev"],r["ref"][:2])
             assert (s["val"] is not None)==bool(ok and e<=g and calls+2<=100)
@@ -75,7 +75,7 @@ def audit(source,runs,arms=ARMS,selectors=None,domains=NEW,seeds=SEEDS):
     summary=[]
     for n in ("combined",*domains):
         for a in arms:
-            for g in GOALS:
+            for g in goals:
                 ts=[r["hit"] for r in runs if r["arm"]==a and r["goal"]==g and n in ("combined",r["name"])]
                 for cap in (40,100):
                     summary.append(dict(domain=n,method=a,goal=g,cap=cap,n=len(ts),

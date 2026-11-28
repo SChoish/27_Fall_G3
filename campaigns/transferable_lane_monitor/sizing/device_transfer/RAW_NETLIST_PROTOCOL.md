@@ -13,3 +13,7 @@
 `python raw_netlist_suggest.py design.cir --pdk sky --history history.json`으로 다음 SPICE 후보의 소자별 nominal 폭 배율을 얻는다. `--method devices400`으로 물리 MLP, `--method wires400`으로 실제 net 공유 GAT를 선택한다. 기본 소스 데이터는 함께 공개하는 physical_transfer_measurements.zip에서 읽는다. 회로 그래프나 소자 역할 목록을 만들 필요가 없다.
 
 history.json의 limits는 MOS 인스턴스 이름별 [최소, 최대] 폭 배율이다. observations가 비어 있으면 기준 설계를 반환한다. 이후 각 관측에는 소자 이름별 ratios와 개발 코너의 log_metrics 다섯 값(기준 대비 EDP, 허용치 대비 지연·slew·공급 민감도·레일 위반 비율의 로그)을 넣는다. 이 벤치마크에서는 기존 circuit.ratios가 시뮬레이터 출력으로 계산한다. 확인 코너 관측은 입력하지 않는다. 이 진입점은 본 시험의 평탄화된 두 PDK primitive deck용 후보 제안기이며 시뮬레이터 실행과 비용 집계는 평가 어댑터가 담당한다.
+
+### 소자 역할과 무관한 공통 폭 범위
+
+기존 설계 영역은 최초 입력에 붙은 소자에 1.0배, 나머지에 1.3배 상한을 준다. 실제 납품 사양에서 입력 부하 제한을 받는 경우와 별개로, 이 벤치마크의 탐색 범위가 역할 단서가 되는지 고려했다. 독립 보조 실험에서는 모든 MOS에 0.58–1.30배를 똑같이 적용한다. 소스의 네 회로도 같은 공통 범위에서 25개씩 재추출하고 각 PDK에서 측정한다(400 transient). 두 회로군 × 두 PDK × 같은 seed 81, 82에서 타깃 전용 BO, 물리 속성 MLP+BO, net 공유 GAT+BO의 5% 최초 도달을 비교한다. 제약, 고정 nominal 회로 및 타깃 100회 예산은 같다. 기존 시험과 탐색 공간 및 소스가 함께 바뀌므로 차이를 단일 요인에 귀속하지 않는다.
