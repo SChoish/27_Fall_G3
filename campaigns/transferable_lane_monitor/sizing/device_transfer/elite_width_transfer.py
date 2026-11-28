@@ -45,7 +45,7 @@ def templates(source,target,random=False):
     p,r=descriptors(target)
     mapped=[]
     for index,row in enumerate(source):
-        ps,rs=descriptors(SOURCE_NETS[row["name"]])
+        ps,rs=descriptors(replace(SOURCE_NETS[row["name"]],pdk=row["pdk"]))
         distance=(r[:,None]-rs)**2
         weights=np.exp(-.5*distance/.2**2)*(p[:,None]==ps)
         weights/=weights.sum(1,keepdims=True)
@@ -57,13 +57,13 @@ def templates(source,target,random=False):
     return np.stack(mapped)
 
 
-def policies(source,domains=DOMAINS):
+def policies(source,domains=DOMAINS,trial_seeds=None):
     baseline=selector(source,use_correction=False)
     net=train(source,only=("anon400",))["anon400"]
     def for_domain(n,c):
         banks={a:templates(source,c,random=(a=="random_templates")) for a in ("retrieved","random_templates")}
         d=banks["retrieved"].shape[1]
-        seeds=earlier_seeds(n) if n in EARLIER else SEEDS
+        seeds=trial_seeds if trial_seeds is not None else (earlier_seeds(n) if n in EARLIER else SEEDS)
         reordered={(a,s):bank[:,np.random.default_rng([s,886]).permutation(d)]
                    for a,bank in banks.items() for s in seeds}
         def pick(arm,hist,y,lo,hi,seed,unused):
