@@ -52,7 +52,7 @@ def main():
         print(f"- {1-goal:.0%} 목표")
         for a in ("coin","myopic_gate","ppo_gate","rollout_gate"):
             decisions=[e for n in NEW for e in (rollout_actions[f"{n}_{goal}"] if a=="rollout_gate" else binary_actions[f"{n}_{goal}"][a]) if e["distinct"]]
-            print(f"  - {NAMES[a]}가 소스 복귀 제안을 {sum(e['chosen'] for e in decisions)}/{len(decisions)}회 선택했다.")
+            print(f"  - {NAMES[a]} 정책은 소스 복귀 제안을 {sum(e['chosen'] for e in decisions)}/{len(decisions)}회 선택했다.")
         ds=[e for n in NEW for e in actions[f"{n}_{goal}"]["ppo_snapshot"] if e["distinct"]>1]
         print(f"  - 직접 PPO의 소스 원본·최신·과거 선택은 {sum(e['end']==0 for e in ds)} · "
               f"{sum(e['end']==e['observed'] for e in ds)} · {sum(0<e['end']<e['observed'] for e in ds)}회였다.")
