@@ -62,14 +62,20 @@ def fit_slew(rows):
     return np.linalg.solve(x.T@x+.01*np.eye(x.shape[1]),x.T@np.concatenate(Y))
 
 
-def selector(source):
+def selector(source, use_correction=True):
     model=train(source,only=("anon400",))["anon400"]
-    beta=fit_slew(source)
+    beta=fit_slew(source) if use_correction else None
     def select(arm,hist,y,lo,hi,seed,unused):
         rng=np.random.default_rng([seed,len(hist),6481])
         if len(hist)<=4:return rng.uniform(lo,hi)
         z=np.asarray(hist); obs=np.asarray(y)
         def local(z,y,lo,hi,radius,stream):
+            if arm=="mixed":
+                center=z[np.argmin(y[:,0]+4*np.maximum(y[:,1:],0).sum(1))]
+                mid=len(radius)//2
+                base=stream.uniform(np.maximum(lo,center-radius[:mid]),np.minimum(hi,center+radius[:mid]))
+                directions=local_proposals(z,y,lo,hi,radius[mid:],stream,model,True,True,True)
+                return np.vstack((base,directions))
             return local_proposals(z,y,lo,hi,radius,stream,model,True,True,True)
         def adjust(candidates, predicted):
             corrected=predicted.copy()
@@ -77,28 +83,34 @@ def selector(source):
             corrected[:,2]+=np.maximum(0.,gap)
             return corrected
         return rank_candidates(z,obs,lo,hi,rng,network=model,
-                               local_builder=local if arm in ("elite_natural","slew_elite") else None,
+                               local_builder=local if arm in ("elite_natural","slew_elite","mixed") else None,
                                adjust=adjust if arm in ("slew_mlp","slew_elite") else None)
     return select
 
 
-def verify(source,runs):
-    assert len(source)==4 and all(r["pdk"]=="sky" and len(r["confirmation"])==25 for r in source)
-    assert len(runs)==sum(len(seeds(n))*len(ARMS)*len(GOALS) for n in DOMAINS)
-    sel=selector(source)
+def verify(source,runs,arms=ARMS):
+    mixed = arms==("mixed",)
+    assert len(source)==4 and all(r["pdk"]=="sky" and (mixed or len(r["confirmation"])==25) for r in source)
+    assert len(runs)==sum(len(seeds(n))*len(arms)*len(GOALS) for n in DOMAINS)
+    sel=selector(source,not mixed)
     stats={}
     for n,c in DOMAINS.items():
-        _,stats[n]=audit(source,[r for r in runs if r["name"]==n],ARMS,{a:(sel,None) for a in ARMS},
+        _,stats[n]=audit(source,[r for r in runs if r["name"]==n],arms,{a:(sel,None) for a in arms},
                          {n:c},seeds(n),GOALS)
     return stats
 
 
-def acquire():
+def acquire(mixed=False):
     args=arguments();enable()
     root=args.out/"corner_transfer"
     root.mkdir(exist_ok=True,parents=True)
-    source=source_pairs(args)
-    sel=selector(source)
+    arms=("mixed",) if mixed else ARMS
+    if mixed:
+        with ZipFile(ROOT/"anonymous_width_measurements.zip") as archive:
+            source=[dict(r,pdk="sky") for r in json.loads(archive.read("source.json"))]
+    else:
+        source=source_pairs(args)
+    sel=selector(source,not mixed)
     def pair(job):
         name,arm,seed=job
         rows=[]
@@ -112,21 +124,27 @@ def acquire():
             rows.append(json.loads((root/f).read_text()))
         return rows
     with ThreadPoolExecutor(args.workers) as pool:
-        runs=[r for block in pool.map(pair,[(n,a,s) for n in DOMAINS for s in seeds(n) for a in ARMS]) for r in block]
-    stats=verify(source,runs)
-    with ZipFile(ARCHIVE,"w",compression=ZIP_DEFLATED,compresslevel=9) as f:
+        runs=[r for block in pool.map(pair,[(n,a,s) for n in DOMAINS for s in seeds(n) for a in arms]) for r in block]
+    stats=verify(source,runs,arms)
+    with ZipFile(archive_path(mixed),"w",compression=ZIP_DEFLATED,compresslevel=9) as f:
         for key,data in (("source",source),("runs",runs),("audit",stats)):
             f.writestr(key+".json",json.dumps(data,separators=(",",":"),allow_nan=False))
     return stats
 
 
-def replay():
-    with ZipFile(ARCHIVE) as f:
+def archive_path(mixed):
+    return ROOT/"mixed_transfer_measurements.zip" if mixed else ARCHIVE
+
+
+def replay(mixed=False):
+    with ZipFile(archive_path(mixed)) as f:
         source,runs,expected=[json.loads(f.read(k+".json")) for k in ("source","runs","audit")]
-    stats=verify(source,runs)
+    stats=verify(source,runs,("mixed",) if mixed else ARMS)
     assert stats==expected
     return stats
 
 
 if __name__=="__main__":
-    print(replay() if sys.argv[1:]==["--replay"] else acquire())
+    mixed="--mixed" in sys.argv
+    if mixed:sys.argv.remove("--mixed")
+    print(replay(mixed) if sys.argv[1:]==["--replay"] else acquire(mixed))
