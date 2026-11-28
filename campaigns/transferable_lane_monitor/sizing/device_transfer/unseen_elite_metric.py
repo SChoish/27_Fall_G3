@@ -78,8 +78,8 @@ def models_from(source):
     return train(source, only=("anon400", SKY_ONLY))
 
 
-def chooser(models):
-    mask_models = {s: bind(SKY_ONLY, models[SKY_ONLY], TEST[DOMAIN], s) for s in SEEDS}
+def chooser(models, domain=DOMAIN):
+    mask_models = {s: bind(SKY_ONLY, models[SKY_ONLY], TEST[domain], s) for s in SEEDS}
     def select(arm, history, obs, lo, hi, seed, unused):
         if arm == "bo":
             return propose("bo", history, obs, lo, hi, seed)
@@ -99,12 +99,12 @@ def chooser(models):
     return select
 
 
-def verify(source, runs, select, arms=ARMS):
+def verify(source, runs, select, arms=ARMS, domain=DOMAIN):
     selectors = {a: (select, None) for a in arms}
-    return audit(source, runs, arms, selectors, {DOMAIN: TEST[DOMAIN]}, SEEDS, GOALS)[1]
+    return audit(source, runs, arms, selectors, {domain: TEST[domain]}, SEEDS, GOALS)[1]
 
 
-def acquire(arms=ARMS, archive_path=ARCHIVE):
+def acquire(arms=ARMS, archive_path=ARCHIVE, domain=DOMAIN):
     args = arguments()
     enable()
     root = args.out/"unseen_elite_metric"
@@ -112,42 +112,47 @@ def acquire(arms=ARMS, archive_path=ARCHIVE):
     # The archive contains the original SKY-only source labels and no GF180 source labels.
     with ZipFile(Path(__file__).with_name("anonymous_width_measurements.zip")) as archive:
         source = [dict(r, pdk="sky") for r in json.loads(archive.read("source.json"))]
-    select = chooser(models_from(source))
+    select = chooser(models_from(source), domain)
     def pair(job):
         arm, seed = job
         rows = []
         for goal in GOALS:
-            name = f"{DOMAIN}-{arm}-{seed}-{goal}.json"
+            name = f"{domain}-{arm}-{seed}-{goal}.json"
             historical = args.out/"adaptive_prior"/name
             if arm=="bo" and historical.exists():
                 rows.append(json.loads(historical.read_text()))
                 continue
-            run((DOMAIN, TEST[DOMAIN], arm, seed, goal), args, None, root, select)
+            run((domain, TEST[domain], arm, seed, goal), args, None, root, select)
             rows.append(json.loads((root/name).read_text()))
         return rows
     with ThreadPoolExecutor(args.workers) as pool:
         runs = [r for group in pool.map(pair, [(a,s) for s in SEEDS for a in arms]) for r in group]
-    stats = verify(source, runs, select, arms)
+    stats = verify(source, runs, select, arms, domain)
     with ZipFile(archive_path, "w", compression=ZIP_DEFLATED, compresslevel=9) as out:
         for k, v in (("source",source),("runs",runs),("audit",stats)):
             out.writestr(k+".json",json.dumps(v,separators=(",",":"),allow_nan=False))
     return stats
 
 
-def replay(arms=ARMS, archive_path=ARCHIVE):
+def replay(arms=ARMS, archive_path=ARCHIVE, domain=DOMAIN):
     with ZipFile(archive_path) as f:
         source, runs, expected = [json.loads(f.read(k+".json")) for k in ("source","runs","audit")]
-    stats = verify(source, runs, chooser(models_from(source)), arms)
+    stats = verify(source, runs, chooser(models_from(source), domain), arms, domain)
     assert stats==expected
     return stats
 
 
 if __name__=="__main__":
-    arms, archive_path = ARMS, ARCHIVE
+    domain, arms, archive_path = DOMAIN, ARMS, ARCHIVE
     if "--directional" in sys.argv:
         sys.argv.remove("--directional")
         arms, archive_path = DIRECTION_ARMS, ARCHIVE.with_name("unseen_directional_measurements.zip")
     elif "--single-directional" in sys.argv:
         sys.argv.remove("--single-directional")
         arms, archive_path = SINGLE_ARMS, ARCHIVE.with_name("unseen_single_directional_measurements.zip")
-    print(replay(arms, archive_path) if sys.argv[1:]==["--replay"] else acquire(arms, archive_path))
+    elif "--branch" in sys.argv:
+        sys.argv.remove("--branch")
+        domain = "adapt_branch_gf"
+        arms = ("bo", "mlp200", "elite_natural")
+        archive_path = ARCHIVE.with_name("branch_transfer_measurements.zip")
+    print(replay(arms, archive_path, domain) if sys.argv[1:]==["--replay"] else acquire(arms, archive_path, domain))
