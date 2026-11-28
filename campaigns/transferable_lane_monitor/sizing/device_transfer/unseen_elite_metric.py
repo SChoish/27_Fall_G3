@@ -19,6 +19,7 @@ from raw_netlist_run import SKY_ONLY, bind, train
 DOMAIN = "adapt_lane_gf"
 ARMS = ("bo", "mlp200", "wires200", "elite", "metric", "elite_metric")
 DIRECTION_ARMS = ("elite_gradient", "elite_natural")
+SINGLE_ARMS = ("single_gradient", "single_natural")
 ARCHIVE = Path(__file__).with_name("unseen_elite_metric_measurements.zip")
 
 
@@ -87,11 +88,12 @@ def chooser(models):
             return rng.uniform(lo, hi)
         model = mask_models[seed] if arm == SKY_ONLY else models["anon400"]
         builder = None
-        if arm in ("elite", "metric", "elite_metric", *DIRECTION_ARMS):
+        if arm in ("elite", "metric", "elite_metric", *DIRECTION_ARMS, *SINGLE_ARMS):
             def builder(z, y, lower, upper, radius, stream):
                 return local_proposals(z, y, lower, upper, radius, stream, model,
                                        arm in ("elite", "elite_metric", *DIRECTION_ARMS),
-                                       arm in ("metric", "elite_metric", "elite_natural"), arm in DIRECTION_ARMS)
+                                       arm in ("metric", "elite_metric", "elite_natural", "single_natural"),
+                                       arm in (*DIRECTION_ARMS, *SINGLE_ARMS))
         return rank_candidates(np.asarray(history), np.asarray(obs), lo, hi, rng,
                                network=model, local_builder=builder)
     return select
@@ -145,4 +147,7 @@ if __name__=="__main__":
     if "--directional" in sys.argv:
         sys.argv.remove("--directional")
         arms, archive_path = DIRECTION_ARMS, ARCHIVE.with_name("unseen_directional_measurements.zip")
+    elif "--single-directional" in sys.argv:
+        sys.argv.remove("--single-directional")
+        arms, archive_path = SINGLE_ARMS, ARCHIVE.with_name("unseen_single_directional_measurements.zip")
     print(replay(arms, archive_path) if sys.argv[1:]==["--replay"] else acquire(arms, archive_path))
