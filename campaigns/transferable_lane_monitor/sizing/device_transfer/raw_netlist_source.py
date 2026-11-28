@@ -1,5 +1,7 @@
 """Acquire matching GF180 source labels at the 100 already sampled SKY130 designs."""
 import json
+from pathlib import Path
+from zipfile import ZipFile
 from concurrent.futures import ThreadPoolExecutor
 from dataclasses import replace
 import numpy as np
@@ -12,7 +14,12 @@ from circuit import ratios
 if __name__=="__main__":
     args=arguments();enable()
     root=args.out/"raw_netlist";root.mkdir(exist_ok=True)
-    sky=json.loads((args.out/"anonymous_width"/"source.json").read_text())
+    cached=args.out/"anonymous_width"/"source.json"
+    if cached.is_file():
+        sky=json.loads(cached.read_text())
+    else:
+        with ZipFile(Path(__file__).with_name("anonymous_width_measurements.zip")) as archive:
+            sky=json.loads(archive.read("source.json"))
     def sample(r):
         c=replace(SOURCE_NETS[r["name"]],pdk="gf")
         store=Store("raw_source_gf_"+r["name"],c,args)

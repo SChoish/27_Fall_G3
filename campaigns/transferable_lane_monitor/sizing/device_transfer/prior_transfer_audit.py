@@ -17,6 +17,7 @@ from circuit import deck
 from raw_netlist import extract,DeviceNet
 from raw_netlist_run import ARMS,SKY_ONLY,bind,select,train
 from alarm_pilot import SOURCE_NETS
+import uniform_netlist_run as uniform
 
 
 def validate_graphs(source):
@@ -64,6 +65,20 @@ def verify(group,runs,source):
             subset=[r for r in runs if r["name"] in domains]
             selectors={a:(policy,nets) for a in ADAPT_ARMS}
             _,stats[split]=audit(source,subset,ADAPT_ARMS,selectors,domains,seeds)
+    elif group=="uniform":
+        stats["graph"]=validate_graphs(source)
+        nets=train(source,only=uniform.ARMS[1:])
+        for name,c in TEST.items():
+            bound={(a,s):bind(a,nets[a],c,s) for a in uniform.ARMS[1:] for s in uniform.SEEDS}
+            def choose(arm,hist,y,lo,hi,seed,unused):
+                return uniform.choose(arm,hist,y,lo,hi,seed,bound.get((arm,seed)))
+            subset=[r for r in runs if r["name"]==name]
+            selectors={a:(choose,None) for a in uniform.ARMS}
+            _,stats[name]=audit(source,subset,uniform.ARMS,selectors,{name:c},uniform.SEEDS,uniform.GOALS,uniform.uniform_upper)
+        for r in source:
+            assert np.all((np.asarray(r["x"])>=.58)&(np.asarray(r["x"])<=1.3))
+            mate=next(other for other in source if other["name"]==r["name"] and other["pdk"]!=r["pdk"])
+            np.testing.assert_array_equal(r["x"],mate["x"])
     else:
         stats["graph"]=validate_graphs(source)
         nets=train(source)
@@ -103,14 +118,15 @@ def collect(group,path):
         for a,d in (("bo","anonymous_width"),("mlp_bo","anonymous_network"),("gat_bo","anonymous_network")):
             runs.extend(json.loads(f.read_text()) for f in sorted((path/d).glob(f"long100*-{a}-*.json")))
     else:
-        source=json.loads((path/"raw_netlist"/"source.json").read_text())
-        runs=[json.loads(f.read_text()) for f in sorted((path/"raw_netlist").glob("adapt_*-*.json"))]
+        location=path/("uniform_netlist" if group=="uniform" else "raw_netlist")
+        source=json.loads((location/"source.json").read_text())
+        runs=[json.loads(f.read_text()) for f in sorted(location.glob("adapt_*-*.json"))]
     return source,runs
 
 
 if __name__=="__main__":
     parser=argparse.ArgumentParser()
-    parser.add_argument("group",choices=["adaptive","physical"])
+    parser.add_argument("group",choices=["adaptive","physical","uniform"])
     parser.add_argument("--replay",action="store_true")
     opt=parser.parse_args();group=opt.group
     archive=Path(f"{group}_transfer_measurements.zip")
@@ -129,7 +145,7 @@ if __name__=="__main__":
         with ZipFile(archive,"w",compression=ZIP_DEFLATED,compresslevel=8) as z:
             for k,v in (("source",source),("runs",runs),("summary",rows),("audit",stats)):
                 z.writestr(k+".json",json.dumps(v,separators=(",",":"),allow_nan=False))
-        out=root/("adaptive_prior" if group=="adaptive" else "raw_netlist")
+        out=root/{"adaptive":"adaptive_prior","physical":"raw_netlist","uniform":"uniform_netlist"}[group]
         with (out/"summary.csv").open("w") as f:
             writer=csv.DictWriter(f,fieldnames=rows[0]);writer.writeheader();writer.writerows(rows)
     print(group,len(runs),stats,flush=True)

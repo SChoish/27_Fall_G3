@@ -2,7 +2,11 @@
 
 The circuit-to-circuit transfer benchmark uses native-width vectors rather than the two endpoints from the earlier pilot. Each transistor receives its own multiplier. Forward models in this directory are trained offline on development SPICE and are queried against real transient measurements. See PROTOCOL.md for the test splits, benchmark commitments and exploratory additions.
 
-## Active role-free comparison
+## Raw physical inputs and transfer
+
+The optimizer reads model identity, MOS polarity, nominal geometry, capacitances, supply levels, and connectivity directly from the flat SPICE deck. The operator supplies numerical specifications and permitted width intervals. The benchmark includes a common-interval experiment in which every transistor has the same bounds on both source and target. Compare pooled device MLP and attention models with a residual GP using the same target calls. [Physical transfer protocol, supported deck formats and commands](RAW_NETLIST_PROTOCOL.md).
+
+## Anonymous-input baselines
 
 [Anonymous MLP and graph-attention results](ANONYMOUS_NETWORKS.md) compare direct neural search and learned GP means on the same trials.
 
