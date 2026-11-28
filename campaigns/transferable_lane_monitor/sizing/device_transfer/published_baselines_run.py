@@ -19,7 +19,8 @@ from experiment import upper
 from stage_transfer_run import ARCHIVE, ROOT, conditions, digest, evaluate, read, source_pdk, write
 from surrogate_buffer_run import models
 
-ARMS = ("scbo", "kato", "dnnopt", "mlp200", "random_templates", "retrieved")
+DEFAULT_ARMS = ("scbo", "kato", "dnnopt", "mlp200", "random_templates", "retrieved")
+ARMS = (*DEFAULT_ARMS, "constrained_search")
 DEPENDENCIES = (
     "published_baselines_run.py", "published_scbo.py", "published_kato.py", "published_dnnopt.py",
     "stage_transfer_run.py", "blind_width_run.py", "blind_width_policy.py", "blind_width_audit.py",
@@ -71,6 +72,10 @@ def prepare(targets, arms, sources, donors):
             from published_scbo import select_scbo as external
         elif arm == "dnnopt":
             from published_dnnopt import select_dnnopt as external
+        elif arm == "constrained_search":
+            from published_constrained import make_selector
+
+            external = make_selector()
         else:
             from published_kato import select_kato
 
@@ -182,7 +187,7 @@ def main():
     parser.add_argument("--goal", type=float, choices=(.95, .90), default=.95)
     parser.add_argument("--seeds-per-condition", type=int, choices=range(1, 13), default=12,
                         metavar="1..12")
-    parser.add_argument("--arms", nargs="+", choices=ARMS, default=ARMS)
+    parser.add_argument("--arms", nargs="+", choices=ARMS, default=DEFAULT_ARMS)
     mode = parser.add_mutually_exclusive_group()
     mode.add_argument("--plan", action="store_true", help="show trajectory count and exit")
     mode.add_argument("--report-only", action="store_true", help="audit completed raw traces")
@@ -213,7 +218,9 @@ def main():
         donors = get_kato_donors(sources, targets) if "kato" in args.arms else {}
         code = DEPENDENCIES + (("century_engine.py", "century_worker.mjs") if args.compiled else ())
         packages = ["numpy"]
-        if set(args.arms) & {"kato", "scbo"}:
+        if "constrained_search" in args.arms:
+            code += ("published_constrained.py", "../../../../experiments/constrained_search.py")
+        if set(args.arms) & {"kato", "scbo", "constrained_search"}:
             packages.append("scipy")
         if set(args.arms) & {"kato", "dnnopt"}:
             packages.append("torch")
@@ -221,7 +228,8 @@ def main():
         for name, c, _ in targets:
             calls = 2 * sum(len(row["x"]) for row in sources[source_pdk(c)])
             source_calls[name] = {a: (2 * len(donors[name]["x"]) if a == "kato" else
-                                      0 if a in ("scbo", "dnnopt") else calls) for a in args.arms}
+                                      0 if a in ("scbo", "dnnopt", "constrained_search") else calls)
+                                  for a in args.arms}
         manifest = dict(schema=1, cap=100, goal=args.goal, compiled=args.compiled, arms=list(args.arms),
                         circuits={n: dict(circuit=asdict(c), seeds=s) for n, c, s in targets},
                         archive=digest(ARCHIVE), source_calls_by_condition=source_calls,

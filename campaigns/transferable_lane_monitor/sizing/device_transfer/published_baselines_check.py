@@ -125,14 +125,15 @@ def main():
             rows = [read(full_root / f"{name}-{arm}-{seed}-0.95.json")
                     for arm in ARMS]
             assert all(row["hit"] == row["calls"] == 24 for row in rows)
-            assert {row["arm"] for row in rows if row["actions"]} == {"kato", "scbo", "dnnopt"}
+            assert {row["arm"] for row in rows if row["actions"]} == {
+                "kato", "scbo", "dnnopt", "constrained_search"}
         write(full_root / "manifest.json", dict(goal=.95, arms=ARMS, archive=digest(ARCHIVE),
               circuits={name: dict(circuit=asdict(c), seeds=seeds) for name, c, seeds in targets},
               source_calls_by_condition={}))
         report(full_root, targets, sources)
         summary = read(full_root / "summary.json")["results"]["all"]["methods"]
         assert all(row["successes"] == 8 and row["mean_cost"] == 24. for row in summary.values())
-    print("Passed numerical checks, all 48 synthetic trajectories, reporting and interruption/resume.")
+    print(f"Passed numerical checks, all {len(jobs)} synthetic trajectories, reporting and interruption/resume.")
 
 
 if __name__ == "__main__":

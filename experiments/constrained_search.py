@@ -63,13 +63,21 @@ class ConstrainedSearch:
             return np.inf,np.inf
         return max(0.,float(np.max(row[1:]))),float(row[0])
 
-    def observe(self, point, objective=None, constraints=None):
+    def _point(self, point):
         point = np.asarray(point,dtype=float)
         if point.shape != (self.dimension,) or not np.isfinite(point).all() or np.any((point<0)|(point>1)):
             raise ValueError('Expected a finite normalized design')
+        return point
+
+    def observe(self, point, objective=None, constraints=None, *, measured_point=None):
+        point = self._point(point)
         active = self.pending is not None
         if active and not np.array_equal(point,self.pending):
             raise ValueError('Observation differs from the outstanding proposal')
+        if measured_point is not None:
+            if not active:
+                raise ValueError('A measured replacement requires an outstanding proposal')
+            point = self._point(measured_point)
         row = None
         if objective is not None or constraints is not None:
             constraints = np.asarray(constraints,dtype=float)
