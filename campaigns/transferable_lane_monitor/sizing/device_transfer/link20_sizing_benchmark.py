@@ -58,7 +58,7 @@ class Spice:
             raise
 
 
-def policy_factory(source):
+def policy_factory(source, goal=GOAL):
     external = tuple(a for a in ARMS if a not in TRANSFER)
     targets = [("tx20",CIRCUIT,SEEDS)]
     donor = get_kato_donors(source,targets)
@@ -68,7 +68,7 @@ def policy_factory(source):
 
     def choose(arm, log):
         if arm not in TRANSFER:
-            return create(arm,CIRCUIT,GOAL,log)
+            return create(arm,CIRCUIT,goal,log)
 
         def proposal(_arm,hist,values,lo,hi,seed,_prior):
             z = np.asarray(hist)
@@ -101,14 +101,14 @@ def measured(panel, raw):
     return panel.failure(delay_swing(raw))
 
 
-def qualifies(rows, refs, failure, baseline):
+def qualifies(rows, refs, failure, baseline, goal=GOAL):
     ok, edp = checks(rows,refs)
     if not ok or failure is None:
         return False, None
-    return bool(edp<=GOAL and link_residual(failure,baseline)<=0),float(edp)
+    return bool(edp<=goal and link_residual(failure,baseline)<=0),float(edp)
 
 
-def run_trial(layout,arm,seed,panel,meter,factory,out):
+def run_trial(layout,arm,seed,panel,meter,factory,out,*,goal=GOAL):
     start = perf_counter()
     dev, test = panel
     calls = 0
@@ -155,13 +155,13 @@ def run_trial(layout,arm,seed,panel,meter,factory,out):
             y = np.full(6,3.)
         else:
             y = np.r_[ratios(actual,ref[:2]),link_residual(link,base_dev)]
-        q, edp = qualifies(actual,ref[:2],link,base_dev)
+        q, edp = qualifies(actual,ref[:2],link,base_dev,goal)
         check = final = None
         heldout_link = fine_link = None
         if q and calls+2<=CAP:
             check = pair(x,2)
             heldout_link = measured(test,check)
-            q, _ = qualifies(check,ref[2:],heldout_link,base_test)
+            q, _ = qualifies(check,ref[2:],heldout_link,base_test,goal)
             if q and calls+(8 if fine_ref is None else 4)<=CAP:
                 if fine_ref is None:
                     fine_ref = pair(nominal,0,.25)+pair(nominal,2,.25)
@@ -171,7 +171,7 @@ def run_trial(layout,arm,seed,panel,meter,factory,out):
                 final = pair(x,0,.25)+pair(x,2,.25)
                 fine_link = [measured(dev,final[:2]),measured(test,final[2:])]
                 if all(qualifies(final[2*i:2*i+2],fine_ref[2*i:2*i+2],fine_link[i],
-                                 fine_baselines[i])[0] for i in (0,1)):
+                                 fine_baselines[i],goal)[0] for i in (0,1)):
                     hit = calls
         trace.append(dict(x=x.tolist(),y=y.tolist(),dev=actual,dev_link=link,dev_edp=edp,
                           check=check,check_link=heldout_link,fine=final,fine_link=fine_link,calls=calls))
@@ -188,7 +188,7 @@ def run_trial(layout,arm,seed,panel,meter,factory,out):
     return row
 
 
-def audit_trial(row, panel):
+def audit_trial(row, panel, *, goal=GOAL):
     dev,this_test = panel
     calls = 4
     found = None
@@ -199,13 +199,13 @@ def audit_trial(row, panel):
         calls += 2
         link = measured(dev,trial["dev"])
         assert link==trial["dev_link"]
-        q, _ = qualifies(trial["dev"],reference[:2],link,row["ref_link"][0])
+        q, _ = qualifies(trial["dev"],reference[:2],link,row["ref_link"][0],goal)
         assert (trial["check"] is not None)==(q and calls+2<=CAP)
         if trial["check"] is not None:
             calls += 2
             link = measured(this_test,trial["check"])
             assert link==trial["check_link"]
-            q, _ = qualifies(trial["check"],reference[2:],link,row["ref_link"][1])
+            q, _ = qualifies(trial["check"],reference[2:],link,row["ref_link"][1],goal)
             assert (trial["fine"] is not None)==(q and calls+(4 if fine_reference_charged else 8)<=CAP)
         if trial["fine"] is not None:
             calls += 4 if fine_reference_charged else 8
@@ -214,7 +214,7 @@ def audit_trial(row, panel):
             values = [measured(dev,fine[:2]),measured(this_test,fine[2:])]
             assert values==trial["fine_link"]
             if all(qualifies(fine[2*i:2*i+2],row["fine_ref"][2*i:2*i+2],values[i],
-                             row["fine_ref_link"][i])[0] for i in (0,1)):
+                             row["fine_ref_link"][i],goal)[0] for i in (0,1)):
                 found = calls
         assert calls==trial["calls"]<=CAP
     assert len(row["ledger"])==row["calls"]==calls
@@ -229,6 +229,8 @@ def main():
     p.add_argument("--node",required=True)
     p.add_argument("--workers",type=int,default=8)
     p.add_argument("--limit",type=int,choices=range(1,51),default=50)
+    p.add_argument("--goal",type=float,choices=(.95,.90),default=GOAL,
+                   help="maximum EDP ratio to nominal, with the same cell and link limits")
     args = p.parse_args()
     args.out.mkdir(parents=True,exist_ok=True)
     raw_out = args.out/"trajectories"
@@ -241,20 +243,20 @@ def main():
         assert sha256(matrix.tobytes()).hexdigest()==row["matrix_sha256"]
     import torch
     torch.set_num_threads(1)
-    factory,source = policy_factory(load_sources())
+    factory,source = policy_factory(load_sources(),args.goal)
     meter = Spice(args)
     with ThreadPoolExecutor(args.workers) as pool:
         panel = list(pool.map(lambda i:panels(h[i],i),range(args.limit)))
         def execute(job):
             i,arm = job
-            return run_trial(i,arm,SEEDS[i%len(SEEDS)],panel[i],meter,factory,raw_out)
+            return run_trial(i,arm,SEEDS[i%len(SEEDS)],panel[i],meter,factory,raw_out,goal=args.goal)
 
         results = list(pool.map(execute,((0,a) for a in ARMS)))
         for pilot in results:
-            audit_trial(pilot,panel[0])
+            audit_trial(pilot,panel[0],goal=args.goal)
         print("Audited the first physical 20-lane circuit against all seven methods.",flush=True)
         results.extend(pool.map(execute,((i,a) for i in range(1,args.limit) for a in ARMS)))
-        list(pool.map(lambda r:audit_trial(r,panel[r["layout"]]),results))
+        list(pool.map(lambda r:audit_trial(r,panel[r["layout"]],goal=args.goal),results))
     assert len(results)==args.limit*7
     stats = {}
     for i in range(args.limit):
@@ -274,7 +276,7 @@ def main():
                           source_spice=source[arm])
     physical = sum(r["physical_transients"] for r in results)
     assert physical==len(meter.entries)==sum(not corner["cache_hit"] for r in results for corner in r["ledger"])
-    report = dict(layouts=args.limit,lanes=20,regimes=REGIMES,quarter_ps=True,goal=GOAL,cap=CAP,
+    report = dict(layouts=args.limit,lanes=20,regimes=REGIMES,quarter_ps=True,goal=args.goal,cap=CAP,
                   source_archive_sha256=digest(ARCHIVE),circuit=asdict(CIRCUIT),methods=stats,
                   logical_target_calls=sum(r["calls"] for r in results),physical_target_transients=physical,
                   cache_hits=sum(r["cache_hits"] for r in results),
