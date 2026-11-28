@@ -21,7 +21,7 @@ def graphs(c):
     return graph,Graph(graph.features,None)
 
 
-def train(records):
+def train(records,only=(*ARMS,SKY_ONLY)):
     examples=[];dense=[];anonymous=[];sky=[]
     for r in records:
         c=replace(SOURCE_NETS[r["name"]],pdk=r["pdk"])
@@ -29,9 +29,14 @@ def train(records):
         z=np.log(r["x"]);y=np.asarray(r["y"])-r["y"][0]
         anonymous.append((z,y));examples.append((z,y,graph));dense.append((z,y,unmasked))
         if c.pdk=="sky":sky.append(examples[-1])
-    return {"anon400":WidthNet(False).fit(anonymous),"devices400":DeviceNet(False).fit(dense),
-            "dense400":DeviceNet(True).fit(dense),"wires400":DeviceNet(True).fit(examples),
-            SKY_ONLY:DeviceNet(True).fit(sky)}
+    specifications={"anon400":(WidthNet,False,anonymous),"devices400":(DeviceNet,False,dense),
+                    "dense400":(DeviceNet,True,dense),"wires400":(DeviceNet,True,examples),
+                    SKY_ONLY:(DeviceNet,True,sky)}
+    models={}
+    for arm in only:
+        constructor,attention,data=specifications[arm]
+        models[arm]=constructor(attention).fit(data)
+    return models
 
 
 def bind(arm,net,c,seed):
