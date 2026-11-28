@@ -24,34 +24,43 @@ DOMAINS = {
 }
 
 
-def selectors(source):
+def selectors(source, pdk="gf"):
     assert len(source)==4 and {r["name"] for r in source}==set(SOURCE_NETS)
-    assert all(r["pdk"]=="gf" and len(r["x"])==25 for r in source)
+    assert all(r["pdk"]==pdk and len(r["x"])==25 for r in source)
     learned = policies(source,DOMAINS,trial_seeds=SEEDS)
     def cold(arm, hist, y, lo, hi, seed, unused):
         return propose("bo",hist,y,lo,hi,seed)
     return {n:{a:(cold if a=="bo" else learned[n], None) for a in ARMS} for n in DOMAINS}
 
 
-def verify(source,runs,choose):
-    assert len(runs)==len(DOMAINS)*len(ARMS)*len(SEEDS)*len(GOALS)
-    return {n:audit(source,[r for r in runs if r["name"]==n],ARMS,choose[n],{n:c},SEEDS,GOALS)[1]
+def verify(source,runs,choose,arms=ARMS):
+    assert len(runs)==len(DOMAINS)*len(arms)*len(SEEDS)*len(GOALS)
+    return {n:audit(source,[r for r in runs if r["name"]==n],arms,choose[n],{n:c},SEEDS,GOALS)[1]
             for n,c in DOMAINS.items()}
 
 
 def main():
+    matched="--matched-source" in sys.argv
+    if matched:
+        sys.argv.remove("--matched-source")
+    pdk="sky" if matched else "gf"
+    archive=ARCHIVE.with_name("matched_source_transfer_measurements.zip") if matched else ARCHIVE
+    arms=("mlp200","retrieved") if matched else ARMS
     if sys.argv[1:]==["--replay"]:
-        with ZipFile(ARCHIVE) as f:
+        with ZipFile(archive) as f:
             source,runs,expected=[json.loads(f.read(k+".json")) for k in ("source","runs","audit")]
-        stats=verify(source,runs,selectors(source))
+        stats=verify(source,runs,selectors(source,pdk),arms)
         assert stats==expected
         return stats
     args=arguments()
     enable()
     data=json.loads((args.out/"raw_netlist"/"source.json").read_text())
-    source=[r for r in data if r["pdk"]=="gf"]
-    choose=selectors(source)
-    root=args.out/"reverse_transfer"
+    source=[r for r in data if r["pdk"]==pdk]
+    if matched:
+        gf={r["name"]:r["x"] for r in data if r["pdk"]=="gf"}
+        assert all(r["x"]==gf[r["name"]] for r in source)
+    choose=selectors(source,pdk)
+    root=args.out/("matched_source_transfer" if matched else "reverse_transfer")
     root.mkdir(parents=True,exist_ok=True)
     def pair(job):
         n,a,s=job
@@ -61,9 +70,9 @@ def main():
             rows.append(json.loads((root/f"{n}-{a}-{s}-{g}.json").read_text()))
         return rows
     with ThreadPoolExecutor(args.workers) as pool:
-        runs=[r for block in pool.map(pair,[(n,a,s) for s in SEEDS for n in DOMAINS for a in ARMS]) for r in block]
-    stats=verify(source,runs,choose)
-    with ZipFile(ARCHIVE,"w",compression=ZIP_DEFLATED,compresslevel=9) as f:
+        runs=[r for block in pool.map(pair,[(n,a,s) for s in SEEDS for n in DOMAINS for a in arms]) for r in block]
+    stats=verify(source,runs,choose,arms)
+    with ZipFile(archive,"w",compression=ZIP_DEFLATED,compresslevel=9) as f:
         for k,v in (("source",source),("runs",runs),("audit",stats)):
             f.writestr(k+".json",json.dumps(v,separators=(",",":"),allow_nan=False))
     return stats
