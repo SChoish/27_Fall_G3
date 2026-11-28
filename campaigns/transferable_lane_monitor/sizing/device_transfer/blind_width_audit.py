@@ -12,7 +12,7 @@ from circuit import ratios
 from experiment import upper
 
 
-def audit(source,runs,arms=ARMS,selectors=None,domains=NEW,seeds=SEEDS,goals=GOALS,width_upper=upper):
+def audit(source,runs,arms=ARMS,selectors=None,domains=NEW,seeds=SEEDS,goals=GOALS,width_upper=upper,*,allow_invalid=False):
     examples=[]
     for r in source:
         x=np.asarray(r["x"])
@@ -35,8 +35,10 @@ def audit(source,runs,arms=ARMS,selectors=None,domains=NEW,seeds=SEEDS,goals=GOA
         np.testing.assert_array_equal(p,np.random.default_rng([seed,886]).permutation(dim))
         def record(x,start,values,fine=False):
             for k,v in enumerate(values,start):
-                assert "error" not in v
+                assert allow_invalid or "error" not in v
                 key=(n,tuple(x),k,fine)
+                if allow_invalid and "error" in v:
+                    continue
                 assert seen.setdefault(key,v)==v
         base=np.ones(dim);record(base,0,r["ref"])
         lo=np.full(dim,np.log(.58));hi=np.log(width_upper(domains[n])[p])

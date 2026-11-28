@@ -48,3 +48,24 @@
 궤적에는 회로·PDK·부하·seed·arm·누적 호출·hit를 남긴다. 선택 시점별로 사용 가능 head의 학습 종료 위치, head별 제안 폭 식별자, actor 입력과 로짓, 선택한 head를 저장한다. 결과가 나온 뒤 **서로 다른 폭이 제안된 결정 수 / 전체 결정 수**와 그 시점의 head 선택을 보고한다. 자주 선택된 head가 성과를 개선했다고 선택 빈도만으로 판정하지 않는다.
 
 재개 시 첫 작업은 신규 arm과 두 타깃 등록, 마스킹 및 후보 일치 검사, run manifest 고정이다. 이 문서 작성 시 신규 arm 구현과 SPICE 실행은 시작하지 않았다.
+
+## 실행 방법 · 2026-11-28 구현
+
+브랜치 `research/transferable-lane-monitor`의 저장소 루트에서 실행한다. Python 3.10 이상과 NumPy, 기존 실험과 같은 Node 24와 ngspice ESM 파일을 사용한다. `GF_MODEL`과 `NGSPICE_MJS`는 기존 실행에서 사용한 절대경로로 설정한다. [시뮬레이터와 모델 버전](../README.md) · [GF180 모델 준비](../domain_transfer/prepare_gf.py)
+
+```bash
+cd campaigns/transferable_lane_monitor/sizing/device_transfer
+python stage_transfer_check.py
+python stage_transfer_run.py \
+  --sky ../../../../adc_driver/models/sky130_1v8_tt.spice \
+  --gf "${GF_MODEL:?set GF_MODEL}" --wasm "${NGSPICE_MJS:?set NGSPICE_MJS}" \
+  --node "$(command -v node)" --out runs --workers 4
+```
+
+위 명령은 5% 목표 384개 궤적을 등록한다. 각 arm은 자기 궤적에서 실제 SPICE를 호출하고 성공을 정밀 확인하는 즉시 멈춘다. 모델 학습은 이미 끝났으며 3개 seed × 2개 전이 방향의 신규 가중치는 `stage_transfer_weights.json`에 있다. 소스에서 다시 학습해 비교하려면 `python stage_transfer_check.py --retrain`을 사용한다.
+
+동일 명령을 재실행하면 완료된 궤적은 건너뛰고 중단된 궤적에서는 디스크에 기록된 마지막 코너부터 이어간다. 코너 결과를 쓰기 전에 프로세스가 강제 종료된 경우에는 해당 코너를 다시 실행할 수 있다. 다른 arm의 결과는 재사용하지 않는다. 측정 실패도 호출에 포함한다. nominal 기준 자체를 측정할 수 없으면 해당 실행은 중단 원인과 함께 남긴다.
+
+완료 시 `runs/stage_transfer_95/summary.json`에 방법별 성공 수, 제한평균 비용, 누적 달성 수, PDK별 대응 차이와 95% 구간, head 선택 집계가 저장된다. 같은 폴더의 `manifest.json`에는 조건·seed·시뮬레이터 지문이 있다. 개별 궤적 JSON의 `trace`가 코너별 전기 측정, `actions`가 웜업 이후 각 head의 제안과 선택이다. 집계만 재실행하려면 `python stage_transfer_report.py runs/stage_transfer_95`를 쓴다. 별도 10% 시험은 실행 명령에 `--goal 0.90`을 추가한다.
+
+구현 검산에서 8개 새 조건의 nominal 4코너씩 총 32회가 측정·검사를 통과했다. 기존 회로에서 수집한 704개 결정(서로 다른 폭 제안 644개)에 대해 두 PPO의 후보 ID가 일치했고, 신규 actor의 입력 3–7열이 모두 0이었다. 기존 비대칭 SKY 회로의 별도 seed 997에서 네 방법의 실제 SPICE 호출 184회를 원자료로 재집계했다. 완료 코너 9개에서 중단을 모사한 뒤 같은 궤적이 복원되는 것도 확인했다. 이 검산은 새 회로의 96개 대응 시작점과 분리했다.

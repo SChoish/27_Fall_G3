@@ -51,7 +51,14 @@ def probabilities(logits):
     return p/p.sum()
 
 
-def learn(tasks,seed):
+def actor_features(features, arm):
+    if arm == "ppo_stage":
+        features = features.copy()
+        features[:, 3:8] = 0
+    return features
+
+
+def learn(tasks,seed,arm="ppo_snapshot"):
     theta=np.zeros(10); m=np.zeros(10);v=np.zeros(10);critic=np.zeros(4)
     step=warm_hits=wins=choices=0
     for epoch in range(20):
@@ -69,6 +76,7 @@ def learn(tasks,seed):
             traj=[]
             for t in range(HORIZON):
                 ids,ends,F=options(net,x[hist],y[hist],lo,hi,x[available],goal)
+                F=actor_features(F,arm)
                 p=probabilities(F@theta)
                 a=min(int(np.searchsorted(p.cumsum(),uniforms[t])),len(p)-1)
                 state=[1.,t/HORIZON,float(goal==.9),np.tanh(merit(y[hist],goal).min()/.1)]
@@ -104,16 +112,16 @@ def learn(tasks,seed):
     return dict(weights=theta.tolist(),decisions=choices,warm_hits=warm_hits,policy_hits=wins)
 
 
-def fit_direct(rows):
+def fit_direct(rows,arm="ppo_snapshot"):
     tasks=[]
     for i,row in enumerate(rows):
         net=train(rows[:i]+rows[i+1:],only=("anon400",))["anon400"]
         hi=np.log(upper(replace(SOURCE_NETS[row["name"]],pdk=row["pdk"])))
         tasks.append((net,np.log(row["x"]),np.array(row["y"]),np.full_like(hi,np.log(.58)),hi))
-    return [learn(tasks,s) for s in SEEDS]
+    return [learn(tasks,s,arm) for s in SEEDS]
 
 
-def chooser_direct(net,models,goal,log=None):
+def chooser_direct(net,models,goal,log=None,*,details=False):
     weights=np.mean([r["weights"] for r in models],axis=0) if models else None
     def select(arm,hist,labels,lo,hi,seed,unused):
         rng=np.random.default_rng([seed,len(hist),6481])
@@ -122,13 +130,21 @@ def chooser_direct(net,models,goal,log=None):
         z,y=map(np.asarray,(hist,labels))
         c=generate_candidates(z,y,lo,hi,rng)
         ids,ends,F=options(net,z,y,lo,hi,c,goal)
-        if arm=="ppo_snapshot":
-            a=int(np.argmax(F@weights))
+        F=actor_features(F,arm)
+        logits=None
+        if arm in ("ppo_snapshot","ppo_stage"):
+            logits=F@weights
+            a=int(np.argmax(logits))
         elif arm=="random_snapshot":
             a=int(np.random.default_rng([seed,len(hist),3001]).integers(len(ids)))
         else:
             raise ValueError(arm)
         if log is not None:
-            log.append(dict(end=int(ends[a]),observed=len(hist),distinct=len(set(ids))))
+            entry=dict(end=int(ends[a]),observed=len(hist),distinct=len(set(ids)))
+            if details:
+                entry.update(ends=ends.tolist(),proposal_ids=ids,chosen=a,
+                             actor_inputs=F.tolist() if logits is not None else None,
+                             logits=logits.tolist() if logits is not None else None)
+            log.append(entry)
         return c[ids[a]]
     return select

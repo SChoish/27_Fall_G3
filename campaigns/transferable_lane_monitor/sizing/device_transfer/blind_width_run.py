@@ -37,7 +37,7 @@ def source(args,root):
     (root/"source.json").write_text(json.dumps(records))
 
 
-def run(job,args,prior,root,selector=None,width_upper=upper):
+def run(job,args,prior,root,selector=None,width_upper=upper,*,store_factory=Store):
     name,c,arm,seed,goal=job
     dest=root/f"{name}-{arm}-{seed}-{goal}.json"
     if dest.exists():return
@@ -45,9 +45,9 @@ def run(job,args,prior,root,selector=None,width_upper=upper):
     bounds=width_upper(c)
     dim=len(bounds); perm=np.random.default_rng([seed,886]).permutation(dim)
     inv=np.argsort(perm);lo=np.full(dim,np.log(.58));hi=np.log(bounds[perm])
-    coarse=Store(name,c,args)
+    coarse=store_factory(name,c,args)
     fine_args=copy(args);fine_args.step_ps=.25
-    fine=Store("blind_fine_"+name,c,fine_args)
+    fine=store_factory("blind_fine_"+name,c,fine_args)
     nominal=np.ones(dim)
     ref=coarse.pair(nominal,0)+coarse.pair(nominal,2)
     calls=4;fine_ref=None;hit=None;trace=[]
