@@ -1,0 +1,62 @@
+{
+  "claim_id": "G3_LINK20_SIZING_FIFTY_TIMES_SEVEN",
+  "mathematics": {
+    "assertion_tested": "For each of 50 distinct 20-lane package models compare exactly seven named sizing optimizers by first link-qualified 5% EDP improvement within 100 standalone target corner calls.",
+    "coefficient_domain": "SKY130 TT ngspice transient measurements plus complex matched-port 20-lane electromagnetic responses, finite 32 Gb/s NRZ packets, and Gaussian timing perturbations",
+    "conventions": "Replicate the shared 2-stage transmitter on each of 20 lanes. Measure cell EDP/delay/slew/supply sensitivity/swing by ngspice. Use the measured mean edge delay change between the two supply points to linearly map droop to timing in the full link. The same centered MEE operational monitor spends 32 probes in each 128-block episode. Accept a candidate only if EDP <= 0.95, the four cell constraints pass, and in all three regimes the 20-lane failure fraction grows by at most 0.01 vs nominal. Verify separately on held-out packets and at 0.25 ps.",
+    "inputs": [
+      "50 frozen Chiplet-SI M1 channel matrices at a9408b5ed373ee76b41bb000c412cc8fd39154a7, each an actual electromagnetic simulation layout",
+      "Pinned SKY130 TT model and ngspice WASM",
+      "Published SCBO, KATO, DNN-Opt, MLP200, random source mapping, elite source mapping and constrained Bayesian search implementations"
+    ],
+    "bounds": {
+      "layouts": 50,
+      "lanes": 20,
+      "arms": 7,
+      "trajectories": 350,
+      "logical_transient_cap": 100,
+      "logical_target_calls_at_most": 35000,
+      "runtime_probes_per_episode": 32,
+      "blocks_per_episode": 128,
+      "link_allowance_absolute": 0.01,
+      "independent_confirmation_episodes_per_regime": 8
+    },
+    "non_claims": [
+      "Cell EDP is not an end-to-end link energy measurement",
+      "This is transistor timing plus a 20-lane matched-port link model; no full mixed-mode 20-lane transistor-level SPICE netlist or silicon BER claim",
+      "Identical raw SPICE transients are cached, but each standalone method's budget is charged; physical execution count is separately reported",
+      "The 20-lane timing noninferiority gate is finite and based on paired held-out packets, not a universal probabilistic guarantee"
+    ]
+  },
+  "software": [
+    {
+      "name": "Python",
+      "version": "3.10.18"
+    },
+    {
+      "name": "NumPy",
+      "version": "2.2.6"
+    },
+    {
+      "name": "SciPy",
+      "version": "1.15.3"
+    },
+    {
+      "name": "PyTorch",
+      "version": "2.7.1+cu126"
+    },
+    {
+      "name": "Node",
+      "version": "24.22.3"
+    },
+    {
+      "name": "ngspice WASM Git blob",
+      "version": "07df5e5d6607628589c3034b214098bae60319cf"
+    }
+  ],
+  "randomness": {
+    "used": true,
+    "generator": "NumPy default_rng and deterministic per-decision torch fits",
+    "seed": "Common starting seeds 26112910–26112914 rotated across layouts; development and confirmation packet bases 672100/982100 and drift bases 672500/982500"
+  }
+}

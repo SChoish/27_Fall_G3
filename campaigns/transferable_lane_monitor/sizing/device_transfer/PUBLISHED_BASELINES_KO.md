@@ -41,4 +41,52 @@ python published_baselines_run.py \
 
 완료 시 `runs/published_baselines_95/summary.json`에 조건별·PDK별·전체 성공 수, 제한평균, 누적 달성 수와 대응 seed bootstrap 구간을 저장한다. 미달은 100회 비용으로 계산한다. `reference_minus_control`의 음수는 기준 방법이 더 적은 호출을 썼다는 뜻이다. `--report-only --out runs`으로 원자료의 초기점, 전기적 통과 여부와 코너 계수를 재검산한다. 이 집계는 신경망과 GP를 다시 학습하지 않는다.
 
-SPICE 없는 구현 검산은 `python published_baselines_check.py`로 실행한다. 고정 GP가 들어 있는 정렬 모델의 공분산, feasibility 우선순위, 합성 측정에서 48개 실행의 시드 대응과 호출 수, 중단 후 KATO 궤적 재개를 확인한다.
+SPICE 없는 구현 검산은 `python published_baselines_check.py`로 실행한다. 고정 GP가 들어 있는 정렬 모델의 공분산, feasibility 우선순위, 제약 베이지안 탐색을 포함한 합성 측정 56개의 시드 대응과 호출 수, 중단 후 KATO 궤적 재개를 확인한다.
+
+## 20-lane 배선 50개 × 사이징 7개 결과
+
+위 버퍼 비교와 별도로, 20-lane 패키지 모델 50개에 동일한 2단 SKY130 TT 송신 버퍼를
+연결한 조건에서 여섯 기준선과 제약 베이지안 탐색을 비교했다. 7개 방법에 같은 초기 폭,
+32 Gb/s 패킷과 드리프트, 최대 100회 타깃 호출 예산을 적용했다. 타깃의 소자 폭 후보는
+ngspice로 측정하고, 그 지연 변화를 20-lane 채널 모델에 넣어 최악 레인의 마진을 확인했다.
+링크 모니터는 모든 방법에서 동일하게 128블록당 32회 측정한다.
+
+성공은 송신 버퍼 EDP를 5% 이상 줄이고 네 셀 제약을 모두 지키며, 확인한 세 드리프트
+조건에서 링크 마진 미달률을 nominal보다 1%p 넘게 늘리지 않는 경우다. 독립 패킷과
+0.25 ps 정밀 검증을 통과해야 최초 성공으로 센다. 미달은 비교 평균에 100회로 넣는다.
+동일 폭·코너·해상도의 ngspice 결과를 재사용해 독립 실행 예산상 18,422회 중 5,338회를
+실제로 계산했다. 각 방법이 사용한 기존 소스 측정은 타깃 비용과 별도로 표시한다.
+
+| 방법 | 성공 배선 | 평균 타깃 호출 | 기존 소스 측정 |
+| --- | ---: | ---: | ---: |
+| 무작위 소스 매핑 | 50/50 | 46.92 | 200 |
+| 제약 베이지안 탐색 | 40/50 | 47.60 | 0 |
+| MLP200 | 50/50 | 48.68 | 200 |
+| SCBO | 47/50 | 51.88 | 0 |
+| DNN-Opt | 48/50 | 52.52 | 0 |
+| Elite 소스 매핑 | 40/50 | 56.20 | 200 |
+| KATO | 47/50 | 64.64 | 50 |
+
+[집계](../../../../implementation_results/20261128_20lane_sizing/summary.json) ·
+[프로토콜](../../../../implementation_results/20261128_20lane_sizing/protocol.json) ·
+[배선 출처 및 해시](../../../../implementation_results/20261128_20lane_sizing/layouts.json) ·
+[350개 원본 압축](../../../../implementation_results/20261128_20lane_sizing/trajectories.tar.gz)
+
+채널 데이터는 Lihao Liu 등의 [Chiplet-SI](https://github.com/Koyomi1999/Chiplet-SI/tree/a9408b5ed373ee76b41bb000c412cc8fd39154a7)
+(© 2024 Lihao Liu, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/))에서 추출했다.
+각 원본 M1 배선의 중앙 20개 레인에서 0–60 GHz 전방 경로를 골라 복소수 행렬로 변환했다.
+50개 행렬을 함께 제공하며, [추출 코드](../../experiments/package20_monitor/channel_bank.py)는
+기존 3개 참조 행렬을 원본에서 정확히 재현한 뒤 새 배선을 고른다. 이 실험의 EDP는 버퍼
+범위이며, 링크 판정은 공급전압에 따른 실측 버퍼 지연을 사용하는 유한 패킷 모델이다.
+
+저장소 루트에서 고정된 채널 파일과 Node 24.22.3을 사용해 다시 실행한다.
+
+```bash
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 \
+python campaigns/transferable_lane_monitor/sizing/device_transfer/link20_sizing_benchmark.py \
+  --channels implementation_results/20261128_20lane_sizing \
+  --sky adc_driver/models/sky130_1v8_tt.spice \
+  --wasm "${NGSPICE_MJS:?set path to pinned ngspice ESM}" \
+  --node "${NODE24:?set path to Node 24.22.3}" \
+  --out campaigns/20lane_sizing_rerun --workers 8
+```
