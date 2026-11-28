@@ -94,5 +94,24 @@ def main():
           f"{sum(r['calls'] for r in runs):,}회다. 동일 측정 재사용분도 각 방법의 비용에 포함했다.")
 
 
+def transfer_report():
+    from surrogate_buffer_transfer import ARCHIVE as holdout_archive, ARMS as holdout_arms
+    with ZipFile(holdout_archive) as z:
+        rows=json.loads(z.read("runs.json"))
+    print("\n## 신규 3출력 회로의 5% 목표\n")
+    print("| 방법 | SKY130 → GF180 | GF180 → SKY130 | 전체 |")
+    print("|---|---:|---:|---:|")
+    for arm in holdout_arms:
+        group=[r for r in rows if r["arm"]==arm]
+        cells=[score([r for r in group if r["name"].endswith(p)]) for p in ("gf","sky")]
+        print("| "+" | ".join([NAMES[arm],*cells,score(group)])+" |")
+    print("\n| 타깃 | seed | "+" | ".join(NAMES[a] for a in holdout_arms)+" |")
+    print("|---|---:|---:|---:|---:|")
+    for name,seed in sorted({(r["name"],r["seed"]) for r in rows}):
+        hits={r["arm"]:r["hit"] for r in rows if r["name"]==name and r["seed"]==seed}
+        print("| "+" | ".join([name,str(seed),*(str(hits[a] or "미달") for a in holdout_arms)])+" |")
+
+
 if __name__=="__main__":
     main()
+    transfer_report()
