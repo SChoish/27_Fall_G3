@@ -40,7 +40,7 @@ def propose(arm,history,observations,lower,upper,seed,prior=None):
     return rank_candidates(z,y,lower,upper,rng,prior=prior)
 
 
-def rank_candidates(z,y,lower,upper,rng,prior=None,network=None,gp=True):
+def rank_candidates(z,y,lower,upper,rng,prior=None,network=None,gp=True,calibrated=None):
     t,dim=z.shape
     penalty=lambda values: values[...,0]+4*np.maximum(values[...,1:],0).sum(axis=-1)
     center=z[np.argmin(penalty(y))]
@@ -62,7 +62,9 @@ def rank_candidates(z,y,lower,upper,rng,prior=None,network=None,gp=True):
     K=kernel(u,u)+.004*np.eye(t)
     cross=kernel(v,u)
     w=np.linalg.solve(K,cross.T).T
-    if network is None:
+    if calibrated is not None:
+        mean,pred=calibrated(z,candidates,y,K)
+    elif network is None:
         mean=np.broadcast_to(y[0],y.shape)
         pred=y[0]+np.zeros((len(v),y.shape[1]))
     if prior is not None:
