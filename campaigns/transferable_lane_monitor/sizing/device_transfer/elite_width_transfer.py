@@ -13,7 +13,7 @@ from blind_width_policy import rank_candidates
 from blind_width_run import GOALS, run
 from century_engine import enable
 from circuit import Circuit
-from corner_transfer import selector
+from corner_transfer import DOMAINS as EARLIER, seeds as earlier_seeds, selector
 from experiment import arguments
 from raw_netlist import geometry
 from raw_netlist_run import train
@@ -41,28 +41,33 @@ def descriptors(c):
     return polar,rank
 
 
-def templates(source,target):
+def templates(source,target,random=False):
     p,r=descriptors(target)
     mapped=[]
-    for row in source:
+    for index,row in enumerate(source):
         ps,rs=descriptors(SOURCE_NETS[row["name"]])
         distance=(r[:,None]-rs)**2
         weights=np.exp(-.5*distance/.2**2)*(p[:,None]==ps)
         weights/=weights.sum(1,keepdims=True)
         y=np.array(row["y"]);z=np.log(row["x"])
         elite=np.argsort(y[1:,0]+4*np.maximum(y[1:,1:],0).sum(1),kind="stable")[:3]+1
+        if random:
+            elite=np.random.default_rng([4703,index]).choice(np.arange(1,len(z)),size=3,replace=False)
         mapped.extend(z[elite]@weights.T)
     return np.stack(mapped)
 
 
-def policies(source):
+def policies(source,domains=DOMAINS):
     baseline=selector(source,use_correction=False)
     net=train(source,only=("anon400",))["anon400"]
-    def for_domain(c):
-        bank=templates(source,c);d=bank.shape[1]
-        reordered={s:bank[:,np.random.default_rng([s,886]).permutation(d)] for s in SEEDS}
+    def for_domain(n,c):
+        banks={a:templates(source,c,random=(a=="random_templates")) for a in ("retrieved","random_templates")}
+        d=banks["retrieved"].shape[1]
+        seeds=earlier_seeds(n) if n in EARLIER else SEEDS
+        reordered={(a,s):bank[:,np.random.default_rng([s,886]).permutation(d)]
+                   for a,bank in banks.items() for s in seeds}
         def pick(arm,hist,y,lo,hi,seed,unused):
-            if arm!="retrieved":
+            if arm not in ("retrieved","random_templates"):
                 return baseline(arm,hist,y,lo,hi,seed,None)
             rng=np.random.default_rng([seed,len(hist),6481])
             if len(hist)<=4:return rng.uniform(lo,hi)
@@ -70,7 +75,7 @@ def policies(source):
                 incumbent=z[np.argmin(y[:,0]+4*np.maximum(y[:,1:],0).sum(1))]
                 mid=len(radius)//2
                 base=stream.uniform(np.maximum(lo,incumbent-radius[:mid]),np.minimum(hi,incumbent+radius[:mid]))
-                prior=reordered[seed]
+                prior=reordered[arm,seed]
                 count=len(radius)-mid
                 anchors=np.clip(prior[np.arange(count)%len(prior)],lo,hi)
                 draws=stream.uniform(np.maximum(lo,anchors-radius[mid:]),np.minimum(hi,anchors+radius[mid:]))
@@ -78,7 +83,7 @@ def policies(source):
                 return np.vstack((base,draws))
             return rank_candidates(np.asarray(hist),np.asarray(y),lo,hi,rng,network=net,local_builder=local)
         return pick
-    return {n:for_domain(c) for n,c in DOMAINS.items()}
+    return {n:for_domain(n,c) for n,c in domains.items()}
 
 
 def verify(source,runs,choose):
