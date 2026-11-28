@@ -40,7 +40,7 @@ def propose(arm,history,observations,lower,upper,seed,prior=None):
     return rank_candidates(z,y,lower,upper,rng,prior=prior)
 
 
-def rank_candidates(z,y,lower,upper,rng,prior=None,network=None,gp=True,calibrated=None,local_builder=None):
+def rank_candidates(z,y,lower,upper,rng,prior=None,network=None,gp=True,calibrated=None,local_builder=None,adjust=None):
     t,dim=z.shape
     penalty=lambda values: values[...,0]+4*np.maximum(values[...,1:],0).sum(axis=-1)
     center=z[np.argmin(penalty(y))]
@@ -76,5 +76,7 @@ def rank_candidates(z,y,lower,upper,rng,prior=None,network=None,gp=True,calibrat
     pred+=w@(y-mean)
     sig=np.sqrt(np.maximum(0.,1-(w*cross).sum(1)))
     scale=np.maximum(y.std(axis=0),.02)
+    if adjust is not None:
+        pred=adjust(candidates,pred)
     score=penalty(pred-.7*sig[:,None]*scale)
     return candidates[np.argmin(score)]
