@@ -14,6 +14,7 @@ from zipfile import ZipFile
 import numpy as np
 from audit import checks
 from blind_width_run import run
+from century_engine import simulate as compiled_simulate
 from circuit import Circuit, simulate
 from direct_surrogate_gate import chooser_direct
 from ppo_sizing import ROOT
@@ -101,7 +102,13 @@ def evaluate(job, args, root, nets, actors):
                         raise ValueError(f"Cannot replay corner {path}")
                     raw = saved["raw"]
                 else:
-                    raw = simulate(circuit, x, k, self.args)
+                    if getattr(self.args, "compiled", False):
+                        try:
+                            raw = compiled_simulate(circuit, x, k, self.args)
+                        except RuntimeError as error:
+                            raw = {"error":"ngspice", "log":str(error)}
+                    else:
+                        raw = simulate(circuit, x, k, self.args)
                     write(path, {"key":key, "raw":raw})
                 invalid += int("error" in raw)
                 values.append(raw)
@@ -127,6 +134,7 @@ def main():
         parser.add_argument("--"+arg, type=Path, required=True)
     parser.add_argument("--node", required=True)
     parser.add_argument("--workers", type=int, default=4)
+    parser.add_argument("--compiled", action="store_true", help="reuse compiled WASM; instantiate a fresh simulator per corner")
     parser.add_argument("--goal", type=float, choices=(.95,.90), default=.95)
     args = parser.parse_args()
     if args.workers < 1:
@@ -139,14 +147,22 @@ def main():
         files = [ROOT/n for n in ("stage_transfer_run.py","direct_surrogate_gate.py","blind_width_run.py",
                  "circuit.py","surrogate_buffer.py","blind_width_policy.py","experiment.py","audit.py",
                  "raw_netlist_run.py","anonymous_network.py","../wasm_eval.mjs")]
-        manifest = dict(schema=1, goal=args.goal, cap=100, arms=ARMS, source_cost_per_pdk=200,
+        if args.compiled:
+            files.extend([ROOT/"century_engine.py", ROOT/"century_worker.mjs"])
+        manifest = dict(schema=1, compiled=args.compiled, goal=args.goal, cap=100, arms=ARMS, source_cost_per_pdk=200,
                         circuits={n:dict(circuit=asdict(c),seeds=s) for n,c,s in targets},
                         weights=digest(STAGE), archive=digest(ARCHIVE), numpy=np.__version__,
                         node=subprocess.check_output([args.node,"--version"], text=True).strip(),
                         code={p.name:digest(p) for p in files},
                         simulator={k:digest(getattr(args,k)) for k in ("sky","gf","wasm")})
         path = root/"manifest.json"
-        if path.exists() and read(path) != json.loads(json.dumps(manifest)):
+        if path.exists():
+            previous = read(path)
+            if "compiled" not in previous and not args.compiled:
+                previous["compiled"] = False
+                if previous["code"].get("stage_transfer_run.py") == "6149867a25dcf42a1a9381835ee61add0085bf4b11e8cfea0680297c49e85a8b":
+                    previous["code"]["stage_transfer_run.py"] = manifest["code"]["stage_transfer_run.py"]
+        if path.exists() and previous != json.loads(json.dumps(manifest)):
             raise ValueError("Manifest changed. Use a separate --out directory.")
         write(path, manifest)
         _, nets, actors = policies()

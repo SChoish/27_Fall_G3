@@ -69,3 +69,5 @@ python stage_transfer_run.py \
 완료 시 `runs/stage_transfer_95/summary.json`에 방법별 성공 수, 제한평균 비용, 누적 달성 수, PDK별 대응 차이와 95% 구간, head 선택 집계가 저장된다. 같은 폴더의 `manifest.json`에는 조건·seed·시뮬레이터 지문이 있다. 개별 궤적 JSON의 `trace`가 코너별 전기 측정, `actions`가 웜업 이후 각 head의 제안과 선택이다. 집계만 재실행하려면 `python stage_transfer_report.py runs/stage_transfer_95`를 쓴다. 별도 10% 시험은 실행 명령에 `--goal 0.90`을 추가한다.
 
 구현 검산에서 8개 새 조건의 nominal 4코너씩 총 32회가 측정·검사를 통과했다. 기존 회로에서 수집한 704개 결정(서로 다른 폭 제안 644개)에 대해 두 PPO의 후보 ID가 일치했고, 신규 actor의 입력 3–7열이 모두 0이었다. 기존 비대칭 SKY 회로의 별도 seed 997에서 네 방법의 실제 SPICE 호출 184회를 원자료로 재집계했다. 완료 코너 9개에서 중단을 모사한 뒤 같은 궤적이 복원되는 것도 확인했다. 이 검산은 새 회로의 96개 대응 시작점과 분리했다.
+
+본실험 실행에서는 위 명령에 `--compiled --workers 8`을 적용했다. 기존 프로젝트의 ngspice worker가 컴파일된 WASM 모듈만 재사용하며, 매 유료 코너마다 새 시뮬레이터 인스턴스를 만들어 transient를 계산한다. 회로 해나 이전 궤적 측정값은 공유하지 않는다. 이 실행을 재개할 때는 `--compiled`를 유지한다.
