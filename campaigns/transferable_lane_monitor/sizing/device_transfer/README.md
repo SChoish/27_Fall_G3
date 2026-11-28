@@ -2,6 +2,10 @@
 
 The circuit-to-circuit transfer benchmark uses native-width vectors rather than the two endpoints from the earlier pilot. Each transistor receives its own multiplier. Forward models in this directory are trained offline on development SPICE and are queried against real transient measurements. See PROTOCOL.md for the test splits, benchmark commitments and exploratory additions.
 
+## Active role-free comparison
+
+[Anonymous-width black-box comparison](ANONYMOUS_WIDTH.md) uses permuted legal width coordinates and measured specifications. The source-assisted and target-only GP optimizers share initialization, target updates and acquisition. The role-informed runs below are historical comparisons.
+
 ## 100-evaluation benchmark
 
 [Results and circuit-level first hits](CENTURY_RESULTS_KO.md) · [Electrical prefix on an independent PDK pair](PORTFOLIO_RESULTS_KO.md) · [Protocol](century_protocol.md) · [Raw corner measurements and traces](century_measurements.zip). Run `python century_restore.py` to verify both the joint 5%/10% and direct 10% target policies without ngspice.
