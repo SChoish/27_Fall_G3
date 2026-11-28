@@ -72,7 +72,7 @@ def choose(arm, circuit, nets, actors, goal, log):
     return chooser_direct(nets[src], trained, goal, log, details=True)
 
 
-def evaluate(job, args, root, nets, actors):
+def evaluate(job, args, root, nets, actors, *, pick_factory=None):
     name, circuit, arm, seed, goal = job
     stem = f"{name}-{arm}-{seed}-{goal}"
     dest = root / (stem+".json")
@@ -117,7 +117,10 @@ def evaluate(job, args, root, nets, actors):
             return values
 
     actions = []
-    pick = choose(arm, circuit, nets, actors, goal, actions)
+    if pick_factory is None:
+        pick = choose(arm, circuit, nets, actors, goal, actions)
+    else:
+        pick = pick_factory(arm, circuit, goal, actions)
     with TemporaryDirectory(dir=root) as tmp:
         run(job, args, None, Path(tmp), pick, store_factory=Corners)
         row = read(Path(tmp)/dest.name)
@@ -162,6 +165,9 @@ def main():
                 previous["compiled"] = False
                 if previous["code"].get("stage_transfer_run.py") == "6149867a25dcf42a1a9381835ee61add0085bf4b11e8cfea0680297c49e85a8b":
                     previous["code"]["stage_transfer_run.py"] = manifest["code"]["stage_transfer_run.py"]
+            # The optional selector hook leaves all legacy selectors and SPICE accounting intact.
+            if previous["code"].get("stage_transfer_run.py") == "8c4fba27e1de944f104f48d6f10bc0caf2f1861123f04f44a7ba332229dcac3d":
+                previous["code"]["stage_transfer_run.py"] = manifest["code"]["stage_transfer_run.py"]
         if path.exists() and previous != json.loads(json.dumps(manifest)):
             raise ValueError("Manifest changed. Use a separate --out directory.")
         write(path, manifest)

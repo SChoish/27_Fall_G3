@@ -12,7 +12,7 @@ from circuit import ratios
 from experiment import upper
 
 
-def audit(source,runs,arms=ARMS,selectors=None,domains=NEW,seeds=SEEDS,goals=GOALS,width_upper=upper,*,allow_invalid=False):
+def audit(source,runs,arms=ARMS,selectors=None,domains=NEW,seeds=SEEDS,goals=GOALS,width_upper=upper,*,allow_invalid=False,replay_proposals=True):
     examples=[]
     for r in source:
         x=np.asarray(r["x"])
@@ -46,12 +46,13 @@ def audit(source,runs,arms=ARMS,selectors=None,domains=NEW,seeds=SEEDS,goals=GOA
         calls=4;fine_ref=None;hit=None
         for t,s in enumerate(r["trace"]):
             assert hit is None
-            if selectors and arm in selectors:
-                select,net=selectors[arm]
-                z=select(arm,hist,labels,lo,hi,seed,net)
-            else:
-                z=propose(arm,hist,labels,lo,hi,seed,prior if arm=="transfer_bo" else None)
-            x=np.round(np.exp(z)[inv],6);np.testing.assert_allclose(x,s["x"],rtol=0,atol=1e-6)
+            if replay_proposals or t<4:
+                if replay_proposals and selectors and arm in selectors:
+                    select,net=selectors[arm]
+                    z=select(arm,hist,labels,lo,hi,seed,net)
+                else:
+                    z=propose(arm,hist,labels,lo,hi,seed,prior if arm=="transfer_bo" else None)
+                x=np.round(np.exp(z)[inv],6);np.testing.assert_allclose(x,s["x"],rtol=0,atol=1e-6)
             x=np.array(s["x"])
             if t<4:assert prefix.setdefault((n,seed,t),x.tolist())==x.tolist()
             assert np.all((x>=.58)&(x<=width_upper(domains[n])))

@@ -57,6 +57,19 @@ def templates(source,target,random=False):
     return np.stack(mapped)
 
 
+def mapped_local(prior):
+    """Use half the local proposals for the incumbent and half for donor widths."""
+    def local(z,y,lo,hi,radius,stream):
+        incumbent=z[np.argmin(y[:,0]+4*np.maximum(y[:,1:],0).sum(1))]
+        mid=len(radius)//2
+        base=stream.uniform(np.maximum(lo,incumbent-radius[:mid]),np.minimum(hi,incumbent+radius[:mid]))
+        anchors=np.clip(prior[np.arange(len(radius)-mid)%len(prior)],lo,hi)
+        draws=stream.uniform(np.maximum(lo,anchors-radius[mid:]),np.minimum(hi,anchors+radius[mid:]))
+        draws[:len(prior)]=anchors[:len(prior)]
+        return np.vstack((base,draws))
+    return local
+
+
 def policies(source,domains=DOMAINS,trial_seeds=None):
     baseline=selector(source,use_correction=False)
     net=train(source,only=("anon400",))["anon400"]
@@ -71,16 +84,7 @@ def policies(source,domains=DOMAINS,trial_seeds=None):
                 return baseline(arm,hist,y,lo,hi,seed,None)
             rng=np.random.default_rng([seed,len(hist),6481])
             if len(hist)<=4:return rng.uniform(lo,hi)
-            def local(z,y,lo,hi,radius,stream):
-                incumbent=z[np.argmin(y[:,0]+4*np.maximum(y[:,1:],0).sum(1))]
-                mid=len(radius)//2
-                base=stream.uniform(np.maximum(lo,incumbent-radius[:mid]),np.minimum(hi,incumbent+radius[:mid]))
-                prior=reordered[arm,seed]
-                count=len(radius)-mid
-                anchors=np.clip(prior[np.arange(count)%len(prior)],lo,hi)
-                draws=stream.uniform(np.maximum(lo,anchors-radius[mid:]),np.minimum(hi,anchors+radius[mid:]))
-                draws[:len(prior)]=anchors[:len(prior)]
-                return np.vstack((base,draws))
+            local=mapped_local(reordered[arm,seed])
             return rank_candidates(np.asarray(hist),np.asarray(y),lo,hi,rng,network=net,local_builder=local)
         return pick
     return {n:for_domain(n,c) for n,c in domains.items()}
