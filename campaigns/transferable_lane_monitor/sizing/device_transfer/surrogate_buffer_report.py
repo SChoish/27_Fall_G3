@@ -9,7 +9,7 @@ from blind_width_policy import kernel
 from circuit import ratios
 from experiment import upper
 from ppo_sizing import DOMAINS, GOALS, source_for
-from surrogate_buffer import ARMS, WINDOW, select_head
+from surrogate_buffer import ARMS, WINDOW, margins, select_head
 from surrogate_buffer_run import ARCHIVE, models
 
 NAMES = dict(zip(ARMS,("소스 MLP 고정","최신 전체","최신 적격","무작위","평균 오차","목표 경계 가중 오차","설계 순위","거짓 통과 비용","소스 복귀")))
@@ -47,7 +47,10 @@ def diagnostics(sources,runs):
                     head,_=select_head(arm,net,z[:stop],y[:stop],lo,hi,.95,r["seed"])
                     biased=base[:stop+1]+feat[:stop+1]@head
                 pred=biased[stop]+w@(y[:stop]-biased[:stop])
-                stats[arm].append(float(np.mean(np.abs(pred-y[stop])/np.maximum(.02,net.scale))))
+                err = np.mean(np.abs(pred-y[stop])/np.maximum(.02,net.scale))
+                predicted_pass = (margins(pred[None,:],.95) <= 0).all()
+                actual_pass = (margins(y[stop:stop+1],.95) <= 0).all()
+                stats[arm].append((err, predicted_pass and not actual_pass, actual_pass and not predicted_pass))
     return stats
 
 
@@ -82,10 +85,11 @@ def main():
     print("\n## 같은 다음 설계를 예측하는 진단\n")
     errors=diagnostics(sources,runs)
     print("기준 MLP의 5% 평가 궤적에서 다음 후보를 관측하기 직전, 같은 이력과 후보에 대한 다섯 지표의 소스 스케일 정규화 절대오차를 비교했다. 개발 두 코너만 사용했다. 측정점에 같은 가중치를 둔 기술통계다.\n")
-    print("| 방법 | 다음 설계 수 | 평균 예측오차 |")
-    print("|---|---:|---:|")
+    print("| 방법 | 다음 설계 수 | 평균 예측오차 | 설계 전체 거짓 통과 | 설계 전체 거짓 탈락 |")
+    print("|---|---:|---:|---:|---:|")
     for arm in ARMS:
-        print(f"| {NAMES[arm]} | {len(errors[arm])} | {mean(errors[arm]):.4f} |")
+        mae, fp, fn = np.array(errors[arm]).T
+        print(f"| {NAMES[arm]} | {len(mae)} | {mae.mean():.4f} | {int(fp.sum())} | {int(fn.sum())} |")
     print("\n각 방법을 독립 실행으로 계산한 타깃 SPICE 예산 합계는 "
           f"{sum(r['calls'] for r in runs):,}회다. 동일 측정 재사용분도 각 방법의 비용에 포함했다.")
 
