@@ -4,6 +4,8 @@ The circuit-to-circuit transfer benchmark uses native-width vectors rather than 
 
 ## Active role-free comparison
 
+[Anonymous MLP and graph-attention results](ANONYMOUS_NETWORKS.md) compare direct neural search and learned GP means on the same trials.
+
 [Anonymous-width black-box comparison](ANONYMOUS_WIDTH.md) uses permuted legal width coordinates and measured specifications. The source-assisted and target-only GP optimizers share initialization, target updates and acquisition. The role-informed runs below are historical comparisons.
 
 ## 100-evaluation benchmark
