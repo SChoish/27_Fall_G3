@@ -30,7 +30,7 @@ def main():
             times[kind]+=thread_time()-begin
             return result
         setattr(owner,key,clock)
-    watch(pilot.Critic,"fit","fit")
+    watch(pilot.SpiceSurrogate,"fit","fit")
     watch(pilot,"fit_attention","source_attention_fit")
     for owner,key in ((pilot,"local_search"),(pilot,"propose"),(pilot,"size_move"),
                       (pilot.exp,"pool"),(pilot,"choose_snapshot")):

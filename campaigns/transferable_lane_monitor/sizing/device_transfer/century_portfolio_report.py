@@ -13,7 +13,7 @@ def main():
         r=ix[n,m,g,cap]
         return f"{r['successes']}/{r['n']} · {float(r['mean']):.2f}"
     groups=[("previous","선택에 사용한 6조건"),("new","고정 후 신규 2조건"),("long100_sky","신규 SKY130"),("long100_gf","신규 GF180")]
-    names={"role":"역할 규칙 + 직접 탐색","warm4":"웜업 4회 + 잔차 critic","prefix_warm4":"역할 2회 → 웜업 4회 + 잔차 critic"}
+    names={"role":"역할 규칙 + 직접 탐색","warm4":"웜업 4회 + 잔차 SPICE surrogate","prefix_warm4":"역할 2회 → 웜업 4회 + 잔차 SPICE surrogate"}
     tab=["| 조건 | 방법 | 5% ≤40 | 5% ≤100 | 10% ≤40 | 10% ≤100 |","|---|---|---|---|---|---|"]
     for n,label in groups:
         for m,title in names.items():
@@ -50,7 +50,7 @@ def main():
             cells.extend([f"{r['hits']}/{r['n']} · {r['capped_mean']:.2f}",f"{q['hits']}/{q['n']} · {float(q['mean']):.2f}"])
         rigorous.append("| "+" | ".join([title,*cells])+" |")
     lines=["# 역할 제안 두 번을 먼저 쓰는 조합의 독립 전이 검증",
-           "개발 결과를 본 뒤 결정한 조합이다. 첫 제안은 출력 폭을 nominal의 0.84배로 줄인다. 두 번째는 측정한 개발 전기 제약에 맞춰 같은 방향의 보폭을 조절한다. 이후 기존 네 국소 웜업과 잔차 critic을 사용한다. 같은 설계를 만나면 기존 개발 관측을 반환한다. 모든 실행은 4회 기준 측정을 포함해 최대 100회다.",
+           "개발 결과를 본 뒤 결정한 조합이다. 첫 제안은 출력 폭을 nominal의 0.84배로 줄인다. 두 번째는 측정한 개발 전기 제약에 맞춰 같은 방향의 보폭을 조절한다. 이후 기존 네 국소 웜업과 잔차 SPICE surrogate를 사용한다. 같은 설계를 만나면 기존 개발 관측을 반환한다. 모든 실행은 4회 기준 측정을 포함해 최대 100회다.",
            "신규 회로는 6단과 2단 버퍼를 결합한 2출력 구조다. 정책·회로·부하·seed를 고정하고 SKY130과 GF180을 평가했다. 독립 구조 한 가지, 두 PDK, 확률적 방법당 3 seed다. 표 안의 값은 성공 수/시행 수와 제한 평균 최초 도달 비용이다.",
            "## 신규 두 PDK 조건의 정밀 확인 결과",
            "\n".join(rigorous),

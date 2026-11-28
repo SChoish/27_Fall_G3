@@ -9,7 +9,7 @@ from reportlab.lib.colors import HexColor
 
 LABELS={"random":("Random","#8e9296"),"de":("DE","#7656a8"),"bo":("BO","#d55e00"),
         "acor":("ACOR","#1877ab"),"group_acor":("Grouped ACOR","#098570"),"group_random":("Grouped random","#ad7918"),
-        "role_poll":("Role + poll","#151a24"),"residual":("Residual critic","#1877ab"),
+        "role_poll":("Role + poll","#151a24"),"residual":("Residual surrogate","#1877ab"),
         "warm4":("4 local probes","#d55e00"),"rank2":("Rank-2 metric","#098570"),
         "shuffled":("Shuffled labels","#7656a8")}
 

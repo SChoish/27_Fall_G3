@@ -11,8 +11,8 @@ from experiment import upper
 from warm_space import TEST
 
 NAMES={"random":"전체 폭 랜덤","group_random":"역할 4좌표 랜덤","bo":"제약 확률 BO","de":"차분 진화 DE",
-       "acor":"전체 폭 ACOR","group_acor":"역할 4좌표 ACOR","residual":"잔차 critic, 웜업 0",
-       "warm4":"잔차 critic, 웜업 4","rank2":"방향 선호 rank-2","shuffled":"방향 라벨 셔플","role_poll":"역할 규칙 + 직접 탐색"}
+       "acor":"전체 폭 ACOR","group_acor":"역할 4좌표 ACOR","residual":"잔차 SPICE surrogate, 웜업 0",
+       "warm4":"잔차 SPICE surrogate, 웜업 4","rank2":"방향 선호 rank-2","shuffled":"방향 라벨 셔플","role_poll":"역할 규칙 + 직접 탐색"}
 
 def main():
     root=Path("runs/century")
@@ -107,7 +107,7 @@ def main():
       "두 프로토콜과 모든 방법의 고유 후보를 합쳤다. 개발 EDP, 네 코너 제약 및 가장 낮은 확인 EDP는 서로 다른 열이다. 후보가 확인되지 않았거나 통과하지 못한 경우, 측정 범위를 넘어선 최적값은 알 수 없다.",
       "## 실제 SPICE 방향 선호로 학습한 metric",
       "각 SKY130 소스 회로에서 3개 anchor와 anchor당 8개 방향을 사용했다. 방향은 로그 폭 공간에서 L2 길이 0.10이고 실제 폭 반올림 오차는 허용했다. 같은 anchor의 28쌍은 8번의 후보 측정을 공유한다. 실측에서 허용 제약을 충족한 방향을 먼저 선호하고 양의 로그 제약 위반 합, EDP 순으로 비교했다. 12개 방향 집합이 제공한 336개 비교를 독립적인 실험 횟수로 세지 않는다.",
-      "기본 대각 행렬 D, 역할 특징 Φ, 학습 행렬 B로 역 metric을 D^(-1/2) [I + Φ B Bᵀ Φᵀ] D^(-1/2)로 구성했다. 10×2 행렬 B는 측정 순위와 제안 방향 내적의 쌍대 로지스틱 손실로 학습했다. critic, 타깃 잔차 보정, 후보 수와 선탐색은 웜업 0과 같다. 표의 보류 조건은 한 소스 회로의 방향 라벨을 제외하고 B를 재학습한 결과다. 기반 critic은 기존 네 소스 회로의 324회 자료를 사용했다.",
+      "기본 대각 행렬 D, 역할 특징 Φ, 학습 행렬 B로 역 metric을 D^(-1/2) [I + Φ B Bᵀ Φᵀ] D^(-1/2)로 구성했다. 10×2 행렬 B는 측정 순위와 제안 방향 내적의 쌍대 로지스틱 손실로 학습했다. SPICE surrogate, 타깃 잔차 보정, 후보 수와 선탐색은 웜업 0과 같다. 표의 보류 조건은 한 소스 회로의 방향 라벨을 제외하고 B를 재학습한 결과다. 기반 SPICE surrogate는 기존 네 소스 회로의 324회 자료를 사용했다.",
       acc,
       f"소스에서 기본 방향과 rank-2 방향의 각도 중앙값은 {np.median(angles):.1f}°였다. 선호 손실 gradient를 유한차분으로 검사한 최대 절대 오차는 {max(r['gradient_error'] for r in diagnostic):.2e}다. 타깃에서는 역할 제안 뒤 두 번째 설계까지 진행된 {len(rms)}개 대응 시행 중 {sum(v>0 for v in rms)}개에서 rank-2가 실제로 다른 폭을 SPICE에 보냈다. 이 시점의 소자별 로그 폭 RMS 차이 중앙값은 {np.median(rms):.4f}였다.",
       "## 비용 검산과 재현",

@@ -48,7 +48,7 @@ def report():
     s=["# ALARM 구성요소의 목표 도달 비용", "",
        "표는 성공 수/시행 수와 40회 제한 평균 SPICE 호출 수입니다. 미도달도 40회로 포함했으며 실제 40회째 성공은 성공 수에 포함합니다. 회로에 동일 가중치를 주었습니다. 목표는 모든 출력·동작점에서 EDP를 기준 대비 각각 5%, 10% 줄이면서 지연·slew·레일·전원 민감도 제약을 만족하는 것입니다. 최초 4회는 기준, 개발 2회와 확인 2회를 포함해 최솟값은 8회입니다.", "",
        "## 방법별 결과","","| 방법 | 전체 5% | 새 회로 조건 5% | 전체 10% | 새 회로 조건 10% |","|---|---:|---:|---:|---:|"]
-    s[2:2]=["5% 목표에서 다섯 조건의 제한 평균은 elite + ALARM 균일 대각 가중치가 19.20회로 가장 낮았고, 새 세 조건에서는 elite + 일반 경사가 21.33회로 가장 낮았습니다. 10% 목표는 다중 지표 metric이 34.40회로 가장 낮았으나 성공은 4/15회였고 모두 GF180에서 나왔습니다. 두 성과는 서로 다른 목표에 대한 것입니다.","","같은 일반 경사에 elite 시작점을 추가하면 새 조건에서 5% 도달 비용이 27.33회에서 21.33회로 줄었습니다. 학습 대각과 과거 critic의 점수 재사용은 5% 전체 평균을 개선하지 못했습니다. 기준 역할 규칙과 ALARM 균일 대각 방법의 5% 전체 타깃 비용차는 3.60회입니다. 같은 회로 분포와 평균 절감량을 가정하면 324회 소스 비용을 새로 지불하는 경우 약 90건의 타깃이 필요합니다. 이미 소스 데이터를 보유했다면 신규 타깃의 추가 비용을 따로 볼 수 있습니다.",""]
+    s[2:2]=["5% 목표에서 다섯 조건의 제한 평균은 elite + ALARM 균일 대각 가중치가 19.20회로 가장 낮았고, 새 세 조건에서는 elite + 일반 경사가 21.33회로 가장 낮았습니다. 10% 목표는 다중 지표 metric이 34.40회로 가장 낮았으나 성공은 4/15회였고 모두 GF180에서 나왔습니다. 두 성과는 서로 다른 목표에 대한 것입니다.","","같은 일반 경사에 elite 시작점을 추가하면 새 조건에서 5% 도달 비용이 27.33회에서 21.33회로 줄었습니다. 학습 대각과 과거 SPICE surrogate의 점수 재사용은 5% 전체 평균을 개선하지 못했습니다. 기준 역할 규칙과 ALARM 균일 대각 방법의 5% 전체 타깃 비용차는 3.60회입니다. 같은 회로 분포와 평균 절감량을 가정하면 324회 소스 비용을 새로 지불하는 경우 약 90건의 타깃이 필요합니다. 이미 소스 데이터를 보유했다면 신규 타깃의 추가 비용을 따로 볼 수 있습니다.",""]
     for m in ALL:s.append("| "+" | ".join([NAMES[m],cell(TARGETS,m,.95),cell(NEW,m,.95),cell(TARGETS,m,.9),cell(NEW,m,.9)])+" |")
     s+=["","새 조건은 기존 SKY130 결합 2-lane의 부하·결합 용량을 바꾼 load_sky와, 동일한 새 7-inverter 배선을 두 PDK에서 평가한 seven_sky·seven_gf입니다. fork와 mixed_gf는 이전 연구에서 진단에 사용했습니다. 세 seed는 공통 회로 내에 중첩되어 있습니다. 결정적 역할 규칙은 조건당 한 번만 실행했습니다.",""]
     for g in GOALS:
@@ -92,10 +92,10 @@ def report():
         f"- 역할 규칙과 BO는 소스 비용 0회, 학습 방법은 같은 SKY130 소스 324회입니다. 참조 탐색 {oracle}회, 0.25 ps 재검산 {sum(r['calls'] for r in fine)}회는 별도입니다."]
     timing=json.loads((root/"timing.json").read_text())
     trained=timing["source_per_seed_seconds"]
-    s.append(f"- 저장한 시뮬레이션 값을 메모리에서 읽어 {timing['traces_exact']}개 알고리즘 궤적을 완전히 재생했습니다. seed당 소스 critic 학습은 {trained['fit']:.3f} CPU초, 좌표 가중치 학습은 {trained['source_attention_fit']:.3f} CPU초였습니다. 전체 재생과 방법별 타깃 critic 학습·후보 제안 시간은 [시간 로그](runs/alarm/timing.json)에 있습니다. SPICE 실행 시간은 이 CPU 시간에 포함하지 않았습니다.")
+    s.append(f"- 저장한 시뮬레이션 값을 메모리에서 읽어 {timing['traces_exact']}개 알고리즘 궤적을 완전히 재생했습니다. seed당 소스 SPICE surrogate 학습은 {trained['fit']:.3f} CPU초, 좌표 가중치 학습은 {trained['source_attention_fit']:.3f} CPU초였습니다. 전체 재생과 방법별 타깃 SPICE surrogate 학습·후보 제안 시간은 [시간 로그](runs/alarm/timing.json)에 있습니다. SPICE 실행 시간은 이 CPU 시간에 포함하지 않았습니다.")
     for m,(all_n,old_n) in ledger["snapshot_selections_and_older"].items():
         s.append(f"- {NAMES[m]}가 snapshot을 초기값으로 선택해 다시 학습한 횟수는 {all_n}회입니다. 직전 갱신보다 더 오래된 모델을 선택한 경우는 {old_n}회였습니다.")
-    s+=["- critic의 해석적 Jacobian을 중앙 유한차분과 대조했고, 네 방향의 하강성, 소자 순열 불변성, encoder 고정 및 snapshot 복사 독립성을 확인했습니다.",
+    s+=["- SPICE surrogate의 해석적 Jacobian을 중앙 유한차분과 대조했고, 네 방향의 하강성, 소자 순열 불변성, encoder 고정 및 snapshot 복사 독립성을 확인했습니다.",
         "- ALARM 원문을 바탕으로 만든 변형입니다. 역할 특성을 소자 전체에 집계한 MLP, 소스에서 학습한 좌표별 softmax 대각 가중치, 12개 방향 × 5개 스텝 후보를 사용합니다. 허용 범위에서 Armijo를 만족한 후보에 우선순위를 주고, 전부 탈락하면 예측 비용으로 결정합니다. 후보 슬롯 수는 같아도 초기 elite 개수에 따라 중복 좌표 수는 다를 수 있습니다. buffer 점수는 과거 벡터 예측오차·실측 비용 변화·현재 중심과의 거리를 사용합니다. 이식한 buffer는 한 타깃 안에서만 모델을 다시 고릅니다.",
         "- 해당 비교는 셀 수준 SPICE입니다. 검증 대상은 부하·결합·회로 배선·PDK 변화이며 전체 패키지 signoff는 포함하지 않습니다.",
         "", "[설정](ALARM_PILOT.md) · [회로/seed별 결과](runs/alarm/summary.csv) · [대응 효과](runs/alarm/contrasts.csv) · [최초 달성 누적분포](runs/alarm/hit_curves.csv) · [비용 장부](runs/alarm/audit.json) · [원시 데이터](alarm_measurements.zip)"]

@@ -2,6 +2,12 @@
 
 The circuit-to-circuit transfer benchmark uses native-width vectors rather than the two endpoints from the earlier pilot. Each transistor receives its own multiplier. Forward models in this directory are trained offline on development SPICE and are queried against real transient measurements. See PROTOCOL.md for the test splits, benchmark commitments and exploratory additions.
 
+## Model terminology
+
+The **SPICE surrogate** predicts the electrical response of a design. For sizing, its MLP predicts log-normalized EDP and four constraint metrics (delay, slew, supply sensitivity, and output rails). The optimizer combines these outputs to estimate its scalar objective $\hat J(x)$. A **SPICE surrogate buffer** stores past versions of this predictor.
+
+The **PPO value critic** estimates expected future search return $V^\pi(s)$ from the search history. A **PPO value critic buffer** stores past value models for computing advantages.
+
 ## Raw physical inputs and transfer
 
 The optimizer reads model identity, MOS polarity, nominal geometry, capacitances, supply levels, and connectivity directly from the flat SPICE deck. The operator supplies numerical specifications and permitted width intervals. The benchmark includes a common-interval experiment in which every transistor has the same bounds on both source and target. Compare pooled device MLP and attention models with a residual GP using the same target calls. [Physical transfer protocol, supported deck formats and commands](RAW_NETLIST_PROTOCOL.md).
@@ -43,7 +49,7 @@ For the descriptive two-step test and the final deterministic policy run `python
 
 ## ALARM transfer pilot
 
-[Protocol and commands](ALARM_PILOT.md) and [Korean results](ALARM_RESULTS_KO.md) cover the matched first-proposal study of elite anchors, metric geometry, critic snapshots and transfer heads. The separate [SPICE archive](alarm_measurements.zip) contains the 1 ps traces, independent attainability checks, 0.25 ps replications and exact policy replay timing.
+[Protocol and commands](ALARM_PILOT.md) and [Korean results](ALARM_RESULTS_KO.md) cover the matched first-proposal study of elite anchors, metric geometry, SPICE surrogate snapshots and transfer heads. The separate [SPICE archive](alarm_measurements.zip) contains the 1 ps traces, independent attainability checks, 0.25 ps replications and exact policy replay timing.
 
 ## Attention-free search, warm-up and coordinates
 

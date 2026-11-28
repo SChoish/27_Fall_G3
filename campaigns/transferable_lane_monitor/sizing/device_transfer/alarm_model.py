@@ -1,4 +1,4 @@
-"""A shared, size-independent circuit critic and continuous local search."""
+"""A shared, size-independent SPICE surrogate and continuous local search."""
 import numpy as np
 from experiment import structure, upper
 
@@ -18,14 +18,16 @@ def inputs(x, descriptor):
     return np.column_stack((scale*z@roles, scale*(z*z)@roles,
                             np.tile(context,(len(z),1))))
 
-class Critic:
+class SpiceSurrogate:
+    """MLP predicting log-normalized EDP and four electrical constraints from SPICE labels."""
+
     def __init__(self, seed):
         rng=np.random.default_rng(seed)
         self.params=[rng.normal(0,.22,(24,24)),np.zeros(24),
                      rng.normal(0,.14,(24,5)),np.zeros(5)]
 
     def copy(self):
-        result=object.__new__(Critic)
+        result=object.__new__(type(self))
         result.params=[p.copy() for p in self.params]
         return result
 
@@ -56,6 +58,11 @@ class Critic:
         feature_jac=(w*((1-h*h)[None,:]))@v
         return (3/len(x))*(roles@feature_jac[:10]+2*np.log(x)[:,None]*(roles@feature_jac[10:20])).T
 
+
+# Historical experiment scripts imported this model as Critic.
+Critic = SpiceSurrogate
+
+
 def cost(y):
     # A smooth hinge gives a differentiable cost at the electrical boundary.
     y=np.asarray(y)
@@ -80,7 +87,7 @@ def direction(net,x,desc,kind,beta):
     return p/max(np.max(np.abs(p)),1e-10),g
 
 def fit_attention(net, examples):
-    # Coordinate descent on source-only one-step surrogate cost, critic held fixed.
+    # Coordinate descent on source-only one-step surrogate cost, surrogate held fixed.
     beta=np.zeros(10)
     def objective(b):
         total=0.

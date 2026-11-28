@@ -127,7 +127,7 @@ def fit_all(args,models):
                 train=[r for r in rows if r[0]!=name]
                 test=[r for r in true if r[0]==name]
                 cv[name]=[objective(test,b)[2] for b in (np.zeros_like(B),fit(train))]
-            # Existing critic was fit on all four source circuits. CV only holds out direction labels.
+            # Existing SPICE surrogate was fit on all four source circuits. CV only holds out direction labels.
             output[f"{arm}-{seed}"]=dict(B=B.tolist(),source_ordinal_accuracy=objective(true,B)[2],
                                           held_out_direction_accuracy=cv)
     (args.out/"century"/"metrics.json").write_text(json.dumps(output))

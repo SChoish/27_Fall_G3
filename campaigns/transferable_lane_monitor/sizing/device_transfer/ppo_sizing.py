@@ -67,8 +67,8 @@ def train_actor(rows,models,gamma,buffer_size=1):
     rng=np.random.default_rng(14019)
     actor=np.zeros(NFEATURES)
     adam1=np.zeros_like(actor);adam2=adam1.copy()
-    critic=np.zeros(4);step=0;success=0;warm=0;actions=0;clipped=0;total_updates=0
-    history=[critic.copy()]
+    value_critic=np.zeros(4);step=0;success=0;warm=0;actions=0;clipped=0;total_updates=0
+    history=[value_critic.copy()]
     critic_age_counts=np.zeros(buffer_size,dtype=int)
     tasks=[]
     for row,model in zip(rows,models):
@@ -112,7 +112,7 @@ def train_actor(rows,models,gamma,buffer_size=1):
             returns.extend(reversed(ret));samples.extend(trajectory)
             folds.extend([(episode%8+episode//8+epoch)%2]*len(trajectory))
         states=np.stack([s[4] for s in samples]);returns=np.array(returns)
-        adv=returns-states@critic
+        adv=returns-states@value_critic
         if buffer_size>1:
             predictions=states@np.stack(history[::-1],axis=1)
             fold_ids=np.asarray(folds)
@@ -124,8 +124,8 @@ def train_actor(rows,models,gamma,buffer_size=1):
                 age=int(np.argmin(mse))
                 critic_age_counts[age]+=1
                 adv[held]=returns[held]-predictions[held,age]
-        critic=np.linalg.solve(states.T@states+.1*np.eye(4),states.T@returns)
-        history=(history+[critic])[-buffer_size:]
+        value_critic=np.linalg.solve(states.T@states+.1*np.eye(4),states.T@returns)
+        history=(history+[value_critic])[-buffer_size:]
         adv=(adv-adv.mean())/max(adv.std(),1e-8)
         actions+=len(samples)
         for _ in range(4):

@@ -15,7 +15,7 @@ from ppo_critic_buffer import ARCHIVE as BUFFER_ARCHIVE
 from ppo_standalone import ARCHIVE as STANDALONE_ARCHIVE
 
 ARMS = ("mlp200", "standalone", "bandit", "ppo", "ppo_buffer")
-NAMES = ("MLP + BO", "단독 PPO", "즉시보상 bandit", "PPO", "PPO + critic buffer")
+NAMES = ("MLP + BO", "단독 PPO", "즉시보상 bandit", "PPO", "PPO + value critic buffer")
 
 
 def read(archive, key):
@@ -90,11 +90,11 @@ def summarize():
         pairs = [(index[t + ("mlp200",)]["calls"], index[t + (method,)]["calls"])
                  for t in trials if t[2] == .95]
         print(f"- {label}는 {sum(b<a for a,b in pairs)} · {sum(b==a for a,b in pairs)} · {sum(b>a for a,b in pairs)}")
-    print("\n## Critic 선택 기록")
+    print("\n## value critic 선택 기록")
     train = read(BUFFER_ARCHIVE, "training")
     for p, methods in train.items():
         counts = methods["ppo_buffer"]["critic_age_counts"]
-        print(f"- {p.upper()} 소스에서 최신 · 1회 전 · 2회 전 · 3회 전 선택은 {counts}회. 이전 critic 재사용은 {sum(counts[1:])}/{sum(counts)}회.")
+        print(f"- {p.upper()} 소스에서 최신 · 1회 전 · 2회 전 · 3회 전 선택은 {counts}회. 이전 value critic 재사용은 {sum(counts[1:])}/{sum(counts)}회.")
     print("\n## 같은 이력에서 첫 정책 제안의 개발 코너 통과 수")
     print("기준점 및 네 웜업 뒤 실제로 다음 후보를 제안한 대응 사례만 센다. 이후 궤적은 알고리즘마다 달라진다.")
     print("| 목표 | 비교 수 | " + " | ".join(NAMES) + " |")

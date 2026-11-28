@@ -12,7 +12,7 @@ from audit import checks
 from circuit import Circuit, ratios, simulate
 from extend import SOURCE
 from proposal import propose
-from alarm_model import Critic, anchors, cost, features, fit_attention, inputs, local_search
+from alarm_model import SpiceSurrogate, anchors, cost, features, fit_attention, inputs, local_search
 
 NEW_FORK=Circuit("sky",(-1,0,1,2,2,-2,5),(1.,1.75,2.25,3.5,2.,1.,2.5),
                  (3,4,6),(.65,1.25,1.50),2.7)
@@ -31,7 +31,7 @@ def train_source(root,seed):
         desc=features(c);x=np.array(data["designs"]);x0=np.ones(x.shape[1])
         xx.extend(inputs(np.vstack((x0,x)),desc));yy.extend([data["ref"],*data["labels"]])
         examples.extend([(z,desc,exp.upper(c)) for z in [x0,*x[-6:]]])
-    model=Critic(seed)
+    model=SpiceSurrogate(seed)
     model.fit(np.array(xx),np.array(yy),500,.006)
     return model,fit_attention(model,examples)
 

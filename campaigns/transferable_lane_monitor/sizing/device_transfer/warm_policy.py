@@ -2,7 +2,7 @@
 from dataclasses import dataclass
 import numpy as np
 
-from alarm_model import Critic, anchors, cost, features, inputs
+from alarm_model import SpiceSurrogate, anchors, cost, features, inputs
 from warm_space import bank,span
 
 @dataclass(frozen=True)
@@ -25,7 +25,7 @@ def source_prior(root,seed):
         widths=np.array(r["designs"])
         x.extend(inputs(np.vstack([np.ones(widths.shape[1]),widths]),features(c)))
         y.extend([r["ref"],*r["labels"]])
-    out=Critic(seed);out.fit(np.array(x),np.array(y),500,.006)
+    out=SpiceSurrogate(seed);out.fit(np.array(x),np.array(y),500,.006)
     return out
 
 class Space:

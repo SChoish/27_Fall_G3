@@ -1,4 +1,4 @@
-"""A fixed electrical prefix with a local-warmup critic fallback. Separate new-netlist test."""
+"""A fixed electrical prefix with a local-warmup SPICE surrogate fallback. Separate new-netlist test."""
 from concurrent.futures import ThreadPoolExecutor
 from dataclasses import replace
 import json
