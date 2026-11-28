@@ -41,3 +41,22 @@
 [원시 데이터와 궤적](unseen_elite_metric_measurements.zip) · [실행 및 검증 코드](unseen_elite_metric.py). 기존 ngspice 경로 인수로 `python unseen_elite_metric.py search`를 실행한다. 저장 파일만으로는 `python unseen_elite_metric.py --replay`를 사용한다.
 
 방향 보조군의 5% 중간값을 본 뒤, 시작점 수의 효과를 하강 방향과 분리하기 위해 같은 일반 경사와 전처리 경사를 단일 최상점에서도 실행했다. 목표, 세 seed, 방향 생성 규칙, 국소 후보 수를 그대로 사용했다. 이 두 행도 탐색적 결과로 보고한다.
+
+## 명시적으로 하강 방향을 제안한 보조 결과
+
+각 시작점에 잡음을 넣지 않은 후보 한 개를 포함하므로 단일과 elite의 무잡음 후보 수는 각각 1개와 3개다. 같은 시작점 수에서 일반 경사와 metric 경사의 무작위 perturbation, 보폭, 후보 수는 동일하다. 두 탐색 방향은 모두 MLP + 타깃 잔차 GP의 같은 비용을 미분한다. 표는 이전 주 비교와 동일한 GF180 회로, 3 seed, 100회 검증 예산을 사용한다. 
+
+| 방법 | 5% 호출 수 | 5% 성공 · 평균 | 10% 호출 수 | 10% 성공 · 평균 |
+|---|---|---|---|---|
+| 단일 시작점 + 일반 경사 | 28 / 미달 / 28 | 2/3 · 52.00 | 88 / 100 / 62 | 3/3 · 83.33 |
+| 단일 시작점 + adaptive metric 경사 | 34 / 80 / 66 | 3/3 · 60.00 | 78 / 미달 / 90 | 2/3 · 89.33 |
+| Elite + 일반 경사 | 30 / 54 / 미달 | 2/3 · 61.33 | 36 / 52 / 미달 | 2/3 · 62.67 |
+| Elite + adaptive metric 경사 | 36 / 30 / 24 | 3/3 · 30.00 | 미달 / 미달 / 78 | 1/3 · 92.67 |
+
+두 방향 보조군은 각각 12개 궤적을 다시 검산했다. 아래 ZIP과 대응 코드로 동일한 후보 및 비용을 재생한다.
+
+[Elite 시작점의 원시 궤적](unseen_directional_measurements.zip) · [단일 시작점의 원시 궤적](unseen_single_directional_measurements.zip). 검증 명령은 `python unseen_elite_metric.py --directional --replay`와 `python unseen_elite_metric.py --single-directional --replay`다.
+
+### 판단
+
+같은 GF180 회로의 세 seed에서 elite + adaptive metric 경사 방식은 5% 목표를 기본 MLP보다 각각 2·20·28회 빨리 달성했다. 같은 elite에서 일반 경사를 사용할 때는 2/3·61.33회였고, 단일 시작점에서 adaptive metric 경사를 사용할 때는 3/3·60회였다. 10%에서 elite + metric 경사는 한 번만 통과했다. 따라서 5%에는 두 요소를 조합한 방향 제안을 별도 회로에서 재검증할 후보로 유지한다. 10%에는 기본 익명 MLP를 기준으로 유지한다. 여러 변형을 본 단일 GF180 회로의 결과이며, 재검증 전에 전체 회로에 쓸 기본 정책을 교체할 근거는 제한적이다.
