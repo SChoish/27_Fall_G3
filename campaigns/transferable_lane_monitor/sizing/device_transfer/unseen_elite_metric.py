@@ -18,10 +18,11 @@ from raw_netlist_run import SKY_ONLY, bind, train
 
 DOMAIN = "adapt_lane_gf"
 ARMS = ("bo", "mlp200", "wires200", "elite", "metric", "elite_metric")
+DIRECTION_ARMS = ("elite_gradient", "elite_natural")
 ARCHIVE = Path(__file__).with_name("unseen_elite_metric_measurements.zip")
 
 
-def local_proposals(z, y, lo, hi, radius, rng, model, elite, metric):
+def local_proposals(z, y, lo, hi, radius, rng, model, elite, metric, directional=False):
     # Share the incumbent and the random unit-cube samples across interventions.
     order = np.argsort(y[:, 0] + 4 * np.maximum(y[:, 1:], 0).sum(1), kind="stable")
     keep = order[:3 if elite else 1]
@@ -29,7 +30,7 @@ def local_proposals(z, y, lo, hi, radius, rng, model, elite, metric):
     anchors = z[keep]
     centers = anchors[group]
     local = rng.uniform(np.maximum(lo, centers-radius), np.minimum(hi, centers+radius))
-    if not metric:
+    if not metric and not directional:
         return local
     span = hi-lo
     normalized = (z-lo)/span
@@ -48,8 +49,20 @@ def local_proposals(z, y, lo, hi, radius, rng, model, elite, metric):
         gradient = (cost(u+step*eye)-cost(u-step*eye))/(2*step)
         damping = .015*np.mean(gradient**2) + .0001
         geometry = np.outer(gradient, gradient) + np.diag(.7*gradient**2+damping)
-        values, vectors = np.linalg.eigh(geometry)
         idx = group == i
+        if directional:
+            descent = -np.linalg.solve(geometry, gradient) if metric else -gradient
+            descent /= max(np.max(np.abs(descent)), 1e-12)
+            # Identical bounded perturbations and step lengths in both directional controls.
+            lower = np.maximum(lo, anchor-radius[idx])
+            upper = np.minimum(hi, anchor+radius[idx])
+            noise = 2*(local[idx]-lower)/(upper-lower)-1
+            noise[0] = 0.
+            direction = descent+.45*noise
+            direction /= np.maximum(np.max(np.abs(direction), axis=1, keepdims=True), 1e-12)
+            local[idx] = np.clip(anchor+radius[idx]*direction, lo, hi)
+            continue
+        values, vectors = np.linalg.eigh(geometry)
         delta = (local[idx]-anchor)/span
         shaped = ((delta @ vectors)/np.sqrt(values)) @ vectors.T
         shaped *= np.linalg.norm(delta, axis=1, keepdims=True)/np.maximum(np.linalg.norm(shaped, axis=1, keepdims=True), 1e-15)
@@ -74,21 +87,22 @@ def chooser(models):
             return rng.uniform(lo, hi)
         model = mask_models[seed] if arm == SKY_ONLY else models["anon400"]
         builder = None
-        if arm in ("elite", "metric", "elite_metric"):
+        if arm in ("elite", "metric", "elite_metric", *DIRECTION_ARMS):
             def builder(z, y, lower, upper, radius, stream):
                 return local_proposals(z, y, lower, upper, radius, stream, model,
-                                       arm in ("elite", "elite_metric"), arm in ("metric", "elite_metric"))
+                                       arm in ("elite", "elite_metric", *DIRECTION_ARMS),
+                                       arm in ("metric", "elite_metric", "elite_natural"), arm in DIRECTION_ARMS)
         return rank_candidates(np.asarray(history), np.asarray(obs), lo, hi, rng,
                                network=model, local_builder=builder)
     return select
 
 
-def verify(source, runs, select):
-    selectors = {a: (select, None) for a in ARMS}
-    return audit(source, runs, ARMS, selectors, {DOMAIN: TEST[DOMAIN]}, SEEDS, GOALS)[1]
+def verify(source, runs, select, arms=ARMS):
+    selectors = {a: (select, None) for a in arms}
+    return audit(source, runs, arms, selectors, {DOMAIN: TEST[DOMAIN]}, SEEDS, GOALS)[1]
 
 
-def acquire():
+def acquire(arms=ARMS, archive_path=ARCHIVE):
     args = arguments()
     enable()
     root = args.out/"unseen_elite_metric"
@@ -110,21 +124,25 @@ def acquire():
             rows.append(json.loads((root/name).read_text()))
         return rows
     with ThreadPoolExecutor(args.workers) as pool:
-        runs = [r for group in pool.map(pair, [(a,s) for s in SEEDS for a in ARMS]) for r in group]
-    stats = verify(source, runs, select)
-    with ZipFile(ARCHIVE, "w", compression=ZIP_DEFLATED, compresslevel=9) as out:
+        runs = [r for group in pool.map(pair, [(a,s) for s in SEEDS for a in arms]) for r in group]
+    stats = verify(source, runs, select, arms)
+    with ZipFile(archive_path, "w", compression=ZIP_DEFLATED, compresslevel=9) as out:
         for k, v in (("source",source),("runs",runs),("audit",stats)):
             out.writestr(k+".json",json.dumps(v,separators=(",",":"),allow_nan=False))
     return stats
 
 
-def replay():
-    with ZipFile(ARCHIVE) as f:
+def replay(arms=ARMS, archive_path=ARCHIVE):
+    with ZipFile(archive_path) as f:
         source, runs, expected = [json.loads(f.read(k+".json")) for k in ("source","runs","audit")]
-    stats = verify(source, runs, chooser(models_from(source)))
+    stats = verify(source, runs, chooser(models_from(source)), arms)
     assert stats==expected
     return stats
 
 
 if __name__=="__main__":
-    print(replay() if sys.argv[1:]==["--replay"] else acquire())
+    arms, archive_path = ARMS, ARCHIVE
+    if "--directional" in sys.argv:
+        sys.argv.remove("--directional")
+        arms, archive_path = DIRECTION_ARMS, ARCHIVE.with_name("unseen_directional_measurements.zip")
+    print(replay(arms, archive_path) if sys.argv[1:]==["--replay"] else acquire(arms, archive_path))
