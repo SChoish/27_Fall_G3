@@ -40,7 +40,7 @@ def propose(arm,history,observations,lower,upper,seed,prior=None):
     return rank_candidates(z,y,lower,upper,rng,prior=prior)
 
 
-def rank_candidates(z,y,lower,upper,rng,prior=None,network=None,gp=True,calibrated=None,local_builder=None,adjust=None):
+def rank_candidates(z,y,lower,upper,rng,prior=None,network=None,gp=True,calibrated=None,local_builder=None,adjust=None,decision=None):
     t,dim=z.shape
     penalty=lambda values: values[...,0]+4*np.maximum(values[...,1:],0).sum(axis=-1)
     center=z[np.argmin(penalty(y))]
@@ -51,6 +51,14 @@ def rank_candidates(z,y,lower,upper,rng,prior=None,network=None,gp=True,calibrat
     else:
         local=local_builder(z,y,lower,upper,radius,rng)
     candidates=np.vstack((local,rng.uniform(lower,upper,(256,dim))))
+    return evaluate_candidates(z,y,lower,upper,candidates,prior,network,gp,calibrated,adjust,decision)
+
+
+def evaluate_candidates(z,y,lower,upper,candidates,prior=None,network=None,gp=True,
+                        calibrated=None,adjust=None,decision=None):
+    t=len(z)
+    span=upper-lower
+    penalty=lambda values: values[...,0]+4*np.maximum(values[...,1:],0).sum(axis=-1)
     if network is not None:
         feature=network.encode(z)
         test_feature=network.encode(candidates)
@@ -79,4 +87,6 @@ def rank_candidates(z,y,lower,upper,rng,prior=None,network=None,gp=True,calibrat
     if adjust is not None:
         pred=adjust(candidates,pred)
     score=penalty(pred-.7*sig[:,None]*scale)
+    if decision is not None:
+        return decision(candidates,pred,sig,score)
     return candidates[np.argmin(score)]
