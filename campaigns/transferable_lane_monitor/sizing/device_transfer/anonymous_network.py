@@ -14,14 +14,22 @@ class WidthNet:
             self.params.update(q=rng.normal(0,.25,12), k=rng.normal(0,.25,12))
         self.scale=np.ones(5)
 
-    def forward(self,z):
-        p=self.params
+    def embed(self,z,context):
         x=(np.atleast_2d(z)/.3)[...,None]
-        h=np.tanh(x*p["a"]+p["b"])
+        return x,np.tanh(x*self.params["a"]+self.params["b"])
+
+    def input_gradient(self,x,dp):
+        return (dp*x).sum((0,1))
+
+    def forward(self,z,context=None):
+        p=self.params
+        x,h=self.embed(z,context)
         logits=weights=None
         if self.attention:
             logits=(h@p["q"])[:,:,None]+(h@p["k"])[:,None,:]
             a=np.where(logits>=0,logits,.2*logits)
+            if context is not None and context.mask is not None:
+                a=np.where(context.mask[None,:,:],a,-np.inf)
             weights=np.exp(a-a.max(2,keepdims=True))
             weights/=weights.sum(2,keepdims=True)
             mixed=.5*(h+weights@h)
@@ -30,8 +38,8 @@ class WidthNet:
         v=np.tanh(mixed@p["h"]+p["c"])
         return v.mean(1),(x,h,logits,weights,mixed,v)
 
-    def encode(self,z):
-        return self.forward(z)[0]-self.forward(np.zeros((1,np.shape(z)[-1])))[0]
+    def encode(self,z,context=None):
+        return self.forward(z,context)[0]-self.forward(np.zeros((1,np.shape(z)[-1])),context)[0]
 
     def readout(self,encoded):
         return (encoded@self.params["out"])*self.scale
@@ -50,15 +58,15 @@ class WidthNet:
             grad["k"]=(dk[...,None]*h).sum((0,1))
             dh=.5*(dm+weights.swapaxes(1,2)@dm)+dq[...,None]*self.params["q"]+dk[...,None]*self.params["k"]
         dp=dh*(1-h*h)
-        grad.update(a=(dp*x).sum((0,1)),b=dp.sum((0,1)))
+        grad.update(a=self.input_gradient(x,dp),b=dp.sum((0,1)))
         return grad
 
     def loss_grad(self,examples):
         grad={k:np.zeros_like(v) for k,v in self.params.items()}
         loss=0.
-        for z,y in examples:
-            pooled,cache=self.forward(z)
-            zero,anchor=self.forward(np.zeros((1,z.shape[1])))
+        for z,y,*context in examples:
+            pooled,cache=self.forward(z,*context)
+            zero,anchor=self.forward(np.zeros((1,z.shape[1])),*context)
             encoded=pooled-zero
             err=encoded@self.params["out"]-y/self.scale
             loss+=np.mean(err*err)/len(examples)
@@ -70,7 +78,7 @@ class WidthNet:
         return loss,grad
 
     def fit(self,examples):
-        self.scale=np.maximum(np.vstack([y for z,y in examples]).std(0),.015)
+        self.scale=np.maximum(np.vstack([item[1] for item in examples]).std(0),.015)
         m={k:np.zeros_like(v) for k,v in self.params.items()}
         v={k:np.zeros_like(w) for k,w in self.params.items()}
         for t in range(1,301):
